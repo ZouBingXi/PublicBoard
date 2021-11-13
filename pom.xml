@@ -10,20 +10,20 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
     
-	<groupId>${groupId}</groupId>
+	<!-- <groupId>${groupId}</groupId>
 	<artifactId>${artifactId}</artifactId>
 	<version>${version}</version>
 	<packaging>jar</packaging>
 
 	<name>${artifactId}</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Demo project for Spring Boot</description> -->
 	
-	<!-- <groupId>cn.szuer</groupId>
+	<groupId>cn.szuer</groupId>
 	<artifactId>publicboard</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<name>publicboard</name>
-	<description>Demo project for Spring Boot</description> -->
+	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>8</java.version>
@@ -46,7 +46,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency> -->
-		
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
