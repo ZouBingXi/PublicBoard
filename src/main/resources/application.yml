@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    druid:
+        url: jdbc:mysql://localhost:3306/publicboard
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        username: root
+        password: root
+
+server:
+  port: 80

@@ -1,0 +1,15 @@
+package cn.szuer.publicboard;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@MapperScan(basePackages = "cn.szuer.publicboard.mapper")
+public class PublicboardApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(PublicboardApplication.class, args);
+	}
+
+}

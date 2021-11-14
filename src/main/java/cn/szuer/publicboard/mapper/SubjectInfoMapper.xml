@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.szuer.publicboard.mapper.SubjectInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.szuer.publicboard.model.SubjectInfo" >
+    <id column="subjectID" property="subjectid" jdbcType="INTEGER" />
+    <result column="userID" property="userid" jdbcType="INTEGER" />
+    <result column="subjectType" property="subjecttype" jdbcType="INTEGER" />
+    <result column="subjectTitle" property="subjecttitle" jdbcType="VARCHAR" />
+    <result column="sendTime" property="sendtime" jdbcType="TIMESTAMP" />
+    <result column="viewNum" property="viewnum" jdbcType="INTEGER" />
+    <result column="likeNum" property="likenum" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.szuer.publicboard.model.SubjectInfo" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    subjectID, userID, subjectType, subjectTitle, sendTime, viewNum, likeNum
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.szuer.publicboard.model.SubjectInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from subject_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.szuer.publicboard.model.SubjectInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from subject_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from subject_info
+    where subjectID = #{subjectid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from subject_info
+    where subjectID = #{subjectid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.szuer.publicboard.model.SubjectInfoExample" >
+    delete from subject_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.szuer.publicboard.model.SubjectInfo" >
+    insert into subject_info (subjectID, userID, subjectType, 
+      subjectTitle, sendTime, viewNum, 
+      likeNum, content)
+    values (#{subjectid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{subjecttype,jdbcType=INTEGER}, 
+      #{subjecttitle,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, #{viewnum,jdbcType=INTEGER}, 
+      #{likenum,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.szuer.publicboard.model.SubjectInfo" >
+    insert into subject_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="subjectid != null" >
+        subjectID,
+      </if>
+      <if test="userid != null" >
+        userID,
+      </if>
+      <if test="subjecttype != null" >
+        subjectType,
+      </if>
+      <if test="subjecttitle != null" >
+        subjectTitle,
+      </if>
+      <if test="sendtime != null" >
+        sendTime,
+      </if>
+      <if test="viewnum != null" >
+        viewNum,
+      </if>
+      <if test="likenum != null" >
+        likeNum,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="subjectid != null" >
+        #{subjectid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="subjecttype != null" >
+        #{subjecttype,jdbcType=INTEGER},
+      </if>
+      <if test="subjecttitle != null" >
+        #{subjecttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="viewnum != null" >
+        #{viewnum,jdbcType=INTEGER},
+      </if>
+      <if test="likenum != null" >
+        #{likenum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.szuer.publicboard.model.SubjectInfoExample" resultType="java.lang.Integer" >
+    select count(*) from subject_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update subject_info
+    <set >
+      <if test="record.subjectid != null" >
+        subjectID = #{record.subjectid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjecttype != null" >
+        subjectType = #{record.subjecttype,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjecttitle != null" >
+        subjectTitle = #{record.subjecttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendtime != null" >
+        sendTime = #{record.sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.viewnum != null" >
+        viewNum = #{record.viewnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.likenum != null" >
+        likeNum = #{record.likenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update subject_info
+    set subjectID = #{record.subjectid,jdbcType=INTEGER},
+      userID = #{record.userid,jdbcType=INTEGER},
+      subjectType = #{record.subjecttype,jdbcType=INTEGER},
+      subjectTitle = #{record.subjecttitle,jdbcType=VARCHAR},
+      sendTime = #{record.sendtime,jdbcType=TIMESTAMP},
+      viewNum = #{record.viewnum,jdbcType=INTEGER},
+      likeNum = #{record.likenum,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update subject_info
+    set subjectID = #{record.subjectid,jdbcType=INTEGER},
+      userID = #{record.userid,jdbcType=INTEGER},
+      subjectType = #{record.subjecttype,jdbcType=INTEGER},
+      subjectTitle = #{record.subjecttitle,jdbcType=VARCHAR},
+      sendTime = #{record.sendtime,jdbcType=TIMESTAMP},
+      viewNum = #{record.viewnum,jdbcType=INTEGER},
+      likeNum = #{record.likenum,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.szuer.publicboard.model.SubjectInfo" >
+    update subject_info
+    <set >
+      <if test="userid != null" >
+        userID = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="subjecttype != null" >
+        subjectType = #{subjecttype,jdbcType=INTEGER},
+      </if>
+      <if test="subjecttitle != null" >
+        subjectTitle = #{subjecttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="viewnum != null" >
+        viewNum = #{viewnum,jdbcType=INTEGER},
+      </if>
+      <if test="likenum != null" >
+        likeNum = #{likenum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where subjectID = #{subjectid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.szuer.publicboard.model.SubjectInfo" >
+    update subject_info
+    set userID = #{userid,jdbcType=INTEGER},
+      subjectType = #{subjecttype,jdbcType=INTEGER},
+      subjectTitle = #{subjecttitle,jdbcType=VARCHAR},
+      sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      viewNum = #{viewnum,jdbcType=INTEGER},
+      likeNum = #{likenum,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where subjectID = #{subjectid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.szuer.publicboard.model.SubjectInfo" >
+    update subject_info
+    set userID = #{userid,jdbcType=INTEGER},
+      subjectType = #{subjecttype,jdbcType=INTEGER},
+      subjectTitle = #{subjecttitle,jdbcType=VARCHAR},
+      sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      viewNum = #{viewnum,jdbcType=INTEGER},
+      likeNum = #{likenum,jdbcType=INTEGER}
+    where subjectID = #{subjectid,jdbcType=INTEGER}
+  </update>
+</mapper>
