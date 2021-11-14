@@ -38,18 +38,18 @@ public class UserController
 
     /**
      * 用户登录
-     * @param user
+     * @param userInfo
      * @return
      */
-    // @PostMapping("/login")
-    // public BaseResponse<User> login(HttpServletRequest request,User user)
-    // {
-    //     if (userService.login(user))
-    //     {
-    //         request.getSession().setAttribute("User",user);
-    //     }
-    //     return null;
-    // }
+     @PostMapping("/login")
+     public BaseResponse<User> login(HttpServletRequest request,UserInfo userInfo)
+     {
+         if (userService.login(userInfo))
+         {
+             request.getSession().setAttribute("UserInfo",userInfo);
+         }
+         return null;
+     }
 
     /**
      * 查看用户表

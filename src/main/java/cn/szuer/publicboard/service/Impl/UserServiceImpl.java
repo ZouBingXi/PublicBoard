@@ -2,6 +2,7 @@ package cn.szuer.publicboard.service.Impl;
 
 import java.util.List;
 
+import cn.szuer.publicboard.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,15 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     private UserInfoMapper userInfoMapper;
+
+    @Override
+    public boolean login(UserInfo user)
+    {
+        Integer id=user.getUserid();
+        String password=user.getPassword();
+        UserInfo res=userInfoMapper.selectByPrimaryKey(id);
+        return res!=null&&res.getPassword().equals(password);
+    }
 
     @Override
     public List<UserInfo> getAll() {
