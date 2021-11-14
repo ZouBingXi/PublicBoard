@@ -1,7 +1,10 @@
 package cn.szuer.publicboard.service;
 
-import cn.szuer.publicboard.model.User;
+import java.util.List;
+
+import cn.szuer.publicboard.model.UserInfo;
 
 public interface UserService {
-    Boolean add(User user);
+    
+    List<UserInfo> getAll();
 }
