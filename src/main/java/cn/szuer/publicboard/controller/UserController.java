@@ -37,7 +37,7 @@ public class UserController
         {
             return new BaseResponse<UserInfo>(200,"注册成功",userInfo);
         }
-        return new BaseResponse<UserInfo>(500,"注册失败,该学号已被注册");
+        return new BaseResponse<UserInfo>(500,"注册失败,该学号已被注册",userInfo);
     }
 
     /**
