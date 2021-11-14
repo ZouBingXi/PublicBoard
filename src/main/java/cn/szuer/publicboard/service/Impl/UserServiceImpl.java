@@ -18,12 +18,15 @@ public class UserServiceImpl implements UserService {
     private UserInfoMapper userInfoMapper;
 
     @Override
-    public boolean login(UserInfo user)
+    public UserInfo login(UserInfo user)
     {
         Integer id=user.getUserid();
         String password=user.getPassword();
         UserInfo res=userInfoMapper.selectByPrimaryKey(id);
-        return res!=null&&res.getPassword().equals(password);
+        if (res!=null&&password.equals(res.getPassword()))
+            return res;
+        else
+            return null;
     }
 
     @Override

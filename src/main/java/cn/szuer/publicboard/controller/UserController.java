@@ -44,12 +44,13 @@ public class UserController
      @PostMapping("/login")
      public BaseResponse<UserInfo> login(HttpServletRequest request,UserInfo userInfo)
      {
-         if (userService.login(userInfo))
+         UserInfo res=userService.login(userInfo);
+         if (res!=null)
          {
-             request.getSession().setAttribute("UserInfo",userInfo);
-             return new BaseResponse<UserInfo>(200,"login success",userInfo);
+             request.getSession().setAttribute("UserInfo",res);
+             return new BaseResponse<UserInfo>(200,"登录成功",res);
          }
-         return new BaseResponse<UserInfo>(500,"login fail",userInfo);
+         return new BaseResponse<UserInfo>(500,"登陆失败,请检查用户名或密码",userInfo);
      }
 
     /**

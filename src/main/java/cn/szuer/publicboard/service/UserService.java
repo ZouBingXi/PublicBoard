@@ -9,5 +9,5 @@ public interface UserService {
     
     List<UserInfo> getAll();
 
-    boolean login(UserInfo user);
+    UserInfo login(UserInfo user);
 }
