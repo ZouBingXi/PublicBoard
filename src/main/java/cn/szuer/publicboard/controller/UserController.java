@@ -31,7 +31,7 @@ public class UserController
      * @return
      */
     @PostMapping("/add")
-    public BaseResponse<User> addUser(User user)
+    public BaseResponse<UserInfo> addUser(User user)
     {
         return null;
     }
@@ -42,13 +42,14 @@ public class UserController
      * @return
      */
      @PostMapping("/login")
-     public BaseResponse<User> login(HttpServletRequest request,UserInfo userInfo)
+     public BaseResponse<UserInfo> login(HttpServletRequest request,UserInfo userInfo)
      {
          if (userService.login(userInfo))
          {
              request.getSession().setAttribute("UserInfo",userInfo);
+             return new BaseResponse<UserInfo>(200,"login success",userInfo);
          }
-         return null;
+         return new BaseResponse<UserInfo>(500,"login fail",userInfo);
      }
 
     /**
@@ -69,7 +70,7 @@ public class UserController
     public BaseResponse<List<UserInfo>> showall()
     {
         System.out.println("yes");
-        return new BaseResponse<List<UserInfo>>(200, "sucess", userService.getAll());
+        return new BaseResponse<List<UserInfo>>(200, "success", userService.getAll());
     }
 
     @GetMapping("/test")
