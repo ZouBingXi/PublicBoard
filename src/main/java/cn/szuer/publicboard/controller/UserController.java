@@ -30,7 +30,7 @@ public class UserController
      * @param userInfo
      * @return
      */
-    @GetMapping("/add")
+    @PostMapping("/add")
     public BaseResponse<UserInfo> addUser(UserInfo userInfo)
     {
         if (userService.addUser(userInfo))
