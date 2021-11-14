@@ -12,5 +12,4 @@ public class PublicboardApplication {
 		SpringApplication.run(PublicboardApplication.class, args);
 	}
 
-
 }

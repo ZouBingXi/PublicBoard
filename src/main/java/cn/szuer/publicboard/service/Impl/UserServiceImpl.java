@@ -12,9 +12,9 @@ import cn.szuer.publicboard.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
+    
     @Autowired
     private UserInfoMapper userInfoMapper;
-
 
     @Override
     public List<UserInfo> getAll() {
