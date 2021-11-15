@@ -27,13 +27,17 @@ public class UserController
     UserService userService;
     /**
      * 用户注册
-     * @param user
+     * @param userInfo
      * @return
      */
     @PostMapping("/add")
-    public BaseResponse<UserInfo> addUser(User user)
+    public BaseResponse<UserInfo> addUser(UserInfo userInfo)
     {
-        return null;
+        if (userService.addUser(userInfo))
+        {
+            return new BaseResponse<UserInfo>(200,"注册成功",userInfo);
+        }
+        return new BaseResponse<UserInfo>(500,"注册失败,该学号已被注册",userInfo);
     }
 
     /**

@@ -10,4 +10,6 @@ public interface UserService {
     List<UserInfo> getAll();
 
     UserInfo login(UserInfo user);
+    
+    boolean addUser(UserInfo userInfo);
 }
