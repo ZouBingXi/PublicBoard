@@ -1,12 +1,10 @@
-package cn.szuer.publicboard.dto;
-
-import java.util.Date;
+package cn.szuer.publicboard.vo;
 
 import lombok.Data;
 
 @Data
-public class UserDto {
-
+public class UserVo {
+    
     private Integer userid;
 
     private String username;
@@ -14,7 +12,5 @@ public class UserDto {
     private String banstate;
 
     private String usertype;
-
-    private String logintime;
 
 }
