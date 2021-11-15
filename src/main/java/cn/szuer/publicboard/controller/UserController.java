@@ -27,13 +27,17 @@ public class UserController
     UserService userService;
     /**
      * 用户注册
-     * @param user
+     * @param userInfo
      * @return
      */
     @PostMapping("/add")
-    public BaseResponse<User> addUser(User user)
+    public BaseResponse<UserInfo> addUser(UserInfo userInfo)
     {
-        return null;
+        if (userService.addUser(userInfo))
+        {
+            return new BaseResponse<UserInfo>(200,"注册成功",userInfo);
+        }
+        return new BaseResponse<UserInfo>(500,"注册失败,该学号已被注册",userInfo);
     }
 
     /**
@@ -61,7 +65,6 @@ public class UserController
     public BaseResponse<List<UserInfo>> showUsers(@RequestParam(name = "page",required = true,defaultValue = "1") int page,
                                 @RequestParam(name = "size",required = true,defaultValue = "10")int size)
     {
-        
        return null;
     }
 
@@ -69,7 +72,7 @@ public class UserController
     public BaseResponse<List<UserInfo>> showall()
     {
         System.out.println("yes");
-        return new BaseResponse<List<UserInfo>>(200, "sucess", userService.getAll());
+        return new BaseResponse<List<UserInfo>>(200, "success", userService.getAll());
     }
 
     @GetMapping("/test")

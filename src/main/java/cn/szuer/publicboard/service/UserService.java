@@ -7,4 +7,5 @@ import cn.szuer.publicboard.model.UserInfo;
 public interface UserService {
     
     List<UserInfo> getAll();
+    boolean addUser(UserInfo userInfo);
 }
