@@ -50,7 +50,7 @@ public class SubjectServiceImpl implements SubjectService {
                 subjectState.setExaminestate((byte) 0);
                 int subject_res = subjectInfoMapper.insertSelective(subjectInfo);
                 int newState_res = subjectStateMapper.insertSelective(subjectState);
-                if(subject_res==1 && newState_res==1)
+                if(subject_res==1 && newState_res==1) //add subject success
                     return true;
                 else  //inser error
                     return false;
