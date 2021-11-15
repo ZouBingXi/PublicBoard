@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.util.Date;
 import java.util.List;
 
+import cn.szuer.publicboard.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,18 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     private UserInfoMapper userInfoMapper;
+
+    @Override
+    public UserInfo login(UserInfo user)
+    {
+        Integer id=user.getUserid();
+        String password=user.getPassword();
+        UserInfo res=userInfoMapper.selectByPrimaryKey(id);
+        if (res!=null&&password.equals(res.getPassword()))
+            return res;
+        else
+            return null;
+    }
 
     @Override
     public List<UserInfo> getAll() {

@@ -42,18 +42,20 @@ public class UserController
 
     /**
      * 用户登录
-     * @param user
+     * @param userInfo
      * @return
      */
-    // @PostMapping("/login")
-    // public BaseResponse<User> login(HttpServletRequest request,User user)
-    // {
-    //     if (userService.login(user))
-    //     {
-    //         request.getSession().setAttribute("User",user);
-    //     }
-    //     return null;
-    // }
+     @PostMapping("/login")
+     public BaseResponse<UserInfo> login(HttpServletRequest request,UserInfo userInfo)
+     {
+         UserInfo res=userService.login(userInfo);
+         if (res!=null)
+         {
+             request.getSession().setAttribute("UserInfo",res);
+             return new BaseResponse<UserInfo>(200,"登录成功",res);
+         }
+         return new BaseResponse<UserInfo>(500,"登陆失败,请检查用户名或密码",userInfo);
+     }
 
     /**
      * 查看用户表
