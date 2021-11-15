@@ -78,6 +78,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.15</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
@@ -141,15 +147,15 @@
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>3.7.0.1746</version>
-			</plugin>	
+			</plugin>
 		</plugins>
 
 		<!-- 读取所有mapper的映射文件.xml -->
 		<resources>
             <resource>
                 <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
+				<includes>
+					<include>**/*.xml</include>
                 </includes>
             </resource>
             <resource>
