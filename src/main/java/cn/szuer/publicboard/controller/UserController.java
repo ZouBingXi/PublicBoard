@@ -63,7 +63,6 @@ public class UserController
     public BaseResponse<List<UserInfo>> showUsers(@RequestParam(name = "page",required = true,defaultValue = "1") int page,
                                 @RequestParam(name = "size",required = true,defaultValue = "10")int size)
     {
-        
        return null;
     }
 
