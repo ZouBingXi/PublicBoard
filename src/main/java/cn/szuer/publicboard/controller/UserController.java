@@ -67,6 +67,7 @@ public class UserController
     public BaseResponse<PageInfo<UserDto>> showUsers(@RequestParam(name = "page",required = true,defaultValue = "1") int pageNum,
                                 @RequestParam(name = "size",required = true,defaultValue = "10")int pageSize)
     {
+        List<UserVo> userVos = new ArrayList<>();
         return new BaseResponse<PageInfo<UserDto>>(200, "sucess", userService.getByPage(pageNum, pageSize));
     }
     

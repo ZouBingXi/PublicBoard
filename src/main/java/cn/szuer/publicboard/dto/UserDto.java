@@ -11,10 +11,10 @@ public class UserDto {
 
     private String username;
 
-    private Byte banstate;
+    private String banstate;
 
-    private Integer usertype;
+    private String usertype;
 
-    private Date logintime;
+    private String logintime;
 
 }
