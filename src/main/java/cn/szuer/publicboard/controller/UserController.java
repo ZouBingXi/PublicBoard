@@ -11,12 +11,12 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.szuer.publicboard.dto.UserDto;
-import cn.szuer.publicboard.model.User;
 import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.reponse.BaseResponse;
 import cn.szuer.publicboard.service.UserService;
@@ -37,7 +37,7 @@ public class UserController
      * @return
      */
     @PostMapping("/add")
-    public BaseResponse<UserInfo> addUser(UserInfo userInfo)
+    public BaseResponse<UserInfo> addUser(@RequestBody UserInfo userInfo)
     {
         if (userService.addUser(userInfo))
         {
@@ -51,8 +51,10 @@ public class UserController
      * @param userInfo
      * @return
      */
+   
      @PostMapping("/login")
-     public BaseResponse<UserInfo> login(HttpServletRequest request,UserInfo userInfo)
+    
+     public BaseResponse<UserInfo> login(HttpServletRequest request, @RequestBody UserInfo userInfo)
      {
          UserInfo res=userService.login(userInfo);
          if (res!=null)
@@ -73,11 +75,14 @@ public class UserController
     public BaseResponse<PageInfo<UserDto>> showUsers(@RequestParam(name = "page",required = true,defaultValue = "1") int pageNum,
                                 @RequestParam(name = "size",required = true,defaultValue = "10")int pageSize)
     {
-        List<UserVo> userVos = new ArrayList<>();
+        // List<UserVo> userVos = new ArrayList<>();
         return new BaseResponse<PageInfo<UserDto>>(200, "sucess", userService.getByPage(pageNum, pageSize));
 
     }
-    
+    /**
+     * 
+     * @return
+     */
     @GetMapping("/all")
     public BaseResponse<List<UserDto>> showall()
     {
@@ -85,9 +90,9 @@ public class UserController
 
     }
 
-    // @GetMapping("/test")
-    // public String test()
-    // {
-    //     return "yes";
-    // }
+    @GetMapping("/test")
+    public String test()
+    {
+        return "yes";
+    }
 }

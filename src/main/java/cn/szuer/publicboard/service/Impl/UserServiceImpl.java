@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
         else 
             userDto.setUsertype("普通用户");
         if(userInfo.getBanstate()==1)
-            userDto.setBanstate("封禁状态");
+            userDto.setBanstate("禁用状态");
         else
             userDto.setBanstate("正常状态");
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
