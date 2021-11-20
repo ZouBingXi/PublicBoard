@@ -2,6 +2,17 @@ package cn.szuer.publicboard.model;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class UserInfo {
     private Integer userid;
 

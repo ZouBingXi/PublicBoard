@@ -1,5 +1,6 @@
 package cn.szuer.publicboard.Interceptor;
 
+import cn.szuer.publicboard.dto.UserDto;
 import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.reponse.BaseResponse;
 import com.alibaba.fastjson.JSON;
@@ -15,7 +16,7 @@ public class MyInterceptor implements HandlerInterceptor
     public boolean preHandle(HttpServletRequest request,HttpServletResponse response,Object handler) throws Exception
     {
         HttpSession session=request.getSession();
-        UserInfo user=(UserInfo)session.getAttribute("UserInfo");
+        UserDto user=(UserDto)session.getAttribute("UserDto");
         if (user==null)
         {
             //UTF-8编码

@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.szuer.publicboard.dto.UserDto;
+import cn.szuer.publicboard.dto.param.LoginParam;
 import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.reponse.BaseResponse;
 import cn.szuer.publicboard.service.UserService;
-import cn.szuer.publicboard.vo.UserVo;
 
 /**
  * 用户管理
@@ -53,16 +53,15 @@ public class UserController
      */
    
      @PostMapping("/login")
-    
-     public BaseResponse<UserInfo> login(HttpServletRequest request, @RequestBody UserInfo userInfo)
+     public BaseResponse<UserDto> login(HttpServletRequest request,@RequestBody LoginParam loginParam)
      {
-         UserInfo res=userService.login(userInfo);
+         UserDto res=userService.login(loginParam);
          if (res!=null)
          {
-             request.getSession().setAttribute("UserInfo",res);
-             return new BaseResponse<UserInfo>(200,"登录成功",res);
+             request.getSession().setAttribute("UserDto",res);
+             return new BaseResponse<UserDto>(200,"登录成功",res);
          }
-         return new BaseResponse<UserInfo>(500,"登陆失败,请检查用户名或密码",userInfo);
+         return new BaseResponse<UserDto>(500,"登陆失败,请检查用户名或密码",res);
      }
 
     /**
@@ -76,7 +75,7 @@ public class UserController
                                 @RequestParam(name = "size",required = true,defaultValue = "10")int pageSize)
     {
         // List<UserVo> userVos = new ArrayList<>();
-        return new BaseResponse<PageInfo<UserDto>>(200, "sucess", userService.getByPage(pageNum, pageSize));
+        return new BaseResponse<PageInfo<UserDto>>(200, "success", userService.getByPage(pageNum, pageSize));
 
     }
     /**
@@ -86,7 +85,7 @@ public class UserController
     @GetMapping("/all")
     public BaseResponse<List<UserDto>> showall()
     {
-        return new BaseResponse<List<UserDto>>(200, "sucess", userService.getAll());
+        return new BaseResponse<List<UserDto>>(200, "success", userService.getAll());
 
     }
 
