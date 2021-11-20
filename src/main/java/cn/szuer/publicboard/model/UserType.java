@@ -1,5 +1,17 @@
 package cn.szuer.publicboard.model;
 
+import lombok.Data;
+
+import org.springframework.stereotype.Component;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class UserType {
     private Integer typeid;
 

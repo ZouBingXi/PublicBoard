@@ -20,10 +20,13 @@ import org.springframework.format.datetime.standard.DateTimeContext;
 import org.springframework.stereotype.Service;
 
 import cn.szuer.publicboard.dto.UserDto;
+import cn.szuer.publicboard.dto.param.LoginParam;
 import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.model.UserInfoExample;
 import cn.szuer.publicboard.service.UserService;
+import cn.szuer.publicboard.utils.mapsturctconverter.UserConverter;
+
 import java.util.Date;
 
 @Service
@@ -32,14 +35,18 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserInfoMapper userInfoMapper;
 
+    //注入converter,实现类在target里可以看到，由mapstruct自动生成
+    @Autowired
+    private UserConverter userConverter;
         
-    public UserInfo login(UserInfo user)
+    public UserDto login(LoginParam loginParam)
     {
-        Integer id=user.getUserid();
-        String password=user.getPassword();
+        Integer id=loginParam.getUserid();
+        String password=loginParam.getPassword();
         UserInfo res=userInfoMapper.selectByPrimaryKey(id);
         if (res!=null&&password.equals(res.getPassword()))
-            return res;
+            //只返回Dto中的属性
+            return userConverter.UserInfo2UserDto(res);
         else
             return null;
     }
@@ -69,46 +76,49 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> getAll() {
         UserInfoExample example = new UserInfoExample(); 
         List<UserInfo> userInfos = userInfoMapper.selectByExample(example);
-        List<UserDto> userDtos =  copyList(userInfos);
+        List<UserDto> userDtos =  userConverter.UserInfos2UserDtos(userInfos);
         return userDtos;
     }
 
-    
-    
+    /**
+     * 根据页面参数返回对应数量的records
+     * @param  pageNum,pageSiz
+     * @return PageInfo<UserDto>
+     */
     @Override
     public PageInfo<UserDto> getByPage(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         UserInfoExample example = new UserInfoExample(); 
         List<UserInfo> userInfos = userInfoMapper.selectByExample(example);
-        List<UserDto> userDtos =  copyList(userInfos);
+        //使用converter将Userinfo拷贝到userDto
+        List<UserDto> userDtos =  userConverter.UserInfos2UserDtos(userInfos);
         return new PageInfo<UserDto>(userDtos);
     }
     
     
-    private List<UserDto> copyList(List<UserInfo> records) {
-        List<UserDto> userDtos = new ArrayList<>();
-        for(UserInfo record : records){
-            userDtos.add(copy(record));
-
-        }
-        return userDtos;
-    }
+    // private List<UserDto> copyList(List<UserInfo> records) {
+    //     List<UserDto> userDtos = new ArrayList<>();
+    //     for(UserInfo record : records){
+    //         userDtos.add(copy(record));
+    //     }
+    //     return userDtos;
+    // }
     
-    private UserDto copy(UserInfo userInfo){
-        UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(userInfo, userDto);
-        if(userInfo.getUsertype()==1)
-            userDto.setUsertype("管理员");
-        else 
-            userDto.setUsertype("普通用户");
-        if(userInfo.getBanstate()==1)
-            userDto.setBanstate("禁用状态");
-        else
-            userDto.setBanstate("正常状态");
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        userDto.setLogintime(sf.format(userInfo.getLogintime()));
-        return userDto;
-    }
+    // private UserDto copy(UserInfo userInfo){
+    //     UserDto userDto = new UserDto();
+    //     BeanUtils.copyProperties(userInfo, userDto);
+    //     if(userInfo.getUsertype()==1)
+    //         userDto.setUsertype("管理员");
+    //     else 
+    //         userDto.setUsertype("普通用户");
+    //     // if(userInfo.getBanstate()==1)
+    //     //     userDto.setBanstate("禁用状态");
+    //     // else
+    //     //     userDto.setBanstate("正常状态");
+    //     SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    //     userDto.setLogintime(sf.format(userInfo.getLogintime()));
+    //     return userDto;
+    // }
 
 
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import com.github.pagehelper.PageInfo;
 
 import cn.szuer.publicboard.dto.UserDto;
-import cn.szuer.publicboard.model.User;
+import cn.szuer.publicboard.dto.param.LoginParam;
 import cn.szuer.publicboard.model.UserInfo;
 
 public interface UserService {
@@ -14,7 +14,7 @@ public interface UserService {
     List<UserDto> getAll();
     PageInfo<UserDto> getByPage(int pageNum, int pageSize);
     
-    UserInfo login(UserInfo user);
+    UserDto login(LoginParam loginParam);
     boolean addUser(UserInfo userInfo);
 
 }

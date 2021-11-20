@@ -74,7 +74,7 @@
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
-			<version>1.3.0</version>
+			<version>1.4.0</version>
 		</dependency>
 
 		<dependency>
@@ -83,11 +83,52 @@
 			<version>1.2.78</version>
 		</dependency>
 
+		<!-- lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
+		<!-- dozer -->
+		<!-- <dependency>
+			<groupId>com.github.dozermapper</groupId>
+			<artifactId>dozer-spring-boot-starter</artifactId>
+			<version>6.2.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.github.dozermapper</groupId>
+					<artifactId>dozer-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.dozermapper</groupId>
+			<artifactId>dozer-core</artifactId>
+			<version>6.5.0</version>
+		</dependency> -->
+
+		<!-- <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>5.5.1</version>
+        </dependency> -->
+
+		<!-- mapstruct -->
+		<dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>1.3.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-jdk8</artifactId>
+            <version>1.3.0.Final</version>
+        </dependency>
+
+
 
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
@@ -97,6 +138,8 @@
 			<scope>test</scope>
 		</dependency>
 
+	
+		
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -176,5 +219,15 @@
         </resources>
 
 	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.objenesis</groupId>
+				<artifactId>objenesis</artifactId>
+				<version>3.2</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>
