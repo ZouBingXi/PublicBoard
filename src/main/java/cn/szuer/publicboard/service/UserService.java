@@ -4,9 +4,12 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 
+// import com.github.pagehelper.PageInfo;
+
 import cn.szuer.publicboard.dto.UserDto;
 import cn.szuer.publicboard.dto.param.LoginParam;
 import cn.szuer.publicboard.model.UserInfo;
+import cn.szuer.publicboard.utils.Page;
 
 public interface UserService {
     

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 
+// import com.github.pagehelper.PageInfo;
+
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import cn.szuer.publicboard.dto.UserDto;
+import cn.szuer.publicboard.dto.param.LoginParam;
+
 import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.mapper.UserTypeMapper;
 import cn.szuer.publicboard.model.UserInfo;
@@ -31,9 +36,21 @@ class PublicboardApplicationTests {
 	@Autowired
 	private UserService userService;
 
+	// @Autowired
+	// private  RestTemplate restTemplate;
+
+	private TestRestTemplate testRestTemplate = new TestRestTemplate();
+
+	private RestTemplate restTemplate= new RestTemplate();
+
 	@Autowired
-	private  TestRestTemplate restTemplate;
-	private HttpEntity httpEntity;
+    private UserInfoMapper userInfoMapper;
+
+	@Autowired
+	private UserConverter userConverter;
+
+	// @Autowired
+	// private Mapper dozerMapper;
 
 	@Autowired
     private UserInfoMapper userInfoMapper;
@@ -44,8 +61,6 @@ class PublicboardApplicationTests {
 	@Autowired
 	private UserConverter userConverter;
 
-	// @Autowired
-	// private Mapper dozerMapper;
 
 	@Test
 	void contextLoads() {
@@ -61,30 +76,25 @@ class PublicboardApplicationTests {
 	} 
 
 	@Test
-	void login() throws Exception{
+	void login(){
 
-		String url = "/user/login";
-		MultiValueMap<String,String> map = new LinkedMultiValueMap<>();
-		map.add("userid", "");
-		map.add("password", "");
-		ResponseEntity responseEntity = restTemplate.postForEntity(url, map, String.class);
-		System.out.println(responseEntity.getBody());
+		try{
+			String url = "http://localhost/user/login";
+			// MultiValueMap<String,String> map = new LinkedMultiValueMap<>();
+			// map.add("userid", "");
+			// map.add("password", "");
+			LoginParam loginParam= new LoginParam();
+			loginParam.setUserid(2019010101);
+			loginParam.setPassword("1234");
+			ResponseEntity responseEntity = restTemplate.postForEntity(url, loginParam, String.class);
+			System.out.println(responseEntity.getBody());
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 
 	}
 
-	// @Test
-	// public void testDozer()
-	// {
-		
-	// 	UserInfo userInfo = userInfoMapper.selectByPrimaryKey(2019010101);
-
-	// 	System.out.println(userTypeMapper.selectByPrimaryKey(userInfo.getUsertype()).toString());
-
-	// 	UserDto userDto = dozerMapper.map(userInfo, UserDto.class);
-
-	// 	System.out.println(userDto.toString());
-
-	// }
 
 	@Test
 	void testMapstruct()
@@ -96,6 +106,7 @@ class PublicboardApplicationTests {
 		// System.out.println(userInfo.toString());
 		// System.out.println(userType.toString());
 	}
+
 
 
 

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.github.pagehelper.PageInfo;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import cn.szuer.publicboard.dto.param.LoginParam;
 import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.reponse.BaseResponse;
 import cn.szuer.publicboard.service.UserService;
+import cn.szuer.publicboard.utils.Page;
 
 /**
  * 用户管理

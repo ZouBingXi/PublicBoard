@@ -16,6 +16,8 @@ public interface UserInfoMapper {
 
     int insertSelective(UserInfo record);
 
+    List<UserInfo> selectAll();
+
     List<UserInfo> selectByExampleWithBLOBs(UserInfoExample example);
 
     List<UserInfo> selectByExample(UserInfoExample example);
