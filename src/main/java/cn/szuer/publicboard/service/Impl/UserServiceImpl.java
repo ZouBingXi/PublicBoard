@@ -81,8 +81,6 @@ public class UserServiceImpl implements UserService {
         // UserInfoExample example = new UserInfoExample(); 
         // List<UserInfo> userInfos = userInfoMapper.selectByExample(example);
         List<UserInfo> userInfos = userInfoMapper.selectAll();
-        UserInfoExample example = new UserInfoExample(); 
-        List<UserInfo> userInfos = userInfoMapper.selectByExample(example);
         List<UserDto> userDtos =  userConverter.UserInfos2UserDtos(userInfos);
         return userDtos;
     }
@@ -94,26 +92,19 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public PageInfo<UserDto> getByPage(int pageNum, int pageSize) {
+        
         PageHelper.startPage(pageNum, pageSize);
-
         // UserInfoExample example = new UserInfoExample();
         // List<UserInfo> userInfos = userInfoMapper.selectByExample(new UserInfoExample());
         List<UserInfo> userInfos = userInfoMapper.selectAll();
         //使用converter将Userinfo拷贝到userDto
         List<UserDto> userDtos =  userConverter.UserInfos2UserDtos(userInfos);
-
         //先根据查出来的userinfos生成PageInfo
         PageInfo pageInfo = new PageInfo<>(userInfos);
         //再进行setList操作，转成userDtos
         pageInfo.setList(userDtos);
-        
+    
         return pageInfo;
-
-        UserInfoExample example = new UserInfoExample(); 
-        List<UserInfo> userInfos = userInfoMapper.selectByExample(example);
-        //使用converter将Userinfo拷贝到userDto
-        List<UserDto> userDtos =  userConverter.UserInfos2UserDtos(userInfos);
-        return new PageInfo<UserDto>(userDtos);
 
     }
     
