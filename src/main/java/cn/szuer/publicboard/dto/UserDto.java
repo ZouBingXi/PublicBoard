@@ -38,7 +38,6 @@ public class UserDto {
     /**
      * 登录时间
      */
-    @JsonIgnore
     private String logintime;
 
 }
