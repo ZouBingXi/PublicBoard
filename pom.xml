@@ -210,12 +210,12 @@
 			</plugin>
 
 			<!-- 前端自动化打包插件 -->
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<executions>
 
-					<!-- 安装前端依赖 -->
+				
 					<execution>
 						<id>exec-yarn-install</id>
 						<phase>generate-sources</phase>
@@ -231,7 +231,7 @@
 						</configuration>
 					</execution>
 
-					<!-- 打包前端项目 -->
+			
 					<execution>
 						<id>exec-yarn-run-build</id>
 						<phase>generate-sources</phase>
@@ -249,7 +249,7 @@
 						
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 
 			<!-- smart-doc -->
 			<plugin>
