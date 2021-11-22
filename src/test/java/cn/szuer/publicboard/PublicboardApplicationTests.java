@@ -49,18 +49,6 @@ class PublicboardApplicationTests {
 	@Autowired
 	private UserConverter userConverter;
 
-	// @Autowired
-	// private Mapper dozerMapper;
-
-	@Autowired
-    private UserInfoMapper userInfoMapper;
-
-	@Autowired
-	private UserTypeMapper userTypeMapper;
-
-	@Autowired
-	private UserConverter userConverter;
-
 
 	@Test
 	void contextLoads() {
