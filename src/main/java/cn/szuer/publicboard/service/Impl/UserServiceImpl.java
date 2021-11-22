@@ -7,6 +7,9 @@ import java.util.List;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+// import com.github.pagehelper.PageHelper;
+// import com.github.pagehelper.PageInfo;
+
 import org.springframework.beans.BeanUtils;
 
 import java.io.File;
@@ -25,6 +28,7 @@ import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.model.UserInfoExample;
 import cn.szuer.publicboard.service.UserService;
+import cn.szuer.publicboard.utils.Page;
 import cn.szuer.publicboard.utils.mapsturctconverter.UserConverter;
 
 import java.util.Date;
@@ -74,6 +78,9 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public List<UserDto> getAll() {
+        // UserInfoExample example = new UserInfoExample(); 
+        // List<UserInfo> userInfos = userInfoMapper.selectByExample(example);
+        List<UserInfo> userInfos = userInfoMapper.selectAll();
         UserInfoExample example = new UserInfoExample(); 
         List<UserInfo> userInfos = userInfoMapper.selectByExample(example);
         List<UserDto> userDtos =  userConverter.UserInfos2UserDtos(userInfos);
@@ -88,11 +95,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public PageInfo<UserDto> getByPage(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
+
+        // UserInfoExample example = new UserInfoExample();
+        // List<UserInfo> userInfos = userInfoMapper.selectByExample(new UserInfoExample());
+        List<UserInfo> userInfos = userInfoMapper.selectAll();
+        //使用converter将Userinfo拷贝到userDto
+        List<UserDto> userDtos =  userConverter.UserInfos2UserDtos(userInfos);
+
+        //先根据查出来的userinfos生成PageInfo
+        PageInfo pageInfo = new PageInfo<>(userInfos);
+        //再进行setList操作，转成userDtos
+        pageInfo.setList(userDtos);
+        
+        return pageInfo;
+
         UserInfoExample example = new UserInfoExample(); 
         List<UserInfo> userInfos = userInfoMapper.selectByExample(example);
         //使用converter将Userinfo拷贝到userDto
         List<UserDto> userDtos =  userConverter.UserInfos2UserDtos(userInfos);
         return new PageInfo<UserDto>(userDtos);
+
     }
     
     

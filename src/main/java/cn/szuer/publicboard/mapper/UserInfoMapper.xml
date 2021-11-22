@@ -77,6 +77,9 @@
   <sql id="Blob_Column_List" >
     headImage
   </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from user_info 
+  </select>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.szuer.publicboard.model.UserInfoExample" >
     select
     <if test="distinct" >

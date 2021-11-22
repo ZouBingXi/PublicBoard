@@ -76,6 +76,14 @@ public class UrlOnlineTests {
     @Test
     public void testgetAll(){
         try{
+            String url = "http://localhost/user/all";
+            BaseResponse response = template.getForObject(url, BaseResponse.class);
+            System.err.println(response);
+            assertEquals(response.getMsg(), "success");
+
+         }catch(Exception e){
+             e.printStackTrace();
+        }
         String url = "http://localhost/user/all";
         BaseResponse response = template.getForObject(url, BaseResponse.class);
         System.err.println(response);
