@@ -9,15 +9,14 @@
 		<version>2.5.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-    
-	<!-- <groupId>${groupId}</groupId>
-	<artifactId>${artifactId}</artifactId>
-	<version>${version}</version>
-	<packaging>jar</packaging>
 
-	<name>${artifactId}</name>
+	<!-- <groupId>cn.szuer</groupId>
+	<artifactId>publicboard</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>publicboard</name>
 	<description>Demo project for Spring Boot</description> -->
-	
+
 	<groupId>cn.szuer</groupId>
 	<artifactId>publicboard</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -139,7 +138,6 @@
         </dependency>
 
 
-
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -149,8 +147,6 @@
 		</dependency>
 
 	
-		
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -211,6 +207,49 @@
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>3.7.0.1746</version>
 			</plugin>
+
+			<!-- 前端自动化打包插件 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+
+					<!-- 安装前端依赖 -->
+					<execution>
+						<id>exec-yarn-install</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>yarn</executable>
+							<arguments>
+								<argument>install</argument>
+							</arguments>
+							<workingDirectory>${project.basedir}/frontend</workingDirectory>
+						</configuration>
+					</execution>
+
+					<!-- 打包前端项目 -->
+					<execution>
+						<id>exec-yarn-run-build</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>yarn</executable>
+							<arguments>
+								<argument>run</argument>
+								<argument>build</argument>
+							</arguments>
+							<workingDirectory>${project.basedir}/frontend</workingDirectory>
+						</configuration>
+						
+					</execution>
+				</executions>
+			</plugin>
+
 			<!-- smart-doc -->
 			<plugin>
 				<groupId>com.github.shalousun</groupId>
