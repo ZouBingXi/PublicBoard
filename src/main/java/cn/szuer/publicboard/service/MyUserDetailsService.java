@@ -6,6 +6,7 @@ import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.model.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Component("MyUserDetailsService")
 public class MyUserDetailsService implements UserDetailsService
 {
     @Autowired
@@ -46,7 +47,9 @@ public class MyUserDetailsService implements UserDetailsService
 
         //获取用户身份
         List<GrantedAuthority> authorities=new ArrayList<>();
-        String role=userTypeMapper.selectByPrimaryKey(user.getUsertype()).getTypename();
+        GrantedAuthority grantedAuthority=new SimpleGrantedAuthority
+                ("ROLE_"+userTypeMapper.selectByPrimaryKey(user.getUsertype()).getTypename());
+        authorities.add(grantedAuthority);
 
         return new User(String.valueOf(user.getUserid()),user.getPassword(),authorities);
     }
