@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 根据页面参数返回对应数量的records
-     * @param  pageNum,pageSiz
+     * @param  pageNum,pageSize
      * @return PageInfo<UserDto>
      */
     @Override

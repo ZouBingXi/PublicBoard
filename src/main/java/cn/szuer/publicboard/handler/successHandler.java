@@ -4,6 +4,7 @@ import cn.szuer.publicboard.dto.UserDto;
 import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.reponse.BaseResponse;
+import cn.szuer.publicboard.utils.mapsturctconverter.UserConverter;
 import cn.szuer.publicboard.utils.mapsturctconverter.UserConverterImpl;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class successHandler implements AuthenticationSuccessHandler
 {
     @Autowired
     UserInfoMapper userInfoMapper;
+
+    @Autowired
+    UserConverter userConverter;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,HttpServletResponse response,Authentication authentication) throws IOException, ServletException
     {
@@ -43,7 +47,7 @@ public class successHandler implements AuthenticationSuccessHandler
         //将UserInfo转为UserDto写入返回类中
         if (userInfo!=null)
         {
-            UserDto userDto=UserConverterImpl.INSTANCE.UserInfo2UserDto(userInfo);
+            UserDto userDto=userConverter.UserInfo2UserDto(userInfo);
             baseResponse.setData(userDto);
         }
 

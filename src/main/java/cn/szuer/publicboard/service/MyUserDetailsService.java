@@ -7,6 +7,7 @@ import cn.szuer.publicboard.model.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,9 +25,6 @@ public class MyUserDetailsService implements UserDetailsService
     private UserInfoMapper userInfoMapper;
     @Autowired
     private UserTypeMapper userTypeMapper;
-    //定义加密算法
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     /**
      * 自定义UserDetailsService，根据传入的userid，返回一个UserDetails
@@ -40,7 +38,8 @@ public class MyUserDetailsService implements UserDetailsService
     {
         //根据userid查找用户
         UserInfo user=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userid));
-        if (user!=null)
+        System.out.println("User="+user);
+        if (user==null)
         {
             throw new UsernameNotFoundException("用户不存在,请检查用户名");
         }
@@ -51,6 +50,6 @@ public class MyUserDetailsService implements UserDetailsService
                 ("ROLE_"+userTypeMapper.selectByPrimaryKey(user.getUsertype()).getTypename());
         authorities.add(grantedAuthority);
 
-        return new User(String.valueOf(user.getUserid()),user.getPassword(),authorities);
+        return new User(String.valueOf(user.getUserid()),"{noop}"+user.getPassword(),authorities);
     }
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.github.pagehelper.PageInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -90,6 +91,7 @@ public class UserController
     }
 
     @GetMapping("/test")
+    @PreAuthorize("hasAnyRole('ROLE_管理员')")
     public String test()
     {
         return "yes";
