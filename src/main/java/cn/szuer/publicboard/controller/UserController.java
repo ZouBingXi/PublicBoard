@@ -34,36 +34,20 @@ public class UserController
     UserService userService;
     /**
      * 用户注册
-     * @param userInfo
+     * @param loginParam
      * @return
      */
     @PostMapping("/add")
-    public BaseResponse<UserInfo> addUser(@RequestBody UserInfo userInfo)
+    public BaseResponse<UserDto> addUser(LoginParam loginParam)
     {
-        if (userService.addUser(userInfo))
+        UserDto userDto=userService.addUser(loginParam);
+        if (userDto!=null)
         {
-            return new BaseResponse<UserInfo>(200,"注册成功",userInfo);
+            return new BaseResponse<UserDto>(200,"注册成功",userDto);
         }
-        return new BaseResponse<UserInfo>(500,"注册失败,该学号已被注册",userInfo);
+        return new BaseResponse<UserDto>(500,"注册失败,该学号已被注册",userDto);
     }
 
-    /**
-     * 用户登录
-     * @param userInfo
-     * @return
-     */
-   
-     @PostMapping("/login")
-     public BaseResponse<UserDto> login(HttpServletRequest request,@RequestBody LoginParam loginParam)
-     {
-         UserDto res=userService.login(loginParam);
-         if (res!=null)
-         {
-             request.getSession().setAttribute("UserDto",res);
-             return new BaseResponse<UserDto>(200,"登录成功",res);
-         }
-         return new BaseResponse<UserDto>(500,"登陆失败,请检查用户名或密码",res);
-     }
 
     /**
      * 查看用户表

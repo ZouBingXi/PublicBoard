@@ -34,8 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     /**
      * 指定加密方式
      * @return
-     */
-    /*@Bean
+    @Bean
     public PasswordEncoder passwordEncoder()
     {
         return new BCryptPasswordEncoder();
@@ -50,10 +49,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
         auth.userDetailsService(userDetailsService);
+            //.passwordEncoder(passwordEncoder())
     }
 
     /**
-     * 配置不需要验证的uri
+     * 配置
      * @param http
      * @throws Exception
      */
@@ -61,17 +61,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
-                .antMatchers("/user/login","/user/add","/user/all")
+                .antMatchers("/user/login","/user/add","/user/all") //添加不需要登录即可访问的请求路径
                 .permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().authenticated()   //启动认证
                 .and()
                 .formLogin()
-                //.loginProcessingUrl("/user/login")
-                .usernameParameter("userid")
-                //.successHandler(successHandler)
-                //.failureHandler(failureHandler)
+                .loginPage("/login")  //自定义登录界面
+                .loginProcessingUrl("/user/login")    //自定义登录请求路径
+                .usernameParameter("userid")    //自定义登录账号参数名(默认为username,密码默认为password)
+                .successHandler(successHandler) //自定义登录成功处理类
+                .failureHandler(failureHandler) //自定义登录失败处理类
+                .permitAll()
                 .and()
-                .csrf().disable();
+                .csrf().disable();  //不启用csrf访问
 
     }
 }
