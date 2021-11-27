@@ -66,8 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .anyRequest().authenticated()   //启动认证
                 .and()
                 .formLogin()
-                .loginPage("/login")  //自定义登录界面
-                .loginProcessingUrl("/user/login")    //自定义登录请求路径
+                //.loginPage("/login")  //自定义登录界面
+                //.loginProcessingUrl("/user/login")    //自定义登录请求路径
                 .usernameParameter("userid")    //自定义登录账号参数名(默认为username,密码默认为password)
                 .successHandler(successHandler) //自定义登录成功处理类
                 .failureHandler(failureHandler) //自定义登录失败处理类
