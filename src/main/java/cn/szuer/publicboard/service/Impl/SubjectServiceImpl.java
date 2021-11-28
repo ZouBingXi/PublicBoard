@@ -48,7 +48,7 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public int addSubject(AddSubjectParam addSubjectParam) {
+    public int add(AddSubjectParam addSubjectParam) {
         SubjectInfo subject = null;          //话题信息
         SubjectState subjectState = null;    //话题状态
         UserInfo userInfo = userInfoMapper.selectByPrimaryKey(addSubjectParam.getUserid());
