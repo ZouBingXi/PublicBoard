@@ -54,7 +54,7 @@ public class SubjectController
     {
         int res = subjectService.addSubject(addSubjectParam);
         SubjectConverter subjectConverter = null;
-        SubjectSendDto subjectSendDto = subjectConverter.SubjectReceive2SubjectSend(addSubjectParam);
+        SubjectSendDto subjectSendDto = subjectConverter.AddSubjectParam2SubjectSendDto(addSubjectParam);
         if(res==21)
         {
             return new BaseResponse<SubjectSendDto>(500,"发布失败，当前用户处于封禁状态！",subjectSendDto);

@@ -45,30 +45,30 @@ public class UrlOnlineTests {
      * 在其他单元测试前进行login操作，获得cookie所需的Sessionid
      * @throws IOException
      */
-    @Before
-    public void GetCookies() throws IOException
-    {
-        String url = "http://localhost/user/login";
-
-        //更改请求头Header, 修改MediaType为APPLICATION_JSON
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> param = new HashMap<>();
-        param.put("userid", "2019010101");
-        param.put("password", "1234");
-        //请求体的参数，一定要转成String, 才能被接受
-        String value = mapper.writeValueAsString(param);
-        // System.out.println(value);
-
-        //HttpEntity包含消息头和消息体
-        HttpEntity<String> requEntity = new HttpEntity<String>(value, headers);
-        //获得ResponseEntity， 包括响应体对象、响应头和响应状态， BaseResponse.class表明响应体的类型
-        ResponseEntity<BaseResponse> responseEntity = template.postForEntity(url, requEntity, BaseResponse.class);
-        cookies.add(responseEntity.getHeaders().get("set-cookie").get(0).toString());
-        System.out.println(cookies);
-    }
+//    @Before
+//    public void GetCookies() throws IOException
+//    {
+//        String url = "http://localhost/user/login";
+//
+//        //更改请求头Header, 修改MediaType为APPLICATION_JSON
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        Map<String, String> param = new HashMap<>();
+//        param.put("userid", "2019010101");
+//        param.put("password", "1234");
+//        //请求体的参数，一定要转成String, 才能被接受
+//        String value = mapper.writeValueAsString(param);
+//        // System.out.println(value);
+//
+//        //HttpEntity包含消息头和消息体
+//        HttpEntity<String> requEntity = new HttpEntity<String>(value, headers);
+//        //获得ResponseEntity， 包括响应体对象、响应头和响应状态， BaseResponse.class表明响应体的类型
+//        ResponseEntity<BaseResponse> responseEntity = template.postForEntity(url, requEntity, BaseResponse.class);
+//        cookies.add(responseEntity.getHeaders().get("set-cookie").get(0).toString());
+//        System.out.println(cookies);
+//    }
 
     /**
      * getForObject方法只返回响应体对象，没有Http响应状态码等信息
@@ -76,7 +76,7 @@ public class UrlOnlineTests {
     @Test
     public void testgetAll(){
         try{
-            String url = "http://localhost/user/all";
+            String url = "http://localhost/subject/all";
             BaseResponse response = template.getForObject(url, BaseResponse.class);
             System.err.println(response);
             assertEquals(response.getMsg(), "success");
