@@ -52,7 +52,7 @@ public class SubjectController
     @PostMapping("/add")
     public BaseResponse<SubjectSendDto> add(AddSubjectParam addSubjectParam)
     {
-        int res = subjectService.addSubject(addSubjectParam);
+        int res = subjectService.add(addSubjectParam);
         SubjectConverter subjectConverter = null;
         SubjectSendDto subjectSendDto = subjectConverter.AddSubjectParam2SubjectSendDto(addSubjectParam);
         if(res==21)
