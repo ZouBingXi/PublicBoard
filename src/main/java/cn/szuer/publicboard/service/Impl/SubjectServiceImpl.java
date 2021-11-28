@@ -29,7 +29,7 @@ import java.util.List;
 @Service
 public class SubjectServiceImpl implements SubjectService {
 
-    @Autowired
+    @Autowired(required = false)
     private UserInfoMapper userInfoMapper;
     private SubjectInfoMapper subjectInfoMapper;
     private SubjectTypeMapper subjectTypeMapper;
@@ -109,6 +109,7 @@ public class SubjectServiceImpl implements SubjectService {
         PageHelper.startPage(pageNum, pageSize);
         SubjectInfoExample example = new SubjectInfoExample();
         List<SubjectInfo> subjectInfos = subjectInfoMapper.selectByExample(example);
+        System.out.println(subjectInfos.toString());
         List<SubjectSendDto> subjectSendDtos =  copyList(subjectInfos);
         return new PageInfo<>(subjectSendDtos);
     }
