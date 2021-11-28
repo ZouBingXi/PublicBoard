@@ -309,6 +309,81 @@ public class UrlOnlineTests {
         {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 表单提交，接口入参“没有”@requestbody注解
+     */
+    @Test
+    public void testAddnewsbyForm1(){
+        try{
+            //默认为Form表单提交
+            String url = "http://localhost/news/add";
+            //Post以Form表单方式提交必须用LinkedMultiValueMap
+            LinkedMultiValueMap<String, String > param = new LinkedMultiValueMap<>();
+            param.add("userid", "2019010101");
+            param.add("title", "帖子标题");
+            param.add("content","帖子内容");
+            param.add("newstype","1");
+            //获得ResponseEntity， 包括响应体对象、响应头和响应状态， String.class表明响应体被转化为String类型
+            ResponseEntity<String> ResponseEntity = template.postForEntity(url, param, String.class);
+            HttpStatus code = ResponseEntity.getStatusCode();
+            System.err.println(code);
+            System.err.println(ResponseEntity.toString());
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * payload提交，接口入参“有”@requestbody
+     * 若controller使用了@requestbody注解，
+     * 则前端的提交方式变为Payload,需要修改Header中的ContentType,
+     * 否则会报unsupported Media Type
+     **/
+    @Test
+    public void testAddnewsbyPayload1() throws IOException{
+
+
+        try{
+            //接口的url
+            String url = "http://localhost/news/add";
+
+            //更改请求头Header, 修改MediaType为APPLICATION_JSON
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String, String> param = new HashMap<>();
+            param.put("userid", "2019010101");
+            param.put("title", "帖子标题");
+            param.put("content","帖子内容");
+            param.put("newstype","1");
+            //请求体的参数，一定要转成String, 才能被接受
+            String value = mapper.writeValueAsString(param);
+            System.out.println(value);
+
+            //HttpEntity包含消息头和消息体
+            HttpEntity<String> requEntity = new HttpEntity<String>(value, headers);
+
+            //获得ResponseEntity， 包括响应体对象、响应头和响应状态， BaseResponse.class表明响应体的类型
+            ResponseEntity<BaseResponse> responseEntity = template.postForEntity(url, requEntity, BaseResponse.class);
+
+            // System.out.println(responseEntity.toString());
+            System.out.println(responseEntity.getHeaders().get("Set-Cookie").get(0));
+            cookies.add(responseEntity.getHeaders().get("Set-Cookie").get(0).toString());
+
+            //assert测试
+            //getStatusCode获得响应状态，该响应状态是HTTP自带的，并非服务端设置的
+            assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+            //getbody获得响应体，getMsg获得响应体中的信息
+            assertEquals(responseEntity.getBody().getMsg(), "发布成功！");
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
 
     }
 }

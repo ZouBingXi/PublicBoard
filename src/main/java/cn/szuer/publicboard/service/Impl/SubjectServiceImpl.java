@@ -66,8 +66,9 @@ public class SubjectServiceImpl implements SubjectService {
         Integer subjectid = 0;
         SubjectStateExample example = new  SubjectStateExample();
         SubjectStateExample.Criteria criteria = example.createCriteria();
-        criteria.andExaminestateBetween((byte)0,(byte)1);
+        criteria.andExaminestateIsNotNull();
         subjectid = subjectStateMapper.countByExample(example) + 1;
+
         //设置subjectinfo各属性值
         subject.setSubjectid(subjectid);
         subject.setUserid(addSubjectParam.getUserid());
@@ -82,6 +83,11 @@ public class SubjectServiceImpl implements SubjectService {
         subjectState.setTopstate((byte)0);
         subjectState.setHotstate((byte)0);
         subjectState.setExaminestate((byte)0);
+
+        System.out.println("/////test/////subject");
+        System.out.println(subject);
+        System.out.println("/////test/////state");
+        System.out.println(subjectState);
 
         //判断是否匿名
         if(userInfo.getAnonymousstate()==0)//正常用户状态

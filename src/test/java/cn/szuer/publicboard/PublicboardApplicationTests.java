@@ -3,13 +3,15 @@ package cn.szuer.publicboard;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.szuer.publicboard.dto.NewsSendDto;
 import cn.szuer.publicboard.dto.SubjectSendDto;
+import cn.szuer.publicboard.dto.param.AddNewsParam;
 import cn.szuer.publicboard.dto.param.AddSubjectParam;
-import cn.szuer.publicboard.mapper.SubjectInfoMapper;
-import cn.szuer.publicboard.mapper.SubjectStateMapper;
-import cn.szuer.publicboard.mapper.SubjectTypeMapper;
+import cn.szuer.publicboard.mapper.*;
 import cn.szuer.publicboard.model.*;
+import cn.szuer.publicboard.service.NewsService;
 import cn.szuer.publicboard.service.SubjectService;
+import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
 import cn.szuer.publicboard.utils.mapsturctconverter.SubjectConverter;
 import com.github.pagehelper.PageInfo;
 
@@ -28,7 +30,6 @@ import org.springframework.web.client.RestTemplate;
 import cn.szuer.publicboard.dto.UserDto;
 import cn.szuer.publicboard.dto.param.LoginParam;
 
-import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.service.UserService;
 import cn.szuer.publicboard.utils.mapsturctconverter.UserConverter;
 
@@ -43,6 +44,8 @@ class PublicboardApplicationTests {
 	@Autowired
 	private SubjectService subjectService;
 
+	@Autowired
+	private NewsService newsService;
 	// @Autowired
 	// private  RestTemplate restTemplate;
 
@@ -55,18 +58,28 @@ class PublicboardApplicationTests {
 
 	@Autowired(required=false)
 	private SubjectInfoMapper subjectInfoMapper;
+	@Autowired(required=false)
+	private NewsInfoMapper newsInfoMapper;
 
 	@Autowired(required=false)
 	SubjectTypeMapper subjectTypeMapper = null;
 
 	@Autowired(required=false)
+	NewsTypeMapper newsTypeMapper = null;
+
+	@Autowired(required=false)
 	SubjectStateMapper subjectStateMapper = null;
+	@Autowired(required=false)
+	NewsStateMapper newsStateMapper = null;
 
 	@Autowired
 	private UserConverter userConverter;
 
 	@Autowired(required=false)
 	private SubjectConverter subjectConverter;
+
+	@Autowired(required=false)
+	private NewsConverter newsConverter;
 
 
 	@Test
@@ -161,6 +174,55 @@ class PublicboardApplicationTests {
 		System.out.println(subjectSendDto.toString());
 
 	}
+
+	@Test
+	void testNewsService(){
+
+		List<NewsSendDto> list = newsService.getAll();
+		System.out.println(list);
+		PageInfo<NewsSendDto> pageInfo = newsService.getByPage(1, 3);
+		System.out.println(pageInfo);
+	}
+
+	@Test
+		//测试编辑帖子功能
+	void addNews(){
+		try{
+			String url = "http://localhost/news/add";
+			//初始化测试用例1
+			AddNewsParam addNewsParam= new AddNewsParam();
+			addNewsParam.setUserid(2019010101);
+			addNewsParam.setNewstitle("标题：测试帖子");
+			addNewsParam.setContent("内容：测试帖子");
+			addNewsParam.setNewstype(1);
+
+			ResponseEntity responseEntity = restTemplate.postForEntity(url, addNewsParam, String.class);
+			System.out.println(responseEntity.getBody());//打印测试结果
+
+			//修改newstype，使newstype不存在
+			addNewsParam.setNewstype(10);
+			ResponseEntity responseEntity1 = restTemplate.postForEntity(url, addNewsParam, String.class);
+			System.out.println(responseEntity1.getBody());//打印测试结果
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+
+
+	@Test
+		//测试帖子mapper结构
+	void testNewsMapstruct()
+	{
+		NewsInfo newsInfo = newsInfoMapper.selectByPrimaryKey(1);
+		//调用convertor将addnewsparam转换成dto
+		NewsSendDto newsSendDto= newsConverter.NewsInfo2NewsSendDto(newsInfo);
+
+		System.out.println(newsSendDto.toString());
+
+	}
+
 
 
 
