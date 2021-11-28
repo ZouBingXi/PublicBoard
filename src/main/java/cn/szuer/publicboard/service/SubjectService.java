@@ -11,5 +11,5 @@ public interface SubjectService {
     List<SubjectSendDto> getAll();
     PageInfo<SubjectSendDto> getByPage(int pageNum, int pageSize);
 
-    int addSubject(AddSubjectParam addSubjectParam);
+    int add(AddSubjectParam addSubjectParam);
 }
