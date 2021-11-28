@@ -16,6 +16,8 @@ public interface SubjectInfoMapper {
 
     int insertSelective(SubjectInfo record);
 
+    List<SubjectInfo> selectAll();
+
     List<SubjectInfo> selectByExampleWithBLOBs(SubjectInfoExample example);
 
     List<SubjectInfo> selectByExample(SubjectInfoExample example);

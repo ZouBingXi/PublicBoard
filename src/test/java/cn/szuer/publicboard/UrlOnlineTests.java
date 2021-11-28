@@ -205,6 +205,110 @@ public class UrlOnlineTests {
         {
             e.printStackTrace();
         }
-        
+    }
+    @Test
+    @Rollback
+    public void testgetByPage1()
+    {
+        try{
+
+            HttpHeaders headers = new HttpHeaders();
+            // List<String> cookies =new ArrayList<>();
+            //cookies.add("JSESSIONID=FEA9AE832F68F7A0F1AC5D52D60AC841; Path=/; HttpOnly");
+            System.out.println(cookies);
+            //请求头添加cookie，用于传输Sessionid
+            headers.put(HttpHeaders.COOKIE,cookies);
+            HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
+            String url = "http://localhost/subject/admin/checksubject?page=1&size=5";
+            // ResponseEntity<String> entity = template.getForEntity(url, String.class);
+            ResponseEntity<BaseResponse> entity = template.exchange(url, HttpMethod.GET, httpEntity, BaseResponse.class);
+            // HttpStatus code = entity.getStatusCode();
+            // System.err.println(code);
+            System.err.println(entity.getBody().getData().toString());
+
+            //检测HTTP状态码
+            assertEquals(entity.getStatusCode(), HttpStatus.OK);
+            //检测返回体携带的msg是否与controller中所设一致
+            assertEquals(entity.getBody().getMsg(), "success");
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 表单提交，接口入参“没有”@requestbody注解
+     */
+    @Test
+    public void testAddsubjectbyForm1(){
+        try{
+            //默认为Form表单提交
+            String url = "http://localhost/subject/add";
+            //Post以Form表单方式提交必须用LinkedMultiValueMap
+            LinkedMultiValueMap<String, String > param = new LinkedMultiValueMap<>();
+            param.add("userid", "2019010101");
+            param.add("title", "话题标题");
+            param.add("content","话题内容");
+            param.add("subjecttype","1");
+            //获得ResponseEntity， 包括响应体对象、响应头和响应状态， String.class表明响应体被转化为String类型
+            ResponseEntity<String> ResponseEntity = template.postForEntity(url, param, String.class);
+            HttpStatus code = ResponseEntity.getStatusCode();
+            System.err.println(code);
+            System.err.println(ResponseEntity.toString());
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * payload提交，接口入参“有”@requestbody
+     * 若controller使用了@requestbody注解，
+     * 则前端的提交方式变为Payload,需要修改Header中的ContentType,
+     * 否则会报unsupported Media Type
+     **/
+    @Test
+    public void testAddsubjectbyPayload1() throws IOException{
+
+
+        try{
+            //接口的url
+            String url = "http://localhost/subject/add";
+
+            //更改请求头Header, 修改MediaType为APPLICATION_JSON
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String, String> param = new HashMap<>();
+            param.put("userid", "2019010101");
+            param.put("title", "话题标题");
+            param.put("content","话题内容");
+            param.put("subjecttype","1");
+            //请求体的参数，一定要转成String, 才能被接受
+            String value = mapper.writeValueAsString(param);
+            System.out.println(value);
+
+            //HttpEntity包含消息头和消息体
+            HttpEntity<String> requEntity = new HttpEntity<String>(value, headers);
+
+            //获得ResponseEntity， 包括响应体对象、响应头和响应状态， BaseResponse.class表明响应体的类型
+            ResponseEntity<BaseResponse> responseEntity = template.postForEntity(url, requEntity, BaseResponse.class);
+
+            // System.out.println(responseEntity.toString());
+            System.out.println(responseEntity.getHeaders().get("Set-Cookie").get(0));
+            cookies.add(responseEntity.getHeaders().get("Set-Cookie").get(0).toString());
+
+            //assert测试
+            //getStatusCode获得响应状态，该响应状态是HTTP自带的，并非服务端设置的
+            assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+            //getbody获得响应体，getMsg获得响应体中的信息
+            assertEquals(responseEntity.getBody().getMsg(), "发布成功！");
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 }
