@@ -64,7 +64,7 @@ public class SubjectController
             return new BaseResponse<SubjectSendDto>(500, "发布失败!内容不能为空!", subjectSendDto);
         }
         else if(res==24) {
-            return new BaseResponse<SubjectSendDto>(500, "发布失败!帖子类型不能为空!", subjectSendDto);
+            return new BaseResponse<SubjectSendDto>(500, "发布失败!话题类型不能为空!", subjectSendDto);
         }
         else if(res==25) {
             return new BaseResponse<SubjectSendDto>(500, "发布失败!账号不存在!", subjectSendDto);
@@ -73,10 +73,10 @@ public class SubjectController
             return new BaseResponse<SubjectSendDto>(500, "发布失败!当前账号被禁用!", subjectSendDto);
         }
         else if(res==27) {
-            return new BaseResponse<SubjectSendDto>(500, "发布失败!帖子类型不存在!", subjectSendDto);
+            return new BaseResponse<SubjectSendDto>(500, "发布失败!话题类型不存在!", subjectSendDto);
         }
         else if(res==28) {
-            return new BaseResponse<SubjectSendDto>(500, "发布失败!帖子类型被禁用!", subjectSendDto);
+            return new BaseResponse<SubjectSendDto>(500, "发布失败!话题类型被禁用!", subjectSendDto);
         }
         else if(res==29) {
             return new BaseResponse<SubjectSendDto>(500, "发布失败!数据库错误", subjectSendDto);
@@ -85,7 +85,7 @@ public class SubjectController
             return new BaseResponse<SubjectSendDto>(200, "发布成功！", subjectSendDto);
         }
         else if(res==12) {
-            return new BaseResponse<SubjectSendDto>(500, "发布成功，使用匿名账号！", subjectSendDto);
+            return new BaseResponse<SubjectSendDto>(200, "发布成功，使用匿名账号！", subjectSendDto);
         }
         return new BaseResponse<SubjectSendDto>(500, "发送失败，未知错误！", subjectSendDto);
     }

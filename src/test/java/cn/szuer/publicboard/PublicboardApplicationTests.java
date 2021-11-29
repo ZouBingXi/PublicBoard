@@ -138,14 +138,14 @@ class PublicboardApplicationTests {
 		// System.out.println(userType.toString());
 	}
 
-	@Test
-	void testSubjectService(){
+	// @Test
+	// void testSubjectService(){
 
-		List<SubjectSendDto> list = subjectService.getAll();
-		System.out.println(list);
-		PageInfo<SubjectSendDto> pageInfo = subjectService.getByPage(1, 3);
-		System.out.println(pageInfo);
-	}
+	// 	List<SubjectSendDto> list = subjectService.getAll();
+	// 	System.out.println(list);
+	// 	PageInfo<SubjectSendDto> pageInfo = subjectService.getByPage(1, 3);
+	// 	System.out.println(pageInfo);
+	// }
 
 	@Test
 		//测试编辑话题功能
@@ -258,17 +258,17 @@ class PublicboardApplicationTests {
 
 	}
 
-	@Test
-		//测试话题mapper结构
-	void testSubjectMapstruct()
-	{
-		SubjectInfo subjectInfo = subjectInfoMapper.selectByPrimaryKey(1);
-		//调用convertor将addsubjectparam转换成dto
-		SubjectSendDto subjectSendDto= subjectConverter.SubjectInfo2SubjectSendDto(subjectInfo);
+	// @Test
+	// 	//测试话题mapper结构
+	// void testSubjectMapstruct()
+	// {
+	// 	SubjectInfo subjectInfo = subjectInfoMapper.selectByPrimaryKey(1);
+	// 	//调用convertor将addsubjectparam转换成dto
+	// 	SubjectSendDto subjectSendDto= subjectConverter.SubjectInfo2SubjectSendDto(subjectInfo);
 
-		System.out.println(subjectSendDto.toString());
+	// 	System.out.println(subjectSendDto.toString());
 
-	}
+	// }
 
 	@Test
 	//测试编辑话题功能

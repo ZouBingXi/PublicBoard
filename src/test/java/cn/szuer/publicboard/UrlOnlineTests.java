@@ -2,6 +2,8 @@ package cn.szuer.publicboard;
 
 import cn.szuer.publicboard.dto.param.AddNewsParam;
 import cn.szuer.publicboard.dto.param.AddSubjectParam;
+import cn.szuer.publicboard.dto.param.LoginParam;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -76,24 +78,27 @@ public class UrlOnlineTests {
     /**
      * getForEntity方法只返回的包括响应体对象、响应头和响应状态，
      */
-    @Test
-    public void testgetAll(){
-        try{
-            String url = "http://localhost/user/all";
-            ResponseEntity<BaseResponse> entity = template.getForEntity(url, BaseResponse.class);
-            // HttpStatus code = entity.getStatusCode();
-            // System.err.println(code.toString());
-            // System.err.println(entity.getBody().getCode());
-            assertEquals(entity.getStatusCode(), HttpStatus.OK);
-            assertTrue(entity.getBody().getMsg().equals("success"));
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
+    // @Test
+    // public void testgetAll(){
+    //     try{
+    //         String url = "http://localhost/user/all";
+    //         ResponseEntity<BaseResponse> entity = template.getForEntity(url, BaseResponse.class);
+    //         // HttpStatus code = entity.getStatusCode();
+    //         // System.err.println(code.toString());
+    //         // System.err.println(entity.getBody().getCode());
+    //         assertEquals(entity.getStatusCode(), HttpStatus.OK);
+    //         assertTrue(entity.getBody().getMsg().equals("success"));
+    //     }catch(Exception e){
+    //         e.printStackTrace();
+    //     }
+    // }
 
+    /**
+     * 查看用户单元测试
+     */
     @Test
     @Rollback
-    public void testgetByPage()
+    public void testAdminCheckUser()
     {
         try{
 
@@ -124,25 +129,25 @@ public class UrlOnlineTests {
     /**
      * 表单提交，接口入参“没有”@requestbody注解
      */
-    @Test
-    public void testLoginbyForm(){
-        try{
-            //默认为Form表单提交
-            String url = "http://localhost/user/login";
-            //Post以Form表单方式提交必须用LinkedMultiValueMap
-            LinkedMultiValueMap<String, Integer> param = new LinkedMultiValueMap<>();
-            param.add("userid", 2019010101);
-            param.add("password", 1234);
-            //获得ResponseEntity， 包括响应体对象、响应头和响应状态， String.class表明响应体被转化为String类型
-            ResponseEntity<String> ResponseEntity = template.postForEntity(url, param, String.class);
-            HttpStatus code = ResponseEntity.getStatusCode();
-            System.err.println(code);
-            System.err.println(ResponseEntity.toString());
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
+    // @Test
+    // public void testLoginbyForm(){
+    //     try{
+    //         //默认为Form表单提交
+    //         String url = "http://localhost/user/login";
+    //         //Post以Form表单方式提交必须用LinkedMultiValueMap
+    //         LinkedMultiValueMap<String, Integer> param = new LinkedMultiValueMap<>();
+    //         param.add("userid", 2019010101);
+    //         param.add("password", 1234);
+    //         //获得ResponseEntity， 包括响应体对象、响应头和响应状态， String.class表明响应体被转化为String类型
+    //         ResponseEntity<String> ResponseEntity = template.postForEntity(url, param, String.class);
+    //         HttpStatus code = ResponseEntity.getStatusCode();
+    //         System.err.println(code);
+    //         System.err.println(ResponseEntity.toString());
+    //     }catch(Exception e)
+    //     {
+    //         e.printStackTrace();
+    //     }
+    // }
 
 
     /**
@@ -151,51 +156,209 @@ public class UrlOnlineTests {
      * 则前端的提交方式变为Payload,需要修改Header中的ContentType,
      * 否则会报unsupported Media Type
      **/
+
+
+    /**
+     * 登录接口单元测试
+     */
     @Test
-    public void testLoginbyPayload() throws IOException{
+    public void testLogin() throws IOException{
 
+      try{
+        String url = "http://localhost/user/login";
+        LoginParam loginParam= new LoginParam();
+        ResponseEntity<BaseResponse> responseEntity;
 
+        /**
+         *  测试用例1：登录成功
+         */
+        loginParam.setUserid(2019010101);
+        loginParam.setPassword("1234");
+        System.out.println("测试用例1:"+ loginParam);
+        responseEntity = template.postForEntity(url, loginParam, BaseResponse.class);
+        //assert测试
+        //getStatusCode获得响应状态，该响应状态是HTTP自带的，并非服务端设置的
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+        //getbody获得响应体，getCode获得相应体的状态码，getMsg获得响应体中的信息
+        assertEquals(responseEntity.getBody().getCode(), 200);
+        assertEquals(responseEntity.getBody().getMsg(), "登录成功");
+
+        /**
+         *  测试用例2：登录失败
+         */
+        loginParam.setUserid(2019010101);
+        loginParam.setPassword("12345");
+        System.out.println("测试用例2:"+ loginParam);
+        responseEntity = template.postForEntity(url, loginParam, BaseResponse.class);
+         //assert测试
+         //getStatusCode获得响应状态，该响应状态是HTTP自带的，并非服务端设置的
+         assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+         //getbody获得响应体，getCode获得相应体的状态码，getMsg获得响应体中的信息
+         assertEquals(responseEntity.getBody().getCode(), 500);
+         assertEquals(responseEntity.getBody().getMsg(), "登陆失败,请检查用户名或密码");
+        
+      }catch(Exception e)
+      {
+        e.printStackTrace();
+      }
+  
+    }
+
+    
+    /**
+     * 编辑帖子接口单元测试
+    */
+    @Test
+    public void testAddNews() throws IOException{
+    try{
+        String url = "http://localhost/news/add";
+        //初始化编辑帖子参数对象
+        AddNewsParam addNewsParam= new AddNewsParam();
+
+        //初始化响应码
+        BaseResponse baseResponse;
+
+        /**
+         *  测试用例1：账号被禁用测试
+         */
+        addNewsParam.setUserid(2019020202);
+        addNewsParam.setNewstitle("标题：测试帖子");
+        addNewsParam.setContent("内容：测试帖子");
+        addNewsParam.setNewstype(1);
+        System.out.println("测试用例1:"+ addNewsParam);
+        baseResponse= template.postForObject(url, addNewsParam, BaseResponse.class);
+        //assert测试
+        //getCode()获取返回的响应码，getMsg()获取返回的信息
+        assertEquals(baseResponse.getCode(),500);
+        assertEquals(baseResponse.getMsg(),"发布失败!当前账号被禁用!");
+
+        /**
+         * 测试用例2：帖子类型被禁用测试
+         */
+        addNewsParam.setUserid(2019010101);
+        addNewsParam.setNewstitle("标题：测试帖子");
+        addNewsParam.setContent("内容：测试帖子");
+        addNewsParam.setNewstype(3);
+        System.out.println("测试用例2:"+ addNewsParam);
+        baseResponse = template.postForObject(url, addNewsParam, BaseResponse.class);
+        //assert测试
+        //getCode()获取返回的响应码，getMsg()获取返回的信息
+        assertEquals(baseResponse.getCode(),500);
+        assertEquals(baseResponse.getMsg(),"发布失败!帖子类型被禁用!");
+
+        /**
+         *  测试用例3：用户为正常用户状态测试
+         */
+        addNewsParam.setUserid(2019010101);
+        addNewsParam.setNewstitle("标题：测试帖子");
+        addNewsParam.setContent("内容：测试帖子");
+        addNewsParam.setNewstype(1);
+        System.out.println("测试用例3:"+ addNewsParam);
+        baseResponse = template.postForObject(url, addNewsParam, BaseResponse.class);
+        //assert测试
+        //getCode()获取返回的响应码，getMsg()获取返回的信息
+        assertEquals(baseResponse.getCode(),200);
+        assertEquals(baseResponse.getMsg(),"发布成功！");
+
+        /**
+         * 测试用例4：用户为匿名用户状态测试
+         */
+        addNewsParam.setUserid(2019030303);
+        addNewsParam.setNewstitle("标题：测试帖子");
+        addNewsParam.setContent("内容：测试帖子");
+        addNewsParam.setNewstype(1);
+        System.out.println("测试用例4:"+ addNewsParam);
+        baseResponse = template.postForObject(url, addNewsParam, BaseResponse.class);
+        //assert测试
+        //getCode()获取返回的响应码，getMsg()获取返回的信息
+        assertEquals(baseResponse.getCode(), 200);
+        assertEquals(baseResponse.getMsg(),"发布成功，使用匿名账号！");
+
+    }catch(Exception e)
+    {
+        e.printStackTrace();
+    }
+    }
+
+    /**
+     * 编辑话题接口单元测试
+     */
+   @Test
+   public void testAddSubject() throws IOException{
         try{
-            //接口的url
-            String url = "http://localhost/user/login";
+            String url = "http://localhost/subject/add";
+            //初始化编辑话题参数对象
+            AddSubjectParam addSubjectParam= new AddSubjectParam();
 
-            //更改请求头Header, 修改MediaType为APPLICATION_JSON
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
+            //初始化响应码
+            BaseResponse baseResponse;
 
-
-            ObjectMapper mapper = new ObjectMapper();
-            Map<String, String> param = new HashMap<>();
-            param.put("userid", "2019010101");
-            param.put("password", "1234");
-            //请求体的参数，一定要转成String, 才能被接受
-            String value = mapper.writeValueAsString(param);
-            System.out.println(value);
-
-            //HttpEntity包含消息头和消息体
-            HttpEntity<String> requEntity = new HttpEntity<String>(value, headers);
-
-            //获得ResponseEntity， 包括响应体对象、响应头和响应状态， BaseResponse.class表明响应体的类型
-            ResponseEntity<BaseResponse> responseEntity = template.postForEntity(url, requEntity, BaseResponse.class);
-
-            // System.out.println(responseEntity.toString());
-            System.out.println(responseEntity.getHeaders().get("Set-Cookie").get(0));
-            cookies.add(responseEntity.getHeaders().get("Set-Cookie").get(0).toString());
-
+            /**
+             *  测试用例1：账号被禁用测试
+             */
+            addSubjectParam.setUserid(2019020202);
+            addSubjectParam.setSubjecttitle("标题：测试话题");
+            addSubjectParam.setContent("内容：测试话题");
+            addSubjectParam.setSubjecttype(1);
+            System.out.println("测试用例1:"+ addSubjectParam);
+            baseResponse= template.postForObject(url, addSubjectParam, BaseResponse.class);
             //assert测试
-            //getStatusCode获得响应状态，该响应状态是HTTP自带的，并非服务端设置的
-            assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
-            //getbody获得响应体，getMsg获得响应体中的信息
-            assertEquals(responseEntity.getBody().getMsg(), "登录成功");
+            //getCode()获取返回的响应码，getMsg()获取返回的信息
+            assertEquals(baseResponse.getCode(),500);
+            assertEquals(baseResponse.getMsg(),"发布失败!当前账号被禁用!");
+
+            /**
+             * 测试用例2：话题类型被禁用测试
+             */
+            addSubjectParam.setUserid(2019010101);
+            addSubjectParam.setSubjecttitle("标题：测试话题");
+            addSubjectParam.setContent("内容：测试话题");
+            addSubjectParam.setSubjecttype(3);
+            System.out.println("测试用例2:"+ addSubjectParam);
+            baseResponse = template.postForObject(url, addSubjectParam, BaseResponse.class);
+            //assert测试
+            //getCode()获取返回的响应码，getMsg()获取返回的信息
+            assertEquals(baseResponse.getCode(),500);
+            assertEquals(baseResponse.getMsg(),"发布失败!话题类型被禁用!");
+
+            /**
+             *  测试用例3：用户为正常用户状态测试
+             */
+            addSubjectParam.setUserid(2019010101);
+            addSubjectParam.setSubjecttitle("标题：测试话题");
+            addSubjectParam.setContent("内容：测试话题");
+            addSubjectParam.setSubjecttype(1);
+            System.out.println("测试用例3:"+ addSubjectParam);
+            baseResponse = template.postForObject(url, addSubjectParam, BaseResponse.class);
+            //assert测试
+            //getCode()获取返回的响应码，getMsg()获取返回的信息
+            assertEquals(baseResponse.getCode(),200);
+            assertEquals(baseResponse.getMsg(),"发布成功！");
+
+            /**
+             * 测试用例4：用户为匿名用户状态测试
+             */
+            addSubjectParam.setUserid(2019030303);
+            addSubjectParam.setSubjecttitle("标题：测试话题");
+            addSubjectParam.setContent("内容：测试话题");
+            addSubjectParam.setSubjecttype(1);
+            System.out.println("测试用例4:"+ addSubjectParam);
+            baseResponse = template.postForObject(url, addSubjectParam, BaseResponse.class);
+            //assert测试
+            //getCode()获取返回的响应码，getMsg()获取返回的信息
+            assertEquals(baseResponse.getCode(),200);
+            assertEquals(baseResponse.getMsg(),"发布成功，使用匿名账号！");
+
         }catch(Exception e)
         {
             e.printStackTrace();
         }
     }
 
+
     @Test
     @Rollback
-    public void testgetByPage1()
+    public void testAdminCheckSubject()
     {
         try{
 
@@ -226,27 +389,27 @@ public class UrlOnlineTests {
     /**
      * 表单提交，接口入参“没有”@requestbody注解
      */
-    @Test
-    public void testAddsubjectbyForm1(){
-        try{
-            //默认为Form表单提交
-            String url = "http://localhost/subject/add";
-            //Post以Form表单方式提交必须用LinkedMultiValueMap
-            LinkedMultiValueMap<String, String > param = new LinkedMultiValueMap<>();
-            param.add("userid", "2019010101");
-            param.add("title", "话题标题1234");
-            param.add("content","话题内容1234");
-            param.add("subjecttype","1");
-            //获得ResponseEntity， 包括响应体对象、响应头和响应状态， String.class表明响应体被转化为String类型
-            ResponseEntity<String> ResponseEntity = template.postForEntity(url, param, String.class);
-            HttpStatus code = ResponseEntity.getStatusCode();
-            System.err.println(code);
-            System.err.println(ResponseEntity.toString());
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
+    // @Test
+    // public void testAddsubjectbyForm1(){
+    //     try{
+    //         //默认为Form表单提交
+    //         String url = "http://localhost/subject/add";
+    //         //Post以Form表单方式提交必须用LinkedMultiValueMap
+    //         LinkedMultiValueMap<String, String > param = new LinkedMultiValueMap<>();
+    //         param.add("userid", "2019010101");
+    //         param.add("title", "话题标题1234");
+    //         param.add("content","话题内容1234");
+    //         param.add("subjecttype","1");
+    //         //获得ResponseEntity， 包括响应体对象、响应头和响应状态， String.class表明响应体被转化为String类型
+    //         ResponseEntity<String> ResponseEntity = template.postForEntity(url, param, String.class);
+    //         HttpStatus code = ResponseEntity.getStatusCode();
+    //         System.err.println(code);
+    //         System.err.println(ResponseEntity.toString());
+    //     }catch(Exception e)
+    //     {
+    //         e.printStackTrace();
+    //     }
+    // }
 
     /**
      * payload提交，接口入参“有”@requestbody
@@ -297,7 +460,7 @@ public class UrlOnlineTests {
 
     @Test
     @Rollback
-    public void testgetByPage2()
+    public void testAdminCheckNews()
     {
         try{
 
@@ -328,27 +491,27 @@ public class UrlOnlineTests {
     /**
      * 表单提交，接口入参“没有”@requestbody注解
      */
-    @Test
-    public void testAddnewsbyForm1(){
-        try{
-            //默认为Form表单提交
-            String url = "http://localhost/news/add";
-            //Post以Form表单方式提交必须用LinkedMultiValueMap
-            LinkedMultiValueMap<String, String > param = new LinkedMultiValueMap<>();
-            param.add("userid", "2019010101");
-            param.add("title", "帖子标题1234");
-            param.add("content","帖子内容1234");
-            param.add("newstype","1");
-            //获得ResponseEntity， 包括响应体对象、响应头和响应状态， String.class表明响应体被转化为String类型
-            ResponseEntity<String> ResponseEntity = template.postForEntity(url, param, String.class);
-            HttpStatus code = ResponseEntity.getStatusCode();
-            System.err.println(code);
-            System.err.println(ResponseEntity.toString());
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
+    // @Test
+    // public void testAddnewsbyForm1(){
+    //     try{
+    //         //默认为Form表单提交
+    //         String url = "http://localhost/news/add";
+    //         //Post以Form表单方式提交必须用LinkedMultiValueMap
+    //         LinkedMultiValueMap<String, String > param = new LinkedMultiValueMap<>();
+    //         param.add("userid", "2019010101");
+    //         param.add("title", "帖子标题1234");
+    //         param.add("content","帖子内容1234");
+    //         param.add("newstype","1");
+    //         //获得ResponseEntity， 包括响应体对象、响应头和响应状态， String.class表明响应体被转化为String类型
+    //         ResponseEntity<String> ResponseEntity = template.postForEntity(url, param, String.class);
+    //         HttpStatus code = ResponseEntity.getStatusCode();
+    //         System.err.println(code);
+    //         System.err.println(ResponseEntity.toString());
+    //     }catch(Exception e)
+    //     {
+    //         e.printStackTrace();
+    //     }
+    // }
 
     /**
      * payload提交，接口入参“有”@requestbody

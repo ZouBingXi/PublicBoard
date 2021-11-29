@@ -87,7 +87,7 @@ public class NewsController
             return new BaseResponse<NewsSendDto>(200, "发布成功！", newsSendDto);
         }
         else if(res==12) {
-            return new BaseResponse<NewsSendDto>(500, "发布成功，使用匿名账号！", newsSendDto);
+            return new BaseResponse<NewsSendDto>(200, "发布成功，使用匿名账号！", newsSendDto);
         }
         return new BaseResponse<NewsSendDto>(500, "发送失败，未知错误！", newsSendDto);
     }
