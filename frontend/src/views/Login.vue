@@ -57,6 +57,7 @@
 
 <script>
 import  login_background from '../common/images/Login/login_background.svg'
+import {LOGIN} from "@/store/actions.type";
 
 export default {
   data() {
@@ -95,7 +96,8 @@ export default {
                 showClose: true,
                 message: response.data.msg,
                 type: 'success'
-              });
+              })
+              this.$store.commit(LOGIN,response.data.data);
               this.$router.push({path: '/'});
             }
             else {

@@ -101,6 +101,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex"
+
 export default {
   data() {
     return {
@@ -158,7 +160,7 @@ export default {
             }
 
             this.$axios.post('/news/add', {
-              userid: _this.ruleForm.userid,
+              userid: _this.currentUser.userid,
               newstitle: _this.ruleForm.title,
               content: _this.ruleForm.content,
               newstype: typenum
@@ -194,7 +196,7 @@ export default {
             }
 
             this.$axios.post('/subject/add', {
-              userid: _this.ruleForm.userid,
+              userid: _this.currentUser.userid,
               subjecttitle: _this.ruleForm.title,
               content: _this.ruleForm.content,
               subjecttype: typenum
@@ -268,6 +270,9 @@ export default {
         fileList.pop();
       }
     }
+  },
+  computed:{
+    ...mapGetters(["currentUser","isAuthenticated"])
   }
 }
 </script>

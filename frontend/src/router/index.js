@@ -8,7 +8,12 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import("@/views/Home")
+    component: () => import("@/views/Home"),
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import("@/views/Register")
   },
   {
     path: '/login',
@@ -16,9 +21,9 @@ const routes = [
     component: () => import("@/views/Login")
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: () => import("@/views/Register")
+    path: '/articleedit',
+    name: 'ArticleEdit',
+    component: () => import("@/views/ArticleEdit")
   },
   {
     path: '/admin',
@@ -29,6 +34,22 @@ const routes = [
         path:"usertable",
         name:"Usertable",
         component:()=>import("@/components/Usertable")
+      },
+      {
+        path:"topictable",
+        name:"Topictable",
+        component:()=>import("@/components/Topictable")
+      },
+      {
+        path:"poststable",
+        name:"Poststable",
+        component:()=>import("@/components/Poststable")
+      }
+      ,
+      {
+        path:"logtable",
+        name:"Logtable",
+        component:()=>import("@/components/Logtable")
       }
     ]
   }

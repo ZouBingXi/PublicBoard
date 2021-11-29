@@ -1,96 +1,84 @@
 <template>
-  <nav class="navbar navbar-light">
-    <div class="container">
-      <router-link class="navbar-brand" :to="{ name: 'home' }">
-        conduit
-      </router-link>
-      <ul v-if="!isAuthenticated" class="nav navbar-nav pull-xs-right">
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            active-class="active"
-            exact
-            :to="{ name: 'home' }"
-          >
-            Home
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            active-class="active"
-            exact
-            :to="{ name: 'login' }"
-          >
-            <i class="ion-compose"></i>Sign in
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            active-class="active"
-            exact
-            :to="{ name: 'register' }"
-          >
-            <i class="ion-compose"></i>Sign up
-          </router-link>
-        </li>
-      </ul>
-      <ul v-else class="nav navbar-nav pull-xs-right">
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            active-class="active"
-            exact
-            :to="{ name: 'home' }"
-          >
-            Home
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            active-class="active"
-            :to="{ name: 'article-edit' }"
-          >
-            <i class="ion-compose"></i>&nbsp;New Article
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            active-class="active"
-            exact
-            :to="{ name: 'settings' }"
-          >
-            <i class="ion-gear-a"></i>&nbsp;Settings
-          </router-link>
-        </li>
-        <li class="nav-item" v-if="currentUser.username">
-          <router-link
-            class="nav-link"
-            active-class="active"
-            exact
-            :to="{
-              name: 'profile',
-              params: { username: currentUser.username }
-            }"
-          >
-            {{ currentUser.username }}
-          </router-link>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <el-header class="myheader">
+    <el-menu mode="horizontal" router :default-active="$route.path"  active-text-color="black">
+      <router-link class="mylink" :to="{path:'/'}">PublicBoard</router-link>
+      <el-menu-item v-if="isAuthenticated" index="/information">
+        <span class="el-icon-s-custom" style="margin: 0px"></span>{{currentUser.username}}
+      </el-menu-item>
+      <el-menu-item v-for="item in menu" :index="item.index" :key="item.index">
+          <span :class="item.icon" style="margin: 0px"></span>{{ item.text }}
+      </el-menu-item>
+      <el-menu-item v-if="currentUser.usertype==='管理员'&& isAuthenticated" index="/admin">
+        <span class="" style="margin: 0px"></span>Admin Page
+      </el-menu-item>
+      <el-menu-item index="/">
+        Home
+      </el-menu-item>
+    </el-menu>
+  </el-header>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import {mapGetters} from "vuex"
 
 export default {
   name: "TheHeader",
-  computed: {
-    ...mapGetters(["currentUser", "isAuthenticated"])
+  data(){
+    return {
+      menu_notAuthenticated:[
+        {
+          index:"/register",
+          icon:"el-icon-edit-outline",
+          text:"Sign Up",
+        },
+        {
+          index:"/login",
+          icon:"el-icon-edit-outline",
+          text:"Sign In",
+        }
+      ],
+      menu_isAuthenticated:[
+        {
+          index:"/articleedit",
+          icon:"el-icon-edit-outline",
+          text:"New Article",
+        },
+        {
+          index:"/setting",
+          icon:"el-icon-s-tools",
+          text:"Setting",
+        },
+      ]
+    }
+  },
+  computed:{
+    ...mapGetters(["currentUser","isAuthenticated"]),
+    menu(){
+      return this.isAuthenticated?this.menu_isAuthenticated:this.menu_notAuthenticated;
+    }
   }
+
 };
 </script>
+
+<style scoped>
+.myheader{
+  padding: 0px 20px 0px 20px;
+
+}
+.myheader .el-menu .el-menu-item{
+  float: right;
+  padding: 0px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.myheader .mylink{
+  line-height: 60px;
+  font-size: 26px;
+  font-family:sans;
+  text-decoration: none;
+  font-weight:bold;
+  color: black;
+}
+</style>
