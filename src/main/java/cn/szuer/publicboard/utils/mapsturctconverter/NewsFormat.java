@@ -1,7 +1,6 @@
 package cn.szuer.publicboard.utils.mapsturctconverter;
 
 import cn.szuer.publicboard.mapper.NewsTypeMapper;
-import cn.szuer.publicboard.model.NewsType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +15,9 @@ public class NewsFormat {
      * @param newstype
      * @return
      */
-    private String UseridToUsername(Integer newstype)
+    public String idToname(Integer newstype)
     {
-        NewsType newsType = newsTypeMapper.selectByPrimaryKey(newstype);
-        return newsType.getTypename();
+        return newsTypeMapper.selectByPrimaryKey(newstype).getTypename();
     }
-
 
 }

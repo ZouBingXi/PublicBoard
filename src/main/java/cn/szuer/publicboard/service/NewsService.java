@@ -11,5 +11,5 @@ public interface NewsService {
     List<NewsSendDto> getAll();
     PageInfo<NewsSendDto> getByPage(int pageNum, int pageSize);
 
-    int addNews(AddNewsParam addNewsParam);
+    int add(AddNewsParam addNewsParam);
 }

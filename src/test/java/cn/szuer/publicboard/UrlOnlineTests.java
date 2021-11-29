@@ -1,5 +1,7 @@
 package cn.szuer.publicboard;
 
+import cn.szuer.publicboard.dto.param.AddNewsParam;
+import cn.szuer.publicboard.dto.param.AddSubjectParam;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -36,7 +38,7 @@ import cn.szuer.publicboard.reponse.BaseResponse;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UrlOnlineTests {
-    
+
     private RestTemplate template = new RestTemplate();
 
     private List<String> cookies =new ArrayList<>();
@@ -45,45 +47,29 @@ public class UrlOnlineTests {
      * 在其他单元测试前进行login操作，获得cookie所需的Sessionid
      * @throws IOException
      */
-//    @Before
-//    public void GetCookies() throws IOException
-//    {
-//        String url = "http://localhost/user/login";
-//
-//        //更改请求头Header, 修改MediaType为APPLICATION_JSON
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        Map<String, String> param = new HashMap<>();
-//        param.put("userid", "2019010101");
-//        param.put("password", "1234");
-//        //请求体的参数，一定要转成String, 才能被接受
-//        String value = mapper.writeValueAsString(param);
-//        // System.out.println(value);
-//
-//        //HttpEntity包含消息头和消息体
-//        HttpEntity<String> requEntity = new HttpEntity<String>(value, headers);
-//        //获得ResponseEntity， 包括响应体对象、响应头和响应状态， BaseResponse.class表明响应体的类型
-//        ResponseEntity<BaseResponse> responseEntity = template.postForEntity(url, requEntity, BaseResponse.class);
-//        cookies.add(responseEntity.getHeaders().get("set-cookie").get(0).toString());
-//        System.out.println(cookies);
-//    }
+    @Before
+    public void GetCookies() throws IOException
+    {
+        String url = "http://localhost/user/login";
 
-    /**
-     * getForObject方法只返回响应体对象，没有Http响应状态码等信息
-     */
-    @Test
-    public void testgetAll(){
-        try{
-            String url = "http://localhost/subject/all";
-            BaseResponse response = template.getForObject(url, BaseResponse.class);
-            System.err.println(response);
-            assertEquals(response.getMsg(), "success");
+        //更改请求头Header, 修改MediaType为APPLICATION_JSON
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
-         }catch(Exception e){
-             e.printStackTrace();
-        }
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, String> param = new HashMap<>();
+        param.put("userid", "2019010101");
+        param.put("password", "1234");
+        //请求体的参数，一定要转成String, 才能被接受
+        String value = mapper.writeValueAsString(param);
+        // System.out.println(value);
+
+        //HttpEntity包含消息头和消息体
+        HttpEntity<String> requEntity = new HttpEntity<String>(value, headers);
+        //获得ResponseEntity， 包括响应体对象、响应头和响应状态， BaseResponse.class表明响应体的类型
+        ResponseEntity<BaseResponse> responseEntity = template.postForEntity(url, requEntity, BaseResponse.class);
+        cookies.add(responseEntity.getHeaders().get("set-cookie").get(0).toString());
+        System.out.println(cookies);
     }
 
 
@@ -91,7 +77,7 @@ public class UrlOnlineTests {
      * getForEntity方法只返回的包括响应体对象、响应头和响应状态，
      */
     @Test
-    public void testgetAll2(){
+    public void testgetAll(){
         try{
             String url = "http://localhost/user/all";
             ResponseEntity<BaseResponse> entity = template.getForEntity(url, BaseResponse.class);
@@ -116,7 +102,7 @@ public class UrlOnlineTests {
             //cookies.add("JSESSIONID=FEA9AE832F68F7A0F1AC5D52D60AC841; Path=/; HttpOnly");
             System.out.println(cookies);
             //请求头添加cookie，用于传输Sessionid
-            headers.put(HttpHeaders.COOKIE,cookies); 
+            headers.put(HttpHeaders.COOKIE,cookies);
             HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
             String url = "http://localhost/user/admin/checkuser?page=1&size=5";
             // ResponseEntity<String> entity = template.getForEntity(url, String.class);
@@ -163,11 +149,11 @@ public class UrlOnlineTests {
      * payload提交，接口入参“有”@requestbody
      * 若controller使用了@requestbody注解，
      * 则前端的提交方式变为Payload,需要修改Header中的ContentType,
-     * 否则会报unsupported Media Type 
-    **/
+     * 否则会报unsupported Media Type
+     **/
     @Test
     public void testLoginbyPayload() throws IOException{
-    
+
 
         try{
             //接口的url
@@ -177,7 +163,7 @@ public class UrlOnlineTests {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 
-            
+
             ObjectMapper mapper = new ObjectMapper();
             Map<String, String> param = new HashMap<>();
             param.put("userid", "2019010101");
@@ -196,7 +182,7 @@ public class UrlOnlineTests {
             System.out.println(responseEntity.getHeaders().get("Set-Cookie").get(0));
             cookies.add(responseEntity.getHeaders().get("Set-Cookie").get(0).toString());
 
-            //assert测试 
+            //assert测试
             //getStatusCode获得响应状态，该响应状态是HTTP自带的，并非服务端设置的
             assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
             //getbody获得响应体，getMsg获得响应体中的信息
@@ -206,6 +192,7 @@ public class UrlOnlineTests {
             e.printStackTrace();
         }
     }
+
     @Test
     @Rollback
     public void testgetByPage1()
@@ -247,8 +234,8 @@ public class UrlOnlineTests {
             //Post以Form表单方式提交必须用LinkedMultiValueMap
             LinkedMultiValueMap<String, String > param = new LinkedMultiValueMap<>();
             param.add("userid", "2019010101");
-            param.add("title", "话题标题");
-            param.add("content","话题内容");
+            param.add("title", "话题标题1234");
+            param.add("content","话题内容1234");
             param.add("subjecttype","1");
             //获得ResponseEntity， 包括响应体对象、响应头和响应状态， String.class表明响应体被转化为String类型
             ResponseEntity<String> ResponseEntity = template.postForEntity(url, param, String.class);
@@ -283,30 +270,57 @@ public class UrlOnlineTests {
             ObjectMapper mapper = new ObjectMapper();
             Map<String, String> param = new HashMap<>();
             param.put("userid", "2019010101");
-            param.put("title", "话题标题");
-            param.put("content","话题内容");
+            param.put("title", "话题标题3456");
+            param.put("content","话题内容3456");
             param.put("subjecttype","1");
             //请求体的参数，一定要转成String, 才能被接受
             String value = mapper.writeValueAsString(param);
             System.out.println(value);
 
-            //HttpEntity包含消息头和消息体
-            HttpEntity<String> requEntity = new HttpEntity<String>(value, headers);
+            AddSubjectParam addSubjectParam= new AddSubjectParam();
+            addSubjectParam.setUserid(2019010101);
+            addSubjectParam.setSubjecttitle("标题444：测试话题");
+            addSubjectParam.setContent("内容444：测试话题");
+            addSubjectParam.setSubjecttype(1);
 
             //获得ResponseEntity， 包括响应体对象、响应头和响应状态， BaseResponse.class表明响应体的类型
-            ResponseEntity<BaseResponse> responseEntity = template.postForEntity(url, requEntity, BaseResponse.class);
-
-            // System.out.println(responseEntity.toString());
-            System.out.println(responseEntity.getHeaders().get("Set-Cookie").get(0));
-            cookies.add(responseEntity.getHeaders().get("Set-Cookie").get(0).toString());
+            BaseResponse baseResponse = template.postForObject(url, addSubjectParam, BaseResponse.class);
 
             //assert测试
-            //getStatusCode获得响应状态，该响应状态是HTTP自带的，并非服务端设置的
-            assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
-            //getbody获得响应体，getMsg获得响应体中的信息
-            assertEquals(responseEntity.getBody().getMsg(), "发布成功！");
+            assertEquals(baseResponse.getMsg(), "发布成功！");
+            System.out.println(baseResponse.getMsg());
         }catch(Exception e)
         {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    @Rollback
+    public void testgetByPage2()
+    {
+        try{
+
+            HttpHeaders headers = new HttpHeaders();
+            // List<String> cookies =new ArrayList<>();
+            //cookies.add("JSESSIONID=FEA9AE832F68F7A0F1AC5D52D60AC841; Path=/; HttpOnly");
+            System.out.println(cookies);
+            //请求头添加cookie，用于传输Sessionid
+            headers.put(HttpHeaders.COOKIE,cookies);
+            HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
+            String url = "http://localhost/news/admin/checknews?page=1&size=5";
+            // ResponseEntity<String> entity = template.getForEntity(url, String.class);
+            ResponseEntity<BaseResponse> entity = template.exchange(url, HttpMethod.GET, httpEntity, BaseResponse.class);
+            // HttpStatus code = entity.getStatusCode();
+            // System.err.println(code);
+            System.err.println(entity.getBody().getData().toString());
+
+            //检测HTTP状态码
+            assertEquals(entity.getStatusCode(), HttpStatus.OK);
+            //检测返回体携带的msg是否与controller中所设一致
+            assertEquals(entity.getBody().getMsg(), "success");
+
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
@@ -322,8 +336,8 @@ public class UrlOnlineTests {
             //Post以Form表单方式提交必须用LinkedMultiValueMap
             LinkedMultiValueMap<String, String > param = new LinkedMultiValueMap<>();
             param.add("userid", "2019010101");
-            param.add("title", "帖子标题");
-            param.add("content","帖子内容");
+            param.add("title", "帖子标题1234");
+            param.add("content","帖子内容1234");
             param.add("newstype","1");
             //获得ResponseEntity， 包括响应体对象、响应头和响应状态， String.class表明响应体被转化为String类型
             ResponseEntity<String> ResponseEntity = template.postForEntity(url, param, String.class);
@@ -344,8 +358,6 @@ public class UrlOnlineTests {
      **/
     @Test
     public void testAddnewsbyPayload1() throws IOException{
-
-
         try{
             //接口的url
             String url = "http://localhost/news/add";
@@ -358,32 +370,30 @@ public class UrlOnlineTests {
             ObjectMapper mapper = new ObjectMapper();
             Map<String, String> param = new HashMap<>();
             param.put("userid", "2019010101");
-            param.put("title", "帖子标题");
-            param.put("content","帖子内容");
+            param.put("title", "帖子标题3456");
+            param.put("content","帖子内容3456");
             param.put("newstype","1");
             //请求体的参数，一定要转成String, 才能被接受
             String value = mapper.writeValueAsString(param);
             System.out.println(value);
 
-            //HttpEntity包含消息头和消息体
-            HttpEntity<String> requEntity = new HttpEntity<String>(value, headers);
+            AddNewsParam addNewsParam= new AddNewsParam();
+            addNewsParam.setUserid(2019010101);
+            addNewsParam.setNewstitle("标题444：测试帖子");
+            addNewsParam.setContent("内容444：测试帖子");
+            addNewsParam.setNewstype(1);
 
             //获得ResponseEntity， 包括响应体对象、响应头和响应状态， BaseResponse.class表明响应体的类型
-            ResponseEntity<BaseResponse> responseEntity = template.postForEntity(url, requEntity, BaseResponse.class);
-
-            // System.out.println(responseEntity.toString());
-            System.out.println(responseEntity.getHeaders().get("Set-Cookie").get(0));
-            cookies.add(responseEntity.getHeaders().get("Set-Cookie").get(0).toString());
+            BaseResponse baseResponse = template.postForObject(url, addNewsParam, BaseResponse.class);
 
             //assert测试
-            //getStatusCode获得响应状态，该响应状态是HTTP自带的，并非服务端设置的
-            assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
-            //getbody获得响应体，getMsg获得响应体中的信息
-            assertEquals(responseEntity.getBody().getMsg(), "发布成功！");
+            assertEquals(baseResponse.getMsg(), "发布成功！");
+            System.out.println(baseResponse.getMsg());
         }catch(Exception e)
         {
             e.printStackTrace();
         }
-
     }
+
+
 }

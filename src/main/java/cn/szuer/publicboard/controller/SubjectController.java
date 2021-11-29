@@ -9,11 +9,7 @@ import com.github.pagehelper.PageInfo;
 
 import cn.szuer.publicboard.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import cn.szuer.publicboard.dto.param.AddSubjectParam;
 import cn.szuer.publicboard.dto.SubjectSendDto;
@@ -31,6 +27,8 @@ public class SubjectController
 {
     @Autowired
     SubjectService subjectService;
+    @Autowired
+    SubjectConverter subjectConverter;
     /**
      * 查看话题表
      * @param pageNum 页数
@@ -41,7 +39,7 @@ public class SubjectController
     public BaseResponse<PageInfo<SubjectSendDto>> showSubject(@RequestParam(name = "page",required = true,defaultValue = "1") int pageNum,
                                                               @RequestParam(name = "size",required = true,defaultValue = "10")int pageSize)
     {
-        return new BaseResponse<PageInfo<SubjectSendDto>>(200, "sucess", subjectService.getByPage(pageNum, pageSize));
+        return new BaseResponse<PageInfo<SubjectSendDto>>(200, "success", subjectService.getByPage(pageNum, pageSize));
     }
 
     /**
@@ -50,10 +48,9 @@ public class SubjectController
      * @return
      */
     @PostMapping("/add")
-    public BaseResponse<SubjectSendDto> add(AddSubjectParam addSubjectParam)
+    public BaseResponse<SubjectSendDto> add(@RequestBody AddSubjectParam addSubjectParam)
     {
         int res = subjectService.add(addSubjectParam);
-        SubjectConverter subjectConverter = null;
         SubjectSendDto subjectSendDto = subjectConverter.AddSubjectParam2SubjectSendDto(addSubjectParam);
         if(res==21)
         {

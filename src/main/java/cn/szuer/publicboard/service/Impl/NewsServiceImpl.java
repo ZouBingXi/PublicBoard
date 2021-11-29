@@ -1,36 +1,39 @@
 package cn.szuer.publicboard.service.Impl;
 
-import cn.szuer.publicboard.dto.NewsSendDto;
+import java.util.Date;
+import java.util.List;
+
 import cn.szuer.publicboard.dto.param.AddNewsParam;
+import cn.szuer.publicboard.dto.NewsSendDto;
+import cn.szuer.publicboard.model.*;
+import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
+import cn.szuer.publicboard.utils.mapsturctconverter.UserConverter;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.mapper.NewsInfoMapper;
 import cn.szuer.publicboard.mapper.NewsStateMapper;
 import cn.szuer.publicboard.mapper.NewsTypeMapper;
-import cn.szuer.publicboard.mapper.UserInfoMapper;
-import cn.szuer.publicboard.model.*;
 import cn.szuer.publicboard.service.NewsService;
-import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.List;
+import java.util.ArrayList;
 
 
 @Service
 public class NewsServiceImpl implements NewsService {
 
-    @Autowired(required = false)
+    @Autowired
     private UserInfoMapper userInfoMapper;
 
-    @Autowired(required = false)
+    @Autowired
     private NewsInfoMapper newsInfoMapper;
 
-    @Autowired(required = false)
+    @Autowired
     private NewsTypeMapper newsTypeMapper;
 
-    @Autowired(required = false)
+    @Autowired
     private NewsStateMapper newsStateMapper;
 
     @Autowired
@@ -44,14 +47,14 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public int addNews(AddNewsParam addNewsParam) {
-        NewsInfo news = null;          //帖子信息
-        NewsState newsState = null;    //帖子状态
+    public int add(AddNewsParam addNewsParam) {
+        NewsInfo news = new NewsInfo();          //帖子信息
+        NewsState newsState = new NewsState();    //帖子状态
         UserInfo userInfo = userInfoMapper.selectByPrimaryKey(addNewsParam.getUserid());
         NewsType newsType = newsTypeMapper.selectByPrimaryKey(addNewsParam.getNewstype());
 
         //判断用户是否被封禁,被封禁返回21，代表用户封禁，插入失败
-        if (userInfo.getBanstate()==0)
+        if (userInfo.getBanstate()==1)
             return 21;
 
         //判断帖子类型状态是否禁用，禁用返回22，代表该类型被禁用，插入失败
@@ -60,12 +63,11 @@ public class NewsServiceImpl implements NewsService {
 
         //获取帖子表记录数
         Integer newsid = 0;
-        NewsStateExample example = new  NewsStateExample();
-        NewsStateExample.Criteria criteria = example.createCriteria();
-        criteria.andExaminestateBetween((byte)0,(byte)1);
-        newsid = newsStateMapper.countByExample(example) + 1;
+        List<NewsInfo> newsInfos= newsInfoMapper.selectAll();
+        newsid=newsInfos.size();
+
         //设置newsinfo各属性值
-        news.setNewsid(newsid);
+        news.setNewsid(newsid+1);
         news.setUserid(addNewsParam.getUserid());
         news.setNewstype(addNewsParam.getNewstype());
         news.setNewstitle(addNewsParam.getNewstitle());
@@ -74,10 +76,12 @@ public class NewsServiceImpl implements NewsService {
         news.setViewnum(0);
         news.setLikenum(0);
         //设置newsstate各属性
-        newsState.setNewsid(newsid);
-        newsState.setTopstate((byte)0);
-        newsState.setHotstate((byte)0);
-        newsState.setExaminestate((byte)0);
+        newsState.setNewsid(newsid+1);
+        Byte state = 0;
+        newsState.setTopstate(state);
+        newsState.setHotstate(state);
+        newsState.setExaminestate(state);
+
 
         //判断是否匿名
         if(userInfo.getAnonymousstate()==0)//正常用户状态

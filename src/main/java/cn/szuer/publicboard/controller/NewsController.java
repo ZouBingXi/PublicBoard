@@ -1,13 +1,21 @@
 package cn.szuer.publicboard.controller;
 
-import cn.szuer.publicboard.dto.NewsSendDto;
-import cn.szuer.publicboard.dto.param.AddNewsParam;
-import cn.szuer.publicboard.reponse.BaseResponse;
-import cn.szuer.publicboard.service.NewsService;
+import java.util.List;
+import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+
 import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
 import com.github.pagehelper.PageInfo;
+
+import cn.szuer.publicboard.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import cn.szuer.publicboard.dto.param.AddNewsParam;
+import cn.szuer.publicboard.dto.NewsSendDto;
+import cn.szuer.publicboard.model.NewsInfo;
+import cn.szuer.publicboard.reponse.BaseResponse;
+import cn.szuer.publicboard.service.NewsService;
 
 
 /**
@@ -19,6 +27,8 @@ public class NewsController
 {
     @Autowired
     NewsService newsService;
+    @Autowired
+    NewsConverter newsConverter;
     /**
      * 查看帖子表
      * @param pageNum 页数
@@ -27,9 +37,9 @@ public class NewsController
      */
     @GetMapping("/admin/checknews")
     public BaseResponse<PageInfo<NewsSendDto>> showNews(@RequestParam(name = "page",required = true,defaultValue = "1") int pageNum,
-                                                              @RequestParam(name = "size",required = true,defaultValue = "10")int pageSize)
+                                                        @RequestParam(name = "size",required = true,defaultValue = "10")int pageSize)
     {
-        return new BaseResponse<PageInfo<NewsSendDto>>(200, "sucess", newsService.getByPage(pageNum, pageSize));
+        return new BaseResponse<PageInfo<NewsSendDto>>(200, "success", newsService.getByPage(pageNum, pageSize));
     }
 
     /**
@@ -38,10 +48,9 @@ public class NewsController
      * @return
      */
     @PostMapping("/add")
-    public BaseResponse<NewsSendDto> add(AddNewsParam addNewsParam)
+    public BaseResponse<NewsSendDto> add(@RequestBody AddNewsParam addNewsParam)
     {
-        int res = newsService.addNews(addNewsParam);
-        NewsConverter newsConverter = null;
+        int res = newsService.add(addNewsParam);
         NewsSendDto newsSendDto = newsConverter.AddNewsParam2NewsSendDto(addNewsParam);
         if(res==21)
         {

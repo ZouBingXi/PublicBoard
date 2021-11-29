@@ -18,23 +18,22 @@ import cn.szuer.publicboard.mapper.SubjectTypeMapper;
 import cn.szuer.publicboard.service.SubjectService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
 import java.util.ArrayList;
 
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
 
-    @Autowired(required = false)
+    @Autowired
     private UserInfoMapper userInfoMapper;
 
-    @Autowired(required = false)
+    @Autowired
     private SubjectInfoMapper subjectInfoMapper;
 
-    @Autowired(required = false)
+    @Autowired
     private SubjectTypeMapper subjectTypeMapper;
 
-    @Autowired(required = false)
+    @Autowired
     private SubjectStateMapper subjectStateMapper;
 
     @Autowired
@@ -49,13 +48,13 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public int add(AddSubjectParam addSubjectParam) {
-        SubjectInfo subject = null;          //话题信息
-        SubjectState subjectState = null;    //话题状态
+        SubjectInfo subject = new SubjectInfo();          //话题信息
+        SubjectState subjectState = new SubjectState();    //话题状态
         UserInfo userInfo = userInfoMapper.selectByPrimaryKey(addSubjectParam.getUserid());
         SubjectType subjectType = subjectTypeMapper.selectByPrimaryKey(addSubjectParam.getSubjecttype());
 
         //判断用户是否被封禁,被封禁返回21，代表用户封禁，插入失败
-        if (userInfo.getBanstate()==0)
+        if (userInfo.getBanstate()==1)
             return 21;
 
         //判断话题类型状态是否禁用，禁用返回22，代表该类型被禁用，插入失败
@@ -64,13 +63,11 @@ public class SubjectServiceImpl implements SubjectService {
 
         //获取话题表记录数
         Integer subjectid = 0;
-        SubjectStateExample example = new  SubjectStateExample();
-        SubjectStateExample.Criteria criteria = example.createCriteria();
-        criteria.andExaminestateIsNotNull();
-        subjectid = subjectStateMapper.countByExample(example) + 1;
+        List<SubjectInfo> subjectInfos= subjectInfoMapper.selectAll();
+        subjectid=subjectInfos.size();
 
         //设置subjectinfo各属性值
-        subject.setSubjectid(subjectid);
+        subject.setSubjectid(subjectid+1);
         subject.setUserid(addSubjectParam.getUserid());
         subject.setSubjecttype(addSubjectParam.getSubjecttype());
         subject.setSubjecttitle(addSubjectParam.getSubjecttitle());
@@ -79,15 +76,12 @@ public class SubjectServiceImpl implements SubjectService {
         subject.setViewnum(0);
         subject.setLikenum(0);
         //设置subjectstate各属性
-        subjectState.setSubjectid(subjectid);
-        subjectState.setTopstate((byte)0);
-        subjectState.setHotstate((byte)0);
-        subjectState.setExaminestate((byte)0);
+        subjectState.setSubjectid(subjectid+1);
+        Byte state = 0;
+        subjectState.setTopstate(state);
+        subjectState.setHotstate(state);
+        subjectState.setExaminestate(state);
 
-        System.out.println("/////test/////subject");
-        System.out.println(subject);
-        System.out.println("/////test/////state");
-        System.out.println(subjectState);
 
         //判断是否匿名
         if(userInfo.getAnonymousstate()==0)//正常用户状态
