@@ -84,13 +84,6 @@ class PublicboardApplicationTests {
 	
 	@Autowired(required=false)
 	NewsStateMapper newsStateMapper = null;
-    private UserInfoMapper userInfoMapper;
-    
-	@Autowired(required=false)
-	private SubjectInfoMapper subjectInfoMapper;
-	
-	@Autowired(required=false)
-	private NewsInfoMapper newsInfoMapper;
 
 	@Autowired(required=false)
 	SubjectTypeMapper subjectTypeMapper = null;
@@ -112,9 +105,6 @@ class PublicboardApplicationTests {
 
 	@Autowired(required=false)
 	private NewsConverter newsConverter;
-
-	@Autowired
-	private NewsServiceImpl newsServiceImpl;
 
 	@Test
 	void contextLoads() {
