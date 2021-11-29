@@ -25,7 +25,7 @@
 
         <!-- 返回登录文字链接 -->
         <div id="register-text-link">
-          <el-link @click="gotoLogin" id="register-text-link1" :underline="false" type="info">登录</el-link>
+          <el-link @click="gotoLogin('ruleForm')" id="register-text-link1" :underline="false" type="info">登录</el-link>
         </div>
 
         <!-- 输入表单 -->
@@ -106,20 +106,35 @@ export default {
             password: _this.ruleForm.password
           }).then((response) => {
             console.log(response);
-            alert(response.data.msg);
             this.$refs[formName].resetFields();
             if(response.data.code == 200) {
+              this.$message({
+                showClose: true,
+                message: response.data.msg,
+                type: 'success'
+              });
               this.$router.push({path: '/login'});
+            }
+            else {
+              this.$message({
+                showClose: true,
+                message: response.data.msg,
+                type: 'error'
+              });
             }
           });
         } else {
-          console.log('error submit!!');
-          alert('注册失败');
+          this.$message({
+            showClose: true,
+            message: '注册失败，请完成信息填写',
+            type: 'error'
+          });
           return false;
         }
       });
     },
-    gotoLogin() {
+    gotoLogin(formName) {
+      this.$refs[formName].resetFields();
       this.$router.push({path: '/login'});
     }
     // resetForm(formName) {
