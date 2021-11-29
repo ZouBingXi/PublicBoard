@@ -16,6 +16,8 @@ public interface NewsInfoMapper {
 
     int insertSelective(NewsInfo record);
 
+    List<NewsInfo> selectAll();
+
     List<NewsInfo> selectByExampleWithBLOBs(NewsInfoExample example);
 
     List<NewsInfo> selectByExample(NewsInfoExample example);

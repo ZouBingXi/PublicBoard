@@ -77,6 +77,9 @@
   <sql id="Blob_Column_List" >
     content
   </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from subject_info
+  </select>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.szuer.publicboard.model.SubjectInfoExample" >
     select
     <if test="distinct" >
