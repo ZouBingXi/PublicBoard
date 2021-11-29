@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
     public UserDto addUser(LoginParam loginParam)
     {
         UserInfo user=userInfoMapper.selectByPrimaryKey(loginParam.getUserid());
-        if (user==null)
+        if (user!=null)
             return null;
         else
         {
