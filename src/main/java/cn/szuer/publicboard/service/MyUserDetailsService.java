@@ -3,7 +3,6 @@ package cn.szuer.publicboard.service;
 import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.mapper.UserTypeMapper;
 import cn.szuer.publicboard.model.UserInfo;
-import cn.szuer.publicboard.model.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
