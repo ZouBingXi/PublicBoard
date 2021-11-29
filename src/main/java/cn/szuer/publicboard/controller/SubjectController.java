@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
+import cn.szuer.publicboard.dto.SubjectSendDto;
 import cn.szuer.publicboard.utils.mapsturctconverter.SubjectConverter;
 import com.github.pagehelper.PageInfo;
 
@@ -54,13 +55,31 @@ public class SubjectController
         SubjectSendDto subjectSendDto = subjectConverter.AddSubjectParam2SubjectSendDto(addSubjectParam);
         if(res==21)
         {
-            return new BaseResponse<SubjectSendDto>(500,"发布失败，当前用户处于封禁状态！",subjectSendDto);
+            return new BaseResponse<SubjectSendDto>(500,"发布失败，账号不能为空!",subjectSendDto);
         }
         else if(res==22) {
-            return new BaseResponse<SubjectSendDto>(500, "发布失败，话题类型错误！", subjectSendDto);
+            return new BaseResponse<SubjectSendDto>(500, "发布失败，标题不能为空!", subjectSendDto);
         }
         else if(res==23) {
-            return new BaseResponse<SubjectSendDto>(500, "发布失败!", subjectSendDto);
+            return new BaseResponse<SubjectSendDto>(500, "发布失败!内容不能为空!", subjectSendDto);
+        }
+        else if(res==24) {
+            return new BaseResponse<SubjectSendDto>(500, "发布失败!帖子类型不能为空!", subjectSendDto);
+        }
+        else if(res==25) {
+            return new BaseResponse<SubjectSendDto>(500, "发布失败!账号不存在!", subjectSendDto);
+        }
+        else if(res==26) {
+            return new BaseResponse<SubjectSendDto>(500, "发布失败!当前账号被禁用!", subjectSendDto);
+        }
+        else if(res==27) {
+            return new BaseResponse<SubjectSendDto>(500, "发布失败!帖子类型不存在!", subjectSendDto);
+        }
+        else if(res==28) {
+            return new BaseResponse<SubjectSendDto>(500, "发布失败!帖子类型被禁用!", subjectSendDto);
+        }
+        else if(res==29) {
+            return new BaseResponse<SubjectSendDto>(500, "发布失败!数据库错误", subjectSendDto);
         }
         else if(res==11) {
             return new BaseResponse<SubjectSendDto>(200, "发布成功！", subjectSendDto);

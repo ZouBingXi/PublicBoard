@@ -53,13 +53,37 @@ public class NewsServiceImpl implements NewsService {
         UserInfo userInfo = userInfoMapper.selectByPrimaryKey(addNewsParam.getUserid());
         NewsType newsType = newsTypeMapper.selectByPrimaryKey(addNewsParam.getNewstype());
 
-        //判断用户是否被封禁,被封禁返回21，代表用户封禁，插入失败
-        if (userInfo.getBanstate()==1)
+        //判断账号是否为空,为空返回21
+        if(addNewsParam.getUserid()==null)
             return 21;
 
-        //判断帖子类型状态是否禁用，禁用返回22，代表该类型被禁用，插入失败
-        if(newsType.getTypestate()==0)
+        //判断标题是否为空,为空返回22
+        if(addNewsParam.getNewstitle()==null)
             return 22;
+
+        //判断内容是否为空,为空返回23
+        if(addNewsParam.getContent()==null)
+            return 23;
+
+        //判断类型是否为空,为空返回24
+        if(addNewsParam.getNewstype()==null)
+            return 24;
+
+        //判断userinfo表是否存在输入userid,不存在返回25
+        if(userInfo==null)
+            return 25;
+
+        //判断用户是否被封禁,被封禁返回26
+        if (userInfo.getBanstate()==1)
+            return 26;
+
+        //判断newstype表是否存在输入newstypeid,不存在返回27
+        if(newsType==null)
+            return 27;
+
+        //判断帖子类型状态是否禁用，禁用返回28
+        if(newsType.getTypestate()==0)
+            return 28;
 
         //获取帖子表记录数
         Integer newsid = 0;
@@ -91,7 +115,7 @@ public class NewsServiceImpl implements NewsService {
             if(res1!=0&&res2!=0)
                 return 11;
             else
-                return 23;
+                return 29;
         }
         else//匿名用户状态
         {
@@ -100,7 +124,7 @@ public class NewsServiceImpl implements NewsService {
             if(res1!=0&&res2!=0)
                 return 12;
             else
-                return 23;
+                return 29;
         }
     }
 

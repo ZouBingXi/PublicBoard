@@ -128,7 +128,6 @@ class PublicboardApplicationTests {
 
 	}
 
-
 	@Test
 	void testMapstruct()
 	{
@@ -151,17 +150,106 @@ class PublicboardApplicationTests {
 
 	@Test
 		//测试编辑话题功能
-	void addSubject(){
+	void testAddSubject(){
 		try{
 			String url = "http://localhost/subject/add";
-
-			//初始化测试用例1
+			//初始化编辑帖子参数对象
 			AddSubjectParam addSubjectParam= new AddSubjectParam();
+
+			String res;//测试结果
+
+			//初始化测试用例1，账号为空
+			Integer userid = null;
+			addSubjectParam.setUserid(userid);
+			addSubjectParam.setSubjecttitle("标题：测试话题");
+			addSubjectParam.setContent("内容：测试话题");
+			addSubjectParam.setSubjecttype(1);
+			System.out.println("测试用例1:"+ addSubjectParam);
+			res = restTemplate.postForObject(url, addSubjectParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例2，标题为空
+			String title = null;
+			addSubjectParam.setUserid(2019010101);
+			addSubjectParam.setSubjecttitle(title);
+			addSubjectParam.setContent("内容：测试话题");
+			addSubjectParam.setSubjecttype(1);
+			System.out.println("测试用例2:"+ addSubjectParam);
+			res = restTemplate.postForObject(url, addSubjectParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例3，内容为空
+			String content = null;
+			addSubjectParam.setUserid(2019010101);
+			addSubjectParam.setSubjecttitle("标题：测试话题");
+			addSubjectParam.setContent(content);
+			addSubjectParam.setSubjecttype(1);
+			System.out.println("测试用例3:"+ addSubjectParam);
+			res = restTemplate.postForObject(url, addSubjectParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例4，类型为空
+			Integer type = null;
+			addSubjectParam.setUserid(2019010101);
+			addSubjectParam.setSubjecttitle("标题：测试话题");
+			addSubjectParam.setContent("内容：测试话题");
+			addSubjectParam.setSubjecttype(type);
+			System.out.println("测试用例4:"+ addSubjectParam);
+			res = restTemplate.postForObject(url, addSubjectParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例5，账号不存在
+			addSubjectParam.setUserid(2019101010);
+			addSubjectParam.setSubjecttitle("标题：测试话题");
+			addSubjectParam.setContent("内容：测试话题");
+			addSubjectParam.setSubjecttype(1);
+			System.out.println("测试用例5:"+ addSubjectParam);
+			res = restTemplate.postForObject(url, addSubjectParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例6，账号被禁用
+			addSubjectParam.setUserid(2019020202);
+			addSubjectParam.setSubjecttitle("标题：测试话题");
+			addSubjectParam.setContent("内容：测试话题");
+			addSubjectParam.setSubjecttype(1);
+			System.out.println("测试用例6:"+ addSubjectParam);
+			res = restTemplate.postForObject(url, addSubjectParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例7，话题类型不存在
+			addSubjectParam.setUserid(2019010101);
+			addSubjectParam.setSubjecttitle("标题：测试话题");
+			addSubjectParam.setContent("内容：测试话题");
+			addSubjectParam.setSubjecttype(8);
+			System.out.println("测试用例7:"+ addSubjectParam);
+			res = restTemplate.postForObject(url, addSubjectParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例8，话题类型被禁用
+			addSubjectParam.setUserid(2019010101);
+			addSubjectParam.setSubjecttitle("标题：测试话题");
+			addSubjectParam.setContent("内容：测试话题");
+			addSubjectParam.setSubjecttype(3);
+			System.out.println("测试用例8:"+ addSubjectParam);
+			res = restTemplate.postForObject(url, addSubjectParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例9，用户为正常用户状态
 			addSubjectParam.setUserid(2019010101);
 			addSubjectParam.setSubjecttitle("标题：测试话题");
 			addSubjectParam.setContent("内容：测试话题");
 			addSubjectParam.setSubjecttype(1);
-			String res = restTemplate.postForObject(url, addSubjectParam, String.class);
+			System.out.println("测试用例9:"+ addSubjectParam);
+			res = restTemplate.postForObject(url, addSubjectParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例10，用户为匿名用户状态
+			addSubjectParam.setUserid(2019030303);
+			addSubjectParam.setSubjecttitle("标题：测试话题");
+			addSubjectParam.setContent("内容：测试话题");
+			addSubjectParam.setSubjecttype(1);
+			System.out.println("测试用例10:"+ addSubjectParam);
+			res = restTemplate.postForObject(url, addSubjectParam, String.class);
 			System.out.println(res);//打印测试结果
 
 		}catch(Exception e)
@@ -193,31 +281,107 @@ class PublicboardApplicationTests {
 	}
 
 	@Test
-	void testaddnews()
-	{
-		AddNewsParam addNewsParam= new AddNewsParam();
-		addNewsParam.setUserid(2019010101);
-		addNewsParam.setNewstitle("标题：测试帖子");
-		addNewsParam.setContent("内容：测试帖子");
-		addNewsParam.setNewstype(1);
-		int res = newsServiceImpl.add(addNewsParam);
-		System.out.println(res);
-	}
-
-	@Test
-		//测试编辑帖子功能
-	void addNews(){
+//测试编辑帖子功能
+	void testAddNews(){
 		try{
 			String url = "http://localhost/news/add";
-
-			//初始化测试用例1
+			//初始化编辑帖子参数对象
 			AddNewsParam addNewsParam= new AddNewsParam();
+
+			String res;//测试结果
+
+			//初始化测试用例1，账号为空
+			Integer userid = null;
+			addNewsParam.setUserid(userid);
+			addNewsParam.setNewstitle("标题：测试帖子");
+			addNewsParam.setContent("内容：测试帖子");
+			addNewsParam.setNewstype(1);
+			System.out.println("测试用例1:"+ addNewsParam);
+			res = restTemplate.postForObject(url, addNewsParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例2，标题为空
+			String title = null;
+			addNewsParam.setUserid(2019010101);
+			addNewsParam.setNewstitle(title);
+			addNewsParam.setContent("内容：测试帖子");
+			addNewsParam.setNewstype(1);
+			System.out.println("测试用例2:"+ addNewsParam);
+			res = restTemplate.postForObject(url, addNewsParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例3，内容为空
+			String content = null;
+			addNewsParam.setUserid(2019010101);
+			addNewsParam.setNewstitle("标题：测试帖子");
+			addNewsParam.setContent(content);
+			addNewsParam.setNewstype(1);
+			System.out.println("测试用例3:"+ addNewsParam);
+			res = restTemplate.postForObject(url, addNewsParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例4，类型为空
+			Integer type = null;
+			addNewsParam.setUserid(2019010101);
+			addNewsParam.setNewstitle("标题：测试帖子");
+			addNewsParam.setContent("内容：测试帖子");
+			addNewsParam.setNewstype(type);
+			System.out.println("测试用例4:"+ addNewsParam);
+			res = restTemplate.postForObject(url, addNewsParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例5，账号不存在
+			addNewsParam.setUserid(2019101010);
+			addNewsParam.setNewstitle("标题：测试帖子");
+			addNewsParam.setContent("内容：测试帖子");
+			addNewsParam.setNewstype(1);
+			System.out.println("测试用例5:"+ addNewsParam);
+			res = restTemplate.postForObject(url, addNewsParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例6，账号被禁用
+			addNewsParam.setUserid(2019020202);
+			addNewsParam.setNewstitle("标题：测试帖子");
+			addNewsParam.setContent("内容：测试帖子");
+			addNewsParam.setNewstype(1);
+			System.out.println("测试用例6:"+ addNewsParam);
+			res = restTemplate.postForObject(url, addNewsParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例7，帖子类型不存在
+			addNewsParam.setUserid(2019010101);
+			addNewsParam.setNewstitle("标题：测试帖子");
+			addNewsParam.setContent("内容：测试帖子");
+			addNewsParam.setNewstype(8);
+			System.out.println("测试用例7:"+ addNewsParam);
+			res = restTemplate.postForObject(url, addNewsParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例8，帖子类型被禁用
+			addNewsParam.setUserid(2019010101);
+			addNewsParam.setNewstitle("标题：测试帖子");
+			addNewsParam.setContent("内容：测试帖子");
+			addNewsParam.setNewstype(3);
+			System.out.println("测试用例8:"+ addNewsParam);
+			res = restTemplate.postForObject(url, addNewsParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例9，用户为正常用户状态
 			addNewsParam.setUserid(2019010101);
 			addNewsParam.setNewstitle("标题：测试帖子");
 			addNewsParam.setContent("内容：测试帖子");
 			addNewsParam.setNewstype(1);
-			System.out.println(addNewsParam);
-			String res = restTemplate.postForObject(url, addNewsParam, String.class);
+			System.out.println("测试用例9:"+ addNewsParam);
+			res = restTemplate.postForObject(url, addNewsParam, String.class);
+			System.out.println(res);//打印测试结果
+
+			//初始化测试用例10，用户为匿名用户状态
+			addNewsParam.setUserid(2019030303);
+			addNewsParam.setNewstitle("标题：测试帖子");
+			addNewsParam.setContent("内容：测试帖子");
+			addNewsParam.setNewstype(1);
+			System.out.println("测试用例10:"+ addNewsParam);
+			res = restTemplate.postForObject(url, addNewsParam, String.class);
 			System.out.println(res);//打印测试结果
 
 		}catch(Exception e)
@@ -226,7 +390,6 @@ class PublicboardApplicationTests {
 		}
 
 	}
-
 
 	@Test
 		//测试帖子mapper结构

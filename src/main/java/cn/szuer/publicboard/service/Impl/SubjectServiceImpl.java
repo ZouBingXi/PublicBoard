@@ -53,13 +53,37 @@ public class SubjectServiceImpl implements SubjectService {
         UserInfo userInfo = userInfoMapper.selectByPrimaryKey(addSubjectParam.getUserid());
         SubjectType subjectType = subjectTypeMapper.selectByPrimaryKey(addSubjectParam.getSubjecttype());
 
-        //判断用户是否被封禁,被封禁返回21，代表用户封禁，插入失败
-        if (userInfo.getBanstate()==1)
+        //判断账号是否为空,为空返回21
+        if(addSubjectParam.getUserid()==null)
             return 21;
 
-        //判断话题类型状态是否禁用，禁用返回22，代表该类型被禁用，插入失败
-        if(subjectType.getTypestate()==0)
+        //判断标题是否为空,为空返回22
+        if(addSubjectParam.getSubjecttitle()==null)
             return 22;
+
+        //判断内容是否为空,为空返回23
+        if(addSubjectParam.getContent()==null)
+            return 23;
+
+        //判断类型是否为空,为空返回24
+        if(addSubjectParam.getSubjecttype()==null)
+            return 24;
+
+        //判断userinfo表是否存在输入userid,不存在返回25
+        if(userInfo==null)
+            return 25;
+
+        //判断用户是否被封禁,被封禁返回26
+        if (userInfo.getBanstate()==1)
+            return 26;
+
+        //判断subjecttype表是否存在输入subjecttypeid,不存在返回27
+        if(subjectType==null)
+            return 27;
+
+        //判断话题类型状态是否禁用，禁用返回28
+        if(subjectType.getTypestate()==0)
+            return 28;
 
         //获取话题表记录数
         Integer subjectid = 0;
@@ -91,7 +115,7 @@ public class SubjectServiceImpl implements SubjectService {
             if(res1!=0&&res2!=0)
                 return 11;
             else
-                return 23;
+                return 29;
         }
         else//匿名用户状态
         {
@@ -100,7 +124,7 @@ public class SubjectServiceImpl implements SubjectService {
             if(res1!=0&&res2!=0)
                 return 12;
             else
-                return 23;
+                return 29;
         }
     }
 

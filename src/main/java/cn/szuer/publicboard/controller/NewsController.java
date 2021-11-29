@@ -52,15 +52,34 @@ public class NewsController
     {
         int res = newsService.add(addNewsParam);
         NewsSendDto newsSendDto = newsConverter.AddNewsParam2NewsSendDto(addNewsParam);
+
         if(res==21)
         {
-            return new BaseResponse<NewsSendDto>(500,"发布失败，当前用户处于封禁状态！",newsSendDto);
+            return new BaseResponse<NewsSendDto>(500,"发布失败，账号不能为空!",newsSendDto);
         }
         else if(res==22) {
-            return new BaseResponse<NewsSendDto>(500, "发布失败，帖子类型错误！", newsSendDto);
+            return new BaseResponse<NewsSendDto>(500, "发布失败，标题不能为空!", newsSendDto);
         }
         else if(res==23) {
-            return new BaseResponse<NewsSendDto>(500, "发布失败!", newsSendDto);
+            return new BaseResponse<NewsSendDto>(500, "发布失败!内容不能为空!", newsSendDto);
+        }
+        else if(res==24) {
+            return new BaseResponse<NewsSendDto>(500, "发布失败!帖子类型不能为空!", newsSendDto);
+        }
+        else if(res==25) {
+            return new BaseResponse<NewsSendDto>(500, "发布失败!账号不存在!", newsSendDto);
+        }
+        else if(res==26) {
+            return new BaseResponse<NewsSendDto>(500, "发布失败!当前账号被禁用!", newsSendDto);
+        }
+        else if(res==27) {
+            return new BaseResponse<NewsSendDto>(500, "发布失败!帖子类型不存在!", newsSendDto);
+        }
+        else if(res==28) {
+            return new BaseResponse<NewsSendDto>(500, "发布失败!帖子类型被禁用!", newsSendDto);
+        }
+        else if(res==29) {
+            return new BaseResponse<NewsSendDto>(500, "发布失败!数据库错误", newsSendDto);
         }
         else if(res==11) {
             return new BaseResponse<NewsSendDto>(200, "发布成功！", newsSendDto);
