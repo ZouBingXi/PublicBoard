@@ -18,6 +18,6 @@ public interface UserService {
     PageInfo<UserDto> getByPage(int pageNum, int pageSize);
     
     UserDto login(LoginParam loginParam);
-    boolean addUser(UserInfo userInfo);
+    UserDto addUser(LoginParam loginParam);
 
 }

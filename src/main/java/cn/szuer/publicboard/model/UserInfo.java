@@ -2,12 +2,10 @@ package cn.szuer.publicboard.model;
 
 import java.util.Date;
 
-import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -29,6 +27,7 @@ public class UserInfo {
     private Date logintime;
 
     private byte[] headimage;
+
 
     public Integer getUserid() {
         return userid;

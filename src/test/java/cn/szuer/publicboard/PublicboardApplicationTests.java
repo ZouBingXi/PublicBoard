@@ -69,6 +69,7 @@ class PublicboardApplicationTests {
 
 	@Autowired(required=false)
 	private SubjectInfoMapper subjectInfoMapper;
+	
 	@Autowired(required=false)
 	private NewsInfoMapper newsInfoMapper;
 
@@ -80,6 +81,26 @@ class PublicboardApplicationTests {
 
 	@Autowired(required=false)
 	SubjectStateMapper subjectStateMapper = null;
+	
+	@Autowired(required=false)
+	NewsStateMapper newsStateMapper = null;
+    private UserInfoMapper userInfoMapper;
+    
+	@Autowired(required=false)
+	private SubjectInfoMapper subjectInfoMapper;
+	
+	@Autowired(required=false)
+	private NewsInfoMapper newsInfoMapper;
+
+	@Autowired(required=false)
+	SubjectTypeMapper subjectTypeMapper = null;
+
+	@Autowired(required=false)
+	NewsTypeMapper newsTypeMapper = null;
+
+	@Autowired(required=false)
+	SubjectStateMapper subjectStateMapper = null;
+	
 	@Autowired(required=false)
 	NewsStateMapper newsStateMapper = null;
 
@@ -261,6 +282,42 @@ class PublicboardApplicationTests {
 
 	@Test
 		//测试话题mapper结构
+	void testSubjectMapstruct()
+	{
+		SubjectInfo subjectInfo = subjectInfoMapper.selectByPrimaryKey(1);
+		//调用convertor将addsubjectparam转换成dto
+		SubjectSendDto subjectSendDto= subjectConverter.SubjectInfo2SubjectSendDto(subjectInfo);
+
+		System.out.println(subjectSendDto.toString());
+
+	}
+
+	@Test
+	void testNewsService(){
+
+	//测试编辑话题功能
+	void addSubject(){
+		try{
+			String url = "http://localhost/subject/add";
+
+			//初始化测试用例1
+			AddSubjectParam addSubjectParam= new AddSubjectParam();
+			addSubjectParam.setUserid(2019010101);
+			addSubjectParam.setSubjecttitle("标题：测试话题");
+			addSubjectParam.setContent("内容：测试话题");
+			addSubjectParam.setSubjecttype(1);
+			String res = restTemplate.postForObject(url, addSubjectParam, String.class);
+			System.out.println(res);//打印测试结果
+
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+
+	@Test
+	//测试话题mapper结构
 	void testSubjectMapstruct()
 	{
 		SubjectInfo subjectInfo = subjectInfoMapper.selectByPrimaryKey(1);

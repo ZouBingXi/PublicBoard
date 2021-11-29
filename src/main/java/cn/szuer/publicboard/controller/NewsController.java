@@ -37,7 +37,9 @@ public class NewsController
      */
     @GetMapping("/admin/checknews")
     public BaseResponse<PageInfo<NewsSendDto>> showNews(@RequestParam(name = "page",required = true,defaultValue = "1") int pageNum,
-                                                        @RequestParam(name = "size",required = true,defaultValue = "10")int pageSize)
+
+                                @RequestParam(name = "size",required = true,defaultValue = "10")int pageSize)
+
     {
         return new BaseResponse<PageInfo<NewsSendDto>>(200, "success", newsService.getByPage(pageNum, pageSize));
     }
