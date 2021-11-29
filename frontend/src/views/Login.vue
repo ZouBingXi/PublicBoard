@@ -48,7 +48,7 @@
 
         <!-- 立即注册文字链接 -->
         <div id="register-text-link">
-          <el-link @click="gotoRegister" id="register-text-link1" :underline="false" type="info">立即注册</el-link>
+          <el-link @click="gotoRegister('ruleForm')" id="register-text-link1" :underline="false" type="info">立即注册</el-link>
         </div>
       </div>
     </div>
@@ -89,21 +89,35 @@ export default {
             userid: _this.ruleForm.userid,
             password: _this.ruleForm.password
           }).then((response) => {
-            console.log(response);
-            alert(response.data.msg);
             this.$refs[formName].resetFields();
             if(response.data.code == 200) {
+              this.$message({
+                showClose: true,
+                message: response.data.msg,
+                type: 'success'
+              });
               this.$router.push({path: '/'});
+            }
+            else {
+              this.$message({
+                showClose: true,
+                message: response.data.msg,
+                type: 'error'
+              });
             }
           });
         } else {
-          console.log('error submit!!');
-          alert('登录失败');
+          this.$message({
+            showClose: true,
+            message: '登录失败，请检查用户名或密码',
+            type: 'error'
+          });
           return false;
         }
       });
     },
-    gotoRegister() {
+    gotoRegister(formName) {
+      this.$refs[formName].resetFields();
       this.$router.push({path: '/register'});
     }
     // resetForm(formName) {

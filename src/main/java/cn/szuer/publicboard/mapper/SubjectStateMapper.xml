@@ -68,6 +68,9 @@
   <sql id="Base_Column_List" >
     subjectID, topState, hotState, examineState
   </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from suject_state
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.szuer.publicboard.model.SubjectStateExample" >
     select
     <if test="distinct" >
