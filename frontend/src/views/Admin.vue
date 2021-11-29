@@ -1,20 +1,5 @@
 <template>
   <el-container>
-    <el-header>
-      <el-menu mode="horizontal">
-        <div style="
-        margin-left: 1%;
-        margin-right: 1%;
-        font-size: 24px;
-        float: left;
-        line-height: 60px;
-        color: black">
-          <span>PublicBoard后台管理界面</span>
-        </div>
-        <el-menu-item style="float: right">sign out</el-menu-item>
-      </el-menu>
-      <h1 style="vertical-align: center;color: white"></h1>
-    </el-header>
     <el-container>
       <el-aside>
         <el-menu router :default-active="$route.path">
@@ -24,6 +9,7 @@
               {{ menuItem.text }}
             </el-menu-item>
           </el-submenu>
+
         </el-menu>
       </el-aside>
       <el-main>
