@@ -1,5 +1,6 @@
 package cn.szuer.publicboard.mapper;
 
+import cn.szuer.publicboard.model.NewsInfo;
 import cn.szuer.publicboard.model.SubjectInfo;
 import cn.szuer.publicboard.model.SubjectInfoExample;
 import java.util.List;

@@ -1,5 +1,6 @@
 package cn.szuer.publicboard.mapper;
 
+import cn.szuer.publicboard.model.SubjectInfo;
 import cn.szuer.publicboard.model.SubjectState;
 import cn.szuer.publicboard.model.SubjectStateExample;
 import java.util.List;
@@ -15,6 +16,8 @@ public interface SubjectStateMapper {
     int insert(SubjectState record);
 
     int insertSelective(SubjectState record);
+
+    List<SubjectState> selectAll();
 
     List<SubjectState> selectByExample(SubjectStateExample example);
 

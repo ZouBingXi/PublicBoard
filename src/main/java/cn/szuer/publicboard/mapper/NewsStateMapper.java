@@ -3,6 +3,8 @@ package cn.szuer.publicboard.mapper;
 import cn.szuer.publicboard.model.NewsState;
 import cn.szuer.publicboard.model.NewsStateExample;
 import java.util.List;
+
+import cn.szuer.publicboard.model.SubjectState;
 import org.apache.ibatis.annotations.Param;
 
 public interface NewsStateMapper {
@@ -15,6 +17,8 @@ public interface NewsStateMapper {
     int insert(NewsState record);
 
     int insertSelective(NewsState record);
+
+    List<NewsState> selectAll();
 
     List<NewsState> selectByExample(NewsStateExample example);
 
