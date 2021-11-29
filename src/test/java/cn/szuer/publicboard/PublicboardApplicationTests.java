@@ -85,18 +85,6 @@ class PublicboardApplicationTests {
 	@Autowired(required=false)
 	NewsStateMapper newsStateMapper = null;
 
-	@Autowired(required=false)
-	SubjectTypeMapper subjectTypeMapper = null;
-
-	@Autowired(required=false)
-	NewsTypeMapper newsTypeMapper = null;
-
-	@Autowired(required=false)
-	SubjectStateMapper subjectStateMapper = null;
-	
-	@Autowired(required=false)
-	NewsStateMapper newsStateMapper = null;
-
 	@Autowired
 	private UserConverter userConverter;
 
@@ -283,8 +271,6 @@ class PublicboardApplicationTests {
 	}
 
 	@Test
-	void testNewsService(){
-
 	//测试编辑话题功能
 	void addSubject(){
 		try{
@@ -304,28 +290,9 @@ class PublicboardApplicationTests {
 			e.printStackTrace();
 		}
 
-	}
+}
 
-	@Test
-	//测试话题mapper结构
-	void testSubjectMapstruct()
-	{
-		SubjectInfo subjectInfo = subjectInfoMapper.selectByPrimaryKey(1);
-		//调用convertor将addsubjectparam转换成dto
-		SubjectSendDto subjectSendDto= subjectConverter.SubjectInfo2SubjectSendDto(subjectInfo);
 
-		System.out.println(subjectSendDto.toString());
-
-	}
-
-	@Test
-	void testNewsService(){
-
-		List<NewsSendDto> list = newsService.getAll();
-		System.out.println(list);
-		PageInfo<NewsSendDto> pageInfo = newsService.getByPage(1, 3);
-		System.out.println(pageInfo);
-	}
 
 	@Test
 //测试编辑帖子功能
