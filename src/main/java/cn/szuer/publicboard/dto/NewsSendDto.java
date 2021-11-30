@@ -17,7 +17,7 @@ public class NewsSendDto {
 
   private String content;
 
-  private Date sendtime;
+  private String sendtime;
 
   private Integer viewnum;
 

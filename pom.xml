@@ -3,20 +3,20 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>${groupId}</groupId>
+	<!-- <groupId>${groupId}</groupId>
 	<artifactId>${artifactId}</artifactId>
 	<version>${version}</version>
 	<packaging>jar</packaging>
 
 	<name>${artifactId}</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Demo project for Spring Boot</description> -->
 
-	<!-- <groupId>cn.szuer</groupId>
+	<groupId>cn.szuer</groupId>
 	<artifactId>publicboard</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<name>publicboard</name>
-	<description>Demo project for Spring Boot</description> -->
+	<description>Demo project for Spring Boot</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

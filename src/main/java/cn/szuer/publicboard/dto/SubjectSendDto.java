@@ -18,7 +18,7 @@ public class SubjectSendDto {
 
     private String content;
 
-    private Date sendtime;
+    private String sendtime;
 
     private Integer viewnum;
 

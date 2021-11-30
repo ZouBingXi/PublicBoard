@@ -134,7 +134,10 @@ public class NewsServiceImpl implements NewsService {
         PageHelper.startPage(pageNum, pageSize);
         List<NewsInfo> newsInfos = newsInfoMapper.selectAll();
         List<NewsSendDto> newsSendDtos =  newsConverter.NewsInfos2NewsSendDtos(newsInfos);
-        return new PageInfo<>(newsSendDtos);
+        PageInfo pageInfo = new PageInfo<>(newsInfos);
+        //再进行setList操作
+        pageInfo.setList(newsSendDtos);
+        return pageInfo;
     }
 
 

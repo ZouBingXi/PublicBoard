@@ -134,7 +134,10 @@ public class SubjectServiceImpl implements SubjectService {
         PageHelper.startPage(pageNum, pageSize);
         List<SubjectInfo> subjectInfos = subjectInfoMapper.selectAll();
         List<SubjectSendDto> subjectSendDtos =  subjectConverter.SubjectInfos2SubjectSendDtos(subjectInfos);
-        return new PageInfo<>(subjectSendDtos);
+        PageInfo pageInfo = new PageInfo<>(subjectInfos);
+        //再进行setList操作
+        pageInfo.setList(subjectSendDtos);
+        return pageInfo;
     }
 
 
