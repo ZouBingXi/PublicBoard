@@ -34,7 +34,8 @@ public class successHandler implements AuthenticationSuccessHandler
     public void onAuthenticationSuccess(HttpServletRequest request,HttpServletResponse response,Authentication authentication) throws IOException, ServletException
     {
         //设置返回类型
-        response.setContentType("applicationjson;charset=utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("applicationjson");
         PrintWriter out=response.getWriter();
 
         //获取用户信息

@@ -1,7 +1,9 @@
 package cn.szuer.publicboard.config;
 
+import cn.szuer.publicboard.filter.LoginAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -12,7 +14,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+
+import javax.servlet.Filter;
 
 @Configuration
 @EnableWebSecurity
@@ -31,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 
     @Autowired
     LogoutSuccessHandler logoutSuccessHandler;
+
 
     /**
      * 指定加密方式
@@ -66,12 +72,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .permitAll()
                 .anyRequest().authenticated()   //启动认证
                 .and()
+                .addFilterAt(loginAuthenticationFilter(),UsernamePasswordAuthenticationFilter.class)
                 .formLogin()
                 .loginPage("/#/login")  //自定义登录界面
-                .loginProcessingUrl("/user/login")    //自定义登录请求路径
-                .usernameParameter("userid")    //自定义登录账号参数名(默认为username,密码默认为password)
-                .successHandler(successHandler) //自定义登录成功处理类
-                .failureHandler(failureHandler) //自定义登录失败处理类
                 .permitAll()
                 .and()
                 .logout()
@@ -79,6 +82,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .logoutSuccessHandler(logoutSuccessHandler)
                 .and()
                 .csrf().disable();  //不启用csrf访问
+    }
+
+    @Bean
+    LoginAuthenticationFilter loginAuthenticationFilter() throws Exception
+    {
+        LoginAuthenticationFilter loginAuthenticationFilter=new LoginAuthenticationFilter();
+        loginAuthenticationFilter.setAuthenticationSuccessHandler(successHandler);
+        loginAuthenticationFilter.setAuthenticationFailureHandler(failureHandler);
+        loginAuthenticationFilter.setAuthenticationManager(authenticationManagerBean());
+        loginAuthenticationFilter.setUsernameParameter("userid");
+        loginAuthenticationFilter.setFilterProcessesUrl("/user/login");
+        return loginAuthenticationFilter;
     }
 
     @Override
