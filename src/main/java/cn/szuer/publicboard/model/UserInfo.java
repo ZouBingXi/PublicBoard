@@ -2,15 +2,6 @@ package cn.szuer.publicboard.model;
 
 import java.util.Date;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-
 public class UserInfo {
     private Integer userid;
 
@@ -18,16 +9,17 @@ public class UserInfo {
 
     private String password;
 
-    private Byte anonymousstate;
+    private String email;
 
-    private Byte banstate;
+    private String headimage;
 
-    private Integer usertype;
+    private Boolean anonymousmode;
+
+    private Boolean banstate;
+
+    private Integer typeid;
 
     private Date logintime;
-
-    private byte[] headimage;
-
 
     public Integer getUserid() {
         return userid;
@@ -53,28 +45,44 @@ public class UserInfo {
         this.password = password;
     }
 
-    public Byte getAnonymousstate() {
-        return anonymousstate;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAnonymousstate(Byte anonymousstate) {
-        this.anonymousstate = anonymousstate;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Byte getBanstate() {
+    public String getHeadimage() {
+        return headimage;
+    }
+
+    public void setHeadimage(String headimage) {
+        this.headimage = headimage;
+    }
+
+    public Boolean getAnonymousmode() {
+        return anonymousmode;
+    }
+
+    public void setAnonymousmode(Boolean anonymousmode) {
+        this.anonymousmode = anonymousmode;
+    }
+
+    public Boolean getBanstate() {
         return banstate;
     }
 
-    public void setBanstate(Byte banstate) {
+    public void setBanstate(Boolean banstate) {
         this.banstate = banstate;
     }
 
-    public Integer getUsertype() {
-        return usertype;
+    public Integer getTypeid() {
+        return typeid;
     }
 
-    public void setUsertype(Integer usertype) {
-        this.usertype = usertype;
+    public void setTypeid(Integer typeid) {
+        this.typeid = typeid;
     }
 
     public Date getLogintime() {
@@ -83,13 +91,5 @@ public class UserInfo {
 
     public void setLogintime(Date logintime) {
         this.logintime = logintime;
-    }
-
-    public byte[] getHeadimage() {
-        return headimage;
-    }
-
-    public void setHeadimage(byte[] headimage) {
-        this.headimage = headimage;
     }
 }

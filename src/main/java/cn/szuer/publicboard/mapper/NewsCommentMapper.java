@@ -2,7 +2,6 @@ package cn.szuer.publicboard.mapper;
 
 import cn.szuer.publicboard.model.NewsComment;
 import cn.szuer.publicboard.model.NewsCommentExample;
-import cn.szuer.publicboard.model.NewsCommentKey;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,7 +10,7 @@ public interface NewsCommentMapper {
 
     int deleteByExample(NewsCommentExample example);
 
-    int deleteByPrimaryKey(NewsCommentKey key);
+    int deleteByPrimaryKey(Integer commentid);
 
     int insert(NewsComment record);
 
@@ -21,7 +20,7 @@ public interface NewsCommentMapper {
 
     List<NewsComment> selectByExample(NewsCommentExample example);
 
-    NewsComment selectByPrimaryKey(NewsCommentKey key);
+    NewsComment selectByPrimaryKey(Integer commentid);
 
     int updateByExampleSelective(@Param("record") NewsComment record, @Param("example") NewsCommentExample example);
 

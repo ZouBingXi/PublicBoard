@@ -5,7 +5,7 @@ public class SubjectType {
 
     private String typename;
 
-    private Byte typestate;
+    private Boolean typestate;
 
     public Integer getSubjecttypeid() {
         return subjecttypeid;
@@ -23,11 +23,11 @@ public class SubjectType {
         this.typename = typename;
     }
 
-    public Byte getTypestate() {
+    public Boolean getTypestate() {
         return typestate;
     }
 
-    public void setTypestate(Byte typestate) {
+    public void setTypestate(Boolean typestate) {
         this.typestate = typestate;
     }
 }

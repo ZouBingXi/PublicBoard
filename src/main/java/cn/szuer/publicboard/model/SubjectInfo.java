@@ -7,8 +7,6 @@ public class SubjectInfo {
 
     private Integer userid;
 
-    private Integer subjecttype;
-
     private String subjecttitle;
 
     private Date sendtime;
@@ -16,6 +14,16 @@ public class SubjectInfo {
     private Integer viewnum;
 
     private Integer likenum;
+
+    private Integer subjecttypeid;
+
+    private Boolean anonymousstate;
+
+    private Boolean topstate;
+
+    private Boolean hotstate;
+
+    private Boolean examinestate;
 
     private String content;
 
@@ -33,14 +41,6 @@ public class SubjectInfo {
 
     public void setUserid(Integer userid) {
         this.userid = userid;
-    }
-
-    public Integer getSubjecttype() {
-        return subjecttype;
-    }
-
-    public void setSubjecttype(Integer subjecttype) {
-        this.subjecttype = subjecttype;
     }
 
     public String getSubjecttitle() {
@@ -73,6 +73,46 @@ public class SubjectInfo {
 
     public void setLikenum(Integer likenum) {
         this.likenum = likenum;
+    }
+
+    public Integer getSubjecttypeid() {
+        return subjecttypeid;
+    }
+
+    public void setSubjecttypeid(Integer subjecttypeid) {
+        this.subjecttypeid = subjecttypeid;
+    }
+
+    public Boolean getAnonymousstate() {
+        return anonymousstate;
+    }
+
+    public void setAnonymousstate(Boolean anonymousstate) {
+        this.anonymousstate = anonymousstate;
+    }
+
+    public Boolean getTopstate() {
+        return topstate;
+    }
+
+    public void setTopstate(Boolean topstate) {
+        this.topstate = topstate;
+    }
+
+    public Boolean getHotstate() {
+        return hotstate;
+    }
+
+    public void setHotstate(Boolean hotstate) {
+        this.hotstate = hotstate;
+    }
+
+    public Boolean getExaminestate() {
+        return examinestate;
+    }
+
+    public void setExaminestate(Boolean examinestate) {
+        this.examinestate = examinestate;
     }
 
     public String getContent() {

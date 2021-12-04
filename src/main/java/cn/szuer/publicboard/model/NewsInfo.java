@@ -7,8 +7,6 @@ public class NewsInfo {
 
     private Integer userid;
 
-    private Integer newstype;
-
     private String newstitle;
 
     private Date sendtime;
@@ -16,6 +14,16 @@ public class NewsInfo {
     private Integer viewnum;
 
     private Integer likenum;
+
+    private Integer newstypeid;
+
+    private Boolean anonymousstate;
+
+    private Boolean topstate;
+
+    private Boolean hotstate;
+
+    private Boolean examinestate;
 
     private String content;
 
@@ -33,14 +41,6 @@ public class NewsInfo {
 
     public void setUserid(Integer userid) {
         this.userid = userid;
-    }
-
-    public Integer getNewstype() {
-        return newstype;
-    }
-
-    public void setNewstype(Integer newstype) {
-        this.newstype = newstype;
     }
 
     public String getNewstitle() {
@@ -73,6 +73,46 @@ public class NewsInfo {
 
     public void setLikenum(Integer likenum) {
         this.likenum = likenum;
+    }
+
+    public Integer getNewstypeid() {
+        return newstypeid;
+    }
+
+    public void setNewstypeid(Integer newstypeid) {
+        this.newstypeid = newstypeid;
+    }
+
+    public Boolean getAnonymousstate() {
+        return anonymousstate;
+    }
+
+    public void setAnonymousstate(Boolean anonymousstate) {
+        this.anonymousstate = anonymousstate;
+    }
+
+    public Boolean getTopstate() {
+        return topstate;
+    }
+
+    public void setTopstate(Boolean topstate) {
+        this.topstate = topstate;
+    }
+
+    public Boolean getHotstate() {
+        return hotstate;
+    }
+
+    public void setHotstate(Boolean hotstate) {
+        this.hotstate = hotstate;
+    }
+
+    public Boolean getExaminestate() {
+        return examinestate;
+    }
+
+    public void setExaminestate(Boolean examinestate) {
+        this.examinestate = examinestate;
     }
 
     public String getContent() {

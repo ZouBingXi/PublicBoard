@@ -2,10 +2,12 @@ package cn.szuer.publicboard.model;
 
 import java.util.Date;
 
-public class SubjectComment {
-    private Integer commentid;
+public class SubjectReply {
+    private Integer replyid;
 
-    private Integer subjectid;
+    private Integer targetid;
+
+    private Integer commentid;
 
     private Integer userid;
 
@@ -17,20 +19,28 @@ public class SubjectComment {
 
     private String content;
 
+    public Integer getReplyid() {
+        return replyid;
+    }
+
+    public void setReplyid(Integer replyid) {
+        this.replyid = replyid;
+    }
+
+    public Integer getTargetid() {
+        return targetid;
+    }
+
+    public void setTargetid(Integer targetid) {
+        this.targetid = targetid;
+    }
+
     public Integer getCommentid() {
         return commentid;
     }
 
     public void setCommentid(Integer commentid) {
         this.commentid = commentid;
-    }
-
-    public Integer getSubjectid() {
-        return subjectid;
-    }
-
-    public void setSubjectid(Integer subjectid) {
-        this.subjectid = subjectid;
     }
 
     public Integer getUserid() {

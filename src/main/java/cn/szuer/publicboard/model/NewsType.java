@@ -5,7 +5,7 @@ public class NewsType {
 
     private String typename;
 
-    private Byte typestate;
+    private Boolean typestate;
 
     public Integer getNewstypeid() {
         return newstypeid;
@@ -23,11 +23,11 @@ public class NewsType {
         this.typename = typename;
     }
 
-    public Byte getTypestate() {
+    public Boolean getTypestate() {
         return typestate;
     }
 
-    public void setTypestate(Byte typestate) {
+    public void setTypestate(Boolean typestate) {
         this.typestate = typestate;
     }
 }

@@ -3,11 +3,11 @@
 <mapper namespace="cn.szuer.publicboard.mapper.NewsCommentMapper" >
   <resultMap id="BaseResultMap" type="cn.szuer.publicboard.model.NewsComment" >
     <id column="commentID" property="commentid" jdbcType="INTEGER" />
-    <id column="layerID" property="layerid" jdbcType="INTEGER" />
     <result column="newsID" property="newsid" jdbcType="INTEGER" />
     <result column="userID" property="userid" jdbcType="INTEGER" />
     <result column="commentTime" property="commenttime" jdbcType="TIMESTAMP" />
     <result column="likeNum" property="likenum" jdbcType="INTEGER" />
+    <result column="anonymousState" property="anonymousstate" jdbcType="BIT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="cn.szuer.publicboard.model.NewsComment" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    commentID, layerID, newsID, userID, commentTime, likeNum
+    commentID, newsID, userID, commentTime, likeNum, anonymousState
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -106,19 +106,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="cn.szuer.publicboard.model.NewsCommentKey" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from news_comment
     where commentID = #{commentid,jdbcType=INTEGER}
-      and layerID = #{layerid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="cn.szuer.publicboard.model.NewsCommentKey" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from news_comment
     where commentID = #{commentid,jdbcType=INTEGER}
-      and layerID = #{layerid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="cn.szuer.publicboard.model.NewsCommentExample" >
     delete from news_comment
@@ -127,11 +125,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.szuer.publicboard.model.NewsComment" >
-    insert into news_comment (commentID, layerID, newsID, 
-      userID, commentTime, likeNum, 
+    insert into news_comment (commentID, newsID, userID, 
+      commentTime, likeNum, anonymousState, 
       content)
-    values (#{commentid,jdbcType=INTEGER}, #{layerid,jdbcType=INTEGER}, #{newsid,jdbcType=INTEGER}, 
-      #{userid,jdbcType=INTEGER}, #{commenttime,jdbcType=TIMESTAMP}, #{likenum,jdbcType=INTEGER}, 
+    values (#{commentid,jdbcType=INTEGER}, #{newsid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{commenttime,jdbcType=TIMESTAMP}, #{likenum,jdbcType=INTEGER}, #{anonymousstate,jdbcType=BIT}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.szuer.publicboard.model.NewsComment" >
@@ -139,9 +137,6 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="commentid != null" >
         commentID,
-      </if>
-      <if test="layerid != null" >
-        layerID,
       </if>
       <if test="newsid != null" >
         newsID,
@@ -155,6 +150,9 @@
       <if test="likenum != null" >
         likeNum,
       </if>
+      <if test="anonymousstate != null" >
+        anonymousState,
+      </if>
       <if test="content != null" >
         content,
       </if>
@@ -162,9 +160,6 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="commentid != null" >
         #{commentid,jdbcType=INTEGER},
-      </if>
-      <if test="layerid != null" >
-        #{layerid,jdbcType=INTEGER},
       </if>
       <if test="newsid != null" >
         #{newsid,jdbcType=INTEGER},
@@ -177,6 +172,9 @@
       </if>
       <if test="likenum != null" >
         #{likenum,jdbcType=INTEGER},
+      </if>
+      <if test="anonymousstate != null" >
+        #{anonymousstate,jdbcType=BIT},
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
@@ -195,9 +193,6 @@
       <if test="record.commentid != null" >
         commentID = #{record.commentid,jdbcType=INTEGER},
       </if>
-      <if test="record.layerid != null" >
-        layerID = #{record.layerid,jdbcType=INTEGER},
-      </if>
       <if test="record.newsid != null" >
         newsID = #{record.newsid,jdbcType=INTEGER},
       </if>
@@ -210,6 +205,9 @@
       <if test="record.likenum != null" >
         likeNum = #{record.likenum,jdbcType=INTEGER},
       </if>
+      <if test="record.anonymousstate != null" >
+        anonymousState = #{record.anonymousstate,jdbcType=BIT},
+      </if>
       <if test="record.content != null" >
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -221,11 +219,11 @@
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update news_comment
     set commentID = #{record.commentid,jdbcType=INTEGER},
-      layerID = #{record.layerid,jdbcType=INTEGER},
       newsID = #{record.newsid,jdbcType=INTEGER},
       userID = #{record.userid,jdbcType=INTEGER},
       commentTime = #{record.commenttime,jdbcType=TIMESTAMP},
       likeNum = #{record.likenum,jdbcType=INTEGER},
+      anonymousState = #{record.anonymousstate,jdbcType=BIT},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -234,11 +232,11 @@
   <update id="updateByExample" parameterType="map" >
     update news_comment
     set commentID = #{record.commentid,jdbcType=INTEGER},
-      layerID = #{record.layerid,jdbcType=INTEGER},
       newsID = #{record.newsid,jdbcType=INTEGER},
       userID = #{record.userid,jdbcType=INTEGER},
       commentTime = #{record.commenttime,jdbcType=TIMESTAMP},
-      likeNum = #{record.likenum,jdbcType=INTEGER}
+      likeNum = #{record.likenum,jdbcType=INTEGER},
+      anonymousState = #{record.anonymousstate,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -258,12 +256,14 @@
       <if test="likenum != null" >
         likeNum = #{likenum,jdbcType=INTEGER},
       </if>
+      <if test="anonymousstate != null" >
+        anonymousState = #{anonymousstate,jdbcType=BIT},
+      </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where commentID = #{commentid,jdbcType=INTEGER}
-      and layerID = #{layerid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.szuer.publicboard.model.NewsComment" >
     update news_comment
@@ -271,17 +271,17 @@
       userID = #{userid,jdbcType=INTEGER},
       commentTime = #{commenttime,jdbcType=TIMESTAMP},
       likeNum = #{likenum,jdbcType=INTEGER},
+      anonymousState = #{anonymousstate,jdbcType=BIT},
       content = #{content,jdbcType=LONGVARCHAR}
     where commentID = #{commentid,jdbcType=INTEGER}
-      and layerID = #{layerid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.szuer.publicboard.model.NewsComment" >
     update news_comment
     set newsID = #{newsid,jdbcType=INTEGER},
       userID = #{userid,jdbcType=INTEGER},
       commentTime = #{commenttime,jdbcType=TIMESTAMP},
-      likeNum = #{likenum,jdbcType=INTEGER}
+      likeNum = #{likenum,jdbcType=INTEGER},
+      anonymousState = #{anonymousstate,jdbcType=BIT}
     where commentID = #{commentid,jdbcType=INTEGER}
-      and layerID = #{layerid,jdbcType=INTEGER}
   </update>
 </mapper>

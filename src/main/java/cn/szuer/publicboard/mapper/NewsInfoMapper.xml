@@ -4,11 +4,15 @@
   <resultMap id="BaseResultMap" type="cn.szuer.publicboard.model.NewsInfo" >
     <id column="newsID" property="newsid" jdbcType="INTEGER" />
     <result column="userID" property="userid" jdbcType="INTEGER" />
-    <result column="newsType" property="newstype" jdbcType="INTEGER" />
     <result column="newsTitle" property="newstitle" jdbcType="VARCHAR" />
     <result column="sendTime" property="sendtime" jdbcType="TIMESTAMP" />
     <result column="viewNum" property="viewnum" jdbcType="INTEGER" />
     <result column="likeNum" property="likenum" jdbcType="INTEGER" />
+    <result column="newsTypeID" property="newstypeid" jdbcType="INTEGER" />
+    <result column="anonymousState" property="anonymousstate" jdbcType="BIT" />
+    <result column="topState" property="topstate" jdbcType="BIT" />
+    <result column="hotState" property="hotstate" jdbcType="BIT" />
+    <result column="examineState" property="examinestate" jdbcType="BIT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="cn.szuer.publicboard.model.NewsInfo" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
@@ -72,14 +76,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    newsID, userID, newsType, newsTitle, sendTime, viewNum, likeNum
+    newsID, userID, newsTitle, sendTime, viewNum, likeNum, newsTypeID, anonymousState, 
+    topState, hotState, examineState
   </sql>
   <sql id="Blob_Column_List" >
     content
   </sql>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select * from news_info
-  </select>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.szuer.publicboard.model.NewsInfoExample" >
     select
     <if test="distinct" >
@@ -129,12 +131,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.szuer.publicboard.model.NewsInfo" >
-    insert into news_info (newsID, userID, newsType, 
-      newsTitle, sendTime, viewNum, 
-      likeNum, content)
-    values (#{newsid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{newstype,jdbcType=INTEGER}, 
-      #{newstitle,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, #{viewnum,jdbcType=INTEGER}, 
-      #{likenum,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+    insert into news_info (newsID, userID, newsTitle, 
+      sendTime, viewNum, likeNum, 
+      newsTypeID, anonymousState, topState, 
+      hotState, examineState, content
+      )
+    values (#{newsid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{newstitle,jdbcType=VARCHAR}, 
+      #{sendtime,jdbcType=TIMESTAMP}, #{viewnum,jdbcType=INTEGER}, #{likenum,jdbcType=INTEGER}, 
+      #{newstypeid,jdbcType=INTEGER}, #{anonymousstate,jdbcType=BIT}, #{topstate,jdbcType=BIT}, 
+      #{hotstate,jdbcType=BIT}, #{examinestate,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.szuer.publicboard.model.NewsInfo" >
     insert into news_info
@@ -144,9 +150,6 @@
       </if>
       <if test="userid != null" >
         userID,
-      </if>
-      <if test="newstype != null" >
-        newsType,
       </if>
       <if test="newstitle != null" >
         newsTitle,
@@ -160,6 +163,21 @@
       <if test="likenum != null" >
         likeNum,
       </if>
+      <if test="newstypeid != null" >
+        newsTypeID,
+      </if>
+      <if test="anonymousstate != null" >
+        anonymousState,
+      </if>
+      <if test="topstate != null" >
+        topState,
+      </if>
+      <if test="hotstate != null" >
+        hotState,
+      </if>
+      <if test="examinestate != null" >
+        examineState,
+      </if>
       <if test="content != null" >
         content,
       </if>
@@ -170,9 +188,6 @@
       </if>
       <if test="userid != null" >
         #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="newstype != null" >
-        #{newstype,jdbcType=INTEGER},
       </if>
       <if test="newstitle != null" >
         #{newstitle,jdbcType=VARCHAR},
@@ -185,6 +200,21 @@
       </if>
       <if test="likenum != null" >
         #{likenum,jdbcType=INTEGER},
+      </if>
+      <if test="newstypeid != null" >
+        #{newstypeid,jdbcType=INTEGER},
+      </if>
+      <if test="anonymousstate != null" >
+        #{anonymousstate,jdbcType=BIT},
+      </if>
+      <if test="topstate != null" >
+        #{topstate,jdbcType=BIT},
+      </if>
+      <if test="hotstate != null" >
+        #{hotstate,jdbcType=BIT},
+      </if>
+      <if test="examinestate != null" >
+        #{examinestate,jdbcType=BIT},
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
@@ -206,9 +236,6 @@
       <if test="record.userid != null" >
         userID = #{record.userid,jdbcType=INTEGER},
       </if>
-      <if test="record.newstype != null" >
-        newsType = #{record.newstype,jdbcType=INTEGER},
-      </if>
       <if test="record.newstitle != null" >
         newsTitle = #{record.newstitle,jdbcType=VARCHAR},
       </if>
@@ -220,6 +247,21 @@
       </if>
       <if test="record.likenum != null" >
         likeNum = #{record.likenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.newstypeid != null" >
+        newsTypeID = #{record.newstypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.anonymousstate != null" >
+        anonymousState = #{record.anonymousstate,jdbcType=BIT},
+      </if>
+      <if test="record.topstate != null" >
+        topState = #{record.topstate,jdbcType=BIT},
+      </if>
+      <if test="record.hotstate != null" >
+        hotState = #{record.hotstate,jdbcType=BIT},
+      </if>
+      <if test="record.examinestate != null" >
+        examineState = #{record.examinestate,jdbcType=BIT},
       </if>
       <if test="record.content != null" >
         content = #{record.content,jdbcType=LONGVARCHAR},
@@ -233,11 +275,15 @@
     update news_info
     set newsID = #{record.newsid,jdbcType=INTEGER},
       userID = #{record.userid,jdbcType=INTEGER},
-      newsType = #{record.newstype,jdbcType=INTEGER},
       newsTitle = #{record.newstitle,jdbcType=VARCHAR},
       sendTime = #{record.sendtime,jdbcType=TIMESTAMP},
       viewNum = #{record.viewnum,jdbcType=INTEGER},
       likeNum = #{record.likenum,jdbcType=INTEGER},
+      newsTypeID = #{record.newstypeid,jdbcType=INTEGER},
+      anonymousState = #{record.anonymousstate,jdbcType=BIT},
+      topState = #{record.topstate,jdbcType=BIT},
+      hotState = #{record.hotstate,jdbcType=BIT},
+      examineState = #{record.examinestate,jdbcType=BIT},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -247,11 +293,15 @@
     update news_info
     set newsID = #{record.newsid,jdbcType=INTEGER},
       userID = #{record.userid,jdbcType=INTEGER},
-      newsType = #{record.newstype,jdbcType=INTEGER},
       newsTitle = #{record.newstitle,jdbcType=VARCHAR},
       sendTime = #{record.sendtime,jdbcType=TIMESTAMP},
       viewNum = #{record.viewnum,jdbcType=INTEGER},
-      likeNum = #{record.likenum,jdbcType=INTEGER}
+      likeNum = #{record.likenum,jdbcType=INTEGER},
+      newsTypeID = #{record.newstypeid,jdbcType=INTEGER},
+      anonymousState = #{record.anonymousstate,jdbcType=BIT},
+      topState = #{record.topstate,jdbcType=BIT},
+      hotState = #{record.hotstate,jdbcType=BIT},
+      examineState = #{record.examinestate,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -261,9 +311,6 @@
     <set >
       <if test="userid != null" >
         userID = #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="newstype != null" >
-        newsType = #{newstype,jdbcType=INTEGER},
       </if>
       <if test="newstitle != null" >
         newsTitle = #{newstitle,jdbcType=VARCHAR},
@@ -277,6 +324,21 @@
       <if test="likenum != null" >
         likeNum = #{likenum,jdbcType=INTEGER},
       </if>
+      <if test="newstypeid != null" >
+        newsTypeID = #{newstypeid,jdbcType=INTEGER},
+      </if>
+      <if test="anonymousstate != null" >
+        anonymousState = #{anonymousstate,jdbcType=BIT},
+      </if>
+      <if test="topstate != null" >
+        topState = #{topstate,jdbcType=BIT},
+      </if>
+      <if test="hotstate != null" >
+        hotState = #{hotstate,jdbcType=BIT},
+      </if>
+      <if test="examinestate != null" >
+        examineState = #{examinestate,jdbcType=BIT},
+      </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -286,22 +348,30 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.szuer.publicboard.model.NewsInfo" >
     update news_info
     set userID = #{userid,jdbcType=INTEGER},
-      newsType = #{newstype,jdbcType=INTEGER},
       newsTitle = #{newstitle,jdbcType=VARCHAR},
       sendTime = #{sendtime,jdbcType=TIMESTAMP},
       viewNum = #{viewnum,jdbcType=INTEGER},
       likeNum = #{likenum,jdbcType=INTEGER},
+      newsTypeID = #{newstypeid,jdbcType=INTEGER},
+      anonymousState = #{anonymousstate,jdbcType=BIT},
+      topState = #{topstate,jdbcType=BIT},
+      hotState = #{hotstate,jdbcType=BIT},
+      examineState = #{examinestate,jdbcType=BIT},
       content = #{content,jdbcType=LONGVARCHAR}
     where newsID = #{newsid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.szuer.publicboard.model.NewsInfo" >
     update news_info
     set userID = #{userid,jdbcType=INTEGER},
-      newsType = #{newstype,jdbcType=INTEGER},
       newsTitle = #{newstitle,jdbcType=VARCHAR},
       sendTime = #{sendtime,jdbcType=TIMESTAMP},
       viewNum = #{viewnum,jdbcType=INTEGER},
-      likeNum = #{likenum,jdbcType=INTEGER}
+      likeNum = #{likenum,jdbcType=INTEGER},
+      newsTypeID = #{newstypeid,jdbcType=INTEGER},
+      anonymousState = #{anonymousstate,jdbcType=BIT},
+      topState = #{topstate,jdbcType=BIT},
+      hotState = #{hotstate,jdbcType=BIT},
+      examineState = #{examinestate,jdbcType=BIT}
     where newsID = #{newsid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -2,7 +2,6 @@ package cn.szuer.publicboard.mapper;
 
 import cn.szuer.publicboard.model.SubjectComment;
 import cn.szuer.publicboard.model.SubjectCommentExample;
-import cn.szuer.publicboard.model.SubjectCommentKey;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,7 +10,7 @@ public interface SubjectCommentMapper {
 
     int deleteByExample(SubjectCommentExample example);
 
-    int deleteByPrimaryKey(SubjectCommentKey key);
+    int deleteByPrimaryKey(Integer commentid);
 
     int insert(SubjectComment record);
 
@@ -21,7 +20,7 @@ public interface SubjectCommentMapper {
 
     List<SubjectComment> selectByExample(SubjectCommentExample example);
 
-    SubjectComment selectByPrimaryKey(SubjectCommentKey key);
+    SubjectComment selectByPrimaryKey(Integer commentid);
 
     int updateByExampleSelective(@Param("record") SubjectComment record, @Param("example") SubjectCommentExample example);
 

@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.szuer.publicboard.model.SubjectType" >
     <id column="subjectTypeID" property="subjecttypeid" jdbcType="INTEGER" />
     <result column="typeName" property="typename" jdbcType="VARCHAR" />
-    <result column="typeState" property="typestate" jdbcType="TINYINT" />
+    <result column="typeState" property="typestate" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -100,7 +100,7 @@
   <insert id="insert" parameterType="cn.szuer.publicboard.model.SubjectType" >
     insert into subject_type (subjectTypeID, typeName, typeState
       )
-    values (#{subjecttypeid,jdbcType=INTEGER}, #{typename,jdbcType=VARCHAR}, #{typestate,jdbcType=TINYINT}
+    values (#{subjecttypeid,jdbcType=INTEGER}, #{typename,jdbcType=VARCHAR}, #{typestate,jdbcType=BIT}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.szuer.publicboard.model.SubjectType" >
@@ -124,7 +124,7 @@
         #{typename,jdbcType=VARCHAR},
       </if>
       <if test="typestate != null" >
-        #{typestate,jdbcType=TINYINT},
+        #{typestate,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -144,7 +144,7 @@
         typeName = #{record.typename,jdbcType=VARCHAR},
       </if>
       <if test="record.typestate != null" >
-        typeState = #{record.typestate,jdbcType=TINYINT},
+        typeState = #{record.typestate,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -155,7 +155,7 @@
     update subject_type
     set subjectTypeID = #{record.subjecttypeid,jdbcType=INTEGER},
       typeName = #{record.typename,jdbcType=VARCHAR},
-      typeState = #{record.typestate,jdbcType=TINYINT}
+      typeState = #{record.typestate,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -167,7 +167,7 @@
         typeName = #{typename,jdbcType=VARCHAR},
       </if>
       <if test="typestate != null" >
-        typeState = #{typestate,jdbcType=TINYINT},
+        typeState = #{typestate,jdbcType=BIT},
       </if>
     </set>
     where subjectTypeID = #{subjecttypeid,jdbcType=INTEGER}
@@ -175,7 +175,7 @@
   <update id="updateByPrimaryKey" parameterType="cn.szuer.publicboard.model.SubjectType" >
     update subject_type
     set typeName = #{typename,jdbcType=VARCHAR},
-      typeState = #{typestate,jdbcType=TINYINT}
+      typeState = #{typestate,jdbcType=BIT}
     where subjectTypeID = #{subjecttypeid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -5,13 +5,12 @@
     <id column="userID" property="userid" jdbcType="INTEGER" />
     <result column="userName" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="anonymousState" property="anonymousstate" jdbcType="TINYINT" />
-    <result column="banState" property="banstate" jdbcType="TINYINT" />
-    <result column="userType" property="usertype" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="headImage" property="headimage" jdbcType="CHAR" />
+    <result column="anonymousMode" property="anonymousmode" jdbcType="BIT" />
+    <result column="banState" property="banstate" jdbcType="BIT" />
+    <result column="typeID" property="typeid" jdbcType="INTEGER" />
     <result column="loginTime" property="logintime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="cn.szuer.publicboard.model.UserInfo" extends="BaseResultMap" >
-    <result column="headImage" property="headimage" jdbcType="LONGVARBINARY" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,29 +71,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    userID, userName, password, anonymousState, banState, userType, loginTime
-  </sql>
-  <sql id="Blob_Column_List" >
-    headImage
+    userID, userName, password, email, headImage, anonymousMode, banState, typeID, loginTime
   </sql>
   <select id="selectAll" resultMap="BaseResultMap">
     select * from user_info 
-  </select>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.szuer.publicboard.model.UserInfoExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from user_info
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
   </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.szuer.publicboard.model.UserInfoExample" >
     select
@@ -110,11 +90,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from user_info
     where userID = #{userid,jdbcType=INTEGER}
   </select>
@@ -130,11 +108,13 @@
   </delete>
   <insert id="insert" parameterType="cn.szuer.publicboard.model.UserInfo" >
     insert into user_info (userID, userName, password, 
-      anonymousState, banState, userType, 
-      loginTime, headImage)
+      email, headImage, anonymousMode, 
+      banState, typeID, loginTime
+      )
     values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{anonymousstate,jdbcType=TINYINT}, #{banstate,jdbcType=TINYINT}, #{usertype,jdbcType=INTEGER}, 
-      #{logintime,jdbcType=TIMESTAMP}, #{headimage,jdbcType=LONGVARBINARY})
+      #{email,jdbcType=VARCHAR}, #{headimage,jdbcType=CHAR}, #{anonymousmode,jdbcType=BIT}, 
+      #{banstate,jdbcType=BIT}, #{typeid,jdbcType=INTEGER}, #{logintime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.szuer.publicboard.model.UserInfo" >
     insert into user_info
@@ -148,20 +128,23 @@
       <if test="password != null" >
         password,
       </if>
-      <if test="anonymousstate != null" >
-        anonymousState,
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="headimage != null" >
+        headImage,
+      </if>
+      <if test="anonymousmode != null" >
+        anonymousMode,
       </if>
       <if test="banstate != null" >
         banState,
       </if>
-      <if test="usertype != null" >
-        userType,
+      <if test="typeid != null" >
+        typeID,
       </if>
       <if test="logintime != null" >
         loginTime,
-      </if>
-      <if test="headimage != null" >
-        headImage,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -174,20 +157,23 @@
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="anonymousstate != null" >
-        #{anonymousstate,jdbcType=TINYINT},
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="headimage != null" >
+        #{headimage,jdbcType=CHAR},
+      </if>
+      <if test="anonymousmode != null" >
+        #{anonymousmode,jdbcType=BIT},
       </if>
       <if test="banstate != null" >
-        #{banstate,jdbcType=TINYINT},
+        #{banstate,jdbcType=BIT},
       </if>
-      <if test="usertype != null" >
-        #{usertype,jdbcType=INTEGER},
+      <if test="typeid != null" >
+        #{typeid,jdbcType=INTEGER},
       </if>
       <if test="logintime != null" >
         #{logintime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="headimage != null" >
-        #{headimage,jdbcType=LONGVARBINARY},
       </if>
     </trim>
   </insert>
@@ -209,36 +195,25 @@
       <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.anonymousstate != null" >
-        anonymousState = #{record.anonymousstate,jdbcType=TINYINT},
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headimage != null" >
+        headImage = #{record.headimage,jdbcType=CHAR},
+      </if>
+      <if test="record.anonymousmode != null" >
+        anonymousMode = #{record.anonymousmode,jdbcType=BIT},
       </if>
       <if test="record.banstate != null" >
-        banState = #{record.banstate,jdbcType=TINYINT},
+        banState = #{record.banstate,jdbcType=BIT},
       </if>
-      <if test="record.usertype != null" >
-        userType = #{record.usertype,jdbcType=INTEGER},
+      <if test="record.typeid != null" >
+        typeID = #{record.typeid,jdbcType=INTEGER},
       </if>
       <if test="record.logintime != null" >
         loginTime = #{record.logintime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.headimage != null" >
-        headImage = #{record.headimage,jdbcType=LONGVARBINARY},
-      </if>
     </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update user_info
-    set userID = #{record.userid,jdbcType=INTEGER},
-      userName = #{record.username,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      anonymousState = #{record.anonymousstate,jdbcType=TINYINT},
-      banState = #{record.banstate,jdbcType=TINYINT},
-      userType = #{record.usertype,jdbcType=INTEGER},
-      loginTime = #{record.logintime,jdbcType=TIMESTAMP},
-      headImage = #{record.headimage,jdbcType=LONGVARBINARY}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -248,9 +223,11 @@
     set userID = #{record.userid,jdbcType=INTEGER},
       userName = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      anonymousState = #{record.anonymousstate,jdbcType=TINYINT},
-      banState = #{record.banstate,jdbcType=TINYINT},
-      userType = #{record.usertype,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR},
+      headImage = #{record.headimage,jdbcType=CHAR},
+      anonymousMode = #{record.anonymousmode,jdbcType=BIT},
+      banState = #{record.banstate,jdbcType=BIT},
+      typeID = #{record.typeid,jdbcType=INTEGER},
       loginTime = #{record.logintime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -265,42 +242,36 @@
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="anonymousstate != null" >
-        anonymousState = #{anonymousstate,jdbcType=TINYINT},
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="headimage != null" >
+        headImage = #{headimage,jdbcType=CHAR},
+      </if>
+      <if test="anonymousmode != null" >
+        anonymousMode = #{anonymousmode,jdbcType=BIT},
       </if>
       <if test="banstate != null" >
-        banState = #{banstate,jdbcType=TINYINT},
+        banState = #{banstate,jdbcType=BIT},
       </if>
-      <if test="usertype != null" >
-        userType = #{usertype,jdbcType=INTEGER},
+      <if test="typeid != null" >
+        typeID = #{typeid,jdbcType=INTEGER},
       </if>
       <if test="logintime != null" >
         loginTime = #{logintime,jdbcType=TIMESTAMP},
       </if>
-      <if test="headimage != null" >
-        headImage = #{headimage,jdbcType=LONGVARBINARY},
-      </if>
     </set>
-    where userID = #{userid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.szuer.publicboard.model.UserInfo" >
-    update user_info
-    set userName = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      anonymousState = #{anonymousstate,jdbcType=TINYINT},
-      banState = #{banstate,jdbcType=TINYINT},
-      userType = #{usertype,jdbcType=INTEGER},
-      loginTime = #{logintime,jdbcType=TIMESTAMP},
-      headImage = #{headimage,jdbcType=LONGVARBINARY}
     where userID = #{userid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.szuer.publicboard.model.UserInfo" >
     update user_info
     set userName = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      anonymousState = #{anonymousstate,jdbcType=TINYINT},
-      banState = #{banstate,jdbcType=TINYINT},
-      userType = #{usertype,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      headImage = #{headimage,jdbcType=CHAR},
+      anonymousMode = #{anonymousmode,jdbcType=BIT},
+      banState = #{banstate,jdbcType=BIT},
+      typeID = #{typeid,jdbcType=INTEGER},
       loginTime = #{logintime,jdbcType=TIMESTAMP}
     where userID = #{userid,jdbcType=INTEGER}
   </update>

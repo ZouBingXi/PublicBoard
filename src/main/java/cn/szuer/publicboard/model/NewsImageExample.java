@@ -3,14 +3,14 @@ package cn.szuer.publicboard.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsTypeExample {
+public class NewsImageExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public NewsTypeExample() {
+    public NewsImageExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,193 +104,133 @@ public class NewsTypeExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andNewstypeidIsNull() {
-            addCriterion("newsTypeID is null");
+        public Criteria andImageuuidIsNull() {
+            addCriterion("imageUUID is null");
             return (Criteria) this;
         }
 
-        public Criteria andNewstypeidIsNotNull() {
-            addCriterion("newsTypeID is not null");
+        public Criteria andImageuuidIsNotNull() {
+            addCriterion("imageUUID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNewstypeidEqualTo(Integer value) {
-            addCriterion("newsTypeID =", value, "newstypeid");
+        public Criteria andImageuuidEqualTo(String value) {
+            addCriterion("imageUUID =", value, "imageuuid");
             return (Criteria) this;
         }
 
-        public Criteria andNewstypeidNotEqualTo(Integer value) {
-            addCriterion("newsTypeID <>", value, "newstypeid");
+        public Criteria andImageuuidNotEqualTo(String value) {
+            addCriterion("imageUUID <>", value, "imageuuid");
             return (Criteria) this;
         }
 
-        public Criteria andNewstypeidGreaterThan(Integer value) {
-            addCriterion("newsTypeID >", value, "newstypeid");
+        public Criteria andImageuuidGreaterThan(String value) {
+            addCriterion("imageUUID >", value, "imageuuid");
             return (Criteria) this;
         }
 
-        public Criteria andNewstypeidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("newsTypeID >=", value, "newstypeid");
+        public Criteria andImageuuidGreaterThanOrEqualTo(String value) {
+            addCriterion("imageUUID >=", value, "imageuuid");
             return (Criteria) this;
         }
 
-        public Criteria andNewstypeidLessThan(Integer value) {
-            addCriterion("newsTypeID <", value, "newstypeid");
+        public Criteria andImageuuidLessThan(String value) {
+            addCriterion("imageUUID <", value, "imageuuid");
             return (Criteria) this;
         }
 
-        public Criteria andNewstypeidLessThanOrEqualTo(Integer value) {
-            addCriterion("newsTypeID <=", value, "newstypeid");
+        public Criteria andImageuuidLessThanOrEqualTo(String value) {
+            addCriterion("imageUUID <=", value, "imageuuid");
             return (Criteria) this;
         }
 
-        public Criteria andNewstypeidIn(List<Integer> values) {
-            addCriterion("newsTypeID in", values, "newstypeid");
+        public Criteria andImageuuidLike(String value) {
+            addCriterion("imageUUID like", value, "imageuuid");
             return (Criteria) this;
         }
 
-        public Criteria andNewstypeidNotIn(List<Integer> values) {
-            addCriterion("newsTypeID not in", values, "newstypeid");
+        public Criteria andImageuuidNotLike(String value) {
+            addCriterion("imageUUID not like", value, "imageuuid");
             return (Criteria) this;
         }
 
-        public Criteria andNewstypeidBetween(Integer value1, Integer value2) {
-            addCriterion("newsTypeID between", value1, value2, "newstypeid");
+        public Criteria andImageuuidIn(List<String> values) {
+            addCriterion("imageUUID in", values, "imageuuid");
             return (Criteria) this;
         }
 
-        public Criteria andNewstypeidNotBetween(Integer value1, Integer value2) {
-            addCriterion("newsTypeID not between", value1, value2, "newstypeid");
+        public Criteria andImageuuidNotIn(List<String> values) {
+            addCriterion("imageUUID not in", values, "imageuuid");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameIsNull() {
-            addCriterion("typeName is null");
+        public Criteria andImageuuidBetween(String value1, String value2) {
+            addCriterion("imageUUID between", value1, value2, "imageuuid");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameIsNotNull() {
-            addCriterion("typeName is not null");
+        public Criteria andImageuuidNotBetween(String value1, String value2) {
+            addCriterion("imageUUID not between", value1, value2, "imageuuid");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameEqualTo(String value) {
-            addCriterion("typeName =", value, "typename");
+        public Criteria andNewsidIsNull() {
+            addCriterion("newsID is null");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameNotEqualTo(String value) {
-            addCriterion("typeName <>", value, "typename");
+        public Criteria andNewsidIsNotNull() {
+            addCriterion("newsID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameGreaterThan(String value) {
-            addCriterion("typeName >", value, "typename");
+        public Criteria andNewsidEqualTo(Integer value) {
+            addCriterion("newsID =", value, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameGreaterThanOrEqualTo(String value) {
-            addCriterion("typeName >=", value, "typename");
+        public Criteria andNewsidNotEqualTo(Integer value) {
+            addCriterion("newsID <>", value, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameLessThan(String value) {
-            addCriterion("typeName <", value, "typename");
+        public Criteria andNewsidGreaterThan(Integer value) {
+            addCriterion("newsID >", value, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameLessThanOrEqualTo(String value) {
-            addCriterion("typeName <=", value, "typename");
+        public Criteria andNewsidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("newsID >=", value, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameLike(String value) {
-            addCriterion("typeName like", value, "typename");
+        public Criteria andNewsidLessThan(Integer value) {
+            addCriterion("newsID <", value, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameNotLike(String value) {
-            addCriterion("typeName not like", value, "typename");
+        public Criteria andNewsidLessThanOrEqualTo(Integer value) {
+            addCriterion("newsID <=", value, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameIn(List<String> values) {
-            addCriterion("typeName in", values, "typename");
+        public Criteria andNewsidIn(List<Integer> values) {
+            addCriterion("newsID in", values, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameNotIn(List<String> values) {
-            addCriterion("typeName not in", values, "typename");
+        public Criteria andNewsidNotIn(List<Integer> values) {
+            addCriterion("newsID not in", values, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameBetween(String value1, String value2) {
-            addCriterion("typeName between", value1, value2, "typename");
+        public Criteria andNewsidBetween(Integer value1, Integer value2) {
+            addCriterion("newsID between", value1, value2, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andTypenameNotBetween(String value1, String value2) {
-            addCriterion("typeName not between", value1, value2, "typename");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypestateIsNull() {
-            addCriterion("typeState is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypestateIsNotNull() {
-            addCriterion("typeState is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypestateEqualTo(Boolean value) {
-            addCriterion("typeState =", value, "typestate");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypestateNotEqualTo(Boolean value) {
-            addCriterion("typeState <>", value, "typestate");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypestateGreaterThan(Boolean value) {
-            addCriterion("typeState >", value, "typestate");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypestateGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("typeState >=", value, "typestate");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypestateLessThan(Boolean value) {
-            addCriterion("typeState <", value, "typestate");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypestateLessThanOrEqualTo(Boolean value) {
-            addCriterion("typeState <=", value, "typestate");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypestateIn(List<Boolean> values) {
-            addCriterion("typeState in", values, "typestate");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypestateNotIn(List<Boolean> values) {
-            addCriterion("typeState not in", values, "typestate");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypestateBetween(Boolean value1, Boolean value2) {
-            addCriterion("typeState between", value1, value2, "typestate");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypestateNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("typeState not between", value1, value2, "typestate");
+        public Criteria andNewsidNotBetween(Integer value1, Integer value2) {
+            addCriterion("newsID not between", value1, value2, "newsid");
             return (Criteria) this;
         }
     }

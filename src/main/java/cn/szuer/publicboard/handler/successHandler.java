@@ -35,13 +35,16 @@ public class successHandler implements AuthenticationSuccessHandler
     {
         //设置返回类型
         response.setCharacterEncoding("utf-8");
-        response.setContentType("applicationjson");
+        response.setContentType("application/json");//斜杆注意不能漏
         PrintWriter out=response.getWriter();
 
         //获取用户信息
         BaseResponse<UserDto> baseResponse=new BaseResponse(200,"登录成功");
         User user=(User)authentication.getPrincipal();
         UserInfo userInfo=userInfoMapper.selectByPrimaryKey(Integer.parseInt(user.getUsername()));
+
+        System.out.println("=======================================================");
+        System.out.println(userInfo.toString());
 
         //将UserInfo转为UserDto写入返回类中
         if (userInfo!=null)

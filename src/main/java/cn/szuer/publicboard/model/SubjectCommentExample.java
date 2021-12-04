@@ -165,66 +165,6 @@ public class SubjectCommentExample {
             return (Criteria) this;
         }
 
-        public Criteria andLayeridIsNull() {
-            addCriterion("layerID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayeridIsNotNull() {
-            addCriterion("layerID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayeridEqualTo(Integer value) {
-            addCriterion("layerID =", value, "layerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayeridNotEqualTo(Integer value) {
-            addCriterion("layerID <>", value, "layerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayeridGreaterThan(Integer value) {
-            addCriterion("layerID >", value, "layerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayeridGreaterThanOrEqualTo(Integer value) {
-            addCriterion("layerID >=", value, "layerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayeridLessThan(Integer value) {
-            addCriterion("layerID <", value, "layerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayeridLessThanOrEqualTo(Integer value) {
-            addCriterion("layerID <=", value, "layerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayeridIn(List<Integer> values) {
-            addCriterion("layerID in", values, "layerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayeridNotIn(List<Integer> values) {
-            addCriterion("layerID not in", values, "layerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayeridBetween(Integer value1, Integer value2) {
-            addCriterion("layerID between", value1, value2, "layerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayeridNotBetween(Integer value1, Integer value2) {
-            addCriterion("layerID not between", value1, value2, "layerid");
-            return (Criteria) this;
-        }
-
         public Criteria andSubjectidIsNull() {
             addCriterion("subjectID is null");
             return (Criteria) this;
@@ -462,6 +402,66 @@ public class SubjectCommentExample {
 
         public Criteria andLikenumNotBetween(Integer value1, Integer value2) {
             addCriterion("likeNum not between", value1, value2, "likenum");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateIsNull() {
+            addCriterion("anonymousState is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateIsNotNull() {
+            addCriterion("anonymousState is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateEqualTo(Boolean value) {
+            addCriterion("anonymousState =", value, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateNotEqualTo(Boolean value) {
+            addCriterion("anonymousState <>", value, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateGreaterThan(Boolean value) {
+            addCriterion("anonymousState >", value, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("anonymousState >=", value, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateLessThan(Boolean value) {
+            addCriterion("anonymousState <", value, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateLessThanOrEqualTo(Boolean value) {
+            addCriterion("anonymousState <=", value, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateIn(List<Boolean> values) {
+            addCriterion("anonymousState in", values, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateNotIn(List<Boolean> values) {
+            addCriterion("anonymousState not in", values, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateBetween(Boolean value1, Boolean value2) {
+            addCriterion("anonymousState between", value1, value2, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("anonymousState not between", value1, value2, "anonymousstate");
             return (Criteria) this;
         }
     }

@@ -1,7 +1,7 @@
 spring:
   datasource:
     druid:
-        url: jdbc:mysql://120.78.10.173:3306/publicboard
+        url: jdbc:mysql://120.78.10.173:3306/publicboardold
         driver-class-name: com.mysql.cj.jdbc.Driver
         username: root
         password: root

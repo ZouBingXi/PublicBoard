@@ -244,52 +244,52 @@ public class SubjectTypeExample {
             return (Criteria) this;
         }
 
-        public Criteria andTypestateEqualTo(Byte value) {
+        public Criteria andTypestateEqualTo(Boolean value) {
             addCriterion("typeState =", value, "typestate");
             return (Criteria) this;
         }
 
-        public Criteria andTypestateNotEqualTo(Byte value) {
+        public Criteria andTypestateNotEqualTo(Boolean value) {
             addCriterion("typeState <>", value, "typestate");
             return (Criteria) this;
         }
 
-        public Criteria andTypestateGreaterThan(Byte value) {
+        public Criteria andTypestateGreaterThan(Boolean value) {
             addCriterion("typeState >", value, "typestate");
             return (Criteria) this;
         }
 
-        public Criteria andTypestateGreaterThanOrEqualTo(Byte value) {
+        public Criteria andTypestateGreaterThanOrEqualTo(Boolean value) {
             addCriterion("typeState >=", value, "typestate");
             return (Criteria) this;
         }
 
-        public Criteria andTypestateLessThan(Byte value) {
+        public Criteria andTypestateLessThan(Boolean value) {
             addCriterion("typeState <", value, "typestate");
             return (Criteria) this;
         }
 
-        public Criteria andTypestateLessThanOrEqualTo(Byte value) {
+        public Criteria andTypestateLessThanOrEqualTo(Boolean value) {
             addCriterion("typeState <=", value, "typestate");
             return (Criteria) this;
         }
 
-        public Criteria andTypestateIn(List<Byte> values) {
+        public Criteria andTypestateIn(List<Boolean> values) {
             addCriterion("typeState in", values, "typestate");
             return (Criteria) this;
         }
 
-        public Criteria andTypestateNotIn(List<Byte> values) {
+        public Criteria andTypestateNotIn(List<Boolean> values) {
             addCriterion("typeState not in", values, "typestate");
             return (Criteria) this;
         }
 
-        public Criteria andTypestateBetween(Byte value1, Byte value2) {
+        public Criteria andTypestateBetween(Boolean value1, Boolean value2) {
             addCriterion("typeState between", value1, value2, "typestate");
             return (Criteria) this;
         }
 
-        public Criteria andTypestateNotBetween(Byte value1, Byte value2) {
+        public Criteria andTypestateNotBetween(Boolean value1, Boolean value2) {
             addCriterion("typeState not between", value1, value2, "typestate");
             return (Criteria) this;
         }

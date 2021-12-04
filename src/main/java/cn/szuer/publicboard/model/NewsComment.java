@@ -2,7 +2,9 @@ package cn.szuer.publicboard.model;
 
 import java.util.Date;
 
-public class NewsComment extends NewsCommentKey {
+public class NewsComment {
+    private Integer commentid;
+
     private Integer newsid;
 
     private Integer userid;
@@ -11,7 +13,17 @@ public class NewsComment extends NewsCommentKey {
 
     private Integer likenum;
 
+    private Boolean anonymousstate;
+
     private String content;
+
+    public Integer getCommentid() {
+        return commentid;
+    }
+
+    public void setCommentid(Integer commentid) {
+        this.commentid = commentid;
+    }
 
     public Integer getNewsid() {
         return newsid;
@@ -43,6 +55,14 @@ public class NewsComment extends NewsCommentKey {
 
     public void setLikenum(Integer likenum) {
         this.likenum = likenum;
+    }
+
+    public Boolean getAnonymousstate() {
+        return anonymousstate;
+    }
+
+    public void setAnonymousstate(Boolean anonymousstate) {
+        this.anonymousstate = anonymousstate;
     }
 
     public String getContent() {

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class NewsCommentExample {
+public class SubjectReplyExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public NewsCommentExample() {
+    public SubjectReplyExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -105,6 +105,126 @@ public class NewsCommentExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
+        public Criteria andReplyidIsNull() {
+            addCriterion("replyID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplyidIsNotNull() {
+            addCriterion("replyID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplyidEqualTo(Integer value) {
+            addCriterion("replyID =", value, "replyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplyidNotEqualTo(Integer value) {
+            addCriterion("replyID <>", value, "replyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplyidGreaterThan(Integer value) {
+            addCriterion("replyID >", value, "replyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplyidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("replyID >=", value, "replyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplyidLessThan(Integer value) {
+            addCriterion("replyID <", value, "replyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplyidLessThanOrEqualTo(Integer value) {
+            addCriterion("replyID <=", value, "replyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplyidIn(List<Integer> values) {
+            addCriterion("replyID in", values, "replyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplyidNotIn(List<Integer> values) {
+            addCriterion("replyID not in", values, "replyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplyidBetween(Integer value1, Integer value2) {
+            addCriterion("replyID between", value1, value2, "replyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplyidNotBetween(Integer value1, Integer value2) {
+            addCriterion("replyID not between", value1, value2, "replyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTargetidIsNull() {
+            addCriterion("targetID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTargetidIsNotNull() {
+            addCriterion("targetID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTargetidEqualTo(Integer value) {
+            addCriterion("targetID =", value, "targetid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTargetidNotEqualTo(Integer value) {
+            addCriterion("targetID <>", value, "targetid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTargetidGreaterThan(Integer value) {
+            addCriterion("targetID >", value, "targetid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTargetidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("targetID >=", value, "targetid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTargetidLessThan(Integer value) {
+            addCriterion("targetID <", value, "targetid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTargetidLessThanOrEqualTo(Integer value) {
+            addCriterion("targetID <=", value, "targetid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTargetidIn(List<Integer> values) {
+            addCriterion("targetID in", values, "targetid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTargetidNotIn(List<Integer> values) {
+            addCriterion("targetID not in", values, "targetid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTargetidBetween(Integer value1, Integer value2) {
+            addCriterion("targetID between", value1, value2, "targetid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTargetidNotBetween(Integer value1, Integer value2) {
+            addCriterion("targetID not between", value1, value2, "targetid");
+            return (Criteria) this;
+        }
+
         public Criteria andCommentidIsNull() {
             addCriterion("commentID is null");
             return (Criteria) this;
@@ -162,66 +282,6 @@ public class NewsCommentExample {
 
         public Criteria andCommentidNotBetween(Integer value1, Integer value2) {
             addCriterion("commentID not between", value1, value2, "commentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewsidIsNull() {
-            addCriterion("newsID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewsidIsNotNull() {
-            addCriterion("newsID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewsidEqualTo(Integer value) {
-            addCriterion("newsID =", value, "newsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewsidNotEqualTo(Integer value) {
-            addCriterion("newsID <>", value, "newsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewsidGreaterThan(Integer value) {
-            addCriterion("newsID >", value, "newsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewsidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("newsID >=", value, "newsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewsidLessThan(Integer value) {
-            addCriterion("newsID <", value, "newsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewsidLessThanOrEqualTo(Integer value) {
-            addCriterion("newsID <=", value, "newsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewsidIn(List<Integer> values) {
-            addCriterion("newsID in", values, "newsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewsidNotIn(List<Integer> values) {
-            addCriterion("newsID not in", values, "newsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewsidBetween(Integer value1, Integer value2) {
-            addCriterion("newsID between", value1, value2, "newsid");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewsidNotBetween(Integer value1, Integer value2) {
-            addCriterion("newsID not between", value1, value2, "newsid");
             return (Criteria) this;
         }
 

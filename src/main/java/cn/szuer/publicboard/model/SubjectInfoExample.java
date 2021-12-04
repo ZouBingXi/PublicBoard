@@ -225,66 +225,6 @@ public class SubjectInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andSubjecttypeIsNull() {
-            addCriterion("subjectType is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjecttypeIsNotNull() {
-            addCriterion("subjectType is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjecttypeEqualTo(Integer value) {
-            addCriterion("subjectType =", value, "subjecttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjecttypeNotEqualTo(Integer value) {
-            addCriterion("subjectType <>", value, "subjecttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjecttypeGreaterThan(Integer value) {
-            addCriterion("subjectType >", value, "subjecttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjecttypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("subjectType >=", value, "subjecttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjecttypeLessThan(Integer value) {
-            addCriterion("subjectType <", value, "subjecttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjecttypeLessThanOrEqualTo(Integer value) {
-            addCriterion("subjectType <=", value, "subjecttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjecttypeIn(List<Integer> values) {
-            addCriterion("subjectType in", values, "subjecttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjecttypeNotIn(List<Integer> values) {
-            addCriterion("subjectType not in", values, "subjecttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjecttypeBetween(Integer value1, Integer value2) {
-            addCriterion("subjectType between", value1, value2, "subjecttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjecttypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("subjectType not between", value1, value2, "subjecttype");
-            return (Criteria) this;
-        }
-
         public Criteria andSubjecttitleIsNull() {
             addCriterion("subjectTitle is null");
             return (Criteria) this;
@@ -532,6 +472,306 @@ public class SubjectInfoExample {
 
         public Criteria andLikenumNotBetween(Integer value1, Integer value2) {
             addCriterion("likeNum not between", value1, value2, "likenum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjecttypeidIsNull() {
+            addCriterion("subjectTypeID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjecttypeidIsNotNull() {
+            addCriterion("subjectTypeID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjecttypeidEqualTo(Integer value) {
+            addCriterion("subjectTypeID =", value, "subjecttypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjecttypeidNotEqualTo(Integer value) {
+            addCriterion("subjectTypeID <>", value, "subjecttypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjecttypeidGreaterThan(Integer value) {
+            addCriterion("subjectTypeID >", value, "subjecttypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjecttypeidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("subjectTypeID >=", value, "subjecttypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjecttypeidLessThan(Integer value) {
+            addCriterion("subjectTypeID <", value, "subjecttypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjecttypeidLessThanOrEqualTo(Integer value) {
+            addCriterion("subjectTypeID <=", value, "subjecttypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjecttypeidIn(List<Integer> values) {
+            addCriterion("subjectTypeID in", values, "subjecttypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjecttypeidNotIn(List<Integer> values) {
+            addCriterion("subjectTypeID not in", values, "subjecttypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjecttypeidBetween(Integer value1, Integer value2) {
+            addCriterion("subjectTypeID between", value1, value2, "subjecttypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjecttypeidNotBetween(Integer value1, Integer value2) {
+            addCriterion("subjectTypeID not between", value1, value2, "subjecttypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateIsNull() {
+            addCriterion("anonymousState is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateIsNotNull() {
+            addCriterion("anonymousState is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateEqualTo(Boolean value) {
+            addCriterion("anonymousState =", value, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateNotEqualTo(Boolean value) {
+            addCriterion("anonymousState <>", value, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateGreaterThan(Boolean value) {
+            addCriterion("anonymousState >", value, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("anonymousState >=", value, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateLessThan(Boolean value) {
+            addCriterion("anonymousState <", value, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateLessThanOrEqualTo(Boolean value) {
+            addCriterion("anonymousState <=", value, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateIn(List<Boolean> values) {
+            addCriterion("anonymousState in", values, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateNotIn(List<Boolean> values) {
+            addCriterion("anonymousState not in", values, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateBetween(Boolean value1, Boolean value2) {
+            addCriterion("anonymousState between", value1, value2, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousstateNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("anonymousState not between", value1, value2, "anonymousstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopstateIsNull() {
+            addCriterion("topState is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopstateIsNotNull() {
+            addCriterion("topState is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopstateEqualTo(Boolean value) {
+            addCriterion("topState =", value, "topstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopstateNotEqualTo(Boolean value) {
+            addCriterion("topState <>", value, "topstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopstateGreaterThan(Boolean value) {
+            addCriterion("topState >", value, "topstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopstateGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("topState >=", value, "topstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopstateLessThan(Boolean value) {
+            addCriterion("topState <", value, "topstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopstateLessThanOrEqualTo(Boolean value) {
+            addCriterion("topState <=", value, "topstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopstateIn(List<Boolean> values) {
+            addCriterion("topState in", values, "topstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopstateNotIn(List<Boolean> values) {
+            addCriterion("topState not in", values, "topstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopstateBetween(Boolean value1, Boolean value2) {
+            addCriterion("topState between", value1, value2, "topstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopstateNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("topState not between", value1, value2, "topstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotstateIsNull() {
+            addCriterion("hotState is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotstateIsNotNull() {
+            addCriterion("hotState is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotstateEqualTo(Boolean value) {
+            addCriterion("hotState =", value, "hotstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotstateNotEqualTo(Boolean value) {
+            addCriterion("hotState <>", value, "hotstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotstateGreaterThan(Boolean value) {
+            addCriterion("hotState >", value, "hotstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotstateGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("hotState >=", value, "hotstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotstateLessThan(Boolean value) {
+            addCriterion("hotState <", value, "hotstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotstateLessThanOrEqualTo(Boolean value) {
+            addCriterion("hotState <=", value, "hotstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotstateIn(List<Boolean> values) {
+            addCriterion("hotState in", values, "hotstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotstateNotIn(List<Boolean> values) {
+            addCriterion("hotState not in", values, "hotstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotstateBetween(Boolean value1, Boolean value2) {
+            addCriterion("hotState between", value1, value2, "hotstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotstateNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("hotState not between", value1, value2, "hotstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminestateIsNull() {
+            addCriterion("examineState is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminestateIsNotNull() {
+            addCriterion("examineState is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminestateEqualTo(Boolean value) {
+            addCriterion("examineState =", value, "examinestate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminestateNotEqualTo(Boolean value) {
+            addCriterion("examineState <>", value, "examinestate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminestateGreaterThan(Boolean value) {
+            addCriterion("examineState >", value, "examinestate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminestateGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("examineState >=", value, "examinestate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminestateLessThan(Boolean value) {
+            addCriterion("examineState <", value, "examinestate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminestateLessThanOrEqualTo(Boolean value) {
+            addCriterion("examineState <=", value, "examinestate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminestateIn(List<Boolean> values) {
+            addCriterion("examineState in", values, "examinestate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminestateNotIn(List<Boolean> values) {
+            addCriterion("examineState not in", values, "examinestate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminestateBetween(Boolean value1, Boolean value2) {
+            addCriterion("examineState between", value1, value2, "examinestate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminestateNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("examineState not between", value1, value2, "examinestate");
             return (Criteria) this;
         }
     }

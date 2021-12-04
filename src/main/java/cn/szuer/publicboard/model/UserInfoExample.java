@@ -305,63 +305,203 @@ public class UserInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andAnonymousstateIsNull() {
-            addCriterion("anonymousState is null");
+        public Criteria andEmailIsNull() {
+            addCriterion("email is null");
             return (Criteria) this;
         }
 
-        public Criteria andAnonymousstateIsNotNull() {
-            addCriterion("anonymousState is not null");
+        public Criteria andEmailIsNotNull() {
+            addCriterion("email is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAnonymousstateEqualTo(Byte value) {
-            addCriterion("anonymousState =", value, "anonymousstate");
+        public Criteria andEmailEqualTo(String value) {
+            addCriterion("email =", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andAnonymousstateNotEqualTo(Byte value) {
-            addCriterion("anonymousState <>", value, "anonymousstate");
+        public Criteria andEmailNotEqualTo(String value) {
+            addCriterion("email <>", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andAnonymousstateGreaterThan(Byte value) {
-            addCriterion("anonymousState >", value, "anonymousstate");
+        public Criteria andEmailGreaterThan(String value) {
+            addCriterion("email >", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andAnonymousstateGreaterThanOrEqualTo(Byte value) {
-            addCriterion("anonymousState >=", value, "anonymousstate");
+        public Criteria andEmailGreaterThanOrEqualTo(String value) {
+            addCriterion("email >=", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andAnonymousstateLessThan(Byte value) {
-            addCriterion("anonymousState <", value, "anonymousstate");
+        public Criteria andEmailLessThan(String value) {
+            addCriterion("email <", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andAnonymousstateLessThanOrEqualTo(Byte value) {
-            addCriterion("anonymousState <=", value, "anonymousstate");
+        public Criteria andEmailLessThanOrEqualTo(String value) {
+            addCriterion("email <=", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andAnonymousstateIn(List<Byte> values) {
-            addCriterion("anonymousState in", values, "anonymousstate");
+        public Criteria andEmailLike(String value) {
+            addCriterion("email like", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andAnonymousstateNotIn(List<Byte> values) {
-            addCriterion("anonymousState not in", values, "anonymousstate");
+        public Criteria andEmailNotLike(String value) {
+            addCriterion("email not like", value, "email");
             return (Criteria) this;
         }
 
-        public Criteria andAnonymousstateBetween(Byte value1, Byte value2) {
-            addCriterion("anonymousState between", value1, value2, "anonymousstate");
+        public Criteria andEmailIn(List<String> values) {
+            addCriterion("email in", values, "email");
             return (Criteria) this;
         }
 
-        public Criteria andAnonymousstateNotBetween(Byte value1, Byte value2) {
-            addCriterion("anonymousState not between", value1, value2, "anonymousstate");
+        public Criteria andEmailNotIn(List<String> values) {
+            addCriterion("email not in", values, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailBetween(String value1, String value2) {
+            addCriterion("email between", value1, value2, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotBetween(String value1, String value2) {
+            addCriterion("email not between", value1, value2, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageIsNull() {
+            addCriterion("headImage is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageIsNotNull() {
+            addCriterion("headImage is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageEqualTo(String value) {
+            addCriterion("headImage =", value, "headimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageNotEqualTo(String value) {
+            addCriterion("headImage <>", value, "headimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageGreaterThan(String value) {
+            addCriterion("headImage >", value, "headimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageGreaterThanOrEqualTo(String value) {
+            addCriterion("headImage >=", value, "headimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageLessThan(String value) {
+            addCriterion("headImage <", value, "headimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageLessThanOrEqualTo(String value) {
+            addCriterion("headImage <=", value, "headimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageLike(String value) {
+            addCriterion("headImage like", value, "headimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageNotLike(String value) {
+            addCriterion("headImage not like", value, "headimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageIn(List<String> values) {
+            addCriterion("headImage in", values, "headimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageNotIn(List<String> values) {
+            addCriterion("headImage not in", values, "headimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageBetween(String value1, String value2) {
+            addCriterion("headImage between", value1, value2, "headimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadimageNotBetween(String value1, String value2) {
+            addCriterion("headImage not between", value1, value2, "headimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousmodeIsNull() {
+            addCriterion("anonymousMode is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousmodeIsNotNull() {
+            addCriterion("anonymousMode is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousmodeEqualTo(Boolean value) {
+            addCriterion("anonymousMode =", value, "anonymousmode");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousmodeNotEqualTo(Boolean value) {
+            addCriterion("anonymousMode <>", value, "anonymousmode");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousmodeGreaterThan(Boolean value) {
+            addCriterion("anonymousMode >", value, "anonymousmode");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousmodeGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("anonymousMode >=", value, "anonymousmode");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousmodeLessThan(Boolean value) {
+            addCriterion("anonymousMode <", value, "anonymousmode");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousmodeLessThanOrEqualTo(Boolean value) {
+            addCriterion("anonymousMode <=", value, "anonymousmode");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousmodeIn(List<Boolean> values) {
+            addCriterion("anonymousMode in", values, "anonymousmode");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousmodeNotIn(List<Boolean> values) {
+            addCriterion("anonymousMode not in", values, "anonymousmode");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousmodeBetween(Boolean value1, Boolean value2) {
+            addCriterion("anonymousMode between", value1, value2, "anonymousmode");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnonymousmodeNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("anonymousMode not between", value1, value2, "anonymousmode");
             return (Criteria) this;
         }
 
@@ -375,113 +515,113 @@ public class UserInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andBanstateEqualTo(Byte value) {
+        public Criteria andBanstateEqualTo(Boolean value) {
             addCriterion("banState =", value, "banstate");
             return (Criteria) this;
         }
 
-        public Criteria andBanstateNotEqualTo(Byte value) {
+        public Criteria andBanstateNotEqualTo(Boolean value) {
             addCriterion("banState <>", value, "banstate");
             return (Criteria) this;
         }
 
-        public Criteria andBanstateGreaterThan(Byte value) {
+        public Criteria andBanstateGreaterThan(Boolean value) {
             addCriterion("banState >", value, "banstate");
             return (Criteria) this;
         }
 
-        public Criteria andBanstateGreaterThanOrEqualTo(Byte value) {
+        public Criteria andBanstateGreaterThanOrEqualTo(Boolean value) {
             addCriterion("banState >=", value, "banstate");
             return (Criteria) this;
         }
 
-        public Criteria andBanstateLessThan(Byte value) {
+        public Criteria andBanstateLessThan(Boolean value) {
             addCriterion("banState <", value, "banstate");
             return (Criteria) this;
         }
 
-        public Criteria andBanstateLessThanOrEqualTo(Byte value) {
+        public Criteria andBanstateLessThanOrEqualTo(Boolean value) {
             addCriterion("banState <=", value, "banstate");
             return (Criteria) this;
         }
 
-        public Criteria andBanstateIn(List<Byte> values) {
+        public Criteria andBanstateIn(List<Boolean> values) {
             addCriterion("banState in", values, "banstate");
             return (Criteria) this;
         }
 
-        public Criteria andBanstateNotIn(List<Byte> values) {
+        public Criteria andBanstateNotIn(List<Boolean> values) {
             addCriterion("banState not in", values, "banstate");
             return (Criteria) this;
         }
 
-        public Criteria andBanstateBetween(Byte value1, Byte value2) {
+        public Criteria andBanstateBetween(Boolean value1, Boolean value2) {
             addCriterion("banState between", value1, value2, "banstate");
             return (Criteria) this;
         }
 
-        public Criteria andBanstateNotBetween(Byte value1, Byte value2) {
+        public Criteria andBanstateNotBetween(Boolean value1, Boolean value2) {
             addCriterion("banState not between", value1, value2, "banstate");
             return (Criteria) this;
         }
 
-        public Criteria andUsertypeIsNull() {
-            addCriterion("userType is null");
+        public Criteria andTypeidIsNull() {
+            addCriterion("typeID is null");
             return (Criteria) this;
         }
 
-        public Criteria andUsertypeIsNotNull() {
-            addCriterion("userType is not null");
+        public Criteria andTypeidIsNotNull() {
+            addCriterion("typeID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUsertypeEqualTo(Integer value) {
-            addCriterion("userType =", value, "usertype");
+        public Criteria andTypeidEqualTo(Integer value) {
+            addCriterion("typeID =", value, "typeid");
             return (Criteria) this;
         }
 
-        public Criteria andUsertypeNotEqualTo(Integer value) {
-            addCriterion("userType <>", value, "usertype");
+        public Criteria andTypeidNotEqualTo(Integer value) {
+            addCriterion("typeID <>", value, "typeid");
             return (Criteria) this;
         }
 
-        public Criteria andUsertypeGreaterThan(Integer value) {
-            addCriterion("userType >", value, "usertype");
+        public Criteria andTypeidGreaterThan(Integer value) {
+            addCriterion("typeID >", value, "typeid");
             return (Criteria) this;
         }
 
-        public Criteria andUsertypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("userType >=", value, "usertype");
+        public Criteria andTypeidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("typeID >=", value, "typeid");
             return (Criteria) this;
         }
 
-        public Criteria andUsertypeLessThan(Integer value) {
-            addCriterion("userType <", value, "usertype");
+        public Criteria andTypeidLessThan(Integer value) {
+            addCriterion("typeID <", value, "typeid");
             return (Criteria) this;
         }
 
-        public Criteria andUsertypeLessThanOrEqualTo(Integer value) {
-            addCriterion("userType <=", value, "usertype");
+        public Criteria andTypeidLessThanOrEqualTo(Integer value) {
+            addCriterion("typeID <=", value, "typeid");
             return (Criteria) this;
         }
 
-        public Criteria andUsertypeIn(List<Integer> values) {
-            addCriterion("userType in", values, "usertype");
+        public Criteria andTypeidIn(List<Integer> values) {
+            addCriterion("typeID in", values, "typeid");
             return (Criteria) this;
         }
 
-        public Criteria andUsertypeNotIn(List<Integer> values) {
-            addCriterion("userType not in", values, "usertype");
+        public Criteria andTypeidNotIn(List<Integer> values) {
+            addCriterion("typeID not in", values, "typeid");
             return (Criteria) this;
         }
 
-        public Criteria andUsertypeBetween(Integer value1, Integer value2) {
-            addCriterion("userType between", value1, value2, "usertype");
+        public Criteria andTypeidBetween(Integer value1, Integer value2) {
+            addCriterion("typeID between", value1, value2, "typeid");
             return (Criteria) this;
         }
 
-        public Criteria andUsertypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("userType not between", value1, value2, "usertype");
+        public Criteria andTypeidNotBetween(Integer value1, Integer value2) {
+            addCriterion("typeID not between", value1, value2, "typeid");
             return (Criteria) this;
         }
 
