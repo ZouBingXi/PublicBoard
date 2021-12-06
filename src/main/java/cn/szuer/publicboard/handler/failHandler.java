@@ -20,7 +20,8 @@ public class failHandler implements AuthenticationFailureHandler
     public void onAuthenticationFailure(HttpServletRequest request,HttpServletResponse response,AuthenticationException e) throws IOException, ServletException
     {
         //设置返回类型
-        response.setContentType("application/json;charset=utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("application/json");
         PrintWriter out=response.getWriter();
 
         //获取用户信息

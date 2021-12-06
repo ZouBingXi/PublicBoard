@@ -1,20 +1,23 @@
 package cn.szuer.publicboard.service.Impl;
 
-import java.util.Date;
-import java.util.List;
-
-import cn.szuer.publicboard.dto.param.AddNewsParam;
 import cn.szuer.publicboard.dto.NewsSendDto;
+import cn.szuer.publicboard.dto.param.AddNewsParam;
 import cn.szuer.publicboard.model.*;
-import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import cn.szuer.publicboard.model.NewsInfo;
+import cn.szuer.publicboard.model.NewsType;
+import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.mapper.NewsInfoMapper;
 import cn.szuer.publicboard.mapper.NewsTypeMapper;
 import cn.szuer.publicboard.service.NewsService;
+import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 
 @Service

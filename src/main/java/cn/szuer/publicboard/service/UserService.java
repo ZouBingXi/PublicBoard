@@ -7,17 +7,14 @@ import com.github.pagehelper.PageInfo;
 // import com.github.pagehelper.PageInfo;
 
 import cn.szuer.publicboard.dto.UserDto;
-import cn.szuer.publicboard.dto.param.LoginParam;
-import cn.szuer.publicboard.model.UserInfo;
-import cn.szuer.publicboard.utils.Page;
+import cn.szuer.publicboard.dto.param.RegisterParam;
 
 public interface UserService {
     
 
     List<UserDto> getAll();
     PageInfo<UserDto> getByPage(int pageNum, int pageSize);
-    
-    UserDto login(LoginParam loginParam);
-    UserDto addUser(LoginParam loginParam);
+
+    UserDto addUser(RegisterParam registerParam);
 
 }
