@@ -79,12 +79,6 @@ class PublicboardApplicationTests {
 	@Autowired(required=false)
 	NewsTypeMapper newsTypeMapper = null;
 
-	@Autowired(required=false)
-	SubjectStateMapper subjectStateMapper = null;
-	
-	@Autowired(required=false)
-	NewsStateMapper newsStateMapper = null;
-
 	@Autowired
 	private UserConverter userConverter;
 
@@ -93,6 +87,7 @@ class PublicboardApplicationTests {
 
 	@Autowired(required=false)
 	private NewsConverter newsConverter;
+
 
 	@Test
 	void contextLoads() {
@@ -117,7 +112,7 @@ class PublicboardApplicationTests {
 			// map.add("password", "");
 			LoginParam loginParam= new LoginParam();
 			loginParam.setUserid(2019010101);
-			loginParam.setPassword("1234");
+			loginParam.setPassword("123456789");
 			ResponseEntity responseEntity = restTemplate.postForEntity(url, loginParam, String.class);
 			System.out.println(responseEntity.getBody());
 		}catch(Exception e)
@@ -138,138 +133,6 @@ class PublicboardApplicationTests {
 		// System.out.println(userType.toString());
 	}
 
-	// @Test
-	// void testSubjectService(){
-
-	// 	List<SubjectSendDto> list = subjectService.getAll();
-	// 	System.out.println(list);
-	// 	PageInfo<SubjectSendDto> pageInfo = subjectService.getByPage(1, 3);
-	// 	System.out.println(pageInfo);
-	// }
-
-	@Test
-		//测试编辑话题功能
-	void testAddSubject(){
-		try{
-			String url = "http://localhost/subject/add";
-			//初始化编辑帖子参数对象
-			AddSubjectParam addSubjectParam= new AddSubjectParam();
-
-			String res;//测试结果
-
-			//初始化测试用例1，账号为空
-			Integer userid = null;
-			addSubjectParam.setUserid(userid);
-			addSubjectParam.setSubjecttitle("标题：测试话题");
-			addSubjectParam.setContent("内容：测试话题");
-			addSubjectParam.setSubjecttype(1);
-			System.out.println("测试用例1:"+ addSubjectParam);
-			res = restTemplate.postForObject(url, addSubjectParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例2，标题为空
-			String title = null;
-			addSubjectParam.setUserid(2019010101);
-			addSubjectParam.setSubjecttitle(title);
-			addSubjectParam.setContent("内容：测试话题");
-			addSubjectParam.setSubjecttype(1);
-			System.out.println("测试用例2:"+ addSubjectParam);
-			res = restTemplate.postForObject(url, addSubjectParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例3，内容为空
-			String content = null;
-			addSubjectParam.setUserid(2019010101);
-			addSubjectParam.setSubjecttitle("标题：测试话题");
-			addSubjectParam.setContent(content);
-			addSubjectParam.setSubjecttype(1);
-			System.out.println("测试用例3:"+ addSubjectParam);
-			res = restTemplate.postForObject(url, addSubjectParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例4，类型为空
-			Integer type = null;
-			addSubjectParam.setUserid(2019010101);
-			addSubjectParam.setSubjecttitle("标题：测试话题");
-			addSubjectParam.setContent("内容：测试话题");
-			addSubjectParam.setSubjecttype(type);
-			System.out.println("测试用例4:"+ addSubjectParam);
-			res = restTemplate.postForObject(url, addSubjectParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例5，账号不存在
-			addSubjectParam.setUserid(2019101010);
-			addSubjectParam.setSubjecttitle("标题：测试话题");
-			addSubjectParam.setContent("内容：测试话题");
-			addSubjectParam.setSubjecttype(1);
-			System.out.println("测试用例5:"+ addSubjectParam);
-			res = restTemplate.postForObject(url, addSubjectParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例6，账号被禁用
-			addSubjectParam.setUserid(2019020202);
-			addSubjectParam.setSubjecttitle("标题：测试话题");
-			addSubjectParam.setContent("内容：测试话题");
-			addSubjectParam.setSubjecttype(1);
-			System.out.println("测试用例6:"+ addSubjectParam);
-			res = restTemplate.postForObject(url, addSubjectParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例7，话题类型不存在
-			addSubjectParam.setUserid(2019010101);
-			addSubjectParam.setSubjecttitle("标题：测试话题");
-			addSubjectParam.setContent("内容：测试话题");
-			addSubjectParam.setSubjecttype(8);
-			System.out.println("测试用例7:"+ addSubjectParam);
-			res = restTemplate.postForObject(url, addSubjectParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例8，话题类型被禁用
-			addSubjectParam.setUserid(2019010101);
-			addSubjectParam.setSubjecttitle("标题：测试话题");
-			addSubjectParam.setContent("内容：测试话题");
-			addSubjectParam.setSubjecttype(3);
-			System.out.println("测试用例8:"+ addSubjectParam);
-			res = restTemplate.postForObject(url, addSubjectParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例9，用户为正常用户状态
-			addSubjectParam.setUserid(2019010101);
-			addSubjectParam.setSubjecttitle("标题：测试话题");
-			addSubjectParam.setContent("内容：测试话题");
-			addSubjectParam.setSubjecttype(1);
-			System.out.println("测试用例9:"+ addSubjectParam);
-			res = restTemplate.postForObject(url, addSubjectParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例10，用户为匿名用户状态
-			addSubjectParam.setUserid(2019030303);
-			addSubjectParam.setSubjecttitle("标题：测试话题");
-			addSubjectParam.setContent("内容：测试话题");
-			addSubjectParam.setSubjecttype(1);
-			System.out.println("测试用例10:"+ addSubjectParam);
-			res = restTemplate.postForObject(url, addSubjectParam, String.class);
-			System.out.println(res);//打印测试结果
-
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-	}
-
-	// @Test
-	// 	//测试话题mapper结构
-	// void testSubjectMapstruct()
-	// {
-	// 	SubjectInfo subjectInfo = subjectInfoMapper.selectByPrimaryKey(1);
-	// 	//调用convertor将addsubjectparam转换成dto
-	// 	SubjectSendDto subjectSendDto= subjectConverter.SubjectInfo2SubjectSendDto(subjectInfo);
-
-	// 	System.out.println(subjectSendDto.toString());
-
-	// }
-
 	@Test
 	//测试编辑话题功能
 	void addSubject(){
@@ -281,7 +144,7 @@ class PublicboardApplicationTests {
 			addSubjectParam.setUserid(2019010101);
 			addSubjectParam.setSubjecttitle("标题：测试话题");
 			addSubjectParam.setContent("内容：测试话题");
-			addSubjectParam.setSubjecttype(1);
+			addSubjectParam.setSubjecttypeid(1);
 			String res = restTemplate.postForObject(url, addSubjectParam, String.class);
 			System.out.println(res);//打印测试结果
 
@@ -290,119 +153,27 @@ class PublicboardApplicationTests {
 			e.printStackTrace();
 		}
 
-}
-
-
+	}
 
 	@Test
-//测试编辑帖子功能
-	void testAddNews(){
-		try{
-			String url = "http://localhost/news/add";
-			//初始化编辑帖子参数对象
-			AddNewsParam addNewsParam= new AddNewsParam();
+		//测试controller
+	void addSubjectcon() {
+		try {
 
-			String res;//测试结果
 
-			//初始化测试用例1，账号为空
-			Integer userid = null;
-			addNewsParam.setUserid(userid);
-			addNewsParam.setNewstitle("标题：测试帖子");
-			addNewsParam.setContent("内容：测试帖子");
-			addNewsParam.setNewstype(1);
-			System.out.println("测试用例1:"+ addNewsParam);
-			res = restTemplate.postForObject(url, addNewsParam, String.class);
+
+			//初始化测试用例1
+			AddSubjectParam addSubjectParam = new AddSubjectParam();
+			addSubjectParam.setUserid(2019010101);
+			addSubjectParam.setSubjecttitle("标题：测试话题");
+			addSubjectParam.setContent("内容：测试话题");
+			addSubjectParam.setSubjecttypeid(1);
+			int res =subjectService.add(addSubjectParam);
 			System.out.println(res);//打印测试结果
 
-			//初始化测试用例2，标题为空
-			String title = null;
-			addNewsParam.setUserid(2019010101);
-			addNewsParam.setNewstitle(title);
-			addNewsParam.setContent("内容：测试帖子");
-			addNewsParam.setNewstype(1);
-			System.out.println("测试用例2:"+ addNewsParam);
-			res = restTemplate.postForObject(url, addNewsParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例3，内容为空
-			String content = null;
-			addNewsParam.setUserid(2019010101);
-			addNewsParam.setNewstitle("标题：测试帖子");
-			addNewsParam.setContent(content);
-			addNewsParam.setNewstype(1);
-			System.out.println("测试用例3:"+ addNewsParam);
-			res = restTemplate.postForObject(url, addNewsParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例4，类型为空
-			Integer type = null;
-			addNewsParam.setUserid(2019010101);
-			addNewsParam.setNewstitle("标题：测试帖子");
-			addNewsParam.setContent("内容：测试帖子");
-			addNewsParam.setNewstype(type);
-			System.out.println("测试用例4:"+ addNewsParam);
-			res = restTemplate.postForObject(url, addNewsParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例5，账号不存在
-			addNewsParam.setUserid(2019101010);
-			addNewsParam.setNewstitle("标题：测试帖子");
-			addNewsParam.setContent("内容：测试帖子");
-			addNewsParam.setNewstype(1);
-			System.out.println("测试用例5:"+ addNewsParam);
-			res = restTemplate.postForObject(url, addNewsParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例6，账号被禁用
-			addNewsParam.setUserid(2019020202);
-			addNewsParam.setNewstitle("标题：测试帖子");
-			addNewsParam.setContent("内容：测试帖子");
-			addNewsParam.setNewstype(1);
-			System.out.println("测试用例6:"+ addNewsParam);
-			res = restTemplate.postForObject(url, addNewsParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例7，帖子类型不存在
-			addNewsParam.setUserid(2019010101);
-			addNewsParam.setNewstitle("标题：测试帖子");
-			addNewsParam.setContent("内容：测试帖子");
-			addNewsParam.setNewstype(8);
-			System.out.println("测试用例7:"+ addNewsParam);
-			res = restTemplate.postForObject(url, addNewsParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例8，帖子类型被禁用
-			addNewsParam.setUserid(2019010101);
-			addNewsParam.setNewstitle("标题：测试帖子");
-			addNewsParam.setContent("内容：测试帖子");
-			addNewsParam.setNewstype(3);
-			System.out.println("测试用例8:"+ addNewsParam);
-			res = restTemplate.postForObject(url, addNewsParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例9，用户为正常用户状态
-			addNewsParam.setUserid(2019010101);
-			addNewsParam.setNewstitle("标题：测试帖子");
-			addNewsParam.setContent("内容：测试帖子");
-			addNewsParam.setNewstype(1);
-			System.out.println("测试用例9:"+ addNewsParam);
-			res = restTemplate.postForObject(url, addNewsParam, String.class);
-			System.out.println(res);//打印测试结果
-
-			//初始化测试用例10，用户为匿名用户状态
-			addNewsParam.setUserid(2019030303);
-			addNewsParam.setNewstitle("标题：测试帖子");
-			addNewsParam.setContent("内容：测试帖子");
-			addNewsParam.setNewstype(1);
-			System.out.println("测试用例10:"+ addNewsParam);
-			res = restTemplate.postForObject(url, addNewsParam, String.class);
-			System.out.println(res);//打印测试结果
-
-		}catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Test

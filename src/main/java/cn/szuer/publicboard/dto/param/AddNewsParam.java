@@ -8,13 +8,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddNewsParam {
-
+    /**
+     * 用户账号
+     */
     private Integer userid;
 
+    /**
+     * 标题
+     */
     private String newstitle;
 
+    /**
+     * 内容
+     */
     private String content;
 
-    private Integer newstype;
+    /**
+     * 帖子类型
+     */
+    private Integer newstypeid;
+
 
 }

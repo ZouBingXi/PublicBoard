@@ -82,6 +82,9 @@
   <sql id="Blob_Column_List" >
     content
   </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from subject_info
+  </select>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.szuer.publicboard.model.SubjectInfoExample" >
     select
     <if test="distinct" >
@@ -131,12 +134,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.szuer.publicboard.model.SubjectInfo" >
-    insert into subject_info (subjectID, userID, subjectTitle, 
+    insert into subject_info (subjectID, userID, subjectTitle,
       sendTime, viewNum, likeNum, 
       subjectTypeID, anonymousState, topState, 
       hotState, examineState, content
       )
-    values (#{subjectid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{subjecttitle,jdbcType=VARCHAR}, 
+    values (#{subjectid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{subjecttitle,jdbcType=VARCHAR},
       #{sendtime,jdbcType=TIMESTAMP}, #{viewnum,jdbcType=INTEGER}, #{likenum,jdbcType=INTEGER}, 
       #{subjecttypeid,jdbcType=INTEGER}, #{anonymousstate,jdbcType=BIT}, #{topstate,jdbcType=BIT}, 
       #{hotstate,jdbcType=BIT}, #{examinestate,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR}

@@ -15,7 +15,7 @@ import java.util.List;
 public interface SubjectConverter{
 
     SubjectConverter INSTANCE = Mappers.getMapper(SubjectConverter.class);
-    @Mapping(source = "subjecttype",target = "typename")
+    @Mapping(source = "subjecttypeid",target = "subjecttypename")
     SubjectSendDto SubjectInfo2SubjectSendDto(SubjectInfo subjectInfo);
     List<SubjectSendDto> SubjectInfos2SubjectSendDtos(List<SubjectInfo> subjectInfos);
 

@@ -15,7 +15,7 @@ import java.util.List;
 public interface NewsConverter{
 
     NewsConverter INSTANCE = Mappers.getMapper(NewsConverter.class);
-    @Mapping(source = "newstype",target = "typename")
+    @Mapping(source = "newstypeid",target = "newstypename")
         //newsInfo转换成newsSendDto
     NewsSendDto NewsInfo2NewsSendDto(NewsInfo newsInfo);
     List<NewsSendDto> NewsInfos2NewsSendDtos(List<NewsInfo> newsInfos);
