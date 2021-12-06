@@ -2,7 +2,7 @@ package cn.szuer.publicboard;
 
 import cn.szuer.publicboard.dto.param.AddNewsParam;
 import cn.szuer.publicboard.dto.param.AddSubjectParam;
-import cn.szuer.publicboard.dto.param.LoginParam;
+import cn.szuer.publicboard.dto.param.RegisterParam;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,7 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.platform.engine.reporting.ReportEntry;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -29,10 +28,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import cn.szuer.publicboard.reponse.BaseResponse;
@@ -166,16 +161,16 @@ public class UrlOnlineTests {
 
       try{
         String url = "http://localhost/user/login";
-        LoginParam loginParam= new LoginParam();
+        RegisterParam registerParam= new RegisterParam();
         ResponseEntity<BaseResponse> responseEntity;
 
         /**
          *  测试用例1：登录成功
          */
-        loginParam.setUserid(2019010101);
-        loginParam.setPassword("123456789");
-        System.out.println("测试用例1:"+ loginParam);
-        responseEntity = template.postForEntity(url, loginParam, BaseResponse.class);
+        registerParam.setUserid(2019010101);
+        registerParam.setPassword("1234");
+        System.out.println("测试用例1:"+registerParam);
+        responseEntity = template.postForEntity(url,registerParam,BaseResponse.class);
         //assert测试
         //getStatusCode获得响应状态，该响应状态是HTTP自带的，并非服务端设置的
         assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
@@ -186,10 +181,10 @@ public class UrlOnlineTests {
         /**
          *  测试用例2：登录失败
          */
-        loginParam.setUserid(2019010101);
-        loginParam.setPassword("12345");
-        System.out.println("测试用例2:"+ loginParam);
-        responseEntity = template.postForEntity(url, loginParam, BaseResponse.class);
+        registerParam.setUserid(2019010101);
+        registerParam.setPassword("12345");
+        System.out.println("测试用例2:"+registerParam);
+        responseEntity = template.postForEntity(url,registerParam,BaseResponse.class);
          //assert测试
          //getStatusCode获得响应状态，该响应状态是HTTP自带的，并非服务端设置的
          assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);

@@ -22,16 +22,19 @@ public class UserDto {
 
     /**
      * 用户名
+     * @mock 张三
      */
     private String username;
 
     /**
      * 用户状态
+     * @mock 封禁状态
      */
     private String banstate;
 
     /**
      * 用户类型
+     * @mock 管理员
      */
     private String usertype;
 

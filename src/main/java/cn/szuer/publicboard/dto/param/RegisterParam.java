@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginParam
+public class RegisterParam
 {
     /**
      * 账号
@@ -19,6 +19,10 @@ public class LoginParam
      * @mock 123456789
      */
     private String password;
+    /**
+     * 邮箱
+     * @mock 123456789@qq.com
+     */
+    private String email;
 
 }
-

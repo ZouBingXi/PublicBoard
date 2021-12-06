@@ -1,12 +1,6 @@
 package cn.szuer.publicboard.controller;
 
-import java.io.OutputStream;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.github.pagehelper.PageInfo;
 
@@ -20,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.szuer.publicboard.dto.UserDto;
-import cn.szuer.publicboard.dto.param.LoginParam;
-import cn.szuer.publicboard.model.UserInfo;
+import cn.szuer.publicboard.dto.param.RegisterParam;
 import cn.szuer.publicboard.reponse.BaseResponse;
 import cn.szuer.publicboard.service.UserService;
-import cn.szuer.publicboard.utils.Page;
 
 /**
  * 用户管理
@@ -37,38 +29,20 @@ public class UserController
     UserService userService;
     /**
      * 用户注册
-     * @param userInfo
+     * @param registerParam
      * @return
      */
     @PostMapping("/add")
-    public BaseResponse<UserDto> addUser(@RequestBody LoginParam loginParam)
+    public BaseResponse<UserDto> addUser(@RequestBody RegisterParam registerParam)
     {
-        UserDto userDto=userService.addUser(loginParam);
+        UserDto userDto=userService.addUser(registerParam);
         if (userDto!=null)
         {
             return new BaseResponse<UserDto>(200,"注册成功",userDto);
         }
-        return new BaseResponse<UserDto>(500,"注册失败,该学号已被注册",userDto);
+        return new BaseResponse<UserDto>(500,"注册失败,该学号已被注册");
 
     }
-
-    /**
-     * 用户登录
-     * @param userInfo
-     * @return
-     */
-   
-     @PostMapping("/login")
-     public BaseResponse<UserDto> login(HttpServletRequest request,@RequestBody LoginParam loginParam)
-     {
-         UserDto res=userService.login(loginParam);
-         if (res!=null)
-         {
-             request.getSession().setAttribute("UserDto",res);
-             return new BaseResponse<UserDto>(200,"登录成功",res);
-         }
-         return new BaseResponse<UserDto>(500,"登陆失败,请检查用户名或密码",res);
-     }
 
     /**
      * 查看用户表
