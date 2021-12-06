@@ -33,4 +33,7 @@ public interface SubjectInfoMapper {
     int updateByPrimaryKeyWithBLOBs(SubjectInfo record);
 
     int updateByPrimaryKey(SubjectInfo record);
+
+    List<SubjectInfo> selectAll();
+
 }

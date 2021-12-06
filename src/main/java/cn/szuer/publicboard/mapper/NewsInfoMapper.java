@@ -33,4 +33,6 @@ public interface NewsInfoMapper {
     int updateByPrimaryKeyWithBLOBs(NewsInfo record);
 
     int updateByPrimaryKey(NewsInfo record);
+
+    List<NewsInfo> selectAll();
 }

@@ -77,29 +77,6 @@ public class BaseResponse<T> implements Serializable
         return new BaseResponse(500,msg);
     }
 
-    //帖子、话题错误响应
-    //begin
-    public static <T> BaseResponse<T> TitleTooLongError(T newsData)
-    {
-        return new BaseResponse(510,"标题过长!",newsData);
-    }
-
-    public static <T> BaseResponse<T> TitleTooShortError(T newsData)
-    {
-        return new BaseResponse(511,"标题不能为空!",newsData);
-    }
-
-    public static <T> BaseResponse<T> ContentTooLongError(T newsData)
-    {
-        return new BaseResponse(512,"内容过长!请检查文章字数是否在1000字内!",newsData);
-    }
-
-    public static <T> BaseResponse<T> ContentTooShortError(T newsData)
-    {
-        return new BaseResponse(513,"内容不能为空!",newsData);
-    }
-    //end
-
     public int getCode()
     {
         return code;
