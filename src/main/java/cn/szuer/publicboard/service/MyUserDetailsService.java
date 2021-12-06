@@ -46,7 +46,7 @@ public class MyUserDetailsService implements UserDetailsService
         //获取用户身份
         List<GrantedAuthority> authorities=new ArrayList<>();
         GrantedAuthority grantedAuthority=new SimpleGrantedAuthority
-                ("ROLE_"+userTypeMapper.selectByPrimaryKey(user.getUsertype()).getTypename());
+                ("ROLE_"+userTypeMapper.selectByPrimaryKey(user.getTypeid()).getTypename());
         authorities.add(grantedAuthority);
 
         return new User(String.valueOf(user.getUserid()),"{noop}"+user.getPassword(),authorities);
