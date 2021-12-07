@@ -31,9 +31,9 @@ public class UserFormat {
      * @param usertype
      * @return
      */
-    public String IntegerToString(Integer usertype)
+    public String IntegerToString(Integer typeid)
     {
         //返回用户表中usertype对应的用户类型名称
-        return userTypeMapper.selectByPrimaryKey(usertype).getTypename(); 
+        return userTypeMapper.selectByPrimaryKey(typeid).getTypename(); 
     }
 }
