@@ -13,14 +13,12 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.szuer.publicboard.utils.MinioUtil;
-import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.xmlpull.v1.XmlPullParserException;
 
-import java.util.List;
+
 
 
 /**
@@ -124,7 +122,7 @@ public class NewsController
     @PostMapping("/addwithimages")
     public BaseResponse addWithImages(@RequestParam(name = "image", required = false) List<MultipartFile> multipartFiles ,AddNewsParam addNewsParam)
     {
-        int res = NewsService.addWithImages(multipartFiles, addNewsParam);
+        int res = newsService.addWithImages(multipartFiles, addNewsParam);
 
         if(res==21) {
             return new BaseResponse(500, "发布失败!当前账号被禁用!");

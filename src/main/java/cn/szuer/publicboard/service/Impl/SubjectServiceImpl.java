@@ -126,6 +126,70 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+    public int addWithImages(List<MultipartFile> multipartFiles, AddSubjectParam addSubjectParam) {
+        //话题信息
+        SubjectInfo subject = new SubjectInfo();
+        //发布话题人信息
+        UserInfo userInfo = userInfoMapper.selectByPrimaryKey(authenticationUtil.getAuthenticatedId());
+
+        //判断用户是否被封禁,被封禁返回26
+        if (userInfo.getBanstate()==Boolean.TRUE)
+            return 21;
+
+        //设置subjectinfo各属性值
+        Integer id = null;
+        subject.setSubjectid(id);
+        subject.setUserid(userInfo.getUserid());
+        subject.setSubjecttitle(addSubjectParam.getSubjecttitle());
+        subject.setContent(addSubjectParam.getContent());
+        subject.setSubjecttypeid(addSubjectParam.getSubjecttypeid());
+        subject.setSendtime(new Date());
+        subject.setViewnum(0);
+        subject.setLikenum(0);
+        subject.setTopstate(Boolean.FALSE);
+        subject.setHotstate(Boolean.FALSE);
+        subject.setExaminestate(Boolean.FALSE);
+        subject.setAnonymousstate(userInfo.getAnonymousmode());
+
+        //将subject插入到话题信息表
+        int res = subjectInfoMapper.insertSelective(subject);       
+
+        //若插入失败直接返回
+        if(res==0)
+            return 29;
+
+        //如果有图片
+        if(multipartFiles!=null)
+        {
+            //上传图片到服务器, 并返回上传图片的返回体
+            BaseResponse<List<String>> UploadResponse = minioUtil.uploadFile(multipartFiles, "subject");
+            if(UploadResponse.getCode()==9001)
+                return 9001;
+
+            //从上传返回体中获得该话题的图片UUID
+            List<String> subjectImageUUIDs = UploadResponse.getData();
+            //获得话题ID,在进行插入后, 自增的ID会注入回subject
+            Integer subjectid = subject.getSubjectid(); 
+
+            //将话题ID和对应图片的UUID插入到帖子图片表中
+            for(String subjectImageUUID: subjectImageUUIDs)
+            {
+                subjectImageMapper.insert(new SubjectImage(subjectImageUUID, subjectid));
+            }
+        }
+     
+        //判断是否匿名
+        if(userInfo.getAnonymousmode()==Boolean.FALSE)//正常用户状态
+        {
+                return 11;
+        }
+        else//匿名用户状态
+        {
+                return 12;
+        }
+    }
+
+    @Override
     public BaseResponse<SubjectSendDto> view(Integer userid,Integer subjectid)
     {
         SubjectSendDto subjectSendDto = new SubjectSendDto();
@@ -310,68 +374,6 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
 
-    @Override
-    public int addWithImages(List<MultipartFile> multipartFiles, AddSubjectParam addSubjectParam) {
-        //话题信息
-        SubjectInfo subject = new SubjectInfo();
-        //发布话题人信息
-        UserInfo userInfo = userInfoMapper.selectByPrimaryKey(authenticationUtil.getAuthenticatedId());
-
-        //判断用户是否被封禁,被封禁返回26
-        if (userInfo.getBanstate()==Boolean.TRUE)
-            return 21;
-
-        //设置subjectinfo各属性值
-        Integer id = null;
-        subject.setSubjectid(id);
-        subject.setUserid(userInfo.getUserid());
-        subject.setSubjecttitle(addSubjectParam.getSubjecttitle());
-        subject.setContent(addSubjectParam.getContent());
-        subject.setSubjecttypeid(addSubjectParam.getSubjecttypeid());
-        subject.setSendtime(new Date());
-        subject.setViewnum(0);
-        subject.setLikenum(0);
-        subject.setTopstate(Boolean.FALSE);
-        subject.setHotstate(Boolean.FALSE);
-        subject.setExaminestate(Boolean.FALSE);
-        subject.setAnonymousstate(userInfo.getAnonymousmode());
-
-        //将subject插入到话题信息表
-        int res = subjectInfoMapper.insertSelective(subject);       
-
-        //若插入失败直接返回
-        if(res==0)
-            return 29;
-
-        //如果有图片
-        if(multipartFiles!=null)
-        {
-            //上传图片到服务器, 并返回上传图片的返回体
-            BaseResponse<List<String>> UploadResponse = minioUtil.uploadFile(multipartFiles, "subject");
-            if(UploadResponse.getCode()==9001)
-                return 9001;
-
-            //从上传返回体中获得该话题的图片UUID
-            List<String> subjectImageUUIDs = UploadResponse.getData();
-            //获得话题ID,在进行插入后, 自增的ID会注入回subject
-            Integer subjectid = subject.getSubjectid(); 
-
-            //将话题ID和对应图片的UUID插入到帖子图片表中
-            for(String subjectImageUUID: subjectImageUUIDs)
-            {
-                subjectImageMapper.insert(new SubjectImage(subjectImageUUID, subjectid));
-            }
-        }
-     
-        //判断是否匿名
-        if(userInfo.getAnonymousmode()==Boolean.FALSE)//正常用户状态
-        {
-                return 11;
-        }
-        else//匿名用户状态
-        {
-                return 12;
-        }
-    }
+    
 
 }

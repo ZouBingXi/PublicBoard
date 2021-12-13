@@ -52,14 +52,10 @@ public class NewsServiceImpl implements NewsService {
     private NewsImageMapper newsImageMapper;
 
     @Autowired
-    private MinioUtil minioUtil;
-
-    @Autowired
     private NewsConverter newsConverter;
 
     @Autowired
     private AuthenticationUtil authenticationUtil;
-
 
     @Autowired
     private MinioUtil minioUtil;
