@@ -20,14 +20,14 @@
 
         <!-- 输入表单 -->
         <div id="input-form">
-          <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="50px" class="demo-ruleForm" hide-required-asterisk>
+          <el-form :model="loginForm" :rules="rules" ref="ruleForm" label-width="50px" class="demo-ruleForm" hide-required-asterisk>
 
             <el-form-item id="input-form-item1" label="学号" prop="userid">
-              <el-input v-model.number="ruleForm.userid" placeholder="请输入学号"></el-input>
+              <el-input v-model.number="loginForm.userid" placeholder="请输入学号"></el-input>
             </el-form-item>
 
             <el-form-item id="input-form-item2" label="密码" prop="password">
-              <el-input v-model="ruleForm.password" placeholder="请输入密码" show-password></el-input>
+              <el-input v-model="loginForm.password" placeholder="请输入密码" show-password></el-input>
             </el-form-item>
 <!--            <el-form-item>-->
 <!--              <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>-->
@@ -43,7 +43,7 @@
 
         <!-- 登录按钮 -->
         <div id="input-button">
-          <el-button id="input-button1" type="info" @click="submitForm('ruleForm')">登录</el-button>
+          <el-button id="input-button1" type="info" @click="submitForm">登录</el-button>
         </div>
 
         <!-- 立即注册文字链接 -->
@@ -62,8 +62,8 @@ import {LOGIN} from "@/store/actions.type";
 export default {
   data() {
     return {
-      ruleForm: {
-        userid: '',
+      loginForm: {
+        userid: null,
         password: ''
       },
       rules: {
@@ -82,41 +82,17 @@ export default {
     };
   },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          let _this = this;
-          this.$axios.post('/user/login', {
-            userid: _this.ruleForm.userid,
-            password: _this.ruleForm.password
-          }).then((response) => {
-            this.$refs[formName].resetFields();
-            if(response.data.code == 200) {
-              this.$message({
-                showClose: true,
-                message: response.data.msg,
-                type: 'success'
-              })
-              this.$store.commit(LOGIN,response.data.data);
-              this.$router.push({path: '/'});
-            }
-            else {
-              this.$message({
-                showClose: true,
-                message: response.data.msg,
-                type: 'error'
-              });
-            }
-          });
-        } else {
-          this.$message({
-            showClose: true,
-            message: '登录失败，请检查用户名或密码',
-            type: 'error'
-          });
-          return false;
-        }
-      });
+    submitForm (){
+      this.$refs['ruleForm'].validate()
+      .then(()=>{
+        this.$store.dispatch(LOGIN,this.loginForm)
+            .then(()=>this.$router.push({path: '/'}))
+        .catch(({msg})=>this.$message({
+          showClose: true,
+          message: msg,
+          type: 'error'
+        }))
+      })
     },
     gotoRegister(formName) {
       this.$refs[formName].resetFields();

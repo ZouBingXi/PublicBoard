@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-container>
-      <el-aside>
+      <el-aside width="250px">
         <el-menu router :default-active="$route.path">
           <el-submenu v-for="item in elSubMenu" :index="item.title" :key="elSubMenu.text"><span slot="title"><i
               :class="item.icon"></i>{{ item.title }}</span>
@@ -21,13 +21,13 @@
 
 <script>export default {
   name: "Admin",
-  data(){
-    return{
-      elSubMenu:[
+  data() {
+    return {
+      elSubMenu: [
         {
           title: '数据表',
           icon: "el-icon-notebook-2",
-          elMenuItem:[
+          elMenuItem: [
             {
               index: "/admin/usertable",
               text: "用户信息表"

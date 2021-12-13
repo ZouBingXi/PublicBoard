@@ -1,10 +1,23 @@
 <template>
   <div>
-    <template>
-      <el-table :data="table.data" style="width: 100%;min-width: 800px"  stripe>
-        <el-table-column v-for="item in table.table_colum" :prop="item.prop" :label="item.label" sortable  />
 
-        <el-table-column fixed="right" label="操作" min-width="150px" align="right">
+      <el-table :data="table.data" style="width: 100%;min-width: 800px"  stripe>
+        <el-table-column v-for="item in table.tableColumn"
+                         :prop="item.prop"
+                         :label="item.label"
+                         :min-width="item.minWidth"
+                         align="center"
+                         show-overflow-tooltip
+                         sortable  />
+
+        <el-table-column label="状态" min-width="60px">
+          <template slot-scope="scope">
+            <span :style="{ color: scope.row.banstate==='封禁状态'? '#ED3F14' : 'green' }">
+              {{scope.row.banstate}}
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" width="250px" align="left">
           <template #header>
             <el-input v-model="search" size="mini" placeholder="Type to search" />
           </template>
@@ -13,26 +26,15 @@
             <el-button size="mini" type="danger">删除</el-button>
           </template>
         </el-table-column>
-
-        <el-table-column label="状态">
-          <template slot-scope="scope">
-            <span :style="{ color: scope.row.banstate === '正常状态' ? 'green' : '#ED3F14' }">{{scope.row.banstate}}</span>
-          </template>
-        </el-table-column>
-
       </el-table>
-    </template>
 
     <div class="block" style="text-align: center;margin: 10px">
       <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          v-model="test"
-          :current-page="table.currentpage"
-          :page-sizes="table.pagesizes"
-          :page-size="table.pagesize"
+          :current-page.sync="currentpage"
+          :page-sizes.sync="pagesizes"
+          :page-size.sync="pagesize"
+          :total.sync="total"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="table.total"
           background>
       </el-pagination>
     </div>
@@ -48,57 +50,46 @@ export default {
   data(){
     return{
       search:'',
+      pagesizes:[10, 20, 50, 100],
+      currentpage:1,
+      pagesize:10,
+      total:1,
       table,
     };
   },
   methods:{
     gettable(){
-      this.$axios.get("/user/admin/checkuser?size="+this.table.pagesize+"&page="+this.table.currentpage)
+      this.$axios.get("/user/admin/checkuser?size="+this.pagesize+"&page="+this.currentpage)
           .then((response)=>{
             this.table.data=response.data.data.list;
-            this.table.total=response.data.data.total;
+            this.total=response.data.data.total;
+            console.log('请求用户表成功');
             console.log(response);
           })
-          .catch(()=>{console.log("失败")})
-    },
-    handleSizeChange(size){
-      this.table.pagesize=size;
-      this.gettable();
-    },
-    handleCurrentChange(currentpage){
-      this.table.currentpage=currentpage;
-      this.gettable();
-    },
-    setcell({ row, column, rowIndex, columnIndex }){
-      if (row.banstate==="封禁状态")
-        return 'color:red;';
-      else if(row.banstate==="正常状态")
-        return 'color:green;';
-          }
+          .catch(()=>{console.log("请求用户表失败")})
+    }
   },
   created:function (){
     this.gettable();
   },
-  computed:{
+  watch:{
+    currentpage(){
+      this.gettable();
+    },
+    pagesize(){
+      this.gettable();
+    }
   }
 }
 
 const table={
-  table_colum:[
-    {prop:"userid",label:"账号"},
-    {prop:"username",label:"用户名"},
-    {prop:"usertype",label:"用户类型"},
-    {prop:"logintime",label:"登陆时间"}
+  tableColumn:[
+    {prop:"userid",label:"账号",minWidth:""},
+    {prop:"username",label:"用户名",minWidth:""},
+    {prop:"usertype",label:"用户类型",minWidth:""},
+    {prop:"logintime",label:"登陆时间",minWidth:"110px"}
   ],
-  data:[
-    {userid:123456, username:123456, banstate:"封禁状态", usertype:123456, logintime:123465},
-    {userid:123456, username:123456, banstate:"正常状态", usertype:123456, logintime:123465}
-  ],
-  pagesizes:[10, 20, 50, 100],
-  currentpage:1,
-  pagesize:10,
-  total:1,
-
+  data:[],
 }
 </script>
 

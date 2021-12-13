@@ -1,104 +1,90 @@
 <template>
   <div>
-    <template>
-      <el-table :data="table.data" style="width: 100%;min-width: 1100px" stripe>
-        <el-table-column v-for="item in table.table_colum" :prop="item.prop" :label="item.label" sortable  />
-        <el-table-column fixed="right" label="操作" min-width="150px" align="right">
-          <template #header>
-            <el-input v-model="search" size="mini" placeholder="Type to search" />
-          </template>
-          <template slot-scope="scope">
-            <el-button size="mini" @click="checkmore(scope.row)">查看</el-button>
-            <el-button size="mini" type="danger">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </template>
+
+    <el-table :data="table.data" style="width: 100%; min-width: 1000px" stripe>
+      <el-table-column v-for="item in table.tableColumn"
+                       :prop="item.prop"
+                       :label="item.label"
+                       :min-width="item.minWidth"
+                       align="center"
+                       show-overflow-tooltip
+                       sortable  />
+
+      <el-table-column fixed="right" label="操作" align="left" width="250px">
+        <template #header>
+          <el-input v-model="search" size="mini" placeholder="Type to search" />
+        </template>
+        <template>
+          <el-button size="mini" >查看</el-button>
+          <el-button size="mini" type="danger">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
 
     <div class="block" style="text-align: center;margin: 10px">
       <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="table.currentpage"
-          :page-sizes="table.pagesizes"
-          :page-size="table.pagesize"
+          :current-page.sync="currentpage"
+          :page-sizes.sync="pagesizes"
+          :page-size.sync="pagesize"
+          :total.sync="total"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="table.total"
           background>
       </el-pagination>
     </div>
+
     <!--el-button @click="gettable">请求表</el-button>
     <el-button @click="test">测试</el-button-->
-    <el-dialog
-        :title="'标题:  '+title"
-        :visible.sync="dialogVisible">
-      <h4>内容：</h4>
-      <span>{{ content }}</span>
-    </el-dialog>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Topictable",
+  name: "Usertable",
   data(){
     return{
       search:'',
+      pagesizes:[10, 20, 50, 100],
+      currentpage:1,
+      pagesize:10,
+      total:1,
       table,
-      dialogVisible: false,
-      title:'',
-      content:'',
     };
   },
   methods:{
     gettable(){
-      this.$axios.get("/subject/admin/checksubject?page="+this.table.currentpage+"&size="+this.table.pagesize)
+      this.$axios.get("/subject/admin/checksubject?page="+this.pagesize+"&page="+this.currentpage)
           .then((response)=>{
             this.table.data=response.data.data.list;
-            this.table.total=response.data.data.total;
+            this.total=response.data.data.total;
+            console.log('请求话题表成功');
             console.log(response);
           })
-          .catch(()=>{console.log("失败")})
-    },
-    handleSizeChange(size){
-      this.table.pagesize=size;
-      this.gettable();
-    },
-    handleCurrentChange(currentpage){
-      this.table.currentpage=currentpage;
-      this.gettable();
-    },
-    checkmore(row){
-      this.dialogVisible=true;
-      this.title=row.subjecttitle;
-      this.content=row.content;
+          .catch(()=>{console.log("请求话题表失败")})
     }
   },
   created:function (){
     this.gettable();
   },
-  computed:{
+  watch:{
+    currentpage(){
+      this.gettable();
+    },
+    pagesize(){
+      this.gettable();
+    }
   }
 }
 
 const table={
-  table_colum:[
-    {prop:"subjectid",label:"话题编号"},
-    {prop:"userid",label:"作者账号"},
-    {prop:"typename",label:"话题类型"},
-    {prop:"subjecttitle",label:"话题标题"},
+  tableColumn:[
+    {prop:"subjecttitle",label:"话题标题",minWidth:"150px"},
+    {prop:"subjecttypename",label:"类型",minWidth:"50px"},
+    {prop:"userid",label:"作者账号",minWidth:"120px"},
     {prop:"sendtime",label:"发帖时间"},
-    {prop:"viewnum",label:"浏览量"},
-    {prop:"likenum",label:"点赞量"},
+    {prop:"viewnum",label:"浏览量",minWidth:"60px"},
+    {prop:"likenum",label:"点赞量",minWidth:"60px"},
   ],
-  data:[
-    {subjectid:123456, userid:123456, subjecttype:123456, subjecttitle:123456, sendtime:123465, viewnum:123456, likenum:123456},
-  ],
-  pagesizes:[10, 20, 50, 100],
-  currentpage:1,
-  pagesize:10,
-  total:1,
-
+  data:[],
 }
 </script>
 

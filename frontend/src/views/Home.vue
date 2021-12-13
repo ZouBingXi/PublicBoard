@@ -1,39 +1,41 @@
 <template>
   <div>
-    <div class="banner">
-      <h1 class="logo-font">PblicBoard</h1>
-      <p>A place to share your knowledge for SZU</p>
+    <Banner></Banner>
+    <div class="contain" >
+      <el-menu mode="horizontal" router :default-active="$route.path"  active-text-color="black">
+        <el-menu-item index="/">帖子</el-menu-item>
+        <el-menu-item index="/subjectslist">话题</el-menu-item>
+      </el-menu>
+      <router-view></router-view>
     </div>
+
+<!--    <el-button @click="test">test</el-button>-->
   </div>
 </template>
 
 <script>
-
-
+import Banner from "@/components/Banner";
 export default {
   name: "Home",
-
+  components:{
+    Banner
+  },
+  methods:{
+    test(){
+      axios.get("/news/viewDiffNews?typeid=1&page=1&size=10")
+          .then((re)=>{
+            console.log(re);
+          })
+    }
+  }
 }
 </script>
 
 <style scoped>
-.banner{
-  background-color: #333333;
-  margin: 10px 0px 10px 0px;
-  padding: 30px;
-  height: 100px;
-  text-align: center;
+
+.contain{
+  width: 800px;
+  margin: auto;
 }
 
-.logo-font{
-  color: white;
-  font-size: 50px;
-  line-height: 50px;
-  margin: 0px;
-}
-
-p{
-  font-size: 20px;
-  color: white;
-}
 </style>
