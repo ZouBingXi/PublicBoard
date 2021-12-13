@@ -1,5 +1,10 @@
 package cn.szuer.publicboard.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class NewsImage {
     private String imageuuid;
 

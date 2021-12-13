@@ -4,6 +4,8 @@ import cn.szuer.publicboard.dto.SubjectSendDto;
 import cn.szuer.publicboard.dto.param.AddSubjectParam;
 import com.github.pagehelper.PageInfo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public interface SubjectService {
@@ -12,4 +14,6 @@ public interface SubjectService {
     PageInfo<SubjectSendDto> getByPage(int pageNum, int pageSize);
 
     int add(AddSubjectParam addSubjectParam);
+
+    int addWithImages(List<MultipartFile> multipartFiles, AddSubjectParam addSubjectParam);
 }

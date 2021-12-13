@@ -4,7 +4,12 @@ spring:
         url: jdbc:mysql://120.78.10.173:3306/publicboard
         driver-class-name: com.mysql.cj.jdbc.Driver
         username: root
-        password: "dlsdwwrg666"
+        password: dlsdwwrg666
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+        
 
 
 server:
@@ -19,3 +24,9 @@ pagehelper:
 mybatis:
   configuration:
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl 
+
+minio:
+  endPoint: http://120.78.10.173:9000/
+  accessKey: admin
+  secretKey: adminjunior
+  bucket: test

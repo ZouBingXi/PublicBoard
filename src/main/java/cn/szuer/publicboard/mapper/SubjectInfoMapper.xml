@@ -145,7 +145,7 @@
       #{hotstate,jdbcType=BIT}, #{examinestate,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.szuer.publicboard.model.SubjectInfo" >
+  <insert id="insertSelective" parameterType="cn.szuer.publicboard.model.SubjectInfo" useGeneratedKeys="true" keyProperty="subjectid">
     insert into subject_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="subjectid != null" >

@@ -2,11 +2,14 @@ package cn.szuer.publicboard.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class UserInfo {
     private Integer userid;
 
     private String username;
 
+    @JsonIgnore
     private String password;
 
     private String email;
@@ -19,6 +22,7 @@ public class UserInfo {
 
     private Integer typeid;
 
+    @JsonIgnore
     private Date logintime;
 
     public Integer getUserid() {

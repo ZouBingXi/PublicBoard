@@ -4,13 +4,17 @@ import cn.szuer.publicboard.dto.UserDto;
 import cn.szuer.publicboard.dto.param.RegisterParam;
 import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.model.UserInfo;
+import cn.szuer.publicboard.reponse.BaseResponse;
 import cn.szuer.publicboard.service.UserService;
+import cn.szuer.publicboard.utils.AuthenticationUtil;
+import cn.szuer.publicboard.utils.MinioUtil;
 import cn.szuer.publicboard.utils.mapsturctconverter.UserConverter;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +24,12 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     private UserInfoMapper userInfoMapper;
+
+    @Autowired
+    private AuthenticationUtil authenticationUtil;
+
+    @Autowired
+    private MinioUtil minioUtil;
 
     //注入converter,实现类在target里可以看到，由mapstruct自动生成
     @Autowired
@@ -74,8 +84,7 @@ public class UserServiceImpl implements UserService {
     public PageInfo<UserDto> getByPage(int pageNum, int pageSize) {
         
         PageHelper.startPage(pageNum, pageSize);
-        // UserInfoExample example = new UserInfoExample();
-        // List<UserInfo> userInfos = userInfoMapper.selectByExample(new UserInfoExample());
+        //查询数据库中的所有用户信息
         List<UserInfo> userInfos = userInfoMapper.selectAll();
         //使用converter将Userinfo拷贝到userDto
         List<UserDto> userDtos =  userConverter.UserInfos2UserDtos(userInfos);
@@ -87,31 +96,49 @@ public class UserServiceImpl implements UserService {
         return pageInfo;
 
     }
-    
-    
-    // private List<UserDto> copyList(List<UserInfo> records) {
-    //     List<UserDto> userDtos = new ArrayList<>();
-    //     for(UserInfo record : records){
-    //         userDtos.add(copy(record));
-    //     }
-    //     return userDtos;
-    // }
-    
-    // private UserDto copy(UserInfo userInfo){
-    //     UserDto userDto = new UserDto();
-    //     BeanUtils.copyProperties(userInfo, userDto);
-    //     if(userInfo.getUsertype()==1)
-    //         userDto.setUsertype("管理员");
-    //     else 
-    //         userDto.setUsertype("普通用户");
-    //     // if(userInfo.getBanstate()==1)
-    //     //     userDto.setBanstate("禁用状态");
-    //     // else
-    //     //     userDto.setBanstate("正常状态");
-    //     SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    //     userDto.setLogintime(sf.format(userInfo.getLogintime()));
-    //     return userDto;
-    // }
 
+
+    @Override
+    public UserDto getProfile() {
+
+       //查询当前登录用户的用户信息
+       UserInfo userInfo = userInfoMapper.selectByPrimaryKey(authenticationUtil.getAuthenticatedId());
+       //将userInfo转成前端展示所需的userDto
+       UserDto userDto = userConverter.UserInfo2UserDto(userInfo);
+       return userDto;
+    }
+
+
+    @Override
+    public int updateProfile(MultipartFile multipartFile, UserDto userDto) {
+     
+         
+         UserInfo userinfo = userConverter.userDto2UserInfo(userDto);
+         userinfo.setUserid(authenticationUtil.getAuthenticatedId());
+         
+         BaseResponse<String> uploadResponse;
+
+         //如果头像进行了修改
+         if(multipartFile!=null )
+        {
+              System.out.println("==============上传头像================");
+              //上传头像并获得上传返回体 
+              uploadResponse= minioUtil.uploadAvatar(multipartFile, "avatar");
+               if(uploadResponse.getCode()==9001)
+                    return 9001;
+              //从返回体中获得上传头像的uuid
+              userinfo.setHeadimage(uploadResponse.getData());
+         } 
+
+         //插入个人信息
+         int res = userInfoMapper.updateByPrimaryKeySelective(userinfo);
+        
+         if(res!=0)
+            return 11;
+         else
+            return 22; 
+
+    }
+    
 
 }

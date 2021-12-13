@@ -11,6 +11,7 @@ import cn.szuer.publicboard.model.*;
 import cn.szuer.publicboard.service.MyUser;
 import cn.szuer.publicboard.service.NewsService;
 import cn.szuer.publicboard.service.SubjectService;
+import cn.szuer.publicboard.utils.AuthenticationUtil;
 import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
 import cn.szuer.publicboard.utils.mapsturctconverter.SubjectConverter;
 import com.github.pagehelper.PageInfo;
@@ -78,6 +79,9 @@ class PublicboardApplicationTests {
 
 	@Autowired(required=false)
 	private NewsConverter newsConverter;
+
+  @Autowired
+  private AuthenticationUtil authenticationUtil;
 
 
 	@Test
