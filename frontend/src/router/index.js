@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import store from "@/store/index"
 
 Vue.use(VueRouter)
 
@@ -9,6 +9,18 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import("@/views/Home"),
+    children: [
+      {
+        path:'',
+        name:'NewsList',
+        component:()=>import("@/components/NewsList")
+      },
+      {
+        path:'subjectslist',
+        name:'SubjectsList',
+        component:()=>import("@/components/SubjectsList")
+      }
+    ]
   },
   {
     path: '/register',
@@ -24,6 +36,16 @@ const routes = [
     path: '/articleedit',
     name: 'ArticleEdit',
     component: () => import("@/views/ArticleEdit")
+  },
+  {
+    path: '/setting',
+    name: 'Setting',
+    component: () => import("@/views/Setting")
+  },
+  {
+    path: '/articleread',
+    name: 'ReadArticle',
+    component: () => import("@/views/ArticleRead")
   },
   {
     path: '/admin',
@@ -55,7 +77,6 @@ const routes = [
   }
 
 ]
-
 const router = new VueRouter({
   base: process.env.BASE_URL,
   routes

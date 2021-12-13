@@ -1,6 +1,6 @@
 <template>
   <el-header class="myheader">
-    <el-menu mode="horizontal" router :default-active="$route.path"  active-text-color="black">
+    <el-menu mode="horizontal" router :default-active="$route.path.match(/\/[a-z]*/)[0]"  active-text-color="black">
       <router-link class="mylink" :to="{path:'/'}">PublicBoard</router-link>
       <el-menu-item v-if="isAuthenticated" index="/information">
         <span class="el-icon-s-custom" style="margin: 0px"></span>{{currentUser.username}}
@@ -9,10 +9,10 @@
           <span :class="item.icon" style="margin: 0px"></span>{{ item.text }}
       </el-menu-item>
       <el-menu-item v-if="currentUser.usertype==='管理员'&& isAuthenticated" index="/admin">
-        <span class="" style="margin: 0px"></span>Admin Page
+        <span class="el-icon-menu" style="margin: 0px"></span>Admin Page
       </el-menu-item>
       <el-menu-item index="/">
-        Home
+        <span class="el-icon-s-home" style="margin: 0px"></span>Home
       </el-menu-item>
     </el-menu>
   </el-header>
@@ -39,14 +39,14 @@ export default {
       ],
       menu_isAuthenticated:[
         {
-          index:"/articleedit",
-          icon:"el-icon-edit-outline",
-          text:"New Article",
-        },
-        {
           index:"/setting",
           icon:"el-icon-s-tools",
           text:"Setting",
+        },
+        {
+          index:"/articleedit",
+          icon:"el-icon-edit-outline",
+          text:"New Article",
         },
       ]
     }
@@ -56,6 +56,12 @@ export default {
     menu(){
       return this.isAuthenticated?this.menu_isAuthenticated:this.menu_notAuthenticated;
     }
+  },
+  props:['test'],
+  watch:{
+    test(){
+      console.log("this is test");
+    }
   }
 
 };
@@ -64,7 +70,6 @@ export default {
 <style scoped>
 .myheader{
   padding: 0px 20px 0px 20px;
-
 }
 .myheader .el-menu .el-menu-item{
   float: right;

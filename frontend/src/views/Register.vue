@@ -36,7 +36,11 @@
               <el-input v-model.number="ruleForm.userid" placeholder="请输入学号"></el-input>
             </el-form-item>
 
-            <el-form-item id="input-form-item2" label="密码" prop="password">
+            <el-form-item id="input-form-item2" label="邮箱" prop="email">
+              <el-input v-model="ruleForm.email" placeholder="请输入邮箱"></el-input>
+            </el-form-item>
+
+            <el-form-item id="input-form-item3" label="密码" prop="password">
               <el-input v-model="ruleForm.password" placeholder="请输入密码" show-password></el-input>
             </el-form-item>
 
@@ -74,6 +78,7 @@ export default {
     return {
       ruleForm: {
         userid: '',
+        email: '',
         password: '',
         checkpassword: ''
       },
@@ -81,6 +86,10 @@ export default {
         userid: [
           { required: true, message: '请输入学号', trigger: 'blur' },
           { type: 'number', min: 1000000000, max: 9999999999, message: '学号为 10 位数字', trigger: 'blur' }
+        ],
+        email: [
+          { required: true, message: '请输入邮箱', trigger: 'blur' },
+          { type: 'email', message: '请输入正确的邮箱', trigger: 'blur' }
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
@@ -103,7 +112,8 @@ export default {
           let _this = this;
           this.$axios.post('/user/add', {
             userid: _this.ruleForm.userid,
-            password: _this.ruleForm.password
+            password: _this.ruleForm.password,
+            email: _this.ruleForm.email
           }).then((response) => {
             console.log(response);
             this.$refs[formName].resetFields();
@@ -278,18 +288,22 @@ export default {
 }
 
 #input-form-item1 {
-  margin-bottom:30px;
+  margin-bottom:20px;
 }
 
 #input-form-item2 {
-  margin-bottom:30px;
+  margin-bottom:20px;
+}
+
+#input-form-item3 {
+  margin-bottom:20px;
 }
 
 #register-button {
   border-width:0px;
   position:absolute;
   left:70px;
-  top:325px;
+  top:350px;
   font-family:'微软雅黑';
   font-weight:400;
   font-style:normal;

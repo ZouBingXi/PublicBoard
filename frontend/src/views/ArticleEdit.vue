@@ -55,13 +55,13 @@
             </el-form-item>
 
             <el-form-item id="input-form-item5" label="内容" prop="content">
-              <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 10}" v-model="ruleForm.content" placeholder="请填写内容"></el-input>
+              <el-input type="textarea" :autosize="{ minRows: 5 }" v-model="ruleForm.content" placeholder="请填写内容" maxlength="1000" show-word-limit></el-input>
             </el-form-item>
 
             <el-form-item id="input-form-item6" label="插入图片（ 限制 3 张大小不超过 2MB 的 JPG 格式图片 ）">
               <!-- 上传图片 -->
               <el-upload
-                  action="https://jsonplaceholder.typicode.com/posts/"
+                  action="#"
                   list-type="picture-card"
                   :auto-upload="false"
                   :file-list="fileList"
@@ -97,6 +97,9 @@
         <img width="100%" :src="dialogImageUrl" alt="">
       </el-dialog>
     </div>
+
+    <!-- 回到顶部 -->
+    <el-backtop />
   </div>
 </template>
 
@@ -107,7 +110,6 @@ export default {
   data() {
     return {
       ruleForm: {
-        userid: '2018111090',
         title: '',
         type: '贴子',
         newstype: '校园卡丢失',
@@ -147,24 +149,42 @@ export default {
 
           if (_this.ruleForm.type == '贴子') {
             switch (_this.ruleForm.newstype) {
-              case '校园卡丢失' : typenum = 0;
+              case '校园卡丢失' : typenum = 1;
               break;
-              case '寻物' : typenum = 1;
+              case '寻物' : typenum = 2;
               break;
-              case '寻主' : typenum = 2;
+              case '寻主' : typenum = 3;
               break;
-              case '捞人' : typenum = 3;
+              case '捞人' : typenum = 4;
               break;
-              case '求助' : typenum = 4;
+              case '求助' : typenum = 5;
               break;
             }
 
-            this.$axios.post('/news/add', {
-              userid: _this.currentUser.userid,
-              newstitle: _this.ruleForm.title,
-              content: _this.ruleForm.content,
-              newstype: typenum
-            }).then((response) => {
+            let param = new FormData();
+            if (this.fileList.length != 0) {
+              console.log('fileList展示')
+              console.log(this.fileList);
+              this.fileList.forEach(img => param.append("image", img.raw));
+            }
+            param.append("newstitle", _this.ruleForm.title);
+            param.append("content", _this.ruleForm.content);
+            param.append("newstypeid", typenum);
+            console.log('param展示')
+            if (this.fileList.length != 0) {
+              console.log(param.getAll("image"));
+            }
+            console.log(param.getAll("newstitle"));
+            console.log(param.getAll("content"));
+            console.log(param.getAll("newstypeid"));
+
+            let config = {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }
+
+            this.$axios.post('/news/addwithimages', param, config).then((response) => {
               if(response.data.code == 200) {
                 this.$refs[formName].resetFields();
                 this.$message({
@@ -185,22 +205,40 @@ export default {
           }
           else {
             switch (_this.ruleForm.subjecttype) {
-              case '避雷' : typenum = 0;
+              case '避雷' : typenum = 1;
               break;
-              case '树洞' : typenum = 1;
+              case '树洞' : typenum = 2;
               break;
-              case '指南' : typenum = 2;
+              case '指南' : typenum = 3;
               break;
-              case '课程' : typenum = 3;
+              case '课程' : typenum = 4;
               break;
             }
 
-            this.$axios.post('/subject/add', {
-              userid: _this.currentUser.userid,
-              subjecttitle: _this.ruleForm.title,
-              content: _this.ruleForm.content,
-              subjecttype: typenum
-            }).then((response) => {
+            let param = new FormData();
+            if (this.fileList.length != 0) {
+              console.log('fileList展示')
+              console.log(this.fileList);
+              this.fileList.forEach(img => param.append("image", img.raw));
+            }
+            param.append("subjecttitle", _this.ruleForm.title);
+            param.append("content", _this.ruleForm.content);
+            param.append("subjecttypeid", typenum);
+            console.log('param展示')
+            if (this.fileList.length != 0) {
+              console.log(param.getAll("image"));
+            }
+            console.log(param.getAll("subjecttitle"));
+            console.log(param.getAll("content"));
+            console.log(param.getAll("subjecttypeid"));
+
+            let config = {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }
+
+            this.$axios.post('/subject/addwithimages', param, config).then((response) => {
               if(response.data.code == 200) {
                 this.$refs[formName].resetFields();
                 this.$message({
@@ -238,22 +276,16 @@ export default {
       this.dialogVisible = true;
     },
     handleRemove(file, fileList) {
+      console.log('删除操作');
+      this.fileList.pop();
       console.log(file, fileList);
+      console.log(this.fileList);
     },
     handleExceed(files, fileList) {
       this.$message.warning(`当前限制最多插入 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
     },
     handleBeforeUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error('上传图片只能是 JPG 格式!');
-      }
-      if (!isLt2M) {
-        this.$message.error('上传图片大小不能超过 2MB!');
-      }
-      return isJPG && isLt2M;
+      console.log(file);
     },
     handleBeforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${ file.name }？`);
@@ -268,7 +300,12 @@ export default {
       } else if (!isLt2M) {
         this.$message.error('上传图片大小不能超过 2MB!');
         fileList.pop();
+      } else {
+        console.log('添加操作');
+        this.fileList.push(file);
       }
+      console.log(file, fileList);
+      console.log(this.fileList);
     }
   },
   computed:{
