@@ -37,4 +37,6 @@ public interface NewsInfoMapper {
     int updateByPrimaryKey(NewsInfo record);
 
     List<NewsInfo> selectAll();
+
+    int updateViewNum(Integer newsid, Integer num);
 }

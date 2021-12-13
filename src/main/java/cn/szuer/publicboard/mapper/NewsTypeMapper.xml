@@ -87,6 +87,9 @@
     from news_type
     where newsTypeID = #{newstypeid,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from news_type
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from news_type
     where newsTypeID = #{newstypeid,jdbcType=INTEGER}

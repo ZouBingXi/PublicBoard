@@ -1,7 +1,9 @@
 package cn.szuer.publicboard.service.Impl;
 
 import cn.szuer.publicboard.dto.NewsSendDto;
+import cn.szuer.publicboard.dto.TypeSendDto;
 import cn.szuer.publicboard.dto.param.AddNewsParam;
+
 import cn.szuer.publicboard.model.*;
 import cn.szuer.publicboard.model.NewsInfo;
 import cn.szuer.publicboard.model.NewsType;
@@ -11,7 +13,11 @@ import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.mapper.NewsImageMapper;
 import cn.szuer.publicboard.mapper.NewsInfoMapper;
 import cn.szuer.publicboard.mapper.NewsTypeMapper;
+import cn.szuer.publicboard.mapper.UserInfoMapper;
+import cn.szuer.publicboard.model.*;
+import cn.szuer.publicboard.reponse.BaseResponse;
 import cn.szuer.publicboard.service.NewsService;
+
 import cn.szuer.publicboard.utils.AuthenticationUtil;
 import cn.szuer.publicboard.utils.MinioUtil;
 import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
@@ -22,6 +28,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +50,9 @@ public class NewsServiceImpl implements NewsService {
 
     @Autowired
     private NewsImageMapper newsImageMapper;
+
+    @Autowired
+    private MinioUtil minioUtil;
 
     @Autowired
     private NewsConverter newsConverter;
@@ -122,7 +133,7 @@ public class NewsServiceImpl implements NewsService {
         pageInfo.setList(newsSendDtos);
         return pageInfo;
     }
-
+    
     @Override
     public int addWithImages(List<MultipartFile> multipartFiles, AddNewsParam addNewsParam) {
 
@@ -191,4 +202,186 @@ public class NewsServiceImpl implements NewsService {
         }
     }
 
+    @Override
+    public BaseResponse<NewsSendDto> view(Integer userid,Integer newsid)
+    {
+        NewsSendDto newsSendDto = new NewsSendDto();
+        //获取账号信息
+        UserInfo user = userInfoMapper.selectByPrimaryKey(userid);
+
+        //获取帖子信息
+        NewsInfo newsInfo = newsInfoMapper.selectByPrimaryKey(newsid);
+
+        //判断账号是否被封禁
+        if(user.getBanstate()==Boolean.TRUE)
+            return new BaseResponse<>(500,"获取失败！账号处于封禁状态",newsSendDto);
+
+        //获取帖子图像uuid
+        NewsImageExample example = new NewsImageExample();
+        NewsImageExample.Criteria criteria = example.createCriteria();
+        criteria.andNewsidEqualTo(newsInfo.getNewsid());
+        List<NewsImage> imgs = newsImageMapper.selectByExample(example);
+        List<String> uuids  = new ArrayList<>();
+        for (NewsImage img:imgs)
+        {
+            uuids.add(img.getImageuuid());
+        }
+
+        //从服务器获取下载帖子图像url
+        List<String> imgList = new ArrayList<>();
+        if(imgs.size()!=0)  //该帖子有图像才向服务器请求下载图片
+        {
+            try {
+                imgList = minioUtil.getDownloadUrls(uuids,"news");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new BaseResponse<>(500,"获取失败！",newsSendDto);
+            }
+        }
+
+        //获取发帖人信息
+        UserInfo sender = userInfoMapper.selectByPrimaryKey(newsInfo.getUserid());
+        //获取发帖人头像url
+        String headimg = null;
+        try {
+            headimg = minioUtil.getDownloadUrl(sender.getHeadimage(),"avatar");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+
+        //设置NewsSendDto各属性
+        newsSendDto.setUserid(newsInfo.getUserid());
+        newsSendDto.setUsername(sender.getUsername());
+        newsSendDto.setHeadimage(headimg);
+        newsSendDto.setNewstitle(newsInfo.getNewstitle());
+        newsSendDto.setContent(newsInfo.getContent());
+        newsSendDto.setViewnum(newsInfo.getViewnum() + 1);
+        newsSendDto.setLikenum(newsInfo.getLikenum());
+        newsSendDto.setAnonymousstate(newsInfo.getAnonymousstate());
+        newsSendDto.setTopstate(newsInfo.getTopstate());
+        newsSendDto.setHotstate(newsInfo.getHotstate());
+        newsSendDto.setImgUrls(imgList);
+        //将Date类型转换成时间戳
+        SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd");
+        String time = format.format(newsInfo.getSendtime());
+        newsSendDto.setSendtime(time);
+        //设置帖子类型名字
+        String typename = newsTypeMapper.selectByPrimaryKey(newsInfo.getNewstypeid()).getTypename();
+        newsSendDto.setNewstypename(typename);
+
+        //更新浏览量
+        int res = newsInfoMapper.updateViewNum(newsInfo.getNewsid(),newsInfo.getViewnum()+1);
+
+
+        return new BaseResponse<>(200,"获取成功！",newsSendDto);
+    }
+
+    @Override
+    public BaseResponse<PageInfo<NewsSendDto>> viewDiffNews(Integer typeid,Integer pageNum,Integer pageSize)
+    {
+        List<NewsSendDto> newsSendDtos = new ArrayList<>();
+
+        //设置页面属性
+        PageHelper.startPage(pageNum, pageSize);
+
+        //查找输入的帖子类型的所有帖子
+        NewsInfoExample example = new NewsInfoExample();
+        NewsInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andNewstypeidEqualTo(typeid);
+        List<NewsInfo> newsInfos = newsInfoMapper.selectByExample(example);
+
+        //判断这种类型是否有帖子
+        if (newsInfos.size()==0)
+            return new BaseResponse(500,"该类型包含帖子数为0，获取失败！");
+
+        //将每条帖子转化为newsenddto
+        for (NewsInfo newsInfo:newsInfos)
+        {
+            NewsSendDto newsSendDto = new NewsSendDto();
+
+            //获取帖子图像uuid
+            NewsImageExample example1 = new NewsImageExample();
+            NewsImageExample.Criteria criteria1 = example1.createCriteria();
+            criteria.andNewsidEqualTo(newsInfo.getNewsid());
+            List<NewsImage> imgs = newsImageMapper.selectByExample(example1);
+            List<String> uuids  = new ArrayList<>();
+            for (NewsImage img:imgs)
+            {
+                uuids.add(img.getImageuuid());
+            }
+
+            //从服务器获取下载帖子图像url
+            List<String> imgList = new ArrayList<>();
+            if(imgs.size()!=0)  //该帖子有图像才向服务器请求下载图片
+            {
+                try {
+                    imgList = minioUtil.getDownloadUrls(uuids,"news");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return new BaseResponse(500,"获取失败！");
+                }
+            }
+
+            //获取发帖人信息
+            UserInfo sender = userInfoMapper.selectByPrimaryKey(newsInfo.getUserid());
+            //获取发帖人头像url
+            String headimg = null;
+            try {
+                headimg = minioUtil.getDownloadUrl(sender.getHeadimage(),"avatar");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //设置NewsSendDto各属性
+            newsSendDto.setNewsid(newsInfo.getNewsid());
+            newsSendDto.setUserid(newsInfo.getUserid());
+            newsSendDto.setUsername(sender.getUsername());
+            newsSendDto.setHeadimage(headimg);
+            newsSendDto.setNewstitle(newsInfo.getNewstitle());
+            newsSendDto.setContent(newsInfo.getContent());
+            newsSendDto.setViewnum(newsInfo.getViewnum());
+            newsSendDto.setLikenum(newsInfo.getLikenum());
+            newsSendDto.setAnonymousstate(newsInfo.getAnonymousstate());
+            newsSendDto.setTopstate(newsInfo.getTopstate());
+            newsSendDto.setHotstate(newsInfo.getHotstate());
+            newsSendDto.setImgUrls(imgList);
+            //将Date类型转换成时间戳
+            SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd");
+            String time = format.format(newsInfo.getSendtime());
+            newsSendDto.setSendtime(time);
+            //设置帖子类型名字
+            String typename = newsTypeMapper.selectByPrimaryKey(newsInfo.getNewstypeid()).getTypename();
+            newsSendDto.setNewstypename(typename);
+
+            //将newsSendDto添加进List里
+            newsSendDtos.add(newsSendDto);
+        }
+
+        PageInfo pageInfo = new PageInfo<>(newsInfos);
+        pageInfo.setList(newsSendDtos);
+        return new BaseResponse(200,"获取成功！",pageInfo);
+    }
+
+    @Override
+    public BaseResponse<List<TypeSendDto>> getNewsType()
+    {
+        //获取所有帖子类型
+        List<NewsType> tmp = newsTypeMapper.selectAll();
+        List<TypeSendDto> typeSendDtos = new ArrayList<>();
+
+        //去除禁用的帖子类型
+        for (NewsType newsType :tmp)
+        {
+            if(newsType.getTypestate()!=Boolean.FALSE)
+            {
+                TypeSendDto typeSendDto = new TypeSendDto();
+                typeSendDto.setTypeid(newsType.getNewstypeid());
+                typeSendDto.setTypename(newsType.getTypename());
+                typeSendDtos.add(typeSendDto);
+            }
+        }
+
+        return new BaseResponse<>(200,"获取成功！",typeSendDtos);
+    }
 }

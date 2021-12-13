@@ -9,14 +9,24 @@ import java.util.List;
 public class SubjectSendDto {
 
     /**
-     * 话题编号
+     * 话题id
      */
     private Integer subjectid;
 
     /**
-     * 发布话题人
+     * 发布人账号
      */
     private Integer userid;
+
+    /**
+     * 发布人用户名
+     */
+    private String username;
+
+    /**
+     * 发布人头像url
+     */
+    private String headimage;
 
     /**
      * 标题
@@ -31,7 +41,7 @@ public class SubjectSendDto {
     /**
      * 发布时间
      */
-    private Date sendtime;
+    private String sendtime;
 
     /**
      * 浏览量
@@ -44,29 +54,29 @@ public class SubjectSendDto {
     private Integer likenum;
 
     /**
-     * 帖子类型名字
+     * 话题类型名字
      */
     private String subjecttypename;
 
     /**
-     * 用户匿名状态
+     * 发布人匿名状态
      */
     private Boolean anonymousstate;
 
     /**
      * 置顶状态
      */
-    private String topstate;
+    private Boolean topstate;
 
     /**
      * 热门状态
      */
-    private String hotstate;
+    private Boolean hotstate;
+
 
     /**
-     * 审核状态
+     * 话题图像下载url
      */
-    private Boolean examinestate;
-
+    private List<String> imgUrls;
 
 }

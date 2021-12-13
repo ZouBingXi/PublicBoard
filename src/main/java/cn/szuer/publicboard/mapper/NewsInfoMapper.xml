@@ -230,6 +230,11 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <update id="updateViewNum" parameterType="map" >
+    update news_info
+    set viewNum = #{num,jdbcType=INTEGER}
+    where newsid = #{newsid,jdbcType=INTEGER}
+  </update>
   <update id="updateByExampleSelective" parameterType="map" >
     update news_info
     <set >

@@ -38,4 +38,5 @@ public interface SubjectInfoMapper {
 
     List<SubjectInfo> selectAll();
 
+    int updateViewNum(Integer subjectid, Integer num);
 }
