@@ -6,8 +6,8 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +21,8 @@ import java.util.Map;
  */
 public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFilter
 {
+    private SessionRegistry sessionRegistry;
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,HttpServletResponse response) throws AuthenticationException
     {
@@ -31,13 +33,9 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
         }
         else
         {
-            System.out.println("================in===================");
             //如果参数为json格式,则转化
-            System.out.println(request.getContentType());
-            System.out.println(MediaType.APPLICATION_JSON);
             if (request.getContentType().contains(MediaType.APPLICATION_JSON_VALUE))
             {
-                System.out.println("================in===================");
                 String userid="";
                 String password="";
 
@@ -46,8 +44,8 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
                     //接受request里面的json字符串并转为userid和password
                     String body=getBody(request);
                     Map map=JSON.parseObject(body);
-                    userid=String.valueOf(map.get("userid"));
-                    password=(String)map.get("password");
+                    userid=String.valueOf(map.get(this.getUsernameParameter()));
+                    password=(String)map.get(this.getPasswordParameter());
                 }
                 catch (IOException e)
                 {
@@ -57,6 +55,7 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
 
                 //封装成token提交给AuthenticationManager进行认证
                 UsernamePasswordAuthenticationToken authRequest=new UsernamePasswordAuthenticationToken(userid,password);
+                sessionRegistry.registerNewSession(request.getSession().getId(),authRequest.getPrincipal());
                 setDetails(request,authRequest);
                 return this.getAuthenticationManager().authenticate(authRequest);
             }
@@ -80,5 +79,10 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
         }
 
         return sb.toString();
+    }
+
+    public void setSessionRegistry(SessionRegistry sessionRegistry)
+    {
+        this.sessionRegistry=sessionRegistry;
     }
 }

@@ -4,7 +4,9 @@ import cn.szuer.publicboard.model.SubjectComment;
 import cn.szuer.publicboard.model.SubjectCommentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SubjectCommentMapper {
     int countByExample(SubjectCommentExample example);
 

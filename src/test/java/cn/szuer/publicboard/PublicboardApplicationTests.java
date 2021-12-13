@@ -8,6 +8,7 @@ import cn.szuer.publicboard.dto.param.AddSubjectParam;
 import cn.szuer.publicboard.dto.param.LoginParam;
 import cn.szuer.publicboard.mapper.*;
 import cn.szuer.publicboard.model.*;
+import cn.szuer.publicboard.service.MyUser;
 import cn.szuer.publicboard.service.NewsService;
 import cn.szuer.publicboard.service.SubjectService;
 import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
@@ -22,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
@@ -174,6 +177,31 @@ class PublicboardApplicationTests {
 
 		System.out.println(newsSendDto.toString());
 
+	}
+
+	@Test
+	void updateEncodeUser()
+	{
+		PasswordEncoder encoder=new BCryptPasswordEncoder();
+		UserInfo user1=userInfoMapper.selectByPrimaryKey(2019010101);
+		user1.setPassword(encoder.encode("123456789"));
+		userInfoMapper.updateByPrimaryKey(user1);
+
+		UserInfo user2=userInfoMapper.selectByPrimaryKey(2019020202);
+		user2.setPassword(encoder.encode("123456789"));
+		userInfoMapper.updateByPrimaryKey(user2);
+
+		UserInfo user3=userInfoMapper.selectByPrimaryKey(2019030303);
+		user3.setPassword(encoder.encode("123456789"));
+		userInfoMapper.updateByPrimaryKey(user3);
+
+		UserInfo user4=userInfoMapper.selectByPrimaryKey(2019040404);
+		user4.setPassword(encoder.encode("123456789"));
+		userInfoMapper.updateByPrimaryKey(user4);
+
+		UserInfo user5=userInfoMapper.selectByPrimaryKey(2019050505);
+		user5.setPassword(encoder.encode("123456789"));
+		userInfoMapper.updateByPrimaryKey(user5);
 	}
 
 }

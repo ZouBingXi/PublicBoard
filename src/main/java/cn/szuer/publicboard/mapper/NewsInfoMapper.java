@@ -4,7 +4,9 @@ import cn.szuer.publicboard.model.NewsInfo;
 import cn.szuer.publicboard.model.NewsInfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface NewsInfoMapper {
     int countByExample(NewsInfoExample example);
 
