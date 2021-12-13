@@ -4,7 +4,9 @@ import cn.szuer.publicboard.model.SubjectType;
 import cn.szuer.publicboard.model.SubjectTypeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SubjectTypeMapper {
     int countByExample(SubjectTypeExample example);
 

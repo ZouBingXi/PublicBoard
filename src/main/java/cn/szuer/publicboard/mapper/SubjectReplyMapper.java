@@ -4,7 +4,9 @@ import cn.szuer.publicboard.model.SubjectReply;
 import cn.szuer.publicboard.model.SubjectReplyExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SubjectReplyMapper {
     int countByExample(SubjectReplyExample example);
 

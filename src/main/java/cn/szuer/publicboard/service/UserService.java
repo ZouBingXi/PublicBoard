@@ -15,6 +15,6 @@ public interface UserService {
     List<UserDto> getAll();
     PageInfo<UserDto> getByPage(int pageNum, int pageSize);
 
-    UserDto addUser(RegisterParam registerParam);
+    boolean addUser(RegisterParam registerParam);
 
 }

@@ -4,6 +4,7 @@ import cn.szuer.publicboard.dto.UserDto;
 import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.reponse.BaseResponse;
+import cn.szuer.publicboard.service.MyUser;
 import cn.szuer.publicboard.utils.mapsturctconverter.UserConverter;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 
   /*用于处理登录请求成功后的类
@@ -40,11 +42,11 @@ public class successHandler implements AuthenticationSuccessHandler
 
         //获取用户信息
         BaseResponse<UserDto> baseResponse=new BaseResponse(200,"登录成功");
-        User user=(User)authentication.getPrincipal();
+        MyUser user=(MyUser)authentication.getPrincipal();
         UserInfo userInfo=userInfoMapper.selectByPrimaryKey(Integer.parseInt(user.getUsername()));
 
-        System.out.println("=======================================================");
-        System.out.println(userInfo.toString());
+        userInfo.setLogintime(new Date());
+        userInfoMapper.updateByPrimaryKey(userInfo);
 
         //将UserInfo转为UserDto写入返回类中
         if (userInfo!=null)

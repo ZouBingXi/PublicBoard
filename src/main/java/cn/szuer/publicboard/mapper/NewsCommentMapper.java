@@ -4,7 +4,9 @@ import cn.szuer.publicboard.model.NewsComment;
 import cn.szuer.publicboard.model.NewsCommentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface NewsCommentMapper {
     int countByExample(NewsCommentExample example);
 

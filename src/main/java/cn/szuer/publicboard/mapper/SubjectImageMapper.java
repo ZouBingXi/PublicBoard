@@ -4,7 +4,9 @@ import cn.szuer.publicboard.model.SubjectImage;
 import cn.szuer.publicboard.model.SubjectImageExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SubjectImageMapper {
     int countByExample(SubjectImageExample example);
 

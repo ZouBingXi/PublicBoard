@@ -9,6 +9,7 @@ import cn.szuer.publicboard.utils.mapsturctconverter.UserConverter;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -24,15 +25,18 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserConverter userConverter;
 
+    @Autowired
+    PasswordEncoder encoder;
+
     @Override
-    public UserDto addUser(RegisterParam registerParam)
+    public boolean addUser(RegisterParam registerParam)
     {
         //查找数据库中有没有该学号的记录
         UserInfo user=userInfoMapper.selectByPrimaryKey(registerParam.getUserid());
 
         //该学号已注册
         if (user!=null)
-            return null;
+            return false;
 
         else
         {
@@ -41,13 +45,13 @@ public class UserServiceImpl implements UserService {
             user.setUserid(registerParam.getUserid());
             user.setUsername(String.valueOf(registerParam.getUserid()));
             user.setLogintime(new Date());
-            user.setPassword(registerParam.getPassword());
+            user.setPassword(encoder.encode(registerParam.getPassword()));
             user.setEmail(registerParam.getEmail());
             int res=userInfoMapper.insertSelective(user);
             if (res==1)
-                return userConverter.UserInfo2UserDto(user);
+                return true;
             else
-                return null;
+                return false;
         }
     }
     

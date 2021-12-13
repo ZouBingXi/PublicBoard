@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,10 +36,10 @@ public class UserController
     @PostMapping("/add")
     public BaseResponse<UserDto> addUser(@RequestBody RegisterParam registerParam)
     {
-        UserDto userDto=userService.addUser(registerParam);
-        if (userDto!=null)
+        boolean ifsuccess=userService.addUser(registerParam);
+        if (ifsuccess)
         {
-            return new BaseResponse<UserDto>(200,"注册成功",userDto);
+            return new BaseResponse<UserDto>(200,"注册成功");
         }
         return new BaseResponse<UserDto>(500,"注册失败,该学号已被注册");
 
@@ -46,8 +47,8 @@ public class UserController
 
     /**
      * 查看用户表
-     * @param page 页数
-     * @param size 每页记录数
+     * @param pageNum 页数
+     * @param pageSize 每页记录数
      * @return
      */
     @GetMapping("/admin/checkuser")
@@ -63,6 +64,7 @@ public class UserController
      * @return
      */
     @GetMapping("/all")
+    @PreAuthorize("hasAnyRole('ROLE_管理员')")
     public BaseResponse<List<UserDto>> showall()
     {
         return new BaseResponse<List<UserDto>>(200, "success", userService.getAll());
@@ -70,6 +72,7 @@ public class UserController
     }
 
     @GetMapping("/test")
+    @PreAuthorize("hasAnyRole('ROLE_普通用户')")
     public String test()
     {
         return "yes";

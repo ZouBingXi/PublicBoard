@@ -4,7 +4,9 @@ import cn.szuer.publicboard.model.UserType;
 import cn.szuer.publicboard.model.UserTypeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserTypeMapper {
     int countByExample(UserTypeExample example);
 

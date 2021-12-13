@@ -6,12 +6,9 @@ import cn.szuer.publicboard.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -37,7 +34,6 @@ public class MyUserDetailsService implements UserDetailsService
     {
         //根据userid查找用户
         UserInfo user=userInfoMapper.selectByPrimaryKey(Integer.parseInt(userid));
-        System.out.println("User="+user);
         if (user==null)
         {
             throw new UsernameNotFoundException("用户不存在,请检查用户名");
@@ -49,6 +45,6 @@ public class MyUserDetailsService implements UserDetailsService
                 ("ROLE_"+userTypeMapper.selectByPrimaryKey(user.getTypeid()).getTypename());
         authorities.add(grantedAuthority);
 
-        return new User(String.valueOf(user.getUserid()),"{noop}"+user.getPassword(),authorities);
+        return new MyUser(String.valueOf(user.getUserid()),user.getPassword(),authorities);
     }
 }
