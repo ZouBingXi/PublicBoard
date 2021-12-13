@@ -14,6 +14,7 @@ public class AuthenticationUtil {
   public Authentication getAuthentication() {
     return SecurityContextHolder.getContext().getAuthentication();
   }
+  
 
   /**
    * 获取当前登录用户的用户ID

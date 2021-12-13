@@ -1,5 +1,6 @@
 package cn.szuer.publicboard.mapper;
 
+import cn.szuer.publicboard.model.NewsType;
 import cn.szuer.publicboard.model.SubjectType;
 import cn.szuer.publicboard.model.SubjectTypeExample;
 import java.util.List;
@@ -29,4 +30,6 @@ public interface SubjectTypeMapper {
     int updateByPrimaryKeySelective(SubjectType record);
 
     int updateByPrimaryKey(SubjectType record);
+
+    List<SubjectType> selectAll();
 }

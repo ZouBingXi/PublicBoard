@@ -100,15 +100,15 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
-    <!-- minio sdk -->
 
-    <dependency>
-      <groupId>io.minio</groupId>
-      <artifactId>minio</artifactId>
-      <version>7.0.2</version>
-  </dependency>
-    
+		<!-- minio sdk -->
+
+		<dependency>
+			<groupId>io.minio</groupId>
+			<artifactId>minio</artifactId>
+			<version>7.0.2</version>
+		</dependency>
+
 		<!-- dozer -->
 		<!-- <dependency>
 			<groupId>com.github.dozermapper</groupId>

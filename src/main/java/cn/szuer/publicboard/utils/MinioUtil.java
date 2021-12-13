@@ -1,5 +1,6 @@
 package cn.szuer.publicboard.utils;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.InvalidKeyException;
@@ -13,10 +14,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.xmlpull.v1.XmlPullParserException;
 
+
 import cn.szuer.publicboard.reponse.BaseResponse;
 import io.minio.MinioClient;
 import io.minio.PutObjectOptions;
 import io.minio.errors.MinioException;
+
+import io.minio.errors.InvalidEndpointException;
+import io.minio.errors.InvalidPortException;
+import lombok.SneakyThrows;
+import org.checkerframework.checker.units.qual.A;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.SneakyThrows;
 
 
@@ -53,6 +64,15 @@ public class MinioUtil {
     private String bucketName;
 
 
+    private static MinioClient instance ;
+    public MinioClient getInstance() throws InvalidPortException, InvalidEndpointException {
+        if (instance == null) {
+            instance = new MinioClient(endPoint,accessKey,secretKey);
+        }
+        return instance;
+        
+    }
+        
     @SneakyThrows
     public BaseResponse<String> uploadAvatar(MultipartFile multipartFile, String path){
 
@@ -82,11 +102,13 @@ public class MinioUtil {
            System.out.println("Error occurred: " + e);
            return new BaseResponse<String>(9001, "上传失败",  null);
         }
+
     }
 
     @SneakyThrows
     public BaseResponse<List<String>> uploadFile(List<MultipartFile> multipartFiles, String path){
         try{
+
            //使用MinIO服务的URL，端口，Access key和Secret key创建一个MinioClient对象
            MinioClient minioClient = new MinioClient(endPoint, accessKey, secretKey);
             // 检查存储桶是否已经存在
@@ -112,5 +134,35 @@ public class MinioUtil {
         }
     }
 
-    
+
+    /**
+     * 获取单张图片url
+     * @param uuid
+     * @return
+     * @throws Exception
+     */
+    public String getDownloadUrl(String uuid,String path) throws Exception {
+        return endPoint+bucketName+"/"+path+"/"+uuid;
+    }
+
+    /**
+     * 批量获取图片url
+     * @param uuids
+     * @return
+     * @throws Exception
+     */
+    public List<String> getDownloadUrls(List<String> uuids,String path) throws Exception {
+
+        List<String> urlList=new ArrayList<>();
+
+        //通过imgName从服务器获取下载url
+        for (String uuid:uuids) {
+
+            //获取图片下载url
+            String url = endPoint+bucketName+"/"+path+"/"+uuid;
+            urlList.add(url);
+        }
+        return urlList;
+    }
+
 }
