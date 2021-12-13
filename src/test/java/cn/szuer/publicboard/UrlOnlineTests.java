@@ -168,7 +168,7 @@ public class UrlOnlineTests {
          *  测试用例1：登录成功
          */
         registerParam.setUserid(2019010101);
-        registerParam.setPassword("1234");
+        registerParam.setPassword("123456789");
         System.out.println("测试用例1:"+registerParam);
         responseEntity = template.postForEntity(url,registerParam,BaseResponse.class);
         //assert测试
@@ -190,7 +190,7 @@ public class UrlOnlineTests {
          assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
          //getbody获得响应体，getCode获得相应体的状态码，getMsg获得响应体中的信息
          assertEquals(responseEntity.getBody().getCode(), 500);
-         assertEquals(responseEntity.getBody().getMsg(), "登陆失败,请检查用户名或密码");
+         assertEquals(responseEntity.getBody().getMsg(), "登录失败,用户名或密码有误");
 
       }catch(Exception e)
       {
@@ -274,6 +274,9 @@ public class UrlOnlineTests {
         e.printStackTrace();
     }
     }
+
+
+
 
     /**
      * 编辑话题接口单元测试

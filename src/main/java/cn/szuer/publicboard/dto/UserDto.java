@@ -27,6 +27,20 @@ public class UserDto {
     private String username;
 
     /**
+     * 邮箱
+     * @mock 2019192000@szu.edu.cn
+     */
+    private String email;
+
+
+    /**
+     * 头像
+     * @mock "05fe71557e164b32b503708271365dfd.png"
+     */
+    private String headimage;
+
+
+    /**
      * 用户状态
      * @mock 封禁状态
      */

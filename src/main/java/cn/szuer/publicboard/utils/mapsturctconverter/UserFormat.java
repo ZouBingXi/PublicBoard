@@ -1,5 +1,6 @@
 package cn.szuer.publicboard.utils.mapsturctconverter;
 
+import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,13 +15,13 @@ public class UserFormat {
     private UserTypeMapper userTypeMapper;
 
     /**
-     * 将Byte转换成字符串
+     * 将boolean转换成字符串
      * @param banstate
      * @return
      */
-    public String ByteToString(Byte banstate)
+    public String ByteToString(Boolean banstate)
     {
-        if(banstate==1)
+        if(banstate)
             return "封禁状态";
         else
             return "正常状态";
@@ -36,4 +37,11 @@ public class UserFormat {
         //返回用户表中usertype对应的用户类型名称
         return userTypeMapper.selectByPrimaryKey(typeid).getTypename(); 
     }
+
+    @Named("uuid2url")
+    public String UUIDtoURL(String headimage)
+    {
+      return "http://120.78.10.173:9000/test/avatar/" + headimage;
+    }
+
 }
