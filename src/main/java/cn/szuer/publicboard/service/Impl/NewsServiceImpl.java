@@ -299,7 +299,7 @@ public class NewsServiceImpl implements NewsService {
             //获取帖子图像uuid
             NewsImageExample example1 = new NewsImageExample();
             NewsImageExample.Criteria criteria1 = example1.createCriteria();
-            criteria.andNewsidEqualTo(newsInfo.getNewsid());
+            criteria1.andNewsidEqualTo(newsInfo.getNewsid());
             List<NewsImage> imgs = newsImageMapper.selectByExample(example1);
             List<String> uuids  = new ArrayList<>();
             for (NewsImage img:imgs)
@@ -342,6 +342,7 @@ public class NewsServiceImpl implements NewsService {
             newsSendDto.setTopstate(newsInfo.getTopstate());
             newsSendDto.setHotstate(newsInfo.getHotstate());
             newsSendDto.setImgUrls(imgList);
+            newsSendDto.setContent(newsInfo.getContent());
             //将Date类型转换成时间戳
             SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd");
             String time = format.format(newsInfo.getSendtime());

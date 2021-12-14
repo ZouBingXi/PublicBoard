@@ -290,7 +290,7 @@ public class SubjectServiceImpl implements SubjectService {
             //获取话题图像uuid
             SubjectImageExample example1 = new SubjectImageExample();
             SubjectImageExample.Criteria criteria1 = example1.createCriteria();
-            criteria.andSubjectidEqualTo(subjectInfo.getSubjectid());
+            criteria1.andSubjectidEqualTo(subjectInfo.getSubjectid());
             List<SubjectImage> imgs = subjectImageMapper.selectByExample(example1);
             List<String> uuids  = new ArrayList<>();
             for (SubjectImage img:imgs)
@@ -333,6 +333,7 @@ public class SubjectServiceImpl implements SubjectService {
             subjectSendDto.setTopstate(subjectInfo.getTopstate());
             subjectSendDto.setHotstate(subjectInfo.getHotstate());
             subjectSendDto.setImgUrls(imgList);
+            subjectSendDto.setContent(subjectInfo.getContent());
             //将Date类型转换成时间戳
             SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd");
             String time = format.format(subjectInfo.getSendtime());

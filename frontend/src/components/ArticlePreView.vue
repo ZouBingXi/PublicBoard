@@ -7,6 +7,7 @@
       <p v-text="content"/>
       <el-avatar v-for="item in image" :src="item" fit="fill" :size="150" shape="square"></el-avatar>
     </router-link>
+    <el-divider></el-divider>
   </div>
 </template>
 
