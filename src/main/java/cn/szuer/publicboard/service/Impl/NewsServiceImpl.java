@@ -285,7 +285,7 @@ public class NewsServiceImpl implements NewsService {
         NewsInfoExample example = new NewsInfoExample();
         NewsInfoExample.Criteria criteria = example.createCriteria();
         criteria.andNewstypeidEqualTo(typeid);
-        List<NewsInfo> newsInfos = newsInfoMapper.selectByExample(example);
+        List<NewsInfo> newsInfos = newsInfoMapper.selectByExampleWithBLOBs(example);
 
         //判断这种类型是否有帖子
         if (newsInfos.size()==0)

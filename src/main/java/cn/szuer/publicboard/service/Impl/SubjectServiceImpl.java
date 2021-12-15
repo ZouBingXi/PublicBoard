@@ -276,7 +276,7 @@ public class SubjectServiceImpl implements SubjectService {
         SubjectInfoExample example = new SubjectInfoExample();
         SubjectInfoExample.Criteria criteria = example.createCriteria();
         criteria.andSubjecttypeidEqualTo(typeid);
-        List<SubjectInfo> subjectInfos = subjectInfoMapper.selectByExample(example);
+        List<SubjectInfo> subjectInfos = subjectInfoMapper.selectByExampleWithBLOBs(example);
 
         //判断这种类型是否有话题
         if (subjectInfos.size()==0)
