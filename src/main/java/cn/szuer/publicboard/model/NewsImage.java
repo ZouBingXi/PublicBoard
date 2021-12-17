@@ -3,8 +3,8 @@ package cn.szuer.publicboard.model;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class NewsImage {
     private String imageuuid;
 

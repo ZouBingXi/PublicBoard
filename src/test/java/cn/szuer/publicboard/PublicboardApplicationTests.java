@@ -4,16 +4,13 @@ import java.util.List;
 
 import cn.szuer.publicboard.dto.NewsSendDto;
 import cn.szuer.publicboard.dto.param.AddNewsParam;
-import cn.szuer.publicboard.dto.param.AddSubjectParam;
 import cn.szuer.publicboard.dto.param.LoginParam;
 import cn.szuer.publicboard.mapper.*;
 import cn.szuer.publicboard.model.*;
 import cn.szuer.publicboard.service.MyUser;
 import cn.szuer.publicboard.service.NewsService;
-import cn.szuer.publicboard.service.SubjectService;
 import cn.szuer.publicboard.utils.AuthenticationUtil;
 import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
-import cn.szuer.publicboard.utils.mapsturctconverter.SubjectConverter;
 import com.github.pagehelper.PageInfo;
 
 // import com.github.pagehelper.PageInfo;
@@ -44,9 +41,6 @@ class PublicboardApplicationTests {
 	private UserService userService;
 
 	@Autowired
-	private SubjectService subjectService;
-
-	@Autowired
 	private NewsService newsService;
 
 	// @Autowired
@@ -60,22 +54,14 @@ class PublicboardApplicationTests {
 	private UserInfoMapper userInfoMapper;
 
 	@Autowired(required=false)
-	private SubjectInfoMapper subjectInfoMapper;
-	
-	@Autowired(required=false)
 	private NewsInfoMapper newsInfoMapper;
 
-	@Autowired(required=false)
-	SubjectTypeMapper subjectTypeMapper = null;
 
 	@Autowired(required=false)
 	NewsTypeMapper newsTypeMapper = null;
 
 	@Autowired
 	private UserConverter userConverter;
-
-	@Autowired(required=false)
-	private SubjectConverter subjectConverter;
 
 	@Autowired(required=false)
 	private NewsConverter newsConverter;
@@ -128,48 +114,6 @@ class PublicboardApplicationTests {
 		// System.out.println(userType.toString());
 	}
 
-	@Test
-	//测试编辑话题功能
-	void addSubject(){
-		try{
-			String url = "http://localhost/subject/add";
-
-			//初始化测试用例1
-			AddSubjectParam addSubjectParam= new AddSubjectParam();
-			addSubjectParam.setUserid(2019010101);
-			addSubjectParam.setSubjecttitle("标题：测试话题");
-			addSubjectParam.setContent("内容：测试话题");
-			addSubjectParam.setSubjecttypeid(1);
-			String res = restTemplate.postForObject(url, addSubjectParam, String.class);
-			System.out.println(res);//打印测试结果
-
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-	}
-
-	@Test
-		//测试controller
-	void addSubjectcon() {
-		try {
-
-
-
-			//初始化测试用例1
-			AddSubjectParam addSubjectParam = new AddSubjectParam();
-			addSubjectParam.setUserid(2019010101);
-			addSubjectParam.setSubjecttitle("标题：测试话题");
-			addSubjectParam.setContent("内容：测试话题");
-			addSubjectParam.setSubjecttypeid(1);
-			int res =subjectService.add(addSubjectParam);
-			System.out.println(res);//打印测试结果
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Test
 		//测试帖子mapper结构

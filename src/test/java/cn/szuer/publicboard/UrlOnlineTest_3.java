@@ -2,7 +2,6 @@ package cn.szuer.publicboard;
 
 import cn.szuer.publicboard.dto.NewsSendDto;
 import cn.szuer.publicboard.dto.param.AddNewsParam;
-import cn.szuer.publicboard.dto.param.AddSubjectParam;
 import cn.szuer.publicboard.dto.param.RegisterParam;
 
 import cn.szuer.publicboard.service.NewsService;
@@ -200,131 +199,6 @@ public class UrlOnlineTest_3 {
         }
     }
 
-    /**
-     * 查看话题详情接口单元测试
-     */
-    @Test
-    public void testViewSubjectDetails() throws IOException{
-        try{
-
-            HttpHeaders headers = new HttpHeaders();
-            System.out.println(cookies);
-            //请求头添加cookie，用于传输Sessionid
-            headers.put(HttpHeaders.COOKIE,cookies);
-            HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
-            String url;
-            /**
-             * 测试用例1：用户被禁用，获取失败
-             */
-            //合成get请求url
-            url = "http://localhost/subject/view?userid=2019040404&subjectid=3";
-
-            ResponseEntity<BaseResponse> entity1 = template.exchange(url, HttpMethod.GET, httpEntity, BaseResponse.class);
-            System.err.println(entity1.getBody().getData().toString());
-
-            //检测HTTP状态码
-            assertEquals(entity1.getStatusCode(), HttpStatus.OK);
-            //检测返回体携带的msg是否与controller中所设一致
-            assertEquals(entity1.getBody().getMsg(), "获取失败！账号处于封禁状态");
-
-            /**
-             * 测试用例2：获取成功
-             */
-            url = "http://localhost/subject/view?userid=2019010101&subjectid=3";
-
-            ResponseEntity<BaseResponse> entity2 = template.exchange(url, HttpMethod.GET, httpEntity, BaseResponse.class);
-            System.err.println(entity2.getBody().getData().toString());
-
-            //检测HTTP状态码
-            assertEquals(entity2.getStatusCode(), HttpStatus.OK);
-            //检测返回体携带的msg是否与controller中所设一致
-            assertEquals(entity2.getBody().getMsg(), "获取成功！");
-
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 查看不同类型话题接口单元测试
-     */
-    @Test
-    public void testViewDiffSubject() throws IOException{
-        try{
-
-            HttpHeaders headers = new HttpHeaders();
-            System.out.println(cookies);
-            //请求头添加cookie，用于传输Sessionid
-            headers.put(HttpHeaders.COOKIE,cookies);
-            HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
-            String url;
-            /**
-             * 测试用例1：该类型没有记录，获取失败
-             */
-            //合成get请求url
-            url = "http://localhost/subject/viewDiffSubject?typeid=3&page=1&size=5";
-
-            ResponseEntity<BaseResponse> entity1 = template.exchange(url, HttpMethod.GET, httpEntity, BaseResponse.class);
-            //System.err.println(entity1.getBody().getData().toString());
-
-            //检测HTTP状态码
-            assertEquals(entity1.getBody().getCode(), 500);
-            //检测返回体携带的msg是否与controller中所设一致
-            assertEquals(entity1.getBody().getMsg(), "该类型包含话题数为0，获取失败！");
-
-            /**
-             * 测试用例2：获取成功
-             */
-            url = "http://localhost/subject/viewDiffSubject?typeid=1&page=1&size=5";
-
-            ResponseEntity<BaseResponse> entity2 = template.exchange(url, HttpMethod.GET, httpEntity, BaseResponse.class);
-            System.err.println(entity2.getBody().getData().toString());
-
-            //检测HTTP状态码
-            assertEquals(entity2.getStatusCode(), HttpStatus.OK);
-            //检测返回体携带的msg是否与controller中所设一致
-            assertEquals(entity2.getBody().getMsg(), "获取成功！");
-
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 获取话题类型单元测试
-     */
-    @Test
-    public void testGetSubjectType() throws IOException{
-        try{
-
-            HttpHeaders headers = new HttpHeaders();
-            System.out.println(cookies);
-            //请求头添加cookie，用于传输Sessionid
-            headers.put(HttpHeaders.COOKIE,cookies);
-            HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
-            String url;
-            /**
-             * 测试用例1：获取成功
-             */
-            //合成get请求url
-            url = "http://localhost/subject/getSubjectType";
-
-            ResponseEntity<BaseResponse> entity1 = template.exchange(url, HttpMethod.GET, httpEntity, BaseResponse.class);
-            System.err.println(entity1.getBody().getData().toString());
-
-            //检测HTTP状态码
-            assertEquals(entity1.getBody().getCode(), 200);
-            //检测返回体携带的msg是否与controller中所设一致
-            assertEquals(entity1.getBody().getMsg(), "获取成功！");
-
-
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
 
 
 }

@@ -165,63 +165,63 @@ public class LogsExample {
             return (Criteria) this;
         }
 
-        public Criteria andUseridIsNull() {
-            addCriterion("userID is null");
+        public Criteria andTargetidIsNull() {
+            addCriterion("targetID is null");
             return (Criteria) this;
         }
 
-        public Criteria andUseridIsNotNull() {
-            addCriterion("userID is not null");
+        public Criteria andTargetidIsNotNull() {
+            addCriterion("targetID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUseridEqualTo(Integer value) {
-            addCriterion("userID =", value, "userid");
+        public Criteria andTargetidEqualTo(Integer value) {
+            addCriterion("targetID =", value, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridNotEqualTo(Integer value) {
-            addCriterion("userID <>", value, "userid");
+        public Criteria andTargetidNotEqualTo(Integer value) {
+            addCriterion("targetID <>", value, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridGreaterThan(Integer value) {
-            addCriterion("userID >", value, "userid");
+        public Criteria andTargetidGreaterThan(Integer value) {
+            addCriterion("targetID >", value, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridGreaterThanOrEqualTo(Integer value) {
-            addCriterion("userID >=", value, "userid");
+        public Criteria andTargetidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("targetID >=", value, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridLessThan(Integer value) {
-            addCriterion("userID <", value, "userid");
+        public Criteria andTargetidLessThan(Integer value) {
+            addCriterion("targetID <", value, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridLessThanOrEqualTo(Integer value) {
-            addCriterion("userID <=", value, "userid");
+        public Criteria andTargetidLessThanOrEqualTo(Integer value) {
+            addCriterion("targetID <=", value, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridIn(List<Integer> values) {
-            addCriterion("userID in", values, "userid");
+        public Criteria andTargetidIn(List<Integer> values) {
+            addCriterion("targetID in", values, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridNotIn(List<Integer> values) {
-            addCriterion("userID not in", values, "userid");
+        public Criteria andTargetidNotIn(List<Integer> values) {
+            addCriterion("targetID not in", values, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridBetween(Integer value1, Integer value2) {
-            addCriterion("userID between", value1, value2, "userid");
+        public Criteria andTargetidBetween(Integer value1, Integer value2) {
+            addCriterion("targetID between", value1, value2, "targetid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridNotBetween(Integer value1, Integer value2) {
-            addCriterion("userID not between", value1, value2, "userid");
+        public Criteria andTargetidNotBetween(Integer value1, Integer value2) {
+            addCriterion("targetID not between", value1, value2, "targetid");
             return (Criteria) this;
         }
 
@@ -235,52 +235,62 @@ public class LogsExample {
             return (Criteria) this;
         }
 
-        public Criteria andOperatetypeEqualTo(Integer value) {
+        public Criteria andOperatetypeEqualTo(String value) {
             addCriterion("operateType =", value, "operatetype");
             return (Criteria) this;
         }
 
-        public Criteria andOperatetypeNotEqualTo(Integer value) {
+        public Criteria andOperatetypeNotEqualTo(String value) {
             addCriterion("operateType <>", value, "operatetype");
             return (Criteria) this;
         }
 
-        public Criteria andOperatetypeGreaterThan(Integer value) {
+        public Criteria andOperatetypeGreaterThan(String value) {
             addCriterion("operateType >", value, "operatetype");
             return (Criteria) this;
         }
 
-        public Criteria andOperatetypeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andOperatetypeGreaterThanOrEqualTo(String value) {
             addCriterion("operateType >=", value, "operatetype");
             return (Criteria) this;
         }
 
-        public Criteria andOperatetypeLessThan(Integer value) {
+        public Criteria andOperatetypeLessThan(String value) {
             addCriterion("operateType <", value, "operatetype");
             return (Criteria) this;
         }
 
-        public Criteria andOperatetypeLessThanOrEqualTo(Integer value) {
+        public Criteria andOperatetypeLessThanOrEqualTo(String value) {
             addCriterion("operateType <=", value, "operatetype");
             return (Criteria) this;
         }
 
-        public Criteria andOperatetypeIn(List<Integer> values) {
+        public Criteria andOperatetypeLike(String value) {
+            addCriterion("operateType like", value, "operatetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeNotLike(String value) {
+            addCriterion("operateType not like", value, "operatetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeIn(List<String> values) {
             addCriterion("operateType in", values, "operatetype");
             return (Criteria) this;
         }
 
-        public Criteria andOperatetypeNotIn(List<Integer> values) {
+        public Criteria andOperatetypeNotIn(List<String> values) {
             addCriterion("operateType not in", values, "operatetype");
             return (Criteria) this;
         }
 
-        public Criteria andOperatetypeBetween(Integer value1, Integer value2) {
+        public Criteria andOperatetypeBetween(String value1, String value2) {
             addCriterion("operateType between", value1, value2, "operatetype");
             return (Criteria) this;
         }
 
-        public Criteria andOperatetypeNotBetween(Integer value1, Integer value2) {
+        public Criteria andOperatetypeNotBetween(String value1, String value2) {
             addCriterion("operateType not between", value1, value2, "operatetype");
             return (Criteria) this;
         }
@@ -352,66 +362,6 @@ public class LogsExample {
 
         public Criteria andOperateinfoNotBetween(String value1, String value2) {
             addCriterion("operateInfo not between", value1, value2, "operateinfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetidIsNull() {
-            addCriterion("targetID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetidIsNotNull() {
-            addCriterion("targetID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetidEqualTo(Integer value) {
-            addCriterion("targetID =", value, "targetid");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetidNotEqualTo(Integer value) {
-            addCriterion("targetID <>", value, "targetid");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetidGreaterThan(Integer value) {
-            addCriterion("targetID >", value, "targetid");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("targetID >=", value, "targetid");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetidLessThan(Integer value) {
-            addCriterion("targetID <", value, "targetid");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetidLessThanOrEqualTo(Integer value) {
-            addCriterion("targetID <=", value, "targetid");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetidIn(List<Integer> values) {
-            addCriterion("targetID in", values, "targetid");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetidNotIn(List<Integer> values) {
-            addCriterion("targetID not in", values, "targetid");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetidBetween(Integer value1, Integer value2) {
-            addCriterion("targetID between", value1, value2, "targetid");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetidNotBetween(Integer value1, Integer value2) {
-            addCriterion("targetID not between", value1, value2, "targetid");
             return (Criteria) this;
         }
 

@@ -5,13 +5,11 @@ import java.util.Date;
 public class Logs {
     private Integer logsid;
 
-    private Integer userid;
+    private Integer targetid;
 
-    private Integer operatetype;
+    private String operatetype;
 
     private String operateinfo;
-
-    private Integer targetid;
 
     private Date operatetime;
 
@@ -23,19 +21,19 @@ public class Logs {
         this.logsid = logsid;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public Integer getTargetid() {
+        return targetid;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setTargetid(Integer targetid) {
+        this.targetid = targetid;
     }
 
-    public Integer getOperatetype() {
+    public String getOperatetype() {
         return operatetype;
     }
 
-    public void setOperatetype(Integer operatetype) {
+    public void setOperatetype(String operatetype) {
         this.operatetype = operatetype;
     }
 
@@ -45,14 +43,6 @@ public class Logs {
 
     public void setOperateinfo(String operateinfo) {
         this.operateinfo = operateinfo;
-    }
-
-    public Integer getTargetid() {
-        return targetid;
-    }
-
-    public void setTargetid(Integer targetid) {
-        this.targetid = targetid;
     }
 
     public Date getOperatetime() {

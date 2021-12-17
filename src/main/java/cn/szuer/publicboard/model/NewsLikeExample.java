@@ -3,14 +3,14 @@ package cn.szuer.publicboard.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubjectImageExample {
+public class NewsLikeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public SubjectImageExample() {
+    public NewsLikeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,133 +104,123 @@ public class SubjectImageExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andImageuuidIsNull() {
-            addCriterion("imageUUID is null");
+        public Criteria andNewsidIsNull() {
+            addCriterion("newsID is null");
             return (Criteria) this;
         }
 
-        public Criteria andImageuuidIsNotNull() {
-            addCriterion("imageUUID is not null");
+        public Criteria andNewsidIsNotNull() {
+            addCriterion("newsID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andImageuuidEqualTo(String value) {
-            addCriterion("imageUUID =", value, "imageuuid");
+        public Criteria andNewsidEqualTo(Integer value) {
+            addCriterion("newsID =", value, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andImageuuidNotEqualTo(String value) {
-            addCriterion("imageUUID <>", value, "imageuuid");
+        public Criteria andNewsidNotEqualTo(Integer value) {
+            addCriterion("newsID <>", value, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andImageuuidGreaterThan(String value) {
-            addCriterion("imageUUID >", value, "imageuuid");
+        public Criteria andNewsidGreaterThan(Integer value) {
+            addCriterion("newsID >", value, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andImageuuidGreaterThanOrEqualTo(String value) {
-            addCriterion("imageUUID >=", value, "imageuuid");
+        public Criteria andNewsidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("newsID >=", value, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andImageuuidLessThan(String value) {
-            addCriterion("imageUUID <", value, "imageuuid");
+        public Criteria andNewsidLessThan(Integer value) {
+            addCriterion("newsID <", value, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andImageuuidLessThanOrEqualTo(String value) {
-            addCriterion("imageUUID <=", value, "imageuuid");
+        public Criteria andNewsidLessThanOrEqualTo(Integer value) {
+            addCriterion("newsID <=", value, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andImageuuidLike(String value) {
-            addCriterion("imageUUID like", value, "imageuuid");
+        public Criteria andNewsidIn(List<Integer> values) {
+            addCriterion("newsID in", values, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andImageuuidNotLike(String value) {
-            addCriterion("imageUUID not like", value, "imageuuid");
+        public Criteria andNewsidNotIn(List<Integer> values) {
+            addCriterion("newsID not in", values, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andImageuuidIn(List<String> values) {
-            addCriterion("imageUUID in", values, "imageuuid");
+        public Criteria andNewsidBetween(Integer value1, Integer value2) {
+            addCriterion("newsID between", value1, value2, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andImageuuidNotIn(List<String> values) {
-            addCriterion("imageUUID not in", values, "imageuuid");
+        public Criteria andNewsidNotBetween(Integer value1, Integer value2) {
+            addCriterion("newsID not between", value1, value2, "newsid");
             return (Criteria) this;
         }
 
-        public Criteria andImageuuidBetween(String value1, String value2) {
-            addCriterion("imageUUID between", value1, value2, "imageuuid");
+        public Criteria andUseridIsNull() {
+            addCriterion("userID is null");
             return (Criteria) this;
         }
 
-        public Criteria andImageuuidNotBetween(String value1, String value2) {
-            addCriterion("imageUUID not between", value1, value2, "imageuuid");
+        public Criteria andUseridIsNotNull() {
+            addCriterion("userID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectidIsNull() {
-            addCriterion("subjectID is null");
+        public Criteria andUseridEqualTo(Integer value) {
+            addCriterion("userID =", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectidIsNotNull() {
-            addCriterion("subjectID is not null");
+        public Criteria andUseridNotEqualTo(Integer value) {
+            addCriterion("userID <>", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectidEqualTo(Integer value) {
-            addCriterion("subjectID =", value, "subjectid");
+        public Criteria andUseridGreaterThan(Integer value) {
+            addCriterion("userID >", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectidNotEqualTo(Integer value) {
-            addCriterion("subjectID <>", value, "subjectid");
+        public Criteria andUseridGreaterThanOrEqualTo(Integer value) {
+            addCriterion("userID >=", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectidGreaterThan(Integer value) {
-            addCriterion("subjectID >", value, "subjectid");
+        public Criteria andUseridLessThan(Integer value) {
+            addCriterion("userID <", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("subjectID >=", value, "subjectid");
+        public Criteria andUseridLessThanOrEqualTo(Integer value) {
+            addCriterion("userID <=", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectidLessThan(Integer value) {
-            addCriterion("subjectID <", value, "subjectid");
+        public Criteria andUseridIn(List<Integer> values) {
+            addCriterion("userID in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectidLessThanOrEqualTo(Integer value) {
-            addCriterion("subjectID <=", value, "subjectid");
+        public Criteria andUseridNotIn(List<Integer> values) {
+            addCriterion("userID not in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectidIn(List<Integer> values) {
-            addCriterion("subjectID in", values, "subjectid");
+        public Criteria andUseridBetween(Integer value1, Integer value2) {
+            addCriterion("userID between", value1, value2, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectidNotIn(List<Integer> values) {
-            addCriterion("subjectID not in", values, "subjectid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectidBetween(Integer value1, Integer value2) {
-            addCriterion("subjectID between", value1, value2, "subjectid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectidNotBetween(Integer value1, Integer value2) {
-            addCriterion("subjectID not between", value1, value2, "subjectid");
+        public Criteria andUseridNotBetween(Integer value1, Integer value2) {
+            addCriterion("userID not between", value1, value2, "userid");
             return (Criteria) this;
         }
     }

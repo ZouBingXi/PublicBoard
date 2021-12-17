@@ -3,8 +3,6 @@ package cn.szuer.publicboard.mapper;
 import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.model.UserInfoExample;
 import java.util.List;
-
-import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -33,4 +31,4 @@ public interface UserInfoMapper {
     int updateByPrimaryKey(UserInfo record);
 
     List<UserInfo> selectAll();
-}
+  }

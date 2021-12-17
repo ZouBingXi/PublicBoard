@@ -3,10 +3,9 @@
 <mapper namespace="cn.szuer.publicboard.mapper.LogsMapper" >
   <resultMap id="BaseResultMap" type="cn.szuer.publicboard.model.Logs" >
     <id column="logsID" property="logsid" jdbcType="INTEGER" />
-    <result column="userID" property="userid" jdbcType="INTEGER" />
-    <result column="operateType" property="operatetype" jdbcType="INTEGER" />
-    <result column="operateInfo" property="operateinfo" jdbcType="VARCHAR" />
     <result column="targetID" property="targetid" jdbcType="INTEGER" />
+    <result column="operateType" property="operatetype" jdbcType="VARCHAR" />
+    <result column="operateInfo" property="operateinfo" jdbcType="VARCHAR" />
     <result column="operateTime" property="operatetime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -68,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    logsID, userID, operateType, operateInfo, targetID, operateTime
+    logsID, targetID, operateType, operateInfo, operateTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.szuer.publicboard.model.LogsExample" >
     select
@@ -101,12 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.szuer.publicboard.model.Logs" >
-    insert into logs (logsID, userID, operateType, 
-      operateInfo, targetID, operateTime
-      )
-    values (#{logsid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{operatetype,jdbcType=INTEGER}, 
-      #{operateinfo,jdbcType=VARCHAR}, #{targetid,jdbcType=INTEGER}, #{operatetime,jdbcType=TIMESTAMP}
-      )
+    insert into logs (logsID, targetID, operateType, 
+      operateInfo, operateTime)
+    values (#{logsid,jdbcType=INTEGER}, #{targetid,jdbcType=INTEGER}, #{operatetype,jdbcType=VARCHAR}, 
+      #{operateinfo,jdbcType=VARCHAR}, #{operatetime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.szuer.publicboard.model.Logs" >
     insert into logs
@@ -114,17 +111,14 @@
       <if test="logsid != null" >
         logsID,
       </if>
-      <if test="userid != null" >
-        userID,
+      <if test="targetid != null" >
+        targetID,
       </if>
       <if test="operatetype != null" >
         operateType,
       </if>
       <if test="operateinfo != null" >
         operateInfo,
-      </if>
-      <if test="targetid != null" >
-        targetID,
       </if>
       <if test="operatetime != null" >
         operateTime,
@@ -134,17 +128,14 @@
       <if test="logsid != null" >
         #{logsid,jdbcType=INTEGER},
       </if>
-      <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
+      <if test="targetid != null" >
+        #{targetid,jdbcType=INTEGER},
       </if>
       <if test="operatetype != null" >
-        #{operatetype,jdbcType=INTEGER},
+        #{operatetype,jdbcType=VARCHAR},
       </if>
       <if test="operateinfo != null" >
         #{operateinfo,jdbcType=VARCHAR},
-      </if>
-      <if test="targetid != null" >
-        #{targetid,jdbcType=INTEGER},
       </if>
       <if test="operatetime != null" >
         #{operatetime,jdbcType=TIMESTAMP},
@@ -163,17 +154,14 @@
       <if test="record.logsid != null" >
         logsID = #{record.logsid,jdbcType=INTEGER},
       </if>
-      <if test="record.userid != null" >
-        userID = #{record.userid,jdbcType=INTEGER},
+      <if test="record.targetid != null" >
+        targetID = #{record.targetid,jdbcType=INTEGER},
       </if>
       <if test="record.operatetype != null" >
-        operateType = #{record.operatetype,jdbcType=INTEGER},
+        operateType = #{record.operatetype,jdbcType=VARCHAR},
       </if>
       <if test="record.operateinfo != null" >
         operateInfo = #{record.operateinfo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.targetid != null" >
-        targetID = #{record.targetid,jdbcType=INTEGER},
       </if>
       <if test="record.operatetime != null" >
         operateTime = #{record.operatetime,jdbcType=TIMESTAMP},
@@ -186,10 +174,9 @@
   <update id="updateByExample" parameterType="map" >
     update logs
     set logsID = #{record.logsid,jdbcType=INTEGER},
-      userID = #{record.userid,jdbcType=INTEGER},
-      operateType = #{record.operatetype,jdbcType=INTEGER},
-      operateInfo = #{record.operateinfo,jdbcType=VARCHAR},
       targetID = #{record.targetid,jdbcType=INTEGER},
+      operateType = #{record.operatetype,jdbcType=VARCHAR},
+      operateInfo = #{record.operateinfo,jdbcType=VARCHAR},
       operateTime = #{record.operatetime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -198,17 +185,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.szuer.publicboard.model.Logs" >
     update logs
     <set >
-      <if test="userid != null" >
-        userID = #{userid,jdbcType=INTEGER},
+      <if test="targetid != null" >
+        targetID = #{targetid,jdbcType=INTEGER},
       </if>
       <if test="operatetype != null" >
-        operateType = #{operatetype,jdbcType=INTEGER},
+        operateType = #{operatetype,jdbcType=VARCHAR},
       </if>
       <if test="operateinfo != null" >
         operateInfo = #{operateinfo,jdbcType=VARCHAR},
-      </if>
-      <if test="targetid != null" >
-        targetID = #{targetid,jdbcType=INTEGER},
       </if>
       <if test="operatetime != null" >
         operateTime = #{operatetime,jdbcType=TIMESTAMP},
@@ -218,10 +202,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.szuer.publicboard.model.Logs" >
     update logs
-    set userID = #{userid,jdbcType=INTEGER},
-      operateType = #{operatetype,jdbcType=INTEGER},
+    set targetID = #{targetid,jdbcType=INTEGER},
+      operateType = #{operatetype,jdbcType=VARCHAR},
       operateInfo = #{operateinfo,jdbcType=VARCHAR},
-      targetID = #{targetid,jdbcType=INTEGER},
       operateTime = #{operatetime,jdbcType=TIMESTAMP}
     where logsID = #{logsid,jdbcType=INTEGER}
   </update>
