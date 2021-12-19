@@ -2,6 +2,7 @@ package cn.szuer.publicboard.controller;
 
 import java.util.List;
 
+import cn.szuer.publicboard.dto.param.ChangePasswordParam;
 import com.alibaba.druid.sql.ast.statement.SQLIfStatement.Else;
 import com.fasterxml.jackson.databind.JsonSerializable.Base;
 import com.github.pagehelper.PageInfo;
@@ -127,6 +128,23 @@ public class UserController
             return new BaseResponse(200, "个人信息更新成功");
          }
 
+    }
+
+    /**
+     * 修改密码
+     * @param param
+     * @return
+     */
+    @PostMapping("/changepassword")
+    public BaseResponse changePassword(@RequestBody ChangePasswordParam param)
+    {
+        boolean ifSuccess=userService.changePassword(param);
+
+        if (ifSuccess)
+        {
+            return new BaseResponse(200,"修改成功");
+        }
+        return new BaseResponse(500,"原密码错误");
     }
 
 

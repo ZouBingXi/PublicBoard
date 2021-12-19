@@ -1,6 +1,7 @@
 package cn.szuer.publicboard.service.Impl;
 
 import cn.szuer.publicboard.dto.UserDto;
+import cn.szuer.publicboard.dto.param.ChangePasswordParam;
 import cn.szuer.publicboard.dto.param.RegisterParam;
 import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.model.UserInfo;
@@ -139,6 +140,24 @@ public class UserServiceImpl implements UserService {
             return 22; 
 
     }
-    
 
+    @Override
+    public boolean changePassword(ChangePasswordParam param)
+    {
+        //从数据库中找到用户密码
+        Integer userid=authenticationUtil.getAuthenticatedId();
+        UserInfo user=userInfoMapper.selectByPrimaryKey(userid);
+
+        //与输入的密码做匹配
+        boolean ifMatch=encoder.matches(param.getOldPassword(),user.getPassword());
+
+        if (ifMatch)
+        {
+            //如果匹配则更新密码
+            user.setPassword(encoder.encode(param.getNewPassword()));
+            userInfoMapper.updateByPrimaryKey(user);
+        }
+
+        return ifMatch;
+    }
 }

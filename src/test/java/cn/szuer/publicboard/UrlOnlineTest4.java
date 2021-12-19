@@ -1,7 +1,10 @@
 package cn.szuer.publicboard;
 
+import cn.szuer.publicboard.dto.param.ChangePasswordParam;
 import cn.szuer.publicboard.dto.param.RegisterParam;
 import cn.szuer.publicboard.dto.param.SearchParam;
+
+
 import cn.szuer.publicboard.reponse.BaseResponse;
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -56,6 +59,49 @@ public class UrlOnlineTest4
         ResponseEntity<BaseResponse> responseEntity = template.postForEntity(url,requEntity,BaseResponse.class);
         cookies.add(responseEntity.getHeaders().get("set-cookie").get(0).toString());
         System.out.println(cookies);
+    }
+
+    @Test
+    public void ChangePasswordTest()
+    {
+        String url = "http://localhost/user/changepassword";
+        ChangePasswordParam changePasswordParam= new ChangePasswordParam();
+        ResponseEntity<BaseResponse> responseEntity;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        //请求头添加cookie，用于传输Sessionid
+        headers.put(HttpHeaders.COOKIE,cookies);
+        HttpEntity<String> httpEntity;
+
+        /**
+         * 测试用例1：原密码错误，修改失败
+         */
+        //合成get请求url
+        changePasswordParam.setOldPassword("111111111");
+        changePasswordParam.setNewPassword("123456789");
+        httpEntity = new HttpEntity<>(JSON.toJSONString(changePasswordParam), headers);
+        responseEntity = template.exchange(url,HttpMethod.POST,httpEntity,BaseResponse.class);
+
+        //检测HTTP状态码
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+        //检测返回体携带的msg是否与controller中所设一致
+        assertEquals(responseEntity.getBody().getCode(), 500);
+        assertEquals(responseEntity.getBody().getMsg(), "原密码错误");
+
+        /**
+         * 测试用例2：修改成功
+         */
+        //合成get请求url
+        changePasswordParam.setOldPassword("123456789");
+        changePasswordParam.setNewPassword("123456789");
+        httpEntity = new HttpEntity<>(JSON.toJSONString(changePasswordParam), headers);
+        responseEntity = template.exchange(url,HttpMethod.POST,httpEntity,BaseResponse.class);
+
+        //检测HTTP状态码
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+        //检测返回体携带的msg是否与controller中所设一致
+        assertEquals(responseEntity.getBody().getCode(), 200);
+        assertEquals(responseEntity.getBody().getMsg(), "修改成功");
     }
 
     /**
