@@ -1,20 +1,19 @@
 package cn.szuer.publicboard;
 
-import java.util.List;
-
 import cn.szuer.publicboard.dto.NewsSendDto;
-import cn.szuer.publicboard.dto.param.AddNewsParam;
+import cn.szuer.publicboard.dto.UserDto;
 import cn.szuer.publicboard.dto.param.LoginParam;
-import cn.szuer.publicboard.mapper.*;
-import cn.szuer.publicboard.model.*;
-import cn.szuer.publicboard.service.MyUser;
+import cn.szuer.publicboard.mapper.NewsInfoMapper;
+import cn.szuer.publicboard.mapper.NewsTypeMapper;
+import cn.szuer.publicboard.mapper.UserInfoMapper;
+import cn.szuer.publicboard.model.NewsInfo;
+import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.service.NewsService;
+import cn.szuer.publicboard.service.UserService;
 import cn.szuer.publicboard.utils.AuthenticationUtil;
 import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
+import cn.szuer.publicboard.utils.mapsturctconverter.UserConverter;
 import com.github.pagehelper.PageInfo;
-
-// import com.github.pagehelper.PageInfo;
-
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +25,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-import cn.szuer.publicboard.dto.UserDto;
-import cn.szuer.publicboard.dto.param.RegisterParam;
-
-import cn.szuer.publicboard.service.UserService;
-import cn.szuer.publicboard.utils.mapsturctconverter.UserConverter;
+import java.util.List;
 
 
 @RunWith(SpringRunner.class)

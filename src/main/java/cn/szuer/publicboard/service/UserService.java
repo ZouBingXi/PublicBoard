@@ -2,6 +2,7 @@ package cn.szuer.publicboard.service;
 
 import java.util.List;
 
+import cn.szuer.publicboard.dto.param.ChangePasswordParam;
 import com.github.pagehelper.PageInfo;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -24,5 +25,7 @@ public interface UserService {
     UserDto getProfile();
 
     int updateProfile(MultipartFile multipartFile, UserDto userDto);
+
+    boolean changePassword(ChangePasswordParam param);
 
 }
