@@ -3,6 +3,7 @@ package cn.szuer.publicboard.service;
 import cn.szuer.publicboard.dto.NewsSendDto;
 import cn.szuer.publicboard.dto.TypeSendDto;
 import cn.szuer.publicboard.dto.param.AddNewsParam;
+import cn.szuer.publicboard.dto.param.SearchParam;
 import cn.szuer.publicboard.reponse.BaseResponse;
 import com.github.pagehelper.PageInfo;
 
@@ -19,4 +20,5 @@ public interface NewsService {
     BaseResponse<List<TypeSendDto>> getNewsType();
     int add(AddNewsParam addNewsParam);
     int addWithImages(List<MultipartFile> multipartFiles, AddNewsParam addNewsParam);
+    List<NewsSendDto> searchNews(SearchParam param);
 }

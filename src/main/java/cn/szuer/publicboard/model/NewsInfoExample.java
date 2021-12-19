@@ -774,6 +774,11 @@ public class NewsInfoExample {
             addCriterion("examineState not between", value1, value2, "examinestate");
             return (Criteria) this;
         }
+
+        public Criteria andContentLike(String value) {
+            addCriterion("content like", value, "content");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
