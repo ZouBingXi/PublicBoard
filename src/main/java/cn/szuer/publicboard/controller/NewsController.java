@@ -3,6 +3,7 @@ package cn.szuer.publicboard.controller;
 import cn.szuer.publicboard.dto.NewsSendDto;
 import cn.szuer.publicboard.dto.TypeSendDto;
 import cn.szuer.publicboard.dto.param.AddNewsParam;
+import cn.szuer.publicboard.dto.param.SearchParam;
 import cn.szuer.publicboard.reponse.BaseResponse;
 import cn.szuer.publicboard.service.NewsService;
 import java.util.List;
@@ -138,6 +139,17 @@ public class NewsController
         }
 
         return new BaseResponse(500, "发送失败，未知错误！");
+    }
+
+    @PostMapping("/search")
+    public BaseResponse searchNews(@RequestBody SearchParam param)
+    {
+        List<NewsSendDto> pageInfo=newsService.searchNews(param);
+        if (pageInfo==null)
+        {
+            return new BaseResponse(500,"没有相关的信息");
+        }
+        return new BaseResponse<List<NewsSendDto>>(200,"搜索成功",pageInfo);
     }
 
 }
