@@ -221,7 +221,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public PageInfo<NewsSendDto> searchNews(SearchParam param)
     {
-        PageHelper.startPage(param.getPageNum(),param.getPageSize());
+       
 
         //根据类型名称,查找对应类型id
         String typeName=param.getType();
@@ -291,6 +291,11 @@ public class NewsServiceImpl implements NewsService {
         // List<NewsInfo> list=newsInfoMapper.selectByExampleWithBLOBs(example);
         // if (list==null||list.size()==0)
         //     return null;
+
+        //PageHelper.startPage只对该语句以后的第一个查询语句得到的数据进行分页,
+        PageHelper.startPage(param.getPageNum(),param.getPageSize());
+
+        //根据上述查询条件进行搜索
         List<NewsInfo> newsInfos = newsInfoMapper.selectByExampleWithBLOBs(example);
         if(newsInfos==null||newsInfos.size()==0)
           return null;
@@ -302,7 +307,6 @@ public class NewsServiceImpl implements NewsService {
         //     resList.add(newsUtil.NewsInfo2NewsSendDto(newsInfo));
         // }
         List<NewsSendDto> newsSendDtos = newsUtil.NewsInfos2NewsSendDtos(newsInfos);
-        
         PageInfo pageInfo = new PageInfo<>(newsInfos);
         pageInfo.setList(newsSendDtos);
 

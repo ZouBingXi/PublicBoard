@@ -189,9 +189,9 @@ public class UserController
 
     
     /**
-     * 
-     * @param to
-     * @param flag "exist"表示需要邮箱已注册(忘记密码)，"noexist"表示需要邮箱未注册(注册，修改邮箱)
+     * 发送验证码
+     * @param to   验证码发往的邮箱
+     * @param flag "exist"表示需要邮箱已注册(忘记密码);     "noexist"表示需要邮箱未注册(注册，修改邮箱)
      * @return
      */
     @GetMapping("/sendcode")
