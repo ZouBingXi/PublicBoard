@@ -29,4 +29,16 @@ public class SearchParam
      * @mock 校园卡丢失
      */
     private String type;
+
+    /**
+     * 每页的记录数
+     * @mock 8
+     */
+    private Integer pageSize;
+
+    /**
+     * 当前页数
+     * @mock 1
+     */
+    private Integer pageNum;
 }

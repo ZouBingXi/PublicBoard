@@ -1,10 +1,7 @@
 package cn.szuer.publicboard;
 
 import cn.szuer.publicboard.dto.param.ChangePasswordParam;
-import cn.szuer.publicboard.dto.param.RegisterParam;
 import cn.szuer.publicboard.dto.param.SearchParam;
-
-
 import cn.szuer.publicboard.reponse.BaseResponse;
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -112,6 +109,8 @@ public class UrlOnlineTest4
     {
         String url = "http://localhost:80/news/search";
         SearchParam searchParam= new SearchParam();
+        searchParam.setPageNum(1);
+        searchParam.setPageSize(8);
         ResponseEntity<BaseResponse> responseEntity;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -164,6 +163,22 @@ public class UrlOnlineTest4
         //getbody获得响应体，getCode获得相应体的状态码，getMsg获得响应体中的信息
         assertEquals(responseEntity.getBody().getCode(), 500);
         assertEquals(responseEntity.getBody().getMsg(), "没有相关的信息");
+
+        /**
+         *  测试用例4：没有关键字,返回所有帖子信息
+         */
+        searchParam.setKey(null);
+        searchParam.setSort(2);
+        searchParam.setType("校园卡丢失");
+        System.out.println("测试用例3:"+searchParam);
+        httpEntity = new HttpEntity<String>(JSON.toJSONString(searchParam), headers);
+        responseEntity = template.exchange(url,HttpMethod.POST,httpEntity,BaseResponse.class);
+        //assert测试
+        //getStatusCode获得响应状态，该响应状态是HTTP自带的，并非服务端设置的
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+        //getbody获得响应体，getCode获得相应体的状态码，getMsg获得响应体中的信息
+        assertEquals(responseEntity.getBody().getCode(), 200);
+        assertEquals(responseEntity.getBody().getMsg(), "搜索成功");
 
     }
 }

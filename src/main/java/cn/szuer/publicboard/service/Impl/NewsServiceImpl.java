@@ -18,6 +18,7 @@ import cn.szuer.publicboard.service.NewsService;
 
 import cn.szuer.publicboard.utils.AuthenticationUtil;
 import cn.szuer.publicboard.utils.MinioUtil;
+import cn.szuer.publicboard.utils.NewsUtil;
 import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -55,10 +56,17 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     private MinioUtil minioUtil;
 
+    @Autowired
+    private NewsUtil newsUtil;
+
     @Override
     public List<NewsSendDto> getAll() {
         List<NewsInfo> newsInfos = newsInfoMapper.selectAll();
-        List<NewsSendDto> newsSendDtos = newsConverter.NewsInfos2NewsSendDtos(newsInfos);
+        List<NewsSendDto> newsSendDtos = new ArrayList<>();
+        for (NewsInfo newsInfo:newsInfos)
+        {
+            newsSendDtos.add(newsUtil.NewsInfo2NewsSendDto(newsInfo));
+        }
         return newsSendDtos;
     }
 
@@ -199,8 +207,10 @@ public class NewsServiceImpl implements NewsService {
      * @return
      */
     @Override
-    public List<NewsSendDto> searchNews(SearchParam param)
+    public PageInfo<NewsSendDto> searchNews(SearchParam param)
     {
+        PageHelper.startPage(param.getPageNum(),param.getPageSize());
+
         //根据类型名称,查找对应类型id
         String typeName=param.getType();
         Integer type=null;
@@ -239,18 +249,27 @@ public class NewsServiceImpl implements NewsService {
         }
 
         //将关键词根据空格分开,拼接成模糊查询
-        String[] keys=param.getKey().split("\\s+");
-        StringBuilder query=new StringBuilder();
-        query.append("%");
-        for (String s:keys)
-            query.append(s).append("%");
-        String likeQuery=query.toString();
+        String likeQuery=null;
+        if (param.getKey()!=null)
+        {
+            String[] keys=param.getKey().split("\\s+");
+            StringBuilder query=new StringBuilder();
+            query.append("%");
+            for (String s : keys)
+                query.append(s).append("%");
+            likeQuery=query.toString();
+        }
 
         //条件查询
         NewsInfoExample example=new NewsInfoExample();
         example.setOrderByClause(sort);                 //设置排序
-        NewsInfoExample.Criteria criteria1=example.or().andNewstitleLike(likeQuery);  //设置标题模糊查询
-        NewsInfoExample.Criteria criteria2=example.or().andContentLike(likeQuery);    //设置帖子内容模糊查询
+        NewsInfoExample.Criteria criteria1=example.or();  //设置标题模糊查询
+        NewsInfoExample.Criteria criteria2=example.or();    //设置帖子内容模糊查询
+        if (likeQuery!=null)
+        {
+            criteria1.andNewstitleLike(likeQuery);
+            criteria2.andContentLike(likeQuery);
+        }
         if (type!=null)
         {
             criteria1.andNewstypeidEqualTo(type);
@@ -265,10 +284,10 @@ public class NewsServiceImpl implements NewsService {
         List<NewsSendDto> resList=new ArrayList<>();
         for (NewsInfo newsInfo:list)
         {
-            resList.add(NewsInfo2NewsSendDto(newsInfo));
+            resList.add(newsUtil.NewsInfo2NewsSendDto(newsInfo));
         }
 
-        return resList;
+        return new PageInfo<>(resList);
     }
 
     @Override
@@ -285,7 +304,7 @@ public class NewsServiceImpl implements NewsService {
         if(user.getBanstate()==Boolean.TRUE)
             return new BaseResponse<>(500,"获取失败！账号处于封禁状态",newsSendDto);
 
-        NewsInfo2NewsSendDto(newsInfo);
+        newsUtil.NewsInfo2NewsSendDto(newsInfo);
 
         //更新浏览量
         int res = newsInfoMapper.updateViewNum(newsInfo.getNewsid(),newsInfo.getViewnum()+1);
@@ -316,7 +335,7 @@ public class NewsServiceImpl implements NewsService {
         for (NewsInfo newsInfo:newsInfos)
         {
             //将newsSendDto添加进List里
-            newsSendDtos.add(NewsInfo2NewsSendDto(newsInfo));
+            newsSendDtos.add(newsUtil.NewsInfo2NewsSendDto(newsInfo));
         }
 
         PageInfo pageInfo = new PageInfo<>(newsInfos);
@@ -346,62 +365,5 @@ public class NewsServiceImpl implements NewsService {
         return new BaseResponse<>(200,"获取成功！",typeSendDtos);
     }
 
-    private NewsSendDto NewsInfo2NewsSendDto(NewsInfo newsInfo)
-    {
-        NewsSendDto newsSendDto=new NewsSendDto();
-        //获取帖子图像uuid
-        NewsImageExample example = new NewsImageExample();
-        NewsImageExample.Criteria criteria = example.createCriteria();
-        criteria.andNewsidEqualTo(newsInfo.getNewsid());
-        List<NewsImage> imgs = newsImageMapper.selectByExample(example);
-        List<String> uuids  = new ArrayList<>();
-        for (NewsImage img:imgs)
-        {
-            uuids.add(img.getImageuuid());
-        }
-
-        //从服务器获取下载帖子图像url
-        List<String> imgList = new ArrayList<>();
-        if(imgs.size()!=0)  //该帖子有图像才向服务器请求下载图片
-        {
-            try {
-                imgList = minioUtil.getDownloadUrls(uuids,"news");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        //获取发帖人信息
-        UserInfo sender = userInfoMapper.selectByPrimaryKey(newsInfo.getUserid());
-        //获取发帖人头像url
-        String headimg = null;
-        try {
-            headimg = minioUtil.getDownloadUrl(sender.getHeadimage(),"avatar");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        //设置NewsSendDto各属性
-        newsSendDto.setNewsid(newsInfo.getNewsid());
-        newsSendDto.setUserid(newsInfo.getUserid());
-        newsSendDto.setUsername(sender.getUsername());
-        newsSendDto.setHeadimage(headimg);
-        newsSendDto.setNewstitle(newsInfo.getNewstitle());
-        newsSendDto.setContent(newsInfo.getContent());
-        newsSendDto.setViewnum(newsInfo.getViewnum() + 1);
-        newsSendDto.setLikenum(newsInfo.getLikenum());
-        newsSendDto.setAnonymousstate(newsInfo.getAnonymousstate());
-        newsSendDto.setTopstate(newsInfo.getTopstate());
-        newsSendDto.setHotstate(newsInfo.getHotstate());
-        newsSendDto.setImgUrls(imgList);
-        //将Date类型转换成时间戳
-        SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd");
-        String time = format.format(newsInfo.getSendtime());
-        newsSendDto.setSendtime(time);
-        //设置帖子类型名字
-        String typename = newsTypeMapper.selectByPrimaryKey(newsInfo.getNewstypeid()).getTypename();
-        newsSendDto.setNewstypename(typename);
-        return newsSendDto;
-    }
+   
 }
