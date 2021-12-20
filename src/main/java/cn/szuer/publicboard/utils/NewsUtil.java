@@ -17,6 +17,10 @@ import cn.szuer.publicboard.model.NewsInfo;
 import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.model.NewsImage;
 
+
+/**
+ * 用于转换帖子的工具类，包括判断该帖是否匿名
+ */
 @Component
 public class NewsUtil {
   
@@ -48,9 +52,9 @@ public class NewsUtil {
           uuids.add(img.getImageuuid());
       }
 
-      //从服务器获取下载帖子图像url
+      //获取帖子图像url
       List<String> imgList = new ArrayList<>();
-      if(imgs.size()!=0)  //该帖子有图像才向服务器请求下载图片
+      if(imgs.size()!=0)  //该帖子有图像才获取图片url
       {
           try {
               imgList = minioUtil.getDownloadUrls(uuids,"news");
@@ -62,6 +66,7 @@ public class NewsUtil {
       //获取发帖人信息
       UserInfo sender = userInfoMapper.selectByPrimaryKey(newsInfo.getUserid());
 
+      // 判断该帖是否匿名
       if(!newsInfo.getAnonymousstate())
       {
           //获取发帖人头像url
@@ -76,6 +81,7 @@ public class NewsUtil {
       } 
       else
       {
+          //如果是匿名贴则用户名设置为“匿名用户”,头像设置为默认头像
           newsSendDto.setUsername("匿名用户");
           newsSendDto.setHeadimage(minioUtil.getDefaultAvatar());
       }

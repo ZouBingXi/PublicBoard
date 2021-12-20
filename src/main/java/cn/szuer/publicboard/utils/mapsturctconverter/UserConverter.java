@@ -20,7 +20,7 @@ public interface UserConverter {
     // @Mapping(source = "userType.typename", target = "usertype")
     //由于属性字段名称一致，这里不需要mapping注解
     @Mapping(source = "userInfo.typeid", target = "usertype")
-    @Mapping(source = "headimage", target = "headimage", qualifiedByName = "normal")
+    @Mapping(source = "headimage", target = "headimage", qualifiedByName = "uuid2url")
     UserDto UserInfo2UserDto(UserInfo userInfo);
     //实现list的拷贝
     List<UserDto> UserInfos2UserDtos(List<UserInfo> userInfos);

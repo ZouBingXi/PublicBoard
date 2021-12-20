@@ -28,4 +28,6 @@ public interface UserService {
 
     boolean changePassword(ChangePasswordParam param);
 
+    boolean switchMode();
+
 }

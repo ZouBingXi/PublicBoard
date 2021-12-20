@@ -147,5 +147,20 @@ public class UserController
         return new BaseResponse(500,"原密码错误");
     }
 
+    /**
+     * 开启/关闭匿名模式
+     * @return
+     */
+    @PostMapping("/switchmode")
+    public BaseResponse switchMode()
+    {
+    
+       if(userService.switchMode())
+          return new BaseResponse(200,"切换成功");
+        else
+          return new BaseResponse(500, "出错了，请重试");
+
+    }
+
 
 }

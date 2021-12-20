@@ -57,4 +57,9 @@ public class UserDto {
      */
     private String logintime;
 
+    /**
+     * 匿名模式
+     */
+    private Boolean anonymousmode;
+
 }

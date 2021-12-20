@@ -14,11 +14,21 @@ import java.util.List;
 public interface NewsService {
 
     List<NewsSendDto> getAll();
+    
     PageInfo<NewsSendDto> getByPage(int pageNum, int pageSize);
+
     BaseResponse<NewsSendDto> view(Integer userid,Integer newsid);
+
     BaseResponse<PageInfo<NewsSendDto>> viewDiffNews(Integer typeid,Integer pageNum,Integer pageSize);
+
     BaseResponse<List<TypeSendDto>> getNewsType();
+
     int add(AddNewsParam addNewsParam);
+
     int addWithImages(List<MultipartFile> multipartFiles, AddNewsParam addNewsParam);
+  
+    PageInfo<NewsSendDto> getMyNews(int pageNum, int pageSize);
+
     PageInfo<NewsSendDto> searchNews(SearchParam param);
+
 }

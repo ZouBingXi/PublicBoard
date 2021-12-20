@@ -160,4 +160,17 @@ public class UserServiceImpl implements UserService {
 
         return ifMatch;
     }
+
+    @Override
+    public boolean switchMode()
+    {
+        // 将数据库中该用户的匿名模式取反
+        UserInfo userInfo = userInfoMapper.selectByPrimaryKey(authenticationUtil.getAuthenticatedId());
+        userInfo.setAnonymousmode(!userInfo.getAnonymousmode());
+        if(userInfoMapper.updateByPrimaryKeySelective(userInfo)>0)
+           return true;
+        else
+           return false;
+
+    }
 }
