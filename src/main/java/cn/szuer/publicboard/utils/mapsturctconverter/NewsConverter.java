@@ -16,7 +16,11 @@ public interface NewsConverter{
 
     NewsConverter INSTANCE = Mappers.getMapper(NewsConverter.class);
     @Mapping(source = "newstypeid",target = "newstypename")
-        //newsInfo转换成newsSendDto
+    @Mapping(source = "userid", target = "username", qualifiedByName = "useridTousername")
+    @Mapping(source = "userid", target = "headimage", qualifiedByName = "useridToheadimg")
+    @Mapping(source = "newsid", target = "imgUrls", qualifiedByName = "newsidToimgUrls")
+    @Mapping(source = "sendtime", target = "sendtime")
+    //newsInfo转换成newsSendDto
     NewsSendDto NewsInfo2NewsSendDto(NewsInfo newsInfo);
     List<NewsSendDto> NewsInfos2NewsSendDtos(List<NewsInfo> newsInfos);
 

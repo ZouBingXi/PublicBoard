@@ -9,6 +9,7 @@ import cn.szuer.publicboard.model.*;
 import cn.szuer.publicboard.model.NewsInfo;
 import cn.szuer.publicboard.model.NewsType;
 import cn.szuer.publicboard.model.UserInfo;
+import cn.szuer.publicboard.model.NewsCommentExample.Criteria;
 import cn.szuer.publicboard.reponse.BaseResponse;
 import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.mapper.NewsImageMapper;
@@ -366,4 +367,22 @@ public class NewsServiceImpl implements NewsService {
     }
 
    
+    @Override
+    public PageInfo<NewsSendDto> getMyNews(int pageNum, int pageSize)
+    {
+        PageHelper.startPage(pageNum, pageSize);
+        NewsInfoExample newsInfoExample= new NewsInfoExample();
+        NewsInfoExample.Criteria criteria = newsInfoExample.createCriteria();
+        criteria.andUseridEqualTo(authenticationUtil.getAuthenticatedId());
+        List<NewsInfo> newsInfos = newsInfoMapper.selectByExampleWithBLOBs(newsInfoExample);
+        List<NewsSendDto> newsSendDtos = newsConverter.NewsInfos2NewsSendDtos(newsInfos);
+        PageInfo pageInfo = new PageInfo<>(newsInfos);
+
+        pageInfo.setList(newsSendDtos);
+        return pageInfo;
+    }
+    
 }
+
+
+

@@ -141,6 +141,11 @@ public class NewsController
         return new BaseResponse(500, "发送失败，未知错误！");
     }
 
+    /**
+     * 搜索帖子
+     * @param param
+     * @return
+     */
     @PostMapping("/search")
     public BaseResponse searchNews(@RequestBody SearchParam param)
     {
@@ -151,5 +156,19 @@ public class NewsController
         }
         return new BaseResponse<PageInfo<NewsSendDto>>(200,"搜索成功",pageInfo);
     }
+
+    /**
+     * 查看我的帖子
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/mynews")
+    public  BaseResponse<PageInfo<NewsSendDto>> getMyNews(@RequestParam(name = "page",required = true,defaultValue = "1") int pageNum,
+                                  @RequestParam(name = "size",required = true,defaultValue = "10") int pageSize)
+    {
+         return new BaseResponse<PageInfo<NewsSendDto>>(200, "success", newsService.getMyNews(pageNum, pageSize));
+    }
+
 
 }
