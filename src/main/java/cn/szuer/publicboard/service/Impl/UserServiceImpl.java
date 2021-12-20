@@ -2,12 +2,16 @@ package cn.szuer.publicboard.service.Impl;
 
 import cn.szuer.publicboard.dto.UserDto;
 import cn.szuer.publicboard.dto.param.ChangePasswordParam;
+import cn.szuer.publicboard.dto.param.ForgetPasswordParam;
 import cn.szuer.publicboard.dto.param.RegisterParam;
 import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.model.UserInfo;
+import cn.szuer.publicboard.model.UserInfoExample;
 import cn.szuer.publicboard.reponse.BaseResponse;
 import cn.szuer.publicboard.service.UserService;
 import cn.szuer.publicboard.utils.AuthenticationUtil;
+import cn.szuer.publicboard.utils.CodeRandomUtil;
+import cn.szuer.publicboard.utils.MailUtil;
 import cn.szuer.publicboard.utils.MinioUtil;
 import cn.szuer.publicboard.utils.mapsturctconverter.UserConverter;
 import com.github.pagehelper.PageHelper;
@@ -17,6 +21,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -37,22 +43,34 @@ public class UserServiceImpl implements UserService {
     private UserConverter userConverter;
 
     @Autowired
+    private MailUtil mailUtil;
+
+    @Autowired
     PasswordEncoder encoder;
 
     @Override
-    public boolean addUser(RegisterParam registerParam)
+    public int addUser(RegisterParam registerParam,HttpSession session)
     {
-        //查找数据库中有没有该学号的记录
-        UserInfo user=userInfoMapper.selectByPrimaryKey(registerParam.getUserid());
+        //验证
+        int ret=mailUtil.verify(session,registerParam.getEmail(),registerParam.getCode());
+        if (ret!=0)
+            return ret;
 
-        //该学号已注册
-        if (user!=null)
-            return false;
+        //查找数据库中有没有该学号或该邮箱的记录
+        UserInfoExample example=new UserInfoExample();
+        example.or().andEmailEqualTo(registerParam.getEmail());
+        List<UserInfo> users=userInfoMapper.selectByExample(example);
+        //该邮箱已注册
+        if (users.size()>0)
+            return 5;
+        //学号已注册
+        if (userInfoMapper.selectByPrimaryKey(registerParam.getUserid())!=null)
+            return 6;
 
         else
         {
             //向数据库中插入数据,注册账户
-            user=new UserInfo();
+            UserInfo user=new UserInfo();
             user.setUserid(registerParam.getUserid());
             user.setUsername(String.valueOf(registerParam.getUserid()));
             user.setLogintime(new Date());
@@ -60,9 +78,9 @@ public class UserServiceImpl implements UserService {
             user.setEmail(registerParam.getEmail());
             int res=userInfoMapper.insertSelective(user);
             if (res==1)
-                return true;
+                return 0;
             else
-                return false;
+                return 1;
         }
     }
     
@@ -172,5 +190,44 @@ public class UserServiceImpl implements UserService {
         else
            return false;
 
+    }
+
+    @Override
+    public String sendCode(String to)
+    {
+        String code=CodeRandomUtil.verifyCode(6);
+        String subject="PublicBoard";
+        StringBuilder text=new StringBuilder();
+        text.append("<p>")
+                .append("你的验证码为:")
+                .append("<b style:font-size=30px>").append(code).append("</b>")
+                .append(",5分钟后失效")
+                .append("</p>");
+        try
+        {
+            mailUtil.send(to,subject,text.toString());
+        }
+        catch (MessagingException e)
+        {
+            e.printStackTrace();
+        }
+        return code;
+    }
+
+    @Override
+    public int forget(HttpSession session,ForgetPasswordParam param)
+    {
+        //验证
+        int ret=mailUtil.verify(session,param.getEmail(),param.getCode());
+        if (ret!=0)
+            return ret;
+
+        //更新密码
+        Integer userid=authenticationUtil.getAuthenticatedId();
+        UserInfo user=new UserInfo();
+        user.setUserid(userid);
+        user.setPassword(encoder.encode(param.getNewPassword()));
+        userInfoMapper.updateByPrimaryKeySelective(user);
+        return 0;
     }
 }

@@ -3,6 +3,7 @@ package cn.szuer.publicboard.service;
 import java.util.List;
 
 import cn.szuer.publicboard.dto.param.ChangePasswordParam;
+import cn.szuer.publicboard.dto.param.ForgetPasswordParam;
 import com.github.pagehelper.PageInfo;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,8 @@ import cn.szuer.publicboard.dto.UserDto;
 import cn.szuer.publicboard.dto.param.RegisterParam;
 import cn.szuer.publicboard.model.UserInfo;
 
+import javax.servlet.http.HttpSession;
+
 public interface UserService {
     
 
@@ -20,7 +23,7 @@ public interface UserService {
    
     PageInfo<UserDto> getByPage(int pageNum, int pageSize);
 
-    boolean addUser(RegisterParam registerParam);
+    int addUser(RegisterParam registerParam,HttpSession session);
 
     UserDto getProfile();
 
@@ -29,5 +32,9 @@ public interface UserService {
     boolean changePassword(ChangePasswordParam param);
 
     boolean switchMode();
+
+    String sendCode(String to);
+
+    int forget(HttpSession session,ForgetPasswordParam param);
 
 }
