@@ -92,7 +92,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
-                .antMatchers("/","/user/add","/user/all","/user/sendcode") //添加不需要登录即可访问的请求路径
+                .antMatchers("/","/user/add","/user/all","/user/sendcode","user/forget") //添加不需要登录即可访问的请求路径
                 .permitAll()
                 .anyRequest().authenticated()   //启动认证
                 .and()
