@@ -20,5 +20,5 @@ public interface NewsService {
     BaseResponse<List<TypeSendDto>> getNewsType();
     int add(AddNewsParam addNewsParam);
     int addWithImages(List<MultipartFile> multipartFiles, AddNewsParam addNewsParam);
-    List<NewsSendDto> searchNews(SearchParam param);
+    PageInfo<NewsSendDto> searchNews(SearchParam param);
 }

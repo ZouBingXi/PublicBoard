@@ -165,4 +165,13 @@ public class MinioUtil {
         return urlList;
     }
 
+    /**
+     * 获取默认头像
+     * @param uuid
+     * @return
+     */
+    public String getDefaultAvatar(){
+      return endPoint + bucketName + "/avatar/05fe71557e164b32b503708271365dfd.png";
+    }
+
 }

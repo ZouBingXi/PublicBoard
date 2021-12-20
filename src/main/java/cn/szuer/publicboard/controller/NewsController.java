@@ -144,12 +144,12 @@ public class NewsController
     @PostMapping("/search")
     public BaseResponse searchNews(@RequestBody SearchParam param)
     {
-        List<NewsSendDto> pageInfo=newsService.searchNews(param);
+        PageInfo<NewsSendDto> pageInfo=newsService.searchNews(param);
         if (pageInfo==null)
         {
             return new BaseResponse(500,"没有相关的信息");
         }
-        return new BaseResponse<List<NewsSendDto>>(200,"搜索成功",pageInfo);
+        return new BaseResponse<PageInfo<NewsSendDto>>(200,"搜索成功",pageInfo);
     }
 
 }
