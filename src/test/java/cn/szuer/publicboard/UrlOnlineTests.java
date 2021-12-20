@@ -1,7 +1,27 @@
 package cn.szuer.publicboard;
 
+
+import cn.szuer.publicboard.dto.param.AddCommentParam;
+
 import cn.szuer.publicboard.dto.param.AddNewsParam;
+import cn.szuer.publicboard.dto.param.AddReplyParam;
 import cn.szuer.publicboard.dto.param.RegisterParam;
+
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.alibaba.fastjson.JSON;
 import cn.szuer.publicboard.reponse.BaseResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -27,7 +47,14 @@ public class UrlOnlineTests {
 
     private RestTemplate template = new RestTemplate();
 
+    // 正常状态的cookie
     private List<String> cookies =new ArrayList<>();
+    
+    // 封禁用户的cookie
+    private List<String> cookies2 =new ArrayList<>();
+
+    // 匿名用户的cookie
+    private List<String> cookies3 = new ArrayList<>();
 
     /**
      * 在其他单元测试前进行login操作，获得cookie所需的Sessionid
@@ -44,7 +71,7 @@ public class UrlOnlineTests {
 
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> param = new HashMap<>();
-        param.put("userid", "2019010101");
+        param.put("userid", "2019020202");
         param.put("password", "123456789");
         //请求体的参数，一定要转成String, 才能被接受
         String value = mapper.writeValueAsString(param);
@@ -55,7 +82,19 @@ public class UrlOnlineTests {
         //获得ResponseEntity， 包括响应体对象、响应头和响应状态， BaseResponse.class表明响应体的类型
         ResponseEntity<BaseResponse> responseEntity = template.postForEntity(url, requEntity, BaseResponse.class);
         cookies.add(responseEntity.getHeaders().get("set-cookie").get(0).toString());
+
+
+        
+        Map<String, String> param2 = new HashMap<>();
+        param2.put("userid", "2019040404");
+        param2.put("password", "123456789");
+        value = mapper.writeValueAsString(param2);
+        HttpEntity<String> requEntity2 = new HttpEntity<String>(value, headers);
+        ResponseEntity<BaseResponse> responseEntity2 = template.postForEntity(url, requEntity2, BaseResponse.class);
+        cookies2.add(responseEntity2.getHeaders().get("set-cookie").get(0).toString());
+
         System.out.println(cookies);
+        System.out.println(cookies2);
     }
 
 
@@ -89,9 +128,9 @@ public class UrlOnlineTests {
             HttpHeaders headers = new HttpHeaders();
             // List<String> cookies =new ArrayList<>();
             //cookies.add("JSESSIONID=FEA9AE832F68F7A0F1AC5D52D60AC841; Path=/; HttpOnly");
-            System.out.println(cookies);
+            System.out.println(cookies2);
             //请求头添加cookie，用于传输Sessionid
-            headers.put(HttpHeaders.COOKIE,cookies);
+            headers.put(HttpHeaders.COOKIE,cookies2);
             HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
             String url = "http://localhost/user/admin/checkuser?page=1&size=5";
             // ResponseEntity<String> entity = template.getForEntity(url, String.class);
@@ -312,131 +351,7 @@ public class UrlOnlineTests {
         }
     }
 
-    /**
-     * 查看帖子详情接口单元测试
-     */
-    @Test
-    public void testViewNewsDetails() throws IOException{
-        try{
-
-            HttpHeaders headers = new HttpHeaders();
-            System.out.println(cookies);
-            //请求头添加cookie，用于传输Sessionid
-            headers.put(HttpHeaders.COOKIE,cookies);
-            HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
-            String url;
-            /**
-             * 测试用例1：用户被禁用，获取失败
-             */
-            //合成get请求url
-            url = "http://localhost/news/view?userid=2019040404&newsid=3";
-
-            ResponseEntity<BaseResponse> entity1 = template.exchange(url, HttpMethod.GET, httpEntity, BaseResponse.class);
-            System.err.println(entity1.getBody().getData().toString());
-
-            //检测HTTP状态码
-            assertEquals(entity1.getStatusCode(), HttpStatus.OK);
-            //检测返回体携带的msg是否与controller中所设一致
-            assertEquals(entity1.getBody().getMsg(), "获取失败！账号处于封禁状态");
-
-            /**
-             * 测试用例2：获取成功
-             */
-            url = "http://localhost/news/view?userid=2019010101&newsid=3";
-
-            ResponseEntity<BaseResponse> entity2 = template.exchange(url, HttpMethod.GET, httpEntity, BaseResponse.class);
-            System.err.println(entity2.getBody().getData().toString());
-
-            //检测HTTP状态码
-            assertEquals(entity2.getStatusCode(), HttpStatus.OK);
-            //检测返回体携带的msg是否与controller中所设一致
-            assertEquals(entity2.getBody().getMsg(), "获取成功！");
-
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 查看不同类型帖子接口单元测试
-     */
-    @Test
-    public void testViewDiffNews() throws IOException{
-        try{
-
-            HttpHeaders headers = new HttpHeaders();
-            System.out.println(cookies);
-            //请求头添加cookie，用于传输Sessionid
-            headers.put(HttpHeaders.COOKIE,cookies);
-            HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
-            String url;
-            /**
-             * 测试用例1：该类型没有记录，获取失败
-             */
-            //合成get请求url
-            url = "http://localhost/news/viewDiffNews?typeid=3&page=1&size=5";
-
-            ResponseEntity<BaseResponse> entity1 = template.exchange(url, HttpMethod.GET, httpEntity, BaseResponse.class);
-            //System.err.println(entity1.getBody().getData().toString());
-
-            //检测HTTP状态码
-            assertEquals(entity1.getBody().getCode(), 500);
-            //检测返回体携带的msg是否与controller中所设一致
-            assertEquals(entity1.getBody().getMsg(), "该类型包含帖子数为0，获取失败！");
-
-            /**
-             * 测试用例2：获取成功
-             */
-            url = "http://localhost/news/viewDiffNews?typeid=1&page=1&size=5";
-
-            ResponseEntity<BaseResponse> entity2 = template.exchange(url, HttpMethod.GET, httpEntity, BaseResponse.class);
-            System.err.println(entity2.getBody().getData().toString());
-
-            //检测HTTP状态码
-            assertEquals(entity2.getStatusCode(), HttpStatus.OK);
-            //检测返回体携带的msg是否与controller中所设一致
-            assertEquals(entity2.getBody().getMsg(), "获取成功！");
-
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 获取帖子类型单元测试
-     */
-    @Test
-    public void testGetNewsType() throws IOException{
-        try{
-
-            HttpHeaders headers = new HttpHeaders();
-            System.out.println(cookies);
-            //请求头添加cookie，用于传输Sessionid
-            headers.put(HttpHeaders.COOKIE,cookies);
-            HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
-            String url;
-            /**
-             * 测试用例1：获取成功
-             */
-            //合成get请求url
-            url = "http://localhost/news/getNewsType";
-
-            ResponseEntity<BaseResponse> entity1 = template.exchange(url, HttpMethod.GET, httpEntity, BaseResponse.class);
-            System.err.println(entity1.getBody().getData().toString());
-
-            //检测HTTP状态码
-            assertEquals(entity1.getBody().getCode(), 200);
-            //检测返回体携带的msg是否与controller中所设一致
-            assertEquals(entity1.getBody().getMsg(), "获取成功！");
-
-
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-
 }
+
+
+

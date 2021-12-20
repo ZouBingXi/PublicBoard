@@ -39,6 +39,7 @@ public class UserController
 
     @Autowired
     private AuthenticationUtil authenticationUtil;
+    
     /**
      * 用户注册
      * @param registerParam
@@ -83,8 +84,9 @@ public class UserController
         return new BaseResponse<PageInfo<UserDto>>(200, "success", userService.getByPage(pageNum, pageSize));
 
     }
+
     /**
-     * 
+     * 返回所有用户
      * @return
      */
     @GetMapping("/all")
@@ -95,6 +97,10 @@ public class UserController
 
     }
 
+    /**
+     * 测试
+     * @return
+     */
     @GetMapping("/test")
     @PreAuthorize("hasAnyRole('ROLE_普通用户')")
     public String test()
@@ -102,6 +108,10 @@ public class UserController
         return "yes";
     }
 
+    /**
+     * 我是谁
+     * @return
+     */
     @GetMapping("/whoami")
     public Integer whoami()
     {
@@ -191,6 +201,12 @@ public class UserController
         return new BaseResponse(200,"发送成功");
     }
 
+    /**
+     * 忘记密码
+     * @param param
+     * @param session
+     * @return
+     */
     @PostMapping("/forget")
     public BaseResponse forgetPassword(@RequestBody ForgetPasswordParam param,HttpSession session)
     {

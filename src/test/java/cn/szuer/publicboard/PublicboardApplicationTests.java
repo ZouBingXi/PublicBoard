@@ -1,6 +1,11 @@
 package cn.szuer.publicboard;
 
 import cn.szuer.publicboard.dto.NewsSendDto;
+
+import cn.szuer.publicboard.dto.param.LoginParam;
+import cn.szuer.publicboard.mapper.*;
+import cn.szuer.publicboard.model.*;
+
 import cn.szuer.publicboard.dto.UserDto;
 import cn.szuer.publicboard.dto.param.LoginParam;
 import cn.szuer.publicboard.mapper.NewsInfoMapper;
@@ -8,9 +13,11 @@ import cn.szuer.publicboard.mapper.NewsTypeMapper;
 import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.model.NewsInfo;
 import cn.szuer.publicboard.model.UserInfo;
+
 import cn.szuer.publicboard.service.NewsService;
 import cn.szuer.publicboard.service.UserService;
 import cn.szuer.publicboard.utils.AuthenticationUtil;
+
 import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
 import cn.szuer.publicboard.utils.mapsturctconverter.UserConverter;
 import com.github.pagehelper.PageInfo;
@@ -25,7 +32,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
+import cn.szuer.publicboard.dto.UserDto;
+
+import cn.szuer.publicboard.service.UserService;
+import cn.szuer.publicboard.utils.mapsturctconverter.UserConverter;
+
 import java.util.List;
+
 
 
 @RunWith(SpringRunner.class)
@@ -57,9 +70,6 @@ class PublicboardApplicationTests {
 
 	@Autowired
 	private UserConverter userConverter;
-
-	@Autowired(required=false)
-	private NewsConverter newsConverter;
 
   @Autowired
   private AuthenticationUtil authenticationUtil;
@@ -107,19 +117,6 @@ class PublicboardApplicationTests {
 		System.out.println(userDto.toString());
 		// System.out.println(userInfo.toString());
 		// System.out.println(userType.toString());
-	}
-
-
-	@Test
-		//测试帖子mapper结构
-	void testNewsMapstruct()
-	{
-		NewsInfo newsInfo = newsInfoMapper.selectByPrimaryKey(1);
-		//调用convertor将addnewsparam转换成dto
-		NewsSendDto newsSendDto= newsConverter.NewsInfo2NewsSendDto(newsInfo);
-
-		System.out.println(newsSendDto.toString());
-
 	}
 
 	@Test

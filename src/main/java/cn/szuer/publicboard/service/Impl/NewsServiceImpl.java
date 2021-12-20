@@ -1,18 +1,31 @@
 package cn.szuer.publicboard.service.Impl;
 
+import cn.szuer.publicboard.dto.NewsDetailSendDto;
 import cn.szuer.publicboard.dto.NewsSendDto;
 import cn.szuer.publicboard.dto.TypeSendDto;
-import cn.szuer.publicboard.dto.param.AddNewsParam;
+
+import cn.szuer.publicboard.dto.param.*;
+
+import cn.szuer.publicboard.mapper.*;
+
 import cn.szuer.publicboard.dto.param.SearchParam;
+import cn.szuer.publicboard.model.*;
+import cn.szuer.publicboard.model.NewsInfo;
+import cn.szuer.publicboard.model.NewsType;
+import cn.szuer.publicboard.model.UserInfo;
+import cn.szuer.publicboard.reponse.BaseResponse;
+import cn.szuer.publicboard.mapper.UserInfoMapper;
 import cn.szuer.publicboard.mapper.NewsImageMapper;
 import cn.szuer.publicboard.mapper.NewsInfoMapper;
 import cn.szuer.publicboard.mapper.NewsTypeMapper;
-import cn.szuer.publicboard.mapper.UserInfoMapper;
-import cn.szuer.publicboard.model.*;
-import cn.szuer.publicboard.reponse.BaseResponse;
+
+import cn.szuer.publicboard.dto.param.AddNewsParam;
 import cn.szuer.publicboard.service.NewsService;
 import cn.szuer.publicboard.utils.AuthenticationUtil;
 import cn.szuer.publicboard.utils.MinioUtil;
+
+import cn.szuer.publicboard.utils.NewsDetailUtil;
+
 import cn.szuer.publicboard.utils.NewsUtil;
 import cn.szuer.publicboard.utils.mapsturctconverter.NewsConverter;
 import com.github.pagehelper.PageHelper;
@@ -42,13 +55,22 @@ public class NewsServiceImpl implements NewsService {
     private NewsImageMapper newsImageMapper;
 
     @Autowired
-    private NewsConverter newsConverter;
-
-    @Autowired
     private AuthenticationUtil authenticationUtil;
 
     @Autowired
+    private NewsCommentMapper newsCommentMapper;
+
+    @Autowired
+    private NewsReplyMapper newsReplyMapper;
+
+    @Autowired
+    private NewsLikeMapper newsLikeMapper;
+
+    @Autowired
     private MinioUtil minioUtil;
+
+    @Autowired
+    private NewsDetailUtil newsDetailUtil;
 
     @Autowired
     private NewsUtil newsUtil;
@@ -56,11 +78,9 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public List<NewsSendDto> getAll() {
         List<NewsInfo> newsInfos = newsInfoMapper.selectAll();
-        List<NewsSendDto> newsSendDtos = new ArrayList<>();
-        for (NewsInfo newsInfo:newsInfos)
-        {
-            newsSendDtos.add(newsUtil.NewsInfo2NewsSendDto(newsInfo));
-        }
+
+        List<NewsSendDto> newsSendDtos = newsDetailUtil.NewsInfos2NewsSendDtos(newsInfos);
+
         return newsSendDtos;
     }
 
@@ -120,7 +140,7 @@ public class NewsServiceImpl implements NewsService {
     {
         PageHelper.startPage(pageNum, pageSize);
         List<NewsInfo> newsInfos = newsInfoMapper.selectAll();
-        List<NewsSendDto> newsSendDtos =  newsConverter.NewsInfos2NewsSendDtos(newsInfos);
+        List<NewsSendDto> newsSendDtos = newsDetailUtil.NewsInfos2NewsSendDtos(newsInfos);
         PageInfo pageInfo = new PageInfo<>(newsInfos);
         //再进行setList操作
         pageInfo.setList(newsSendDtos);
@@ -182,8 +202,6 @@ public class NewsServiceImpl implements NewsService {
             }
 
         }
-        
-
         //判断是否匿名
         if(userInfo.getAnonymousmode()==Boolean.FALSE)//正常用户状态
         {
@@ -270,24 +288,33 @@ public class NewsServiceImpl implements NewsService {
             criteria2.andNewstypeidEqualTo(type);
         }
 
-        List<NewsInfo> list=newsInfoMapper.selectByExampleWithBLOBs(example);
-        if (list==null||list.size()==0)
-            return null;
+        // List<NewsInfo> list=newsInfoMapper.selectByExampleWithBLOBs(example);
+        // if (list==null||list.size()==0)
+        //     return null;
+        List<NewsInfo> newsInfos = newsInfoMapper.selectByExampleWithBLOBs(example);
+        if(newsInfos==null||newsInfos.size()==0)
+          return null;
 
         //转为dto
-        List<NewsSendDto> resList=new ArrayList<>();
-        for (NewsInfo newsInfo:list)
-        {
-            resList.add(newsUtil.NewsInfo2NewsSendDto(newsInfo));
-        }
+        // List<NewsSendDto> resList=new ArrayList<>();
+        // for (NewsInfo newsInfo:list)
+        // {
+        //     resList.add(newsUtil.NewsInfo2NewsSendDto(newsInfo));
+        // }
+        List<NewsSendDto> newsSendDtos = newsUtil.NewsInfos2NewsSendDtos(newsInfos);
+        
+        PageInfo pageInfo = new PageInfo<>(newsInfos);
+        pageInfo.setList(newsSendDtos);
 
-        return new PageInfo<>(resList);
+        return pageInfo;
+
     }
 
     @Override
-    public BaseResponse<NewsSendDto> view(Integer userid,Integer newsid)
+    public BaseResponse<NewsDetailSendDto> view(Integer newsid)
     {
-        NewsSendDto newsSendDto = new NewsSendDto();
+        Integer userid = authenticationUtil.getAuthenticatedId();
+        NewsDetailSendDto newsDetailSendDto = new NewsDetailSendDto();
         //获取账号信息
         UserInfo user = userInfoMapper.selectByPrimaryKey(userid);
 
@@ -296,21 +323,33 @@ public class NewsServiceImpl implements NewsService {
 
         //判断账号是否被封禁
         if(user.getBanstate()==Boolean.TRUE)
-            return new BaseResponse<>(500,"获取失败！账号处于封禁状态",newsSendDto);
+            return new BaseResponse<>(500,"获取失败,账号处于封禁状态!",newsDetailSendDto);
 
-        newsUtil.NewsInfo2NewsSendDto(newsInfo);
+        //将newsInfo转换成newsSendDto
+        newsDetailSendDto = newsDetailUtil.NewsInfo2NewsDetailSendDto(newsInfo);
+
+        //设置newsDetailSendDto是否点赞
+        NewsLikeExample example = new NewsLikeExample();
+        NewsLikeExample.Criteria criteria = example.createCriteria();
+        criteria.andNewsidEqualTo(newsid);
+        criteria.andUseridEqualTo(userid);
+        int num = newsLikeMapper.countByExample(example);  //查询点赞记录
+        if(num==0)
+            newsDetailSendDto.setIsLike(Boolean.FALSE);
+        else
+            newsDetailSendDto.setIsLike(Boolean.TRUE);
 
         //更新浏览量
         int res = newsInfoMapper.updateViewNum(newsInfo.getNewsid(),newsInfo.getViewnum()+1);
 
-
-        return new BaseResponse<>(200,"获取成功！",newsSendDto);
+        return new BaseResponse<>(200,"获取成功！",newsDetailSendDto);
     }
+
 
     @Override
     public BaseResponse<PageInfo<NewsSendDto>> viewDiffNews(Integer typeid,Integer pageNum,Integer pageSize)
     {
-        List<NewsSendDto> newsSendDtos = new ArrayList<>();
+        List<NewsSendDto> newsSendDtos;
 
         //设置页面属性
         PageHelper.startPage(pageNum, pageSize);
@@ -326,6 +365,8 @@ public class NewsServiceImpl implements NewsService {
             return new BaseResponse(500,"该类型包含帖子数为0，获取失败！");
 
         //将每条帖子转化为newsenddto
+        newsSendDtos = newsDetailUtil.NewsInfos2NewsSendDtos(newsInfos);
+
         for (NewsInfo newsInfo:newsInfos)
         {
             //将newsSendDto添加进List里
@@ -336,6 +377,7 @@ public class NewsServiceImpl implements NewsService {
         pageInfo.setList(newsSendDtos);
         return new BaseResponse(200,"获取成功！",pageInfo);
     }
+
 
     @Override
     public BaseResponse<List<TypeSendDto>> getNewsType()
@@ -359,7 +401,155 @@ public class NewsServiceImpl implements NewsService {
         return new BaseResponse<>(200,"获取成功！",typeSendDtos);
     }
 
+
+    @Override
+    public BaseResponse<List<Integer>> likeNews(Integer newsid)
+    {
+        //获取登陆账号
+        Integer userid = authenticationUtil.getAuthenticatedId();
+        //初始化返回列表，第一个值为点赞量，第二个值为是否点赞
+        List<Integer> res = new ArrayList<>();
+
+        //初始化帖子点赞model
+        NewsLikeKey newsLikeKey = new NewsLikeKey();
+        newsLikeKey.setNewsid(newsid);
+        newsLikeKey.setUserid(userid);
+
+        //获取点赞量
+        Integer likeNum = newsInfoMapper.selectByPrimaryKey(newsid).getLikenum();
+
+        //查找该用户在点赞表是否对当前帖子点赞
+        NewsLikeExample example = new NewsLikeExample();
+        NewsLikeExample.Criteria criteria = example.createCriteria();
+        criteria.andNewsidEqualTo(newsid);
+        criteria.andUseridEqualTo(userid);
+        int num = newsLikeMapper.countByExample(example);
+
+        if (num==0) //未点赞过
+        {
+            //在点赞表插入点赞记录
+            newsLikeMapper.insert(newsLikeKey);
+            //点赞后，赋值1,表示已点赞
+            likeNum+=1;
+            res.add(likeNum);
+            res.add(1);
+            //修改帖子信息表点赞量
+            newsInfoMapper.updateLikeNum(newsid, likeNum);
+            return new BaseResponse<>(200,"点赞成功！",res);
+        }
+        else    //点赞过
+        {
+            if(likeNum<0)
+                return new BaseResponse<>(500,"点赞数不能小于0！");
+            //在点赞表删除点赞记录
+            newsLikeMapper.deleteByPrimaryKey(newsLikeKey);
+            //取消点赞后，赋值0，表示已取消点赞
+            likeNum-=1;
+            res.add(likeNum);
+            res.add(0);
+            //修改帖子信息表点赞量
+            newsInfoMapper.updateLikeNum(newsid,likeNum);
+            return new BaseResponse<>(200,"取消点赞成功！",res);
+        }
+    }
+
+    @Override
+    public BaseResponse<NewsDetailSendDto> comment(AddCommentParam addCommentParam)
+    {
+        Integer newsid = addCommentParam.getNewsid();
+        String content = addCommentParam.getContent();
+        NewsComment newsComment = new NewsComment();
+
+        //获取发布评论人信息
+        UserInfo sender = userInfoMapper.selectByPrimaryKey(authenticationUtil.getAuthenticatedId());
+
+        //账号是否被禁用
+        if(sender.getBanstate()==Boolean.TRUE)
+            return new BaseResponse<>(500,"发布失败，当前账号被禁用！");
+
+        //赋值newsComment各属性
+        Integer id = null;
+        newsComment.setCommentid(id);
+        newsComment.setNewsid(newsid);
+        newsComment.setUserid(sender.getUserid());
+        newsComment.setCommenttime(new Date());
+        newsComment.setAnonymousstate(sender.getAnonymousmode());
+        newsComment.setContent(content);
+
+        //插入到评论表
+        Integer res = newsCommentMapper.insertSelective(newsComment);
+
+        if(res==0)
+            return new BaseResponse<>(500,"插入失败！");
+        else
+        {
+            //获取该newsid下插入后的评论与回复
+            NewsInfo newsInfo = newsInfoMapper.selectByPrimaryKey(newsid);
+
+            //将newsInfo转换为newsDetailSendDto
+            NewsDetailSendDto newsDetailSendDto = newsDetailUtil.NewsInfo2NewsDetailSendDto(newsInfo);
+
+            //根据是否匿名返回响应码
+            if(sender.getAnonymousmode()==Boolean.TRUE) //匿名状态
+                return new BaseResponse<>(200,"匿名状态，发布评论成功！",newsDetailSendDto);
+            else    //正常用户状态
+                return new BaseResponse<>(200,"发布评论成功！",newsDetailSendDto);
+        }
+    }
+
+    @Override
+    public BaseResponse<NewsDetailSendDto> reply(AddReplyParam addReplyParam)
+    {
+        Integer commentid = addReplyParam.getCommentid();
+        String content = addReplyParam.getContent();
+        NewsReply newsReply = new NewsReply();
+
+        //获取发布评论人信息
+        UserInfo sender = userInfoMapper.selectByPrimaryKey(authenticationUtil.getAuthenticatedId());
+
+        //账号是否被禁用
+        if(sender.getBanstate()==Boolean.TRUE)
+            return new BaseResponse<>(500,"回复失败，当前账号被禁用！");
+
+        //赋值newsReply各属性
+        Integer id = null;
+        newsReply.setReplyid(id);
+        newsReply.setTargetid(0);
+        newsReply.setCommentid(commentid);
+        newsReply.setUserid(sender.getUserid());
+        newsReply.setContent(content);
+        newsReply.setCommenttime(new Date());
+        newsReply.setLikenum(0);
+        newsReply.setAnonymousstate(sender.getAnonymousmode());
+
+        //插入到评论表
+        Integer res = newsReplyMapper.insertSelective(newsReply);
+
+        if(res==0)
+            return new BaseResponse<>(500,"回复失败！");
+        else
+        {
+            //获取该回复所在帖子id
+            Integer newsid = newsCommentMapper.selectByPrimaryKey(commentid).getNewsid();
+
+            //获取该newsid下插入后的评论与回复
+            NewsInfo newsInfo = newsInfoMapper.selectByPrimaryKey(newsid);
+
+            //将newsInfo转换为newsDetailSendDto
+            NewsDetailSendDto newsDetailSendDto = newsDetailUtil.NewsInfo2NewsDetailSendDto(newsInfo);
+
+            //根据是否匿名返回响应码
+            if(sender.getAnonymousmode()==Boolean.TRUE) //匿名状态
+                return new BaseResponse<>(200,"匿名状态，发布回复成功！",newsDetailSendDto);
+            else    //正常用户状态
+                return new BaseResponse<>(200,"发布回复成功！",newsDetailSendDto);
+        }
+    }
+
    
+    /**
+     * 获取我的帖子
+     */
     @Override
     public PageInfo<NewsSendDto> getMyNews(int pageNum, int pageSize)
     {
@@ -368,7 +558,7 @@ public class NewsServiceImpl implements NewsService {
         NewsInfoExample.Criteria criteria = newsInfoExample.createCriteria();
         criteria.andUseridEqualTo(authenticationUtil.getAuthenticatedId());
         List<NewsInfo> newsInfos = newsInfoMapper.selectByExampleWithBLOBs(newsInfoExample);
-        List<NewsSendDto> newsSendDtos = newsConverter.NewsInfos2NewsSendDtos(newsInfos);
+        List<NewsSendDto> newsSendDtos = newsUtil.NewsInfos2NewsSendDtos(newsInfos);
         PageInfo pageInfo = new PageInfo<>(newsInfos);
 
         pageInfo.setList(newsSendDtos);

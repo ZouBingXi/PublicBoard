@@ -93,9 +93,6 @@ public class NewsUtil {
       newsSendDto.setContent(newsInfo.getContent());
       newsSendDto.setViewnum(newsInfo.getViewnum() + 1);
       newsSendDto.setLikenum(newsInfo.getLikenum());
-      newsSendDto.setAnonymousstate(newsInfo.getAnonymousstate());
-      newsSendDto.setTopstate(newsInfo.getTopstate());
-      newsSendDto.setHotstate(newsInfo.getHotstate());
       newsSendDto.setImgUrls(imgList);
       //将Date类型转换成时间戳
       SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -105,5 +102,17 @@ public class NewsUtil {
       String typename = newsTypeMapper.selectByPrimaryKey(newsInfo.getNewstypeid()).getTypename();
       newsSendDto.setNewstypename(typename);
       return newsSendDto;
+  }
+
+
+  public List<NewsSendDto> NewsInfos2NewsSendDtos(List<NewsInfo> newsInfos)
+  {
+      if(newsInfos==null)
+          return null;
+          
+      List<NewsSendDto> newsSendDtos = new ArrayList<>();
+      for(int i = 0; i < newsInfos.size();i++)
+          newsSendDtos.add(NewsInfo2NewsSendDto(newsInfos.get(i)));
+      return newsSendDtos;
   }
 }

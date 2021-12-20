@@ -24,7 +24,9 @@ public class UrlOnlineTest_3 {
 
     private RestTemplate template = new RestTemplate();
 
-    private List<String> cookies =new ArrayList<>();
+    private List<String> cookies = new ArrayList<>();
+
+    private List<String> cookies2 =new ArrayList<>();
 
     /**
      * 在其他单元测试前进行login操作，获得cookie所需的Sessionid
@@ -52,7 +54,18 @@ public class UrlOnlineTest_3 {
         //获得ResponseEntity， 包括响应体对象、响应头和响应状态， BaseResponse.class表明响应体的类型
         ResponseEntity<BaseResponse> responseEntity = template.postForEntity(url, requEntity, BaseResponse.class);
         cookies.add(responseEntity.getHeaders().get("set-cookie").get(0).toString());
+
+
+        Map<String, String> param2 = new HashMap<>();
+        param2.put("userid", "2019040404");
+        param2.put("password", "123456789");
+        value = mapper.writeValueAsString(param2);
+        HttpEntity<String> requEntity2 = new HttpEntity<String>(value, headers);
+        ResponseEntity<BaseResponse> responseEntity2 = template.postForEntity(url, requEntity2, BaseResponse.class);
+        cookies2.add(responseEntity2.getHeaders().get("set-cookie").get(0).toString());
+
         System.out.println(cookies);
+        System.out.println(cookies2);
     }
 
     /**
@@ -63,7 +76,7 @@ public class UrlOnlineTest_3 {
         try{
 
             HttpHeaders headers = new HttpHeaders();
-            System.out.println(cookies);
+            System.out.println(cookies.get(0));
             //请求头添加cookie，用于传输Sessionid
             headers.put(HttpHeaders.COOKIE,cookies);
             HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
@@ -155,9 +168,9 @@ public class UrlOnlineTest_3 {
         try{
 
             HttpHeaders headers = new HttpHeaders();
-            System.out.println(cookies);
+            System.out.println(cookies2);
             //请求头添加cookie，用于传输Sessionid
-            headers.put(HttpHeaders.COOKIE,cookies);
+            headers.put(HttpHeaders.COOKIE,cookies2);
             HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
             String url;
             /**
