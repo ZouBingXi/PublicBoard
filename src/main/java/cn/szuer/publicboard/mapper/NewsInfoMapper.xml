@@ -235,6 +235,11 @@
     set viewNum = #{num,jdbcType=INTEGER}
     where newsid = #{newsid,jdbcType=INTEGER}
   </update>
+  <update id="updateLikeNum" parameterType="map" >
+    update news_info
+    set likeNum = #{num,jdbcType=INTEGER}
+    where newsid = #{newsid,jdbcType=INTEGER}
+  </update>
   <update id="updateByExampleSelective" parameterType="map" >
     update news_info
     <set >

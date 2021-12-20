@@ -39,4 +39,6 @@ public interface NewsInfoMapper {
     List<NewsInfo> selectAll();
 
     int updateViewNum(Integer newsid, Integer num);
+
+    int updateLikeNum(Integer newsid, Integer num);
 }

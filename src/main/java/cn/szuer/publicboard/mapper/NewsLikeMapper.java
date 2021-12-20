@@ -4,7 +4,9 @@ import cn.szuer.publicboard.model.NewsLikeExample;
 import cn.szuer.publicboard.model.NewsLikeKey;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface NewsLikeMapper {
     int countByExample(NewsLikeExample example);
 

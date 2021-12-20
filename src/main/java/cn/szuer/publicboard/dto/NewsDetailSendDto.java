@@ -1,14 +1,15 @@
 package cn.szuer.publicboard.dto;
 
+import cn.szuer.publicboard.dto.param.CommentParam;
+import cn.szuer.publicboard.dto.param.ReplyParam;
 import cn.szuer.publicboard.model.NewsComment;
 import cn.szuer.publicboard.model.NewsReply;
 import lombok.Data;
 
-import java.util.Date;
 import java.util.List;
 
 @Data
-public class NewsSendDto {
+public class NewsDetailSendDto {
 
   /**
    * 帖子id
@@ -61,8 +62,23 @@ public class NewsSendDto {
   private String newstypename;
 
   /**
+   * 发帖人匿名状态
+   */
+  private Boolean anonymousstate;
+
+  /**
    * 帖子图像下载url
    */
   private List<String> imgUrls;
+
+  /**
+   * 是否点赞
+   */
+  private Boolean isLike;
+
+  /**
+   * 帖子评论
+   */
+  private List<CommentParam> comments;
 
 }

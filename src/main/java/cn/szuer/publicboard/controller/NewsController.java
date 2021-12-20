@@ -1,17 +1,16 @@
 package cn.szuer.publicboard.controller;
 
+import cn.szuer.publicboard.dto.NewsDetailSendDto;
 import cn.szuer.publicboard.dto.NewsSendDto;
 import cn.szuer.publicboard.dto.TypeSendDto;
+import cn.szuer.publicboard.dto.param.AddCommentParam;
 import cn.szuer.publicboard.dto.param.AddNewsParam;
+import cn.szuer.publicboard.dto.param.AddReplyParam;
 import cn.szuer.publicboard.dto.param.SearchParam;
+
 import cn.szuer.publicboard.reponse.BaseResponse;
 import cn.szuer.publicboard.service.NewsService;
 import java.util.List;
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
 
 import cn.szuer.publicboard.utils.MinioUtil;
 import com.github.pagehelper.PageInfo;
@@ -34,6 +33,7 @@ public class NewsController
 
     @Autowired
     MinioUtil minioUtil;
+    
     /**
      * 查看帖子表
      * @param pageNum 页数
@@ -52,40 +52,39 @@ public class NewsController
      * @param addNewsParam
      * @return
      */
-    @PostMapping("/add")
-    public BaseResponse<NewsSendDto> add(@RequestBody AddNewsParam addNewsParam)
-    {
-        int res = newsService.add(addNewsParam);
+    // @PostMapping("/add")
+    // public BaseResponse<NewsSendDto> add(@RequestBody AddNewsParam addNewsParam)
+    // {
+    //     int res = newsService.add(addNewsParam);
 
-        if(res==21) {
-            return new BaseResponse(500, "发布失败!当前账号被禁用!");
-        }
-        else if(res==22) {
-            return new BaseResponse(500, "发布失败!帖子类型被禁用!");
-        }
-        else if(res==11) {
-            return new BaseResponse(200, "发布成功！");
-        }
-        else if(res==12) {
-            return new BaseResponse(200, "发布成功，使用匿名账号！");
-        }
+    //     if(res==21) {
+    //         return new BaseResponse(500, "发布失败!当前账号被禁用!");
+    //     }
+    //     else if(res==22) {
+    //         return new BaseResponse(500, "发布失败!帖子类型被禁用!");
+    //     }
+    //     else if(res==11) {
+    //         return new BaseResponse(200, "发布成功！");
+    //     }
+    //     else if(res==12) {
+    //         return new BaseResponse(200, "发布成功，使用匿名账号！");
+    //     }
 
-        return new BaseResponse(500, "发送失败，未知错误！");
-    }
+    //     return new BaseResponse(500, "发送失败，未知错误！");
+    // }
 
     /**
      * 查看帖子详情
-     * @param userid
      * @param newsid
      * @return
      */
     @GetMapping("/view")
-    public BaseResponse<NewsSendDto> view(@RequestParam(name="userid") Integer userid,
-                                          @RequestParam(name="newsid") Integer newsid)
+    public BaseResponse<NewsDetailSendDto> view(@RequestParam(name="newsid") Integer newsid)
     {
-        BaseResponse<NewsSendDto> response = newsService.view(userid,newsid);
+        BaseResponse<NewsDetailSendDto> response = newsService.view(newsid);
         return response;
     }
+
 
     /**
      * 按类型查看所有帖子
@@ -94,14 +93,14 @@ public class NewsController
      * @param pageSize 每页记录数
      * @return
      */
-    @GetMapping("/viewDiffNews")
-    public BaseResponse<PageInfo<NewsSendDto>> viewDiffNews(@RequestParam(name="typeid") Integer typeid,
-                                                  @RequestParam(name = "page") Integer pageNum,
-                                                  @RequestParam(name = "size")Integer pageSize)
-    {
-        BaseResponse<PageInfo<NewsSendDto>> response = newsService.viewDiffNews(typeid,pageNum,pageSize);
-        return response;
-    }
+    // @GetMapping("/viewDiffNews")
+    // public BaseResponse<PageInfo<NewsSendDto>> viewDiffNews(@RequestParam(name="typeid") Integer typeid,
+    //                                               @RequestParam(name = "page") Integer pageNum,
+    //                                               @RequestParam(name = "size")Integer pageSize)
+    // {
+    //     BaseResponse<PageInfo<NewsSendDto>> response = newsService.viewDiffNews(typeid,pageNum,pageSize);
+    //     return response;
+    // }
 
     /**
      * 获取所有帖子类型
@@ -142,6 +141,42 @@ public class NewsController
     }
 
     /**
+     * 帖子点赞与取消点赞
+     * @param newsid
+     * @return
+     */
+    @GetMapping("/likenews")
+    public BaseResponse<List<Integer>> likeNews(@RequestParam(name = "newsid")Integer newsid)
+    {
+        BaseResponse<List<Integer>> response = newsService.likeNews(newsid);
+        return response;
+    }
+
+    /**
+     * 帖子评论
+     * @param addCommentParam
+     * @return
+     */
+    @PostMapping("/comment")
+    public BaseResponse<NewsDetailSendDto> comment(@RequestBody AddCommentParam addCommentParam)
+    {
+        BaseResponse<NewsDetailSendDto> response = newsService.comment(addCommentParam);
+        return response;
+    }
+
+    /**
+     * 帖子回复
+     * @param addReplyParam
+     * @return
+     */
+    @PostMapping("/reply")
+    public BaseResponse<NewsDetailSendDto> reply(@RequestBody AddReplyParam addReplyParam)
+    {
+        BaseResponse<NewsDetailSendDto> response = newsService.reply(addReplyParam);
+        return response;
+    }
+
+    /** 
      * 搜索帖子
      * @param param
      * @return
@@ -169,6 +204,5 @@ public class NewsController
     {
          return new BaseResponse<PageInfo<NewsSendDto>>(200, "success", newsService.getMyNews(pageNum, pageSize));
     }
-
 
 }
