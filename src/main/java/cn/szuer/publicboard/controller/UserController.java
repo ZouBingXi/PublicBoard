@@ -103,7 +103,7 @@ public class UserController
      * @return
      */
     @GetMapping("/test")
-    @PreAuthorize("hasAnyRole('ROLE_普通用户')")
+    // @PreAuthorize("hasAnyRole('ROLE_普通用户')")
     public String test()
     {
         return "yes";
@@ -197,13 +197,15 @@ public class UserController
     @GetMapping("/sendcode")
     public BaseResponse sendCode(HttpSession session,String to, String flag)
     {
+        
         boolean res=userService.ifExist(to);
-        if (flag=="exist")
+        if (flag.equals("exist"))
         {
+            //  return new BaseResponse(500,"该邮箱还未注册");
             if (!res)
                 return new BaseResponse(500,"该邮箱还未注册");
         }
-        else if(flag=="noexist")
+        else if(flag.equals("noexist"))
         {
             if(res)
                 return new BaseResponse(500, "该邮箱已被注册");
