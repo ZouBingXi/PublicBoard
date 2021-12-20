@@ -3,6 +3,7 @@ package cn.szuer.publicboard.controller;
 import java.util.Date;
 import java.util.List;
 
+import cn.szuer.publicboard.dto.param.ChangeEmailParam;
 import cn.szuer.publicboard.dto.param.ChangePasswordParam;
 import cn.szuer.publicboard.dto.param.ForgetPasswordParam;
 import com.github.pagehelper.PageInfo;
@@ -186,14 +187,28 @@ public class UserController
 
     }
 
+    
     /**
-     * 发送验证码
-     * @param to 目标邮箱
+     * 
+     * @param to
+     * @param flag "exist"表示需要邮箱已注册(忘记密码)，"noexist"表示需要邮箱未注册(注册，修改邮箱)
      * @return
      */
     @GetMapping("/sendcode")
-    public BaseResponse sendCode(HttpSession session,String to)
+    public BaseResponse sendCode(HttpSession session,String to, String flag)
     {
+        boolean res=userService.ifExist(to);
+        if (flag=="exist")
+        {
+            if (!res)
+                return new BaseResponse(500,"该邮箱还未注册");
+        }
+        else if(flag=="noexist")
+        {
+            if(res)
+                return new BaseResponse(500, "该邮箱已被注册");
+        }
+
         String code=userService.sendCode(to);
         session.setAttribute("code",code);
         session.setAttribute("codeTime",new Date());
@@ -208,7 +223,7 @@ public class UserController
      * @return
      */
     @PostMapping("/forget")
-    public BaseResponse forgetPassword(@RequestBody ForgetPasswordParam param,HttpSession session)
+    public BaseResponse forgetPassword(@RequestBody ForgetPasswordParam param, HttpSession session)
     {
         int res=userService.forget(session,param);
         if (res==1)
@@ -227,5 +242,33 @@ public class UserController
             return new BaseResponse(200,"修改成功");
         }
     }
+
+     /**
+     * 修改邮箱
+     * @param param
+     * @param session
+     * @return
+     */
+    @PostMapping("/changeemail")
+    public BaseResponse changeEmail(@RequestBody ChangeEmailParam param,HttpSession session)
+    {
+        int res=userService.changeEmail(session,param);
+        if (res==1)
+            return new BaseResponse(500,"请先验证邮箱");
+        else if (res==2)
+            return new BaseResponse(500,"不是验证时的邮箱");
+        else if (res==3)
+            return new BaseResponse(500,"验证码超时");
+        else if (res==4)
+            return new BaseResponse(500,"验证码错误");
+        else
+        {
+            session.removeAttribute("code");
+            session.removeAttribute("codeTime");
+            session.removeAttribute("email");
+            return new BaseResponse(200,"修改成功");
+        }        
+    }
+
 
 }

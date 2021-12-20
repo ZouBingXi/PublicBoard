@@ -2,6 +2,7 @@ package cn.szuer.publicboard.service;
 
 import java.util.List;
 
+import cn.szuer.publicboard.dto.param.ChangeEmailParam;
 import cn.szuer.publicboard.dto.param.ChangePasswordParam;
 import cn.szuer.publicboard.dto.param.ForgetPasswordParam;
 import com.github.pagehelper.PageInfo;
@@ -36,5 +37,9 @@ public interface UserService {
     String sendCode(String to);
 
     int forget(HttpSession session,ForgetPasswordParam param);
+
+    boolean ifExist(String email);
+
+    int changeEmail(HttpSession session, ChangeEmailParam changeEmailParam);
 
 }

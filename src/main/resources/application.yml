@@ -25,7 +25,6 @@ spring:
       username: root
       password: dlsdwwrg666
 
-
   servlet:
     multipart:
       enabled: true

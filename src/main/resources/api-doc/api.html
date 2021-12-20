@@ -6,7 +6,7 @@
     <meta name="generator" content="smart-doc">
     <title>测试</title>
     <link rel="stylesheet" href="font.css">
-    <link rel="stylesheet" href="AllInOne.css?v=1637483421819"/>
+    <link rel="stylesheet" href="AllInOne.css?v=1640004585064"/>
     
     <style>.literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint {
         background: #f7f7f8;
@@ -31,41 +31,82 @@
                     </li>
 
                     <li><a
-                            href="api.html#_1_2_编辑帖子">1.2.&nbsp;编辑帖子</a>
+                            href="api.html#_1_2_查看帖子详情">1.2.&nbsp;查看帖子详情</a>
+                    </li>
+
+                    <li><a
+                            href="api.html#_1_3_获取所有帖子类型">1.3.&nbsp;获取所有帖子类型</a>
+                    </li>
+
+                    <li><a
+                            href="api.html#_1_4_发布帖子带图片">1.4.&nbsp;发布帖子带图片</a>
+                    </li>
+
+                    <li><a
+                            href="api.html#_1_5_帖子点赞与取消点赞">1.5.&nbsp;帖子点赞与取消点赞</a>
+                    </li>
+
+                    <li><a
+                            href="api.html#_1_6_帖子评论">1.6.&nbsp;帖子评论</a>
+                    </li>
+
+                    <li><a
+                            href="api.html#_1_7_帖子回复">1.7.&nbsp;帖子回复</a>
+                    </li>
+
+                    <li><a
+                            href="api.html#_1_8_搜索帖子">1.8.&nbsp;搜索帖子</a>
+                    </li>
+
+                    <li><a
+                            href="api.html#_1_9_查看我的帖子">1.9.&nbsp;查看我的帖子</a>
                     </li>
                 </ul>
             </li>
-            <li class=""><a class="dd" href="SubjectController.html#header">2.&nbsp;话题管理</a>
+            <li class=""><a class="dd" href="UserController.html#header">2.&nbsp;用户管理</a>
                 <ul class="sectlevel2" style="display: none">
                     <li><a
-                            href="SubjectController.html#_2_1_查看话题表">2.1.&nbsp;查看话题表</a>
+                            href="UserController.html#_2_1_用户注册">2.1.&nbsp;用户注册</a>
                     </li>
 
                     <li><a
-                            href="SubjectController.html#_2_2_编辑话题">2.2.&nbsp;编辑话题</a>
-                    </li>
-                </ul>
-            </li>
-            <li class=""><a class="dd" href="UserController.html#header">3.&nbsp;用户管理</a>
-                <ul class="sectlevel2" style="display: none">
-                    <li><a
-                            href="UserController.html#_3_1_用户注册">3.1.&nbsp;用户注册</a>
+                            href="UserController.html#_2_2_查看用户表">2.2.&nbsp;查看用户表</a>
                     </li>
 
                     <li><a
-                            href="UserController.html#_3_2_用户登录">3.2.&nbsp;用户登录</a>
+                            href="UserController.html#_2_3_返回所有用户">2.3.&nbsp;返回所有用户</a>
                     </li>
 
                     <li><a
-                            href="UserController.html#_3_3_查看用户表">3.3.&nbsp;查看用户表</a>
+                            href="UserController.html#_2_4_测试">2.4.&nbsp;测试</a>
                     </li>
 
                     <li><a
-                            href="UserController.html#_3_4_">3.4.&nbsp;</a>
+                            href="UserController.html#_2_5_我是谁">2.5.&nbsp;我是谁</a>
                     </li>
 
                     <li><a
-                            href="UserController.html#_3_5_">3.5.&nbsp;</a>
+                            href="UserController.html#_2_6_查看个人信息">2.6.&nbsp;查看个人信息</a>
+                    </li>
+
+                    <li><a
+                            href="UserController.html#_2_7_修改个人信息">2.7.&nbsp;修改个人信息</a>
+                    </li>
+
+                    <li><a
+                            href="UserController.html#_2_8_修改密码">2.8.&nbsp;修改密码</a>
+                    </li>
+
+                    <li><a
+                            href="UserController.html#_2_9_开启/关闭匿名模式">2.9.&nbsp;开启/关闭匿名模式</a>
+                    </li>
+
+                    <li><a
+                            href="UserController.html#_2_10_发送验证码">2.10.&nbsp;发送验证码</a>
+                    </li>
+
+                    <li><a
+                            href="UserController.html#_2_11_忘记密码">2.11.&nbsp;忘记密码</a>
                     </li>
                 </ul>
             </li>
@@ -80,7 +121,7 @@
                 <a class="anchor" href="#_1_1_查看帖子表"></a>
                 <a class="link" href="#_1_1_查看帖子表">1.1.&nbsp;查看帖子表</a>
             </h3>
-                <div class="paragraph"><p><strong>URL:</strong><a href="/news/show" class="bare">&nbsp;/news/show</a>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/news/admin/checkNews" class="bare">&nbsp;/news/admin/checkNews</a>
                 </p></div>
                 <div class="paragraph"><p><strong>Type:</strong>&nbsp;GET</p></div>
                 <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=utf-8</p></div>
@@ -124,7 +165,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /news/show?size=10&page=1</code></pre>
+                        <pre><code class="bash">curl -X GET -i /news/admin/checkNews?page=1&size=10</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -167,64 +208,211 @@
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">处理数据</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─newsid</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─total</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─userid</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─list</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─newstype</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─newsid</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子id</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─newstitle</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─userid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人账号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─username</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人用户名</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─sendtime</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─headimage</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人头像url</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─viewnum</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─likenum</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─newstitle</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">标题</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sendtime</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发布时间</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─viewnum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">浏览量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─likenum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">点赞量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─newstypename</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子类型名字</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─imgUrls</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子图像下载url</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─pageNum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">当前页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─pageSize</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">每页的数量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─size</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">当前页的数量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─startRow</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">由于startRow和endRow不常用，这里说个具体的用法<br>可以在页面中&quot;显示startRow到endRow 共size条数据&quot;<br>当前页面第一个元素在数据库中的行号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─endRow</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">当前页面最后一个元素在数据库中的行号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─pages</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">总页数</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─prePage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">前一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─nextPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">下一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─firstPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否为第一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─lastPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否为最后一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─hasPreviousPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否有前一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─hasNextPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否有下一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─navigatePages</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">导航页码数</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─navigatepageNums</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">所有导航页号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─navigateFirstPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">导航条上的第一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─navigateLastPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">导航条上的最后一页</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
@@ -243,33 +431,59 @@
   "success": true,
   "code": 200,
   "msg": "success",
-  "data": [
-    {
-      "newsid": 494,
-      "userid": 452,
-      "newstype": 845,
-      "newstitle": "biifnz",
-      "sendtime": "2021-11-21",
-      "viewnum": 495,
-      "likenum": 831,
-      "content": "kqtshg"
-    }
-  ],
-  "timestamp": "2021-11-21 16:30:23"
+  "data": {
+    "total": 648,
+    "list": [
+      {
+        "newsid": 49,
+        "userid": 860,
+        "username": "lyda.mante",
+        "headimage": "u4d83o",
+        "newstitle": "16c4v8",
+        "content": "kxlon4",
+        "sendtime": "2021-12-20 20:49:46",
+        "viewnum": 121,
+        "likenum": 46,
+        "newstypename": "lyda.mante",
+        "imgUrls": [
+          "kox17i"
+        ]
+      }
+    ],
+    "pageNum": 816,
+    "pageSize": 10,
+    "size": 10,
+    "startRow": 595,
+    "endRow": 686,
+    "pages": 583,
+    "prePage": 1,
+    "nextPage": 1,
+    "firstPage": true,
+    "lastPage": true,
+    "hasPreviousPage": true,
+    "hasNextPage": true,
+    "navigatePages": 750,
+    "navigatepageNums": [
+      312
+    ],
+    "navigateFirstPage": 1,
+    "navigateLastPage": 1
+  },
+  "timestamp": "2021-12-20 20:49:46"
 }</code></pre>
                     </div>
                 </div>
             </div>
 
-            <div class="sect2"><h3 id="_1_2_编辑帖子">
-                <a class="anchor" href="#_1_2_编辑帖子"></a>
-                <a class="link" href="#_1_2_编辑帖子">1.2.&nbsp;编辑帖子</a>
+            <div class="sect2"><h3 id="_1_2_查看帖子详情">
+                <a class="anchor" href="#_1_2_查看帖子详情"></a>
+                <a class="link" href="#_1_2_查看帖子详情">1.2.&nbsp;查看帖子详情</a>
             </h3>
-                <div class="paragraph"><p><strong>URL:</strong><a href="/news/add" class="bare">&nbsp;/news/add</a>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/news/view" class="bare">&nbsp;/news/view</a>
                 </p></div>
-                <div class="paragraph"><p><strong>Type:</strong>&nbsp;POST</p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;GET</p></div>
                 <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=utf-8</p></div>
-                <div class="paragraph"><p><strong>Description:</strong>&nbsp;编辑帖子</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;查看帖子详情</p></div>
                 <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
                 <table class="tableblock frame-all grid-all spread">
                     <colgroup>
@@ -293,63 +507,7 @@
                         <td class="tableblock halign-left valign-top"><p class="tableblock">newsid</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">userid</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">newstype</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">newstitle</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">sendtime</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">viewnum</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">likenum</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">content</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
                     </tbody>
@@ -357,7 +515,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X POST -i /news/add --data 'sendtime=2021-11-21&likenum=58&userid=399&newstitle=kx6cuj&newstype=229&newsid=20&viewnum=996&content=zjqopt'</code></pre>
+                        <pre><code class="bash">curl -X GET -i /news/view?newsid=890</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -408,56 +566,217 @@
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">└─newsid</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子id</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">└─userid</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人账号</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─newstype</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─username</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─headimage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人头像url</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">└─newstitle</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─sendtime</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─viewnum</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─likenum</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">标题</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">└─content</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─sendtime</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发布时间</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─viewnum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">浏览量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─likenum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">点赞量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─newstypename</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子类型名字</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─anonymousstate</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人匿名状态</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─imgUrls</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子图像下载url</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─isLike</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否点赞</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─comments</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子评论</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─commentid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─userid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户账号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─username</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─headImage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户头像</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─commenttime</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论时间</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─showreply</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否展示回复</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─replynum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">回复数</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─replys</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">回复</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─replyid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">回复id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─targetid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">目标id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─commentid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─userid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户账号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─username</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─headImage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">头像</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─commenttime</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论时间</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论内容</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
@@ -477,28 +796,1919 @@
   "code": 200,
   "msg": "success",
   "data": {
-    "newsid": 840,
-    "userid": 640,
-    "newstype": 772,
-    "newstitle": "51sqf1",
-    "sendtime": "2021-11-21",
-    "viewnum": 962,
-    "likenum": 376,
-    "content": "d0zjsw"
+    "newsid": 309,
+    "userid": 115,
+    "username": "lyda.mante",
+    "headimage": "w47wem",
+    "newstitle": "kzwqj6",
+    "content": "2bmpgy",
+    "sendtime": "2021-12-20 20:49:46",
+    "viewnum": 401,
+    "likenum": 644,
+    "newstypename": "lyda.mante",
+    "anonymousstate": true,
+    "imgUrls": [
+      "28gxi2"
+    ],
+    "isLike": true,
+    "comments": [
+      {
+        "commentid": 845,
+        "userid": 277,
+        "username": "lyda.mante",
+        "headImage": "mvmqx7",
+        "commenttime": "2021-12-20 20:49:46",
+        "content": "08hscj",
+        "showreply": true,
+        "replynum": 725,
+        "replys": [
+          {
+            "replyid": 501,
+            "targetid": 758,
+            "commentid": 532,
+            "userid": 384,
+            "username": "lyda.mante",
+            "headImage": "g3jbyn",
+            "commenttime": "2021-12-20 20:49:46",
+            "content": "pb61gz"
+          }
+        ]
+      }
+    ]
   },
-  "timestamp": "2021-11-21 16:30:23"
+  "timestamp": "2021-12-20 20:49:46"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2"><h3 id="_1_3_获取所有帖子类型">
+                <a class="anchor" href="#_1_3_获取所有帖子类型"></a>
+                <a class="link" href="#_1_3_获取所有帖子类型">1.3.&nbsp;获取所有帖子类型</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/news/getNewsType" class="bare">&nbsp;/news/getNewsType</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;GET</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=utf-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;获取所有帖子类型</p></div>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X GET -i /news/getNewsType</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">成功标志</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">状态码</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">msg</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理信息</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理数据</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─typeid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子类型编号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─typename</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子类型名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">timestamp</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">时间戳</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{
+  "success": true,
+  "code": 200,
+  "msg": "success",
+  "data": [
+    {
+      "typeid": 876,
+      "typename": "lyda.mante"
+    }
+  ],
+  "timestamp": "2021-12-20 20:49:46"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2"><h3 id="_1_4_发布帖子带图片">
+                <a class="anchor" href="#_1_4_发布帖子带图片"></a>
+                <a class="link" href="#_1_4_发布帖子带图片">1.4.&nbsp;发布帖子带图片</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/news/addwithimages" class="bare">&nbsp;/news/addwithimages</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;POST</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;multipart/form-data</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;发布帖子带图片</p></div>
+                <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">multipartFiles</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">file</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.(array of file)</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">userid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户账号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">newstitle</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">标题</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">newstypeid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子类型</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X POST -H 'Content-Type: multipart/form-data' -i /news/addwithimages --data 'newstypeid=818&userid=561&newstitle=ypa8w5&content=b7z70f'</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">成功标志</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">状态码</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">msg</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理信息</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理数据</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">timestamp</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">时间戳</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{
+  "success": true,
+  "code": 200,
+  "msg": "success",
+  "data": {
+    "waring": "You may have used non-display generics."
+  },
+  "timestamp": "2021-12-20 20:49:46"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2"><h3 id="_1_5_帖子点赞与取消点赞">
+                <a class="anchor" href="#_1_5_帖子点赞与取消点赞"></a>
+                <a class="link" href="#_1_5_帖子点赞与取消点赞">1.5.&nbsp;帖子点赞与取消点赞</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/news/likenews" class="bare">&nbsp;/news/likenews</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;GET</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=utf-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;帖子点赞与取消点赞</p></div>
+                <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">newsid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X GET -i /news/likenews?newsid=901</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">成功标志</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">状态码</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">msg</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理信息</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理数据</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">timestamp</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">时间戳</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{
+  "success": true,
+  "code": 200,
+  "msg": "success",
+  "data": [
+    547,
+    148
+  ],
+  "timestamp": "2021-12-20 20:49:46"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2"><h3 id="_1_6_帖子评论">
+                <a class="anchor" href="#_1_6_帖子评论"></a>
+                <a class="link" href="#_1_6_帖子评论">1.6.&nbsp;帖子评论</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/news/comment" class="bare">&nbsp;/news/comment</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;POST</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/json; charset=utf-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;帖子评论</p></div>
+                <div class="paragraph"><p><strong>Body-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">newsid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i /news/comment --data '{
+  "newsid": 693,
+  "content": "5uhc2i"
+}'</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">成功标志</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">状态码</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">msg</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理信息</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理数据</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─newsid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─userid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人账号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─username</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─headimage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人头像url</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─newstitle</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">标题</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─sendtime</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发布时间</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─viewnum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">浏览量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─likenum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">点赞量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─newstypename</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子类型名字</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─anonymousstate</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人匿名状态</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─imgUrls</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子图像下载url</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─isLike</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否点赞</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─comments</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子评论</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─commentid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─userid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户账号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─username</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─headImage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户头像</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─commenttime</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论时间</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─showreply</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否展示回复</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─replynum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">回复数</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─replys</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">回复</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─replyid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">回复id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─targetid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">目标id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─commentid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─userid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户账号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─username</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─headImage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">头像</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─commenttime</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论时间</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">timestamp</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">时间戳</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{
+  "success": true,
+  "code": 200,
+  "msg": "success",
+  "data": {
+    "newsid": 650,
+    "userid": 631,
+    "username": "lyda.mante",
+    "headimage": "774z80",
+    "newstitle": "hddifg",
+    "content": "3lueeq",
+    "sendtime": "2021-12-20 20:49:46",
+    "viewnum": 179,
+    "likenum": 260,
+    "newstypename": "lyda.mante",
+    "anonymousstate": true,
+    "imgUrls": [
+      "m9voqt"
+    ],
+    "isLike": true,
+    "comments": [
+      {
+        "commentid": 697,
+        "userid": 619,
+        "username": "lyda.mante",
+        "headImage": "bhm2f3",
+        "commenttime": "2021-12-20 20:49:46",
+        "content": "8flwjq",
+        "showreply": true,
+        "replynum": 932,
+        "replys": [
+          {
+            "replyid": 713,
+            "targetid": 767,
+            "commentid": 528,
+            "userid": 253,
+            "username": "lyda.mante",
+            "headImage": "qe6uz9",
+            "commenttime": "2021-12-20 20:49:46",
+            "content": "m3k3mo"
+          }
+        ]
+      }
+    ]
+  },
+  "timestamp": "2021-12-20 20:49:46"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2"><h3 id="_1_7_帖子回复">
+                <a class="anchor" href="#_1_7_帖子回复"></a>
+                <a class="link" href="#_1_7_帖子回复">1.7.&nbsp;帖子回复</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/news/reply" class="bare">&nbsp;/news/reply</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;POST</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/json; charset=utf-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;帖子回复</p></div>
+                <div class="paragraph"><p><strong>Body-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">commentid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i /news/reply --data '{
+  "commentid": 542,
+  "content": "tdh2vb"
+}'</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">成功标志</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">状态码</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">msg</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理信息</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理数据</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─newsid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─userid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人账号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─username</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─headimage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人头像url</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─newstitle</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">标题</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─sendtime</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发布时间</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─viewnum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">浏览量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─likenum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">点赞量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─newstypename</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子类型名字</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─anonymousstate</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人匿名状态</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─imgUrls</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子图像下载url</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─isLike</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否点赞</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─comments</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子评论</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─commentid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─userid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户账号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─username</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─headImage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户头像</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─commenttime</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论时间</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─showreply</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否展示回复</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─replynum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">回复数</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─replys</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">回复</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─replyid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">回复id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─targetid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">目标id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─commentid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─userid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户账号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─username</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─headImage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">头像</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─commenttime</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论时间</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">评论内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">timestamp</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">时间戳</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{
+  "success": true,
+  "code": 200,
+  "msg": "success",
+  "data": {
+    "newsid": 271,
+    "userid": 6,
+    "username": "lyda.mante",
+    "headimage": "2uayam",
+    "newstitle": "knahdf",
+    "content": "pbsiwp",
+    "sendtime": "2021-12-20 20:49:46",
+    "viewnum": 916,
+    "likenum": 719,
+    "newstypename": "lyda.mante",
+    "anonymousstate": true,
+    "imgUrls": [
+      "xuyn16"
+    ],
+    "isLike": true,
+    "comments": [
+      {
+        "commentid": 920,
+        "userid": 892,
+        "username": "lyda.mante",
+        "headImage": "jfwqns",
+        "commenttime": "2021-12-20 20:49:46",
+        "content": "j8rd7w",
+        "showreply": true,
+        "replynum": 579,
+        "replys": [
+          {
+            "replyid": 860,
+            "targetid": 132,
+            "commentid": 150,
+            "userid": 77,
+            "username": "lyda.mante",
+            "headImage": "tk7pe8",
+            "commenttime": "2021-12-20 20:49:46",
+            "content": "20leat"
+          }
+        ]
+      }
+    ]
+  },
+  "timestamp": "2021-12-20 20:49:46"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2"><h3 id="_1_8_搜索帖子">
+                <a class="anchor" href="#_1_8_搜索帖子"></a>
+                <a class="link" href="#_1_8_搜索帖子">1.8.&nbsp;搜索帖子</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/news/search" class="bare">&nbsp;/news/search</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;POST</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/json; charset=utf-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;搜索帖子</p></div>
+                <div class="paragraph"><p><strong>Body-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">关键词</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">sort</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">排序方式<br>1=按时间排序<br>2=按浏览量排序<br>3=按点赞量排序</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">查找的帖子类型</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">pageSize</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">每页的记录数</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">pageNum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">当前页数</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i /news/search --data '{
+  "key": "饭堂",
+  "sort": 1,
+  "type": "校园卡丢失",
+  "pageSize": 8,
+  "pageNum": 1
+}'</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">成功标志</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">状态码</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">msg</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理信息</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理数据</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─total</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─list</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─newsid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─userid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人账号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─username</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─headimage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人头像url</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─newstitle</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">标题</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sendtime</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发布时间</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─viewnum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">浏览量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─likenum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">点赞量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─newstypename</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子类型名字</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─imgUrls</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子图像下载url</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─pageNum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">当前页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─pageSize</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">每页的数量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─size</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">当前页的数量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─startRow</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">由于startRow和endRow不常用，这里说个具体的用法<br>可以在页面中&quot;显示startRow到endRow 共size条数据&quot;<br>当前页面第一个元素在数据库中的行号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─endRow</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">当前页面最后一个元素在数据库中的行号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─pages</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">总页数</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─prePage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">前一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─nextPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">下一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─firstPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否为第一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─lastPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否为最后一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─hasPreviousPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否有前一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─hasNextPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否有下一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─navigatePages</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">导航页码数</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─navigatepageNums</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">所有导航页号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─navigateFirstPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">导航条上的第一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─navigateLastPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">导航条上的最后一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">timestamp</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">时间戳</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{
+  "success": true,
+  "code": 200,
+  "msg": "success",
+  "data": {
+    "total": 924,
+    "list": [
+      {
+        "newsid": 851,
+        "userid": 371,
+        "username": "lyda.mante",
+        "headimage": "cghmyy",
+        "newstitle": "qypnys",
+        "content": "2c3we7",
+        "sendtime": "2021-12-20 20:49:46",
+        "viewnum": 218,
+        "likenum": 575,
+        "newstypename": "lyda.mante",
+        "imgUrls": [
+          "kmwgpa"
+        ]
+      }
+    ],
+    "pageNum": 849,
+    "pageSize": 10,
+    "size": 10,
+    "startRow": 136,
+    "endRow": 117,
+    "pages": 826,
+    "prePage": 1,
+    "nextPage": 1,
+    "firstPage": true,
+    "lastPage": true,
+    "hasPreviousPage": true,
+    "hasNextPage": true,
+    "navigatePages": 486,
+    "navigatepageNums": [
+      328
+    ],
+    "navigateFirstPage": 1,
+    "navigateLastPage": 1
+  },
+  "timestamp": "2021-12-20 20:49:46"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2"><h3 id="_1_9_查看我的帖子">
+                <a class="anchor" href="#_1_9_查看我的帖子"></a>
+                <a class="link" href="#_1_9_查看我的帖子">1.9.&nbsp;查看我的帖子</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/news/mynews" class="bare">&nbsp;/news/mynews</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;GET</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=utf-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;查看我的帖子</p></div>
+                <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">page</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">size</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X GET -i /news/mynews?size=10&page=1</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">成功标志</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">状态码</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">msg</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理信息</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">处理数据</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─total</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─list</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─newsid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子id</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─userid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人账号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─username</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人用户名</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─headimage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发帖人头像url</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─newstitle</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">标题</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─content</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">内容</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sendtime</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">发布时间</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─viewnum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">浏览量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─likenum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">点赞量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─newstypename</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子类型名字</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─imgUrls</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">帖子图像下载url</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─pageNum</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">当前页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─pageSize</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">每页的数量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─size</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">当前页的数量</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─startRow</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">由于startRow和endRow不常用，这里说个具体的用法<br>可以在页面中&quot;显示startRow到endRow 共size条数据&quot;<br>当前页面第一个元素在数据库中的行号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─endRow</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">当前页面最后一个元素在数据库中的行号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─pages</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">总页数</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─prePage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">前一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─nextPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">下一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─firstPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否为第一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─lastPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否为最后一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─hasPreviousPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否有前一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─hasNextPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">是否有下一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─navigatePages</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">导航页码数</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─navigatepageNums</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">所有导航页号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─navigateFirstPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">导航条上的第一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">└─navigateLastPage</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">导航条上的最后一页</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">timestamp</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">时间戳</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{
+  "success": true,
+  "code": 200,
+  "msg": "success",
+  "data": {
+    "total": 933,
+    "list": [
+      {
+        "newsid": 654,
+        "userid": 934,
+        "username": "lyda.mante",
+        "headimage": "i7bfi4",
+        "newstitle": "31xmvq",
+        "content": "xplhs6",
+        "sendtime": "2021-12-20 20:49:46",
+        "viewnum": 406,
+        "likenum": 406,
+        "newstypename": "lyda.mante",
+        "imgUrls": [
+          "cz5x3n"
+        ]
+      }
+    ],
+    "pageNum": 797,
+    "pageSize": 10,
+    "size": 10,
+    "startRow": 156,
+    "endRow": 101,
+    "pages": 65,
+    "prePage": 1,
+    "nextPage": 1,
+    "firstPage": true,
+    "lastPage": true,
+    "hasPreviousPage": true,
+    "hasNextPage": true,
+    "navigatePages": 856,
+    "navigatepageNums": [
+      819
+    ],
+    "navigateFirstPage": 1,
+    "navigateLastPage": 1
+  },
+  "timestamp": "2021-12-20 20:49:46"
 }</code></pre>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2021-11-21 16:30:21</span><span
+    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2021-12-20 20:49:45</span><span
             class="footer-modification">Suggestions,contact,support and error reporting on<a
             href="https://gitee.com/smart-doc-team/smart-doc" target="_blank">&nbsp;Gitee</a>&nbsp;or<a
             href="https://github.com/smart-doc-group/smart-doc.git" target="_blank">&nbsp;Github</a></span></footer>
 </div>
-<script src="search.js?v=1637483421819"></script>
+<script src="search.js?v=1640004585064"></script>
 <script>
     $(function () {
         const Accordion = function (el, multiple) {

@@ -102,6 +102,7 @@ public class NewsController
     //     return response;
     // }
 
+    
     /**
      * 获取所有帖子类型
      * @return
@@ -182,12 +183,12 @@ public class NewsController
      * @return
      */
     @PostMapping("/search")
-    public BaseResponse searchNews(@RequestBody SearchParam param)
+    public BaseResponse<PageInfo<NewsSendDto>> searchNews(@RequestBody SearchParam param)
     {
         PageInfo<NewsSendDto> pageInfo=newsService.searchNews(param);
         if (pageInfo==null)
         {
-            return new BaseResponse(500,"没有相关的信息");
+            return new BaseResponse<PageInfo<NewsSendDto>>(500,"没有相关的信息", null);
         }
         return new BaseResponse<PageInfo<NewsSendDto>>(200,"搜索成功",pageInfo);
     }

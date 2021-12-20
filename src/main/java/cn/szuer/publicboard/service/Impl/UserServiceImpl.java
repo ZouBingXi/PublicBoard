@@ -1,6 +1,7 @@
 package cn.szuer.publicboard.service.Impl;
 
 import cn.szuer.publicboard.dto.UserDto;
+import cn.szuer.publicboard.dto.param.ChangeEmailParam;
 import cn.szuer.publicboard.dto.param.ChangePasswordParam;
 import cn.szuer.publicboard.dto.param.ForgetPasswordParam;
 import cn.szuer.publicboard.dto.param.RegisterParam;
@@ -223,11 +224,45 @@ public class UserServiceImpl implements UserService {
             return ret;
 
         //更新密码
-        Integer userid=authenticationUtil.getAuthenticatedId();
-        UserInfo user=new UserInfo();
-        user.setUserid(userid);
+        UserInfoExample example=new UserInfoExample();
+        example.or().andEmailEqualTo(param.getEmail());
+        List<UserInfo> userInfos=userInfoMapper.selectByExample(example);
+
+        UserInfo user=userInfos.get(0);
         user.setPassword(encoder.encode(param.getNewPassword()));
         userInfoMapper.updateByPrimaryKeySelective(user);
         return 0;
+
     }
+
+    @Override
+    public boolean ifExist(String email)
+    {
+        UserInfoExample example=new UserInfoExample();
+        example.or().andEmailEqualTo(email);
+        List<UserInfo> userInfos=userInfoMapper.selectByExample(example);
+        if (userInfos==null||userInfos.size()==0)
+            return false;
+        return true;
+    }
+
+    @Override
+    public int changeEmail(HttpSession session, ChangeEmailParam changeEmailParam)
+    {
+        
+          //验证
+        int ret=mailUtil.verify(session, changeEmailParam.getEmail(), changeEmailParam.getCode());
+        if (ret!=0)
+            return ret;
+
+        UserInfo userInfo =new UserInfo();
+        userInfo.setUserid(authenticationUtil.getAuthenticatedId());
+        userInfo.setEmail(changeEmailParam.getEmail());
+        
+        userInfoMapper.updateByPrimaryKeySelective(userInfo);
+
+        return 0;
+    }
+
+
 }
