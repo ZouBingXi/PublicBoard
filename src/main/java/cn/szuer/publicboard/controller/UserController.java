@@ -1,10 +1,10 @@
 package cn.szuer.publicboard.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import cn.szuer.publicboard.dto.param.ChangePasswordParam;
-import com.alibaba.druid.sql.ast.statement.SQLIfStatement.Else;
-import com.fasterxml.jackson.databind.JsonSerializable.Base;
+import cn.szuer.publicboard.dto.param.ForgetPasswordParam;
 import com.github.pagehelper.PageInfo;
 
 
@@ -20,10 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import cn.szuer.publicboard.dto.UserDto;
 import cn.szuer.publicboard.dto.param.RegisterParam;
-import cn.szuer.publicboard.model.UserInfo;
 import cn.szuer.publicboard.reponse.BaseResponse;
 import cn.szuer.publicboard.service.UserService;
 import cn.szuer.publicboard.utils.AuthenticationUtil;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * 用户管理
@@ -44,15 +45,28 @@ public class UserController
      * @return
      */
     @PostMapping("/add")
-    public BaseResponse<UserDto> addUser(@RequestBody RegisterParam registerParam)
+    public BaseResponse<UserDto> addUser(@RequestBody RegisterParam registerParam,HttpSession session)
     {
-        boolean ifsuccess=userService.addUser(registerParam);
-        if (ifsuccess)
+        int res=userService.addUser(registerParam,session);
+        if (res==1)
+            return new BaseResponse(500,"请先验证邮箱");
+        else if (res==2)
+            return new BaseResponse(500,"不是验证时的邮箱");
+        else if (res==3)
+            return new BaseResponse(500,"验证码超时");
+        else if (res==4)
+            return new BaseResponse(500,"验证码错误");
+        else if (res==5)
+            return new BaseResponse(500,"注册失败,该邮箱已被注册");
+        else if (res==6)
+            return new BaseResponse(500,"注册失败,该学号已被注册");
+        else
         {
-            return new BaseResponse<UserDto>(200,"注册成功");
+            session.removeAttribute("code");
+            session.removeAttribute("codeTime");
+            session.removeAttribute("email");
+            return new BaseResponse(200,"注册成功");
         }
-        return new BaseResponse<UserDto>(500,"注册失败,该学号已被注册");
-
     }
 
     /**
@@ -162,5 +176,40 @@ public class UserController
 
     }
 
+    /**
+     * 发送验证码
+     * @param to 目标邮箱
+     * @return
+     */
+    @GetMapping("/sendcode")
+    public BaseResponse sendCode(HttpSession session,String to)
+    {
+        String code=userService.sendCode(to);
+        session.setAttribute("code",code);
+        session.setAttribute("codeTime",new Date());
+        session.setAttribute("email",to);
+        return new BaseResponse(200,"发送成功");
+    }
+
+    @PostMapping("/forget")
+    public BaseResponse forgetPassword(@RequestBody ForgetPasswordParam param,HttpSession session)
+    {
+        int res=userService.forget(session,param);
+        if (res==1)
+            return new BaseResponse(500,"请先验证邮箱");
+        else if (res==2)
+            return new BaseResponse(500,"不是验证时的邮箱");
+        else if (res==3)
+            return new BaseResponse(500,"验证码超时");
+        else if (res==4)
+            return new BaseResponse(500,"验证码错误");
+        else
+        {
+            session.removeAttribute("code");
+            session.removeAttribute("codeTime");
+            session.removeAttribute("email");
+            return new BaseResponse(200,"修改成功");
+        }
+    }
 
 }

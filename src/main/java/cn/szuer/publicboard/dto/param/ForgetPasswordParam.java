@@ -7,18 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterParam
+public class ForgetPasswordParam
 {
     /**
-     * 账号
-     * @mock 2019xxxxxx
-     */
-    private Integer userid;
-    /**
-     * 密码
+     * 新密码
      * @mock 123456789
      */
-    private String password;
+    private String newPassword;
     /**
      * 邮箱
      * @mock 123456789@qq.com
@@ -29,5 +24,4 @@ public class RegisterParam
      * @mock 123456
      */
     private String code;
-
 }
