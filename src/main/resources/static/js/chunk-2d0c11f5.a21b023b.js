@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0c11f5"],{4564:function(n,e,c){"use strict";c.r(e);var t=c("7a23");function a(n,e,c,a,o,r){return Object(t["J"])(),Object(t["m"])("div")}var o={name:"Logtable"},r=c("6b0d"),d=c.n(r);const u=d()(o,[["render",a]]);e["default"]=u}}]);
+//# sourceMappingURL=chunk-2d0c11f5.a21b023b.js.map
