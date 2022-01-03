@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UrlOnlineTest4
+public class UrlOnlineTest_4_2
 {
     private RestTemplate template = new RestTemplate();
 

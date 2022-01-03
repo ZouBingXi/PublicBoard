@@ -135,6 +135,9 @@ public class NewsServiceImpl implements NewsService {
         }
     }
 
+    /**
+     * 按页返回测试
+     */
     @Override
     public PageInfo<NewsSendDto> getByPage(int pageNum, int pageSize)
     {
@@ -147,6 +150,9 @@ public class NewsServiceImpl implements NewsService {
         return pageInfo;
     }
     
+    /**
+     * 发布帖子带图片
+     */
     @Override
     public int addWithImages(List<MultipartFile> multipartFiles, AddNewsParam addNewsParam) {
 
@@ -215,8 +221,6 @@ public class NewsServiceImpl implements NewsService {
 
     /**
      * 根据关键字查找相关帖子,并根据相应规则排序
-     * @param param
-     * @return
      */
     @Override
     public PageInfo<NewsSendDto> searchNews(SearchParam param)
@@ -300,12 +304,6 @@ public class NewsServiceImpl implements NewsService {
         if(newsInfos==null||newsInfos.size()==0)
           return null;
 
-        //转为dto
-        // List<NewsSendDto> resList=new ArrayList<>();
-        // for (NewsInfo newsInfo:list)
-        // {
-        //     resList.add(newsUtil.NewsInfo2NewsSendDto(newsInfo));
-        // }
         List<NewsSendDto> newsSendDtos = newsUtil.NewsInfos2NewsSendDtos(newsInfos);
         PageInfo pageInfo = new PageInfo<>(newsInfos);
         pageInfo.setList(newsSendDtos);
@@ -314,6 +312,9 @@ public class NewsServiceImpl implements NewsService {
 
     }
 
+    /**
+     * 查看帖子详情
+     */
     @Override
     public BaseResponse<NewsDetailSendDto> view(Integer newsid)
     {
@@ -350,6 +351,9 @@ public class NewsServiceImpl implements NewsService {
     }
 
 
+    /**
+     * 根据类型查看帖子
+     */
     @Override
     public BaseResponse<PageInfo<NewsSendDto>> viewDiffNews(Integer typeid,Integer pageNum,Integer pageSize)
     {
@@ -382,7 +386,9 @@ public class NewsServiceImpl implements NewsService {
         return new BaseResponse(200,"获取成功！",pageInfo);
     }
 
-
+    /**
+     * 获取帖子类型
+     */
     @Override
     public BaseResponse<List<TypeSendDto>> getNewsType()
     {
@@ -405,7 +411,9 @@ public class NewsServiceImpl implements NewsService {
         return new BaseResponse<>(200,"获取成功！",typeSendDtos);
     }
 
-
+    /**
+     * 点赞
+     */
     @Override
     public BaseResponse<List<Integer>> likeNews(Integer newsid)
     {
@@ -457,6 +465,9 @@ public class NewsServiceImpl implements NewsService {
         }
     }
 
+    /**
+     * 评论
+     */
     @Override
     public BaseResponse<NewsDetailSendDto> comment(AddCommentParam addCommentParam)
     {
@@ -501,6 +512,9 @@ public class NewsServiceImpl implements NewsService {
         }
     }
 
+    /**
+     * 回复
+     */
     @Override
     public BaseResponse<NewsDetailSendDto> reply(AddReplyParam addReplyParam)
     {

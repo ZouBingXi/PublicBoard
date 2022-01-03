@@ -37,7 +37,7 @@ import cn.szuer.publicboard.reponse.BaseResponse;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UrlOnlineTest_4 {
+public class UrlOnlineTest_4_1 {
 
     private RestTemplate template = new RestTemplate();
 

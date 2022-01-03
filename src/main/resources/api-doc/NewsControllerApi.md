@@ -1,6 +1,21 @@
+<!-- vscode-markdown-toc -->
+* 1. [查看帖子表](#)
+* 2. [查看帖子详情](#-1)
+* 3. [获取所有帖子类型](#-1)
+* 4. [发布帖子带图片](#-1)
+* 5. [帖子点赞与取消点赞](#-1)
+* 6. [帖子评论](#-1)
+* 7. [帖子回复](#-1)
+* 8. [搜索帖子](#-1)
+* 9. [查看我的帖子](#-1)
 
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
 # 帖子管理
-## 查看帖子表
+##  1. <a name=''></a>查看帖子表
 **URL:** `/news/admin/checkNews`
 
 **Type:** `GET`
@@ -111,7 +126,7 @@ timestamp|string|时间戳|-
 }
 ```
 
-## 查看帖子详情
+##  2. <a name='-1'></a>查看帖子详情
 **URL:** `/news/view`
 
 **Type:** `GET`
@@ -226,7 +241,7 @@ timestamp|string|时间戳|-
 }
 ```
 
-## 获取所有帖子类型
+##  3. <a name='-1'></a>获取所有帖子类型
 **URL:** `/news/getNewsType`
 
 **Type:** `GET`
@@ -272,7 +287,7 @@ timestamp|string|时间戳|-
 }
 ```
 
-## 发布帖子带图片
+##  4. <a name='-1'></a>发布帖子带图片
 **URL:** `/news/addwithimages`
 
 **Type:** `POST`
@@ -322,7 +337,7 @@ timestamp|string|时间戳|-
 }
 ```
 
-## 帖子点赞与取消点赞
+##  5. <a name='-1'></a>帖子点赞与取消点赞
 **URL:** `/news/likenews`
 
 **Type:** `GET`
@@ -369,7 +384,7 @@ timestamp|string|时间戳|-
 }
 ```
 
-## 帖子评论
+##  6. <a name='-1'></a>帖子评论
 **URL:** `/news/comment`
 
 **Type:** `POST`
@@ -488,7 +503,7 @@ timestamp|string|时间戳|-
 }
 ```
 
-## 帖子回复
+##  7. <a name='-1'></a>帖子回复
 **URL:** `/news/reply`
 
 **Type:** `POST`
@@ -607,7 +622,7 @@ timestamp|string|时间戳|-
 }
 ```
 
-## 搜索帖子
+##  8. <a name='-1'></a>搜索帖子
 **URL:** `/news/search`
 
 **Type:** `POST`
@@ -727,7 +742,7 @@ timestamp|string|时间戳|-
 }
 ```
 
-## 查看我的帖子
+##  9. <a name='-1'></a>查看我的帖子
 **URL:** `/news/mynews`
 
 **Type:** `GET`

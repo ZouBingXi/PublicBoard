@@ -1,6 +1,25 @@
+<!-- vscode-markdown-toc -->
+* 1. [用户注册](#)
+* 2. [查看用户表](#-1)
+* 3. [返回所有用户](#-1)
+* 4. [测试](#-1)
+* 5. [我是谁](#-1)
+* 6. [查看个人信息](#-1)
+* 7. [修改个人信息](#-1)
+* 8. [修改密码](#-1)
+* 9. [开启/关闭匿名模式](#-1)
+* 10. [发送验证码](#-1)
+* 11. [忘记密码](#-1)
+* 12. [修改邮箱](#-1)
+
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
 
 # 用户管理
-## 用户注册
+##  1. <a name=''></a>用户注册
 **URL:** `/user/add`
 
 **Type:** `POST`
@@ -54,7 +73,7 @@ timestamp|string|时间戳|-
 {"success":true,"code":200,"msg":"success","data":{"userid":2019192018,"username":"张三","email":"2019192000@szu.edu.cn","headimage":""05fe71557e164b32b503708271365dfd.png"","banstate":"封禁状态","usertype":"管理员","logintime":"2021-12-21 00:27:02","anonymousmode":true},"timestamp":"2021-12-21 00:27:02"}
 ```
 
-## 查看用户表
+##  2. <a name='-1'></a>查看用户表
 **URL:** `/user/admin/checkuser`
 
 **Type:** `GET`
@@ -119,7 +138,7 @@ timestamp|string|时间戳|-
 {"success":true,"code":200,"msg":"success","data":{"total":88,"list":[{"userid":2019192018,"username":"张三","email":"2019192000@szu.edu.cn","headimage":""05fe71557e164b32b503708271365dfd.png"","banstate":"封禁状态","usertype":"管理员","logintime":"2021-12-21 00:27:02","anonymousmode":true}],"pageNum":514,"pageSize":10,"size":10,"startRow":683,"endRow":932,"pages":976,"prePage":1,"nextPage":1,"firstPage":true,"lastPage":true,"hasPreviousPage":true,"hasNextPage":true,"navigatePages":65,"navigatepageNums":[696],"navigateFirstPage":1,"navigateLastPage":1},"timestamp":"2021-12-21 00:27:02"}
 ```
 
-## 返回所有用户
+##  3. <a name='-1'></a>返回所有用户
 **URL:** `/user/all`
 
 **Type:** `GET`
@@ -160,7 +179,7 @@ timestamp|string|时间戳|-
 {"success":true,"code":200,"msg":"success","data":[{"userid":2019192018,"username":"张三","email":"2019192000@szu.edu.cn","headimage":""05fe71557e164b32b503708271365dfd.png"","banstate":"封禁状态","usertype":"管理员","logintime":"2021-12-21 00:27:02","anonymousmode":true}],"timestamp":"2021-12-21 00:27:02"}
 ```
 
-## 测试
+##  4. <a name='-1'></a>测试
 **URL:** `/user/test`
 
 **Type:** `GET`
@@ -184,7 +203,7 @@ curl -X GET -i /user/test
 string
 ```
 
-## 我是谁
+##  5. <a name='-1'></a>我是谁
 **URL:** `/user/whoami`
 
 **Type:** `GET`
@@ -208,7 +227,7 @@ curl -X GET -i /user/whoami
 997
 ```
 
-## 查看个人信息
+##  6. <a name='-1'></a>查看个人信息
 **URL:** `/user/showprofile`
 
 **Type:** `GET`
@@ -249,7 +268,7 @@ timestamp|string|时间戳|-
 {"success":true,"code":200,"msg":"success","data":{"userid":2019192018,"username":"张三","email":"2019192000@szu.edu.cn","headimage":""05fe71557e164b32b503708271365dfd.png"","banstate":"封禁状态","usertype":"管理员","logintime":"2021-12-21 00:27:02","anonymousmode":true},"timestamp":"2021-12-21 00:27:02"}
 ```
 
-## 修改个人信息
+##  7. <a name='-1'></a>修改个人信息
 **URL:** `/user/updateprofile`
 
 **Type:** `POST`
@@ -303,7 +322,7 @@ timestamp|string|时间戳|-
 }
 ```
 
-## 修改密码
+##  8. <a name='-1'></a>修改密码
 **URL:** `/user/changepassword`
 
 **Type:** `POST`
@@ -353,7 +372,7 @@ timestamp|string|时间戳|-
 }
 ```
 
-## 开启/关闭匿名模式
+##  9. <a name='-1'></a>开启/关闭匿名模式
 **URL:** `/user/switchmode`
 
 **Type:** `POST`
@@ -394,7 +413,7 @@ timestamp|string|时间戳|-
 }
 ```
 
-## 发送验证码
+##  10. <a name='-1'></a>发送验证码
 **URL:** `/user/sendcode`
 
 **Type:** `GET`
@@ -441,7 +460,7 @@ timestamp|string|时间戳|-
 }
 ```
 
-## 忘记密码
+##  11. <a name='-1'></a>忘记密码
 **URL:** `/user/forget`
 
 **Type:** `POST`
@@ -493,7 +512,7 @@ timestamp|string|时间戳|-
 }
 ```
 
-## 修改邮箱
+##  12. <a name='-1'></a>修改邮箱
 **URL:** `/user/changeemail`
 
 **Type:** `POST`

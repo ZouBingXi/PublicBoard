@@ -49,6 +49,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     PasswordEncoder encoder;
 
+    /**
+     * 添加用户
+     */
     @Override
     public int addUser(RegisterParam registerParam,HttpSession session)
     {
@@ -97,8 +100,6 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 根据页面参数返回对应数量的records
-     * @param  pageNum,pageSize
-     * @return PageInfo<UserDto>
      */
     @Override
     public PageInfo<UserDto> getByPage(int pageNum, int pageSize) {
@@ -118,6 +119,9 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    /**
+     * 获取个人信息
+     */
     @Override
     public UserDto getProfile() {
 
@@ -128,7 +132,9 @@ public class UserServiceImpl implements UserService {
        return userDto;
     }
 
-
+    /**
+     * 修改个人信息
+     */
     @Override
     public int updateProfile(MultipartFile multipartFile, UserDto userDto) {
      
@@ -160,6 +166,9 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    /**
+     * 修改密码
+     */
     @Override
     public boolean changePassword(ChangePasswordParam param)
     {
@@ -180,6 +189,9 @@ public class UserServiceImpl implements UserService {
         return ifMatch;
     }
 
+    /**
+     * 切换匿名模式
+     */
     @Override
     public boolean switchMode()
     {
@@ -193,6 +205,9 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    /**
+     * 发送验证码
+     */
     @Override
     public String sendCode(String to)
     {
@@ -215,6 +230,9 @@ public class UserServiceImpl implements UserService {
         return code;
     }
 
+    /**
+     * 重置密码
+     */
     @Override
     public int forget(HttpSession session,ForgetPasswordParam param)
     {
@@ -235,6 +253,9 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    /**
+     * 判断邮箱是否存在
+     */
     @Override
     public boolean ifExist(String email)
     {
@@ -246,6 +267,9 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    /**
+     * 修改邮箱
+     */
     @Override
     public int changeEmail(HttpSession session, ChangeEmailParam changeEmailParam)
     {
