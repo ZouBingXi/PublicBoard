@@ -1,4 +1,4 @@
-#编译前端
+# 编译前端
 ```
 cd PublicBoardFrontend
 yarn install
