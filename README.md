@@ -10,6 +10,8 @@ yarn build
 mvnw spring-boot:run
 ```
 # 项目文档
+[Figma前端设计](https://www.figma.com/file/U8QD0L90iUUvMs5wEpicRT/PublicBoard?node-id=0%3A1)
+
 [PublicBoard迭代总结文档](doc/PublicBoard迭代总结文档.pdf)
 
 [PublicBoard白盒黑盒测试文档](doc/PublicBoard白盒黑盒测试文档.pdf)
@@ -25,3 +27,4 @@ mvnw spring-boot:run
 [PublicBoard用户故事文档](doc/PublicBoard用户故事文档.pdf)
 
 [PublicBoard用户手册](doc/PublicBoard用户手册.pdf)
+
