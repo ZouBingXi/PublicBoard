@@ -4,7 +4,7 @@ cd PublicBoardFrontend
 yarn install
 yarn build
 ```
-前端项目会打包成到 ../src/main/resources/static 路径下，作为静态资源提供给后端项目
+前端项目会打包到 ../src/main/resources/static 路径下，作为静态资源提供给后端项目
 # 运行整个项目
 ```
 mvnw spring-boot:run
