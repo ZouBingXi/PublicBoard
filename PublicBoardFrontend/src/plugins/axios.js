@@ -1,7 +1,7 @@
 "use strict";
 
 import axios from "axios";
-import {ElMessage} from "element-plus";
+//import {ElMessage} from "element-plus";
 
 
 // Full config:  https://github.com/axios/axios#request-config
@@ -29,15 +29,15 @@ _axios.interceptors.request.use(
 );
 
 // Add a response interceptor
-_axios.interceptors.response.use(
-  function(response) {
-          return response;
-  },
-  function(error) {
-    // Do something with response error
-      console.log('拦截器错误！！！',error);
-      ElMessage.error("网络异常，请稍后再试");
-  }
-);
+//_axios.interceptors.response.use(
+//  function(response) {
+//          return response;
+//  },
+//  function(error) {
+//    // Do something with response error
+//      console.log('拦截器错误！！！',error);
+//      ElMessage.error("网络异常，请稍后再试");
+//  }
+//);
 
 export default _axios;

@@ -171,7 +171,7 @@ public class MinioUtil {
      * @return
      */
     public String getDefaultAvatar(){
-      return endPoint + bucketName + "/avatar/05fe71557e164b32b503708271365dfd.png";
+      return endPoint + bucketName + "/avatar/DefaultAvatar.jpg";
     }
 
 }

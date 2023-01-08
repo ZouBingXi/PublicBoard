@@ -1,6 +1,7 @@
 package cn.szuer.publicboard.utils.mapsturctconverter;
 
 import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +9,12 @@ import cn.szuer.publicboard.mapper.UserTypeMapper;
 
 @Component
 public class UserFormat {
-    
+
+    @Value("${minio.endPoint}")
+    private String endPoint;
+
+    @Value("${minio.bucket}")
+    private String bucketName;
 
     //注入UserTypeMapper
     @Autowired
@@ -41,7 +47,7 @@ public class UserFormat {
     @Named("uuid2url")
     public String UUIDtoURL(String headimage)
     {
-      return "http://120.78.10.173:9000/test/avatar/" + headimage;
+      return endPoint+bucketName+"/avatar/" + headimage;
     }
 
 }

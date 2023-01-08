@@ -78,7 +78,7 @@ public class NewsDetailUtil {
           String img;
           if (newsInfo.getAnonymousstate() == Boolean.TRUE) {
               newsDetailSendDto.setUsername("匿名用户");
-              img = minioUtil.getDownloadUrl("05fe71557e164b32b503708271365dfd.png", "avatar");
+              img = minioUtil.getDownloadUrl("DefaultAvatar.jpg", "avatar");
           }
           else{
               newsDetailSendDto.setUsername(user.getUsername());
@@ -142,7 +142,7 @@ public class NewsDetailUtil {
               if(newsComment.getAnonymousstate()==Boolean.TRUE)    //用户匿名
               {
                   commentParam.setUsername("匿名用户");
-                  imgUrl = minioUtil.getDownloadUrl("05fe71557e164b32b503708271365dfd.png", "avatar");
+                  imgUrl = minioUtil.getDownloadUrl("DefaultAvatar.jpg", "avatar");
               }
               else   //用户正常状态
               {
@@ -185,7 +185,7 @@ public class NewsDetailUtil {
                   String imgUrl;
                   if(newsReply.getAnonymousstate()==Boolean.TRUE)    //用户匿名
                   {
-                      imgUrl = minioUtil.getDownloadUrl("05fe71557e164b32b503708271365dfd.png", "avatar");
+                      imgUrl = minioUtil.getDownloadUrl("DefaultAvatar.jpg", "avatar");
                       replyParam.setUsername("匿名用户");
                   }
                   else   //用户正常状态
@@ -250,7 +250,7 @@ public class NewsDetailUtil {
           String img;
           if (user.getAnonymousmode() == Boolean.TRUE) {
               newsSendDto.setUsername("匿名用户");
-              img = minioUtil.getDownloadUrl("05fe71557e164b32b503708271365dfd.png", "avatar");
+              img = minioUtil.getDownloadUrl("DefaultAvatar.jpg", "avatar");
           }
           else{
               newsSendDto.setUsername(user.getUsername());

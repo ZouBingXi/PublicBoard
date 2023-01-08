@@ -3,9 +3,9 @@ spring:
     # 配置 SMTP 服务器地址
     host: smtp.qq.com
     # 发送者邮箱
-    username: 1564068065@qq.com
+    username: 1378113965@qq.com
     # 配置密码，注意不是真正的密码，而是刚刚申请到的授权码
-    password: pubwfguqgnhrgjce
+    password: hplugrkpcoekbabb
     # 端口号465或587
     port: 465
     protocol: smtps
@@ -20,10 +20,10 @@ spring:
         debug: true
   datasource:
     druid:
-      url: jdbc:mysql://120.78.10.173:3307/publicboard
+      url: jdbc:mysql://127.0.0.1:9999/publicboard
       driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: dlsdwwrg666
+      username: zoubingxi
+      password: NyiK5iRR8F2wneTc
 
   servlet:
     multipart:
@@ -47,8 +47,8 @@ mybatis:
 
 
 minio:
-  endPoint: http://120.78.10.173:9000/
-  accessKey: admin
-  secretKey: adminjunior
-  bucket: test
+  endPoint: http://43.136.48.39:7778/
+  accessKey: zoubingxi  
+  secretKey: bangbangtang
+  bucket: publicboard
 

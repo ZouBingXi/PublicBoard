@@ -35,7 +35,7 @@ public class UserDto {
 
     /**
      * 头像
-     * @mock "05fe71557e164b32b503708271365dfd.png"
+     * @mock "DefaultAvatar.jpg"
      */
     private String headimage;
 
