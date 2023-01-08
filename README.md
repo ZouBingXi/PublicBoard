@@ -5,10 +5,13 @@ yarn install
 yarn build
 ```
 前端项目会打包到 ../src/main/resources/static 路径下，作为静态资源提供给后端项目
-# 运行整个项目
+# 运行、打包项目
 ```
-mvnw spring-boot:run
+//java.version = 17
+mvnw spring-boot:run //运行项目
+mvnw clean package //打包项目
 ```
+
 # 项目文档
 [Figma前端设计](https://www.figma.com/file/U8QD0L90iUUvMs5wEpicRT/PublicBoard?node-id=0%3A1)
 
