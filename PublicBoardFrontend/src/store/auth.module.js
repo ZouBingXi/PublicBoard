@@ -50,7 +50,7 @@ const actions = {
                 if(data.code==403) {
                     store.commit(PURGE_AUTH);
                     router.push({path: '/login'});
-                    ElMessage('请先登录！')
+                    ElMessage(data.msg)
                 }
                 else
                     context.commit(SET_AUTH,data.data);

@@ -3,7 +3,7 @@ module.exports = {
 	devServer:{
 		proxy: {
 			'/apis':{
-				target: 'http://localhost/',  // 后台api
+				target: 'http://43.136.48.39/',  // 后台api
 				changeOrigin: true,  //是否跨域
 				// secure: true,
 				pathRewrite: {
