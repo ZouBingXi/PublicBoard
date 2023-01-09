@@ -48,7 +48,7 @@ mybatis:
 
 minio:
   endPoint: http://43.136.48.39:7778/
-  accessKey: zoubingxi  
+  accessKey: zoubingxi
   secretKey: bangbangtang
   bucket: publicboard
 
